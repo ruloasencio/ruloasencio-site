@@ -1,1 +1,595 @@
-
+import { useState, useEffect, useRef } from "react";
+ 
+const TEAM = [
+  { id: 1, name: "Alejandro Dominguez", role: "CEO", rate: 950000 },
+  { id: 2, name: "Rafael D'Alvia", role: "Director Creativo", rate: 850000 },
+  { id: 3, name: "Sebastian Stagno", role: "Director de Cuentas", rate: 820000 },
+  { id: 4, name: "Nicolas Roberts", role: "Estrategia", rate: 780000 },
+  { id: 5, name: "Christian Camean", role: "Producción", rate: 750000 },
+  { id: 6, name: "Audrey López", role: "Diseño", rate: 720000 },
+  { id: 7, name: "Martin Rubins", role: "Desarrollo", rate: 760000 },
+  { id: 8, name: "Magalí Sabella", role: "Social Media", rate: 680000 },
+  { id: 9, name: "Gustavo Chiocconi", role: "Contenidos", rate: 700000 },
+  { id: 10, name: "Rulo Asencio", role: "Motion Design", rate: 720000 },
+  { id: 11, name: "Luz Lopez Moreno", role: "Community Manager", rate: 620000 },
+  { id: 12, name: "Micaela Mazziotti", role: "PR", rate: 650000 },
+  { id: 13, name: "Luciano Groba", role: "Performance", rate: 700000 },
+  { id: 14, name: "Morena Joos", role: "UX/UI", rate: 690000 },
+  { id: 15, name: "Lucas Sotelo", role: "Desarrollo Front", rate: 740000 },
+  { id: 16, name: "Joaquin Calvo", role: "Desarrollo Back", rate: 740000 },
+  { id: 17, name: "Roni Castillo", role: "Audiovisual", rate: 680000 },
+  { id: 18, name: "Trini Fernandez Madero", role: "Planning", rate: 670000 },
+  { id: 19, name: "Mariel Nogues", role: "Administración", rate: 600000 },
+  { id: 20, name: "Silvia Otazo", role: "Finanzas", rate: 620000 },
+  { id: 21, name: "Damian Buckmeier", role: "Tecnología", rate: 750000 },
+];
+ 
+function formatARS(value) {
+  return new Intl.NumberFormat("es-AR", {
+    style: "currency",
+    currency: "ARS",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(value);
+}
+ 
+function getInitials(name) {
+  const parts = name.split(" ");
+  return (parts[0][0] + (parts[1] ? parts[1][0] : "")).toUpperCase();
+}
+ 
+const COLORS = [
+  "#1d1d1f", "#0071e3", "#bf4800", "#6e6e73", "#1d7a4e",
+  "#a33d71", "#4a6fa5", "#8b6914", "#2d6a6f", "#6b4c9a",
+  "#b5485d", "#3a7d44", "#7a5c3e", "#5b6abf", "#9b5d2e",
+  "#3d8b8b", "#8a4a7d", "#5c7a29", "#a35d5d", "#4a7a8b",
+  "#7d6b5d",
+];
+ 
+function PersonSlider({ person, value, onChange, color, index }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const monthlyValue = (person.rate * value) / 100;
+ 
+  return (
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "16px",
+        padding: "14px 0",
+        borderBottom: "1px solid rgba(0,0,0,0.06)",
+        opacity: value === 0 ? 0.4 : 1,
+        transition: "opacity 0.4s ease",
+        animation: `fadeSlideIn 0.5s ease ${index * 30}ms both`,
+      }}
+    >
+      <div
+        style={{
+          width: 42,
+          height: 42,
+          borderRadius: "50%",
+          background: value > 0 ? color : "#e5e5e7",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "#fff",
+          fontSize: "13px",
+          fontWeight: 600,
+          letterSpacing: "0.5px",
+          flexShrink: 0,
+          transition: "background 0.4s ease",
+          fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif",
+        }}
+      >
+        {getInitials(person.name)}
+      </div>
+ 
+      <div style={{ flex: "0 0 180px", minWidth: 0 }}>
+        <div
+          style={{
+            fontSize: "14px",
+            fontWeight: 600,
+            color: "#1d1d1f",
+            lineHeight: 1.3,
+            fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+        >
+          {person.name}
+        </div>
+        <div
+          style={{
+            fontSize: "12px",
+            color: "#86868b",
+            fontWeight: 400,
+            marginTop: "1px",
+            fontFamily: "'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif",
+          }}
+        >
+          {person.role}
+        </div>
+      </div>
+ 
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          alignItems: "center",
+          gap: "14px",
+          minWidth: 0,
+        }}
+      >
+        <div style={{ flex: 1, position: "relative", height: "36px", display: "flex", alignItems: "center" }}>
+          <div
+            style={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              height: "4px",
+              background: "#e5e5e7",
+              borderRadius: "2px",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              left: 0,
+              width: `${value}%`,
+              height: "4px",
+              background: value > 0 ? color : "#e5e5e7",
+              borderRadius: "2px",
+              transition: "background 0.3s ease",
+            }}
+          />
+          <input
+            type="range"
+            min="0"
+            max="100"
+            step="5"
+            value={value}
+            onChange={(e) => onChange(parseInt(e.target.value))}
+            style={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              width: "100%",
+              height: "36px",
+              opacity: 0,
+              cursor: "pointer",
+              margin: 0,
+              zIndex: 2,
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              left: `calc(${value}% - 10px)`,
+              width: "20px",
+              height: "20px",
+              borderRadius: "50%",
+              background: "#fff",
+              boxShadow: isHovered || value > 0
+                ? "0 1px 4px rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08)"
+                : "0 1px 3px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.06)",
+              transition: "left 0.1s ease, box-shadow 0.2s ease, transform 0.2s ease",
+              pointerEvents: "none",
+              transform: isHovered ? "scale(1.15)" : "scale(1)",
+              zIndex: 1,
+            }}
+          />
+        </div>
+ 
+        <div
+          style={{
+            width: "44px",
+            textAlign: "right",
+            fontSize: "15px",
+            fontWeight: 600,
+            color: value > 0 ? "#1d1d1f" : "#c7c7cc",
+            fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif",
+            fontVariantNumeric: "tabular-nums",
+            flexShrink: 0,
+          }}
+        >
+          {value}%
+        </div>
+ 
+        <div
+          style={{
+            width: "100px",
+            textAlign: "right",
+            fontSize: "13px",
+            fontWeight: 500,
+            color: value > 0 ? "#86868b" : "#c7c7cc",
+            fontFamily: "'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif",
+            fontVariantNumeric: "tabular-nums",
+            flexShrink: 0,
+            transition: "color 0.3s ease",
+          }}
+        >
+          {formatARS(monthlyValue)}
+        </div>
+      </div>
+    </div>
+  );
+}
+ 
+export default function ProjectPricer() {
+  const [projectName, setProjectName] = useState("");
+  const [allocations, setAllocations] = useState(() =>
+    Object.fromEntries(TEAM.map((p) => [p.id, 0]))
+  );
+  const [savedConfigs, setSavedConfigs] = useState([]);
+ 
+  const total = TEAM.reduce(
+    (sum, p) => sum + (p.rate * (allocations[p.id] || 0)) / 100,
+    0
+  );
+  const activeCount = TEAM.filter((p) => allocations[p.id] > 0).length;
+ 
+  const handleChange = (id, val) => {
+    setAllocations((prev) => ({ ...prev, [id]: val }));
+  };
+ 
+  const resetAll = () => {
+    setAllocations(Object.fromEntries(TEAM.map((p) => [p.id, 0])));
+  };
+ 
+  const saveConfig = () => {
+    if (!projectName.trim()) return;
+    setSavedConfigs((prev) => [
+      ...prev,
+      {
+        name: projectName,
+        allocations: { ...allocations },
+        total,
+        date: new Date().toLocaleDateString("es-AR"),
+      },
+    ]);
+  };
+ 
+  const loadConfig = (config) => {
+    setAllocations(config.allocations);
+    setProjectName(config.name);
+  };
+ 
+  return (
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "#fafafa",
+        fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+        color: "#1d1d1f",
+      }}
+    >
+      <style>{`
+        @keyframes fadeSlideIn {
+          from { opacity: 0; transform: translateY(8px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes numberPop {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.02); }
+          100% { transform: scale(1); }
+        }
+        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; cursor: pointer; }
+        input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; cursor: pointer; border: none; background: transparent; }
+        ::selection { background: rgba(0,113,227,0.15); }
+      `}</style>
+ 
+      {/* Header */}
+      <div
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 100,
+          background: "rgba(250,250,250,0.85)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
+          borderBottom: "1px solid rgba(0,0,0,0.08)",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "960px",
+            margin: "0 auto",
+            padding: "20px 32px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "16px",
+          }}
+        >
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <div
+                style={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: "50%",
+                  background: total > 0 ? "#30d158" : "#c7c7cc",
+                  transition: "background 0.4s ease",
+                }}
+              />
+              <h1
+                style={{
+                  fontSize: "20px",
+                  fontWeight: 700,
+                  margin: 0,
+                  letterSpacing: "-0.3px",
+                }}
+              >
+                Cotizador
+              </h1>
+            </div>
+            <p
+              style={{
+                fontSize: "13px",
+                color: "#86868b",
+                margin: "4px 0 0 18px",
+                fontFamily: "'SF Pro Text', -apple-system, sans-serif",
+              }}
+            >
+              {activeCount} persona{activeCount !== 1 ? "s" : ""} asignada{activeCount !== 1 ? "s" : ""}
+            </p>
+          </div>
+ 
+          <div style={{ textAlign: "right" }}>
+            <div
+              style={{
+                fontSize: "11px",
+                fontWeight: 600,
+                color: "#86868b",
+                textTransform: "uppercase",
+                letterSpacing: "1px",
+                marginBottom: "2px",
+              }}
+            >
+              Total mensual
+            </div>
+            <div
+              key={total}
+              style={{
+                fontSize: "32px",
+                fontWeight: 700,
+                letterSpacing: "-1px",
+                color: total > 0 ? "#1d1d1f" : "#c7c7cc",
+                fontVariantNumeric: "tabular-nums",
+                transition: "color 0.4s ease",
+                animation: "numberPop 0.2s ease",
+                lineHeight: 1,
+              }}
+            >
+              {formatARS(total)}
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+      {/* Main */}
+      <div style={{ maxWidth: "960px", margin: "0 auto", padding: "24px 32px 100px" }}>
+        {/* Project name + actions */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+            marginBottom: "28px",
+            flexWrap: "wrap",
+          }}
+        >
+          <input
+            type="text"
+            value={projectName}
+            onChange={(e) => setProjectName(e.target.value)}
+            placeholder="Nombre del proyecto..."
+            style={{
+              flex: 1,
+              minWidth: "200px",
+              fontSize: "15px",
+              fontWeight: 500,
+              padding: "10px 16px",
+              border: "1px solid #d2d2d7",
+              borderRadius: "10px",
+              background: "#fff",
+              color: "#1d1d1f",
+              outline: "none",
+              fontFamily: "'SF Pro Text', -apple-system, sans-serif",
+              transition: "border-color 0.2s ease",
+            }}
+            onFocus={(e) => (e.target.style.borderColor = "#0071e3")}
+            onBlur={(e) => (e.target.style.borderColor = "#d2d2d7")}
+          />
+          <button
+            onClick={saveConfig}
+            disabled={!projectName.trim() || total === 0}
+            style={{
+              padding: "10px 20px",
+              fontSize: "14px",
+              fontWeight: 600,
+              background: projectName.trim() && total > 0 ? "#0071e3" : "#e5e5e7",
+              color: projectName.trim() && total > 0 ? "#fff" : "#a1a1a6",
+              border: "none",
+              borderRadius: "10px",
+              cursor: projectName.trim() && total > 0 ? "pointer" : "default",
+              fontFamily: "'SF Pro Text', -apple-system, sans-serif",
+              transition: "all 0.2s ease",
+            }}
+          >
+            Guardar
+          </button>
+          <button
+            onClick={resetAll}
+            style={{
+              padding: "10px 20px",
+              fontSize: "14px",
+              fontWeight: 500,
+              background: "transparent",
+              color: "#86868b",
+              border: "1px solid #d2d2d7",
+              borderRadius: "10px",
+              cursor: "pointer",
+              fontFamily: "'SF Pro Text', -apple-system, sans-serif",
+              transition: "all 0.2s ease",
+            }}
+          >
+            Resetear
+          </button>
+        </div>
+ 
+        {/* Saved configs */}
+        {savedConfigs.length > 0 && (
+          <div style={{ marginBottom: "28px" }}>
+            <div
+              style={{
+                fontSize: "11px",
+                fontWeight: 600,
+                color: "#86868b",
+                textTransform: "uppercase",
+                letterSpacing: "1px",
+                marginBottom: "10px",
+              }}
+            >
+              Cotizaciones guardadas
+            </div>
+            <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+              {savedConfigs.map((c, i) => (
+                <button
+                  key={i}
+                  onClick={() => loadConfig(c)}
+                  style={{
+                    padding: "8px 16px",
+                    fontSize: "13px",
+                    fontWeight: 500,
+                    background: "#fff",
+                    color: "#1d1d1f",
+                    border: "1px solid #d2d2d7",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                    fontFamily: "'SF Pro Text', -apple-system, sans-serif",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    transition: "all 0.2s ease",
+                  }}
+                >
+                  <span>{c.name}</span>
+                  <span style={{ color: "#86868b", fontSize: "12px" }}>
+                    {formatARS(c.total)}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+ 
+        {/* Team list */}
+        <div>
+          {TEAM.map((person, i) => (
+            <PersonSlider
+              key={person.id}
+              person={person}
+              value={allocations[person.id]}
+              onChange={(val) => handleChange(person.id, val)}
+              color={COLORS[i % COLORS.length]}
+              index={i}
+            />
+          ))}
+        </div>
+ 
+        {/* Summary footer */}
+        {total > 0 && (
+          <div
+            style={{
+              marginTop: "40px",
+              padding: "24px",
+              background: "#fff",
+              borderRadius: "16px",
+              border: "1px solid rgba(0,0,0,0.06)",
+              animation: "fadeSlideIn 0.4s ease both",
+            }}
+          >
+            <div
+              style={{
+                fontSize: "11px",
+                fontWeight: 600,
+                color: "#86868b",
+                textTransform: "uppercase",
+                letterSpacing: "1px",
+                marginBottom: "16px",
+              }}
+            >
+              Resumen{projectName ? ` — ${projectName}` : ""}
+            </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+                gap: "20px",
+              }}
+            >
+              <div>
+                <div style={{ fontSize: "28px", fontWeight: 700, letterSpacing: "-0.5px" }}>
+                  {activeCount}
+                </div>
+                <div style={{ fontSize: "13px", color: "#86868b", marginTop: "2px" }}>
+                  Personas asignadas
+                </div>
+              </div>
+              <div>
+                <div style={{ fontSize: "28px", fontWeight: 700, letterSpacing: "-0.5px" }}>
+                  {formatARS(total)}
+                </div>
+                <div style={{ fontSize: "13px", color: "#86868b", marginTop: "2px" }}>
+                  Costo mensual
+                </div>
+              </div>
+              <div>
+                <div style={{ fontSize: "28px", fontWeight: 700, letterSpacing: "-0.5px" }}>
+                  {formatARS(total * 1.35)}
+                </div>
+                <div style={{ fontSize: "13px", color: "#86868b", marginTop: "2px" }}>
+                  Fee sugerido (+35%)
+                </div>
+              </div>
+            </div>
+ 
+            {/* Active people detail */}
+            <div style={{ marginTop: "20px", paddingTop: "16px", borderTop: "1px solid rgba(0,0,0,0.06)" }}>
+              {TEAM.filter((p) => allocations[p.id] > 0)
+                .sort((a, b) => allocations[b.id] - allocations[a.id])
+                .map((p) => (
+                  <div
+                    key={p.id}
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      padding: "6px 0",
+                      fontSize: "13px",
+                      fontFamily: "'SF Pro Text', -apple-system, sans-serif",
+                    }}
+                  >
+                    <span style={{ color: "#1d1d1f", fontWeight: 500 }}>
+                      {p.name}
+                      <span style={{ color: "#86868b", fontWeight: 400, marginLeft: "6px" }}>
+                        {allocations[p.id]}%
+                      </span>
+                    </span>
+                    <span style={{ color: "#86868b", fontVariantNumeric: "tabular-nums" }}>
+                      {formatARS((p.rate * allocations[p.id]) / 100)}
+                    </span>
+                  </div>
+                ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
