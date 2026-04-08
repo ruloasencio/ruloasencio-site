@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
-<!-- saved from url=(0051)file:///Users/rulo/Desktop/workspace_storage_2.html -->
-<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<html lang="es">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>La América — Storage</title>
-<link href="./La América — Storage_files/css2" rel="stylesheet">
+<title>La América — Licencias Google Workspace</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Lora:wght@400;600;700&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #faf8f4;
@@ -22,10 +21,9 @@
     --suspended: #b8a99a;
     --hover: #f5f2ed;
     --bar-track: #eae6e0;
+    --mantiene-green: #5b8a72;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
     font-family: 'Source Serif 4', Georgia, serif;
     background: var(--bg);
@@ -35,20 +33,17 @@
     margin: 0 auto;
     -webkit-font-smoothing: antialiased;
   }
-
   header {
     margin-bottom: 2.5rem;
     padding-bottom: 1.5rem;
     border-bottom: 2px solid var(--text);
   }
-
   header h1 {
     font-family: 'Lora', serif;
     font-weight: 700;
     font-size: 1.6rem;
     letter-spacing: -0.02em;
   }
-
   header p {
     font-family: 'DM Mono', monospace;
     font-size: 0.75rem;
@@ -57,23 +52,28 @@
     text-transform: uppercase;
     letter-spacing: 0.06em;
   }
-
   .summary-row {
     display: flex;
     gap: 1rem;
     margin-bottom: 2rem;
     flex-wrap: wrap;
   }
-
   .summary-card {
     flex: 1;
-    min-width: 130px;
+    min-width: 120px;
     padding: 1rem;
     border-radius: 8px;
     border: 1px solid var(--border);
     background: var(--card);
   }
-
+  .summary-card.highlight {
+    border-color: var(--mantiene-green);
+    background: #f4faf6;
+  }
+  .summary-card.baja-card {
+    border-color: var(--accent);
+    background: #fef6f4;
+  }
   .summary-card .label {
     font-family: 'DM Mono', monospace;
     font-size: 0.65rem;
@@ -82,20 +82,19 @@
     color: var(--text-secondary);
     margin-bottom: 0.3rem;
   }
-
   .summary-card .value {
     font-family: 'Lora', serif;
     font-weight: 700;
     font-size: 1.3rem;
   }
-
+  .summary-card.highlight .value { color: var(--mantiene-green); }
+  .summary-card.baja-card .value { color: var(--accent); }
   .summary-card .sub {
     font-family: 'DM Mono', monospace;
     font-size: 0.65rem;
     color: var(--text-secondary);
     margin-top: 0.15rem;
   }
-
   .legend {
     display: flex;
     gap: 1.5rem;
@@ -104,45 +103,9 @@
     font-size: 0.72rem;
     color: var(--text-secondary);
   }
-
   .legend-item { display: flex; align-items: center; gap: 0.4rem; }
   .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
-
-  .sort-bar {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--text-secondary);
-    flex-wrap: wrap;
-  }
-
-  .sort-bar span { text-transform: uppercase; letter-spacing: 0.05em; }
-
-  .sort-btn {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    padding: 0.35rem 0.75rem;
-    border: 1.5px solid var(--border);
-    border-radius: 6px;
-    background: var(--card);
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    user-select: none;
-  }
-
-  .sort-btn:hover { border-color: var(--accent); color: var(--accent); }
-  .sort-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
-  .sort-btn .arrow { font-size: 0.65rem; opacity: 0.7; }
-
   .section { margin-bottom: 2rem; }
-
   .section-title {
     font-family: 'Lora', serif;
     font-weight: 600;
@@ -154,7 +117,6 @@
     align-items: center;
     gap: 0.5rem;
   }
-
   .section-title .count {
     font-family: 'DM Mono', monospace;
     font-size: 0.7rem;
@@ -163,7 +125,17 @@
     padding: 0.15rem 0.5rem;
     border-radius: 10px;
   }
-
+  .status-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 500;
+    color: white;
+    padding: 0.15rem 0.6rem;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-left: auto;
+  }
   .account {
     padding: 0.75rem;
     border-radius: 8px;
@@ -174,9 +146,7 @@
     gap: 0.6rem;
     align-items: start;
   }
-
   .account:hover { background: var(--hover); }
-
   .account .num {
     font-family: 'DM Mono', monospace;
     font-size: 0.7rem;
@@ -184,15 +154,12 @@
     text-align: right;
     padding-top: 0.15rem;
   }
-
   .account-content { display: flex; flex-direction: column; gap: 0.55rem; min-width: 0; }
   .account-header { display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; }
   .account .name { font-family: 'Lora', serif; font-weight: 600; font-size: 0.92rem; }
   .account .email { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--text-secondary); }
-
   .bars-wrapper { display: flex; flex-direction: column; gap: 5px; }
   .bar-row { display: flex; align-items: center; gap: 0.5rem; height: 20px; }
-
   .bar-label {
     font-family: 'DM Mono', monospace;
     font-size: 0.62rem;
@@ -202,10 +169,8 @@
     text-align: right;
     flex-shrink: 0;
   }
-
   .bar-label.mail { color: var(--mail-color); }
   .bar-label.drive { color: var(--drive-color); }
-
   .bar-track {
     flex: 1;
     height: 100%;
@@ -213,17 +178,14 @@
     border-radius: 4px;
     overflow: hidden;
   }
-
   .bar-fill {
     height: 100%;
     border-radius: 4px;
     transition: width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
     position: relative;
   }
-
   .bar-fill.mail { background: var(--mail-bar); }
   .bar-fill.drive { background: var(--drive-bar); }
-
   .bar-fill::after {
     content: '';
     position: absolute;
@@ -231,7 +193,6 @@
     background: linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 60%);
     border-radius: 4px;
   }
-
   .bar-value {
     font-family: 'DM Mono', monospace;
     font-size: 0.66rem;
@@ -240,17 +201,14 @@
     text-align: right;
     flex-shrink: 0;
   }
-
   .bar-value.mail { color: var(--mail-color); }
   .bar-value.drive { color: var(--drive-color); }
-
   .total-line {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     margin-top: 1px;
   }
-
   .total-label {
     font-family: 'DM Mono', monospace;
     font-size: 0.62rem;
@@ -261,10 +219,8 @@
     color: var(--total-color);
     flex-shrink: 0;
   }
-
   .total-bar-area { flex: 1; display: flex; align-items: center; }
   .total-tick { height: 0; border-top: 1.5px dashed var(--total-color); opacity: 0.35; flex: 1; }
-
   .total-value {
     font-family: 'DM Mono', monospace;
     font-size: 0.72rem;
@@ -274,10 +230,8 @@
     text-align: right;
     flex-shrink: 0;
   }
-
   .section.suspended .account .name { color: var(--suspended); }
   .section.suspended .account .email { color: var(--suspended); }
-
   @media (max-width: 600px) {
     body { padding: 1.25rem 0.75rem; }
     .account { grid-template-columns: 1.5rem 1fr; gap: 0.4rem; }
@@ -289,34 +243,32 @@
 </style>
 </head>
 <body>
-
+ 
 <header>
-  <h1>Google Workspace — Storage</h1>
+  <h1>Google Workspace — Decisión de Licencias</h1>
   <p>La América · 39 cuentas · Abril 2026</p>
 </header>
-
-<div id="summary" class="summary-row">
-    <div class="summary-card"><div class="label">Cuentas</div><div class="value">39</div><div class="sub">21 activas</div></div>
-    <div class="summary-card"><div class="label">Total</div><div class="value">39.6 TB</div><div class="sub">39.603,8 GB</div></div>
-    <div class="summary-card"><div class="label">Mail</div><div class="value">379.3 GB</div></div>
-    <div class="summary-card"><div class="label">Drive</div><div class="value">39.2 TB</div><div class="sub">39.224,5 GB</div></div>
-  </div>
-
+ 
+<div class="summary-row">
+  <div class="summary-card"><div class="label">Cuentas totales</div><div class="value">39</div></div>
+  <div class="summary-card highlight"><div class="label">Licencias a mantener</div><div class="value">28</div><div class="sub">21 La América + 3 El Buró + 4 especiales</div></div>
+  <div class="summary-card baja-card"><div class="label">Bajas</div><div class="value">11</div></div>
+</div>
+ 
 <div class="legend">
   <div class="legend-item"><div class="legend-dot" style="background:var(--mail-bar)"></div> Mail</div>
   <div class="legend-item"><div class="legend-dot" style="background:var(--drive-bar)"></div> Drive</div>
   <div class="legend-item"><div class="legend-dot" style="background:transparent; border:1.5px dashed var(--total-color);"></div> Total</div>
 </div>
-
-<div class="sort-bar">
-  <span>Ordenar por:</span>
-  <button class="sort-btn active" data-sort="none" onclick="toggleSort(&#39;none&#39;)">Original</button>
-  <button class="sort-btn" data-sort="total" onclick="toggleSort(&#39;total&#39;)">Total <span class="arrow">↓</span></button>
-  <button class="sort-btn" data-sort="mail" onclick="toggleSort(&#39;mail&#39;)">Mail <span class="arrow">↓</span></button>
-  <button class="sort-btn" data-sort="drive" onclick="toggleSort(&#39;drive&#39;)">Drive <span class="arrow">↓</span></button>
-</div>
-
-<div id="content"><div class="section "><div class="section-title">La América <span class="count">21</span></div>
+ 
+ 
+    <div class="section ">
+      <div class="section-title">
+        Cuentas La América que seguirán activas
+        <span class="count">21</span>
+        <span class="status-badge" style="background:#5b8a72">ACTIVA</span>
+      </div>
+      
         <div class="account">
           <div class="num">1</div>
           <div class="account-content">
@@ -327,12 +279,12 @@
             <div class="bars-wrapper">
               <div class="bar-row">
                 <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:10.819066387486144%"></div></div>
+                <div class="bar-track"><div class="bar-fill mail" style="width:55.653643083421336%"></div></div>
                 <span class="bar-value mail">43.92 GB</span>
               </div>
               <div class="bar-row">
                 <span class="bar-label drive">Drive</span>
-                <div class="bar-track"><div class="bar-fill drive" style="width:39.92856263086587%"></div></div>
+                <div class="bar-track"><div class="bar-fill drive" style="width:25.228015564202334%"></div></div>
                 <span class="bar-value drive">162.1 GB</span>
               </div>
               <div class="total-line">
@@ -343,7 +295,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">2</div>
           <div class="account-content">
@@ -354,7 +305,7 @@
             <div class="bars-wrapper">
               <div class="bar-row">
                 <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:3.0250030791969453%"></div></div>
+                <div class="bar-track"><div class="bar-fill mail" style="width:15.560718057022173%"></div></div>
                 <span class="bar-value mail">12.28 GB</span>
               </div>
               <div class="bar-row">
@@ -370,7 +321,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">3</div>
           <div class="account-content">
@@ -381,7 +331,7 @@
             <div class="bars-wrapper">
               <div class="bar-row">
                 <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:5.244488237467668%"></div></div>
+                <div class="bar-track"><div class="bar-fill mail" style="width:26.97782470960929%"></div></div>
                 <span class="bar-value mail">21.29 GB</span>
               </div>
               <div class="bar-row">
@@ -397,7 +347,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">4</div>
           <div class="account-content">
@@ -408,7 +357,7 @@
             <div class="bars-wrapper">
               <div class="bar-row">
                 <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:5.175514225889889%"></div></div>
+                <div class="bar-track"><div class="bar-fill mail" style="width:26.623020063357973%"></div></div>
                 <span class="bar-value mail">21.01 GB</span>
               </div>
               <div class="bar-row">
@@ -424,7 +373,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">5</div>
           <div class="account-content">
@@ -435,7 +383,7 @@
             <div class="bars-wrapper">
               <div class="bar-row">
                 <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:5.8972779899002346%"></div></div>
+                <div class="bar-track"><div class="bar-fill mail" style="width:30.335797254487858%"></div></div>
                 <span class="bar-value mail">23.94 GB</span>
               </div>
               <div class="bar-row">
@@ -451,7 +399,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">6</div>
           <div class="account-content">
@@ -462,7 +409,7 @@
             <div class="bars-wrapper">
               <div class="bar-row">
                 <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:1.8327380219238822%"></div></div>
+                <div class="bar-track"><div class="bar-fill mail" style="width:9.42766631467793%"></div></div>
                 <span class="bar-value mail">7.44 GB</span>
               </div>
               <div class="bar-row">
@@ -478,7 +425,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">7</div>
           <div class="account-content">
@@ -494,7 +440,7 @@
               </div>
               <div class="bar-row">
                 <span class="bar-label drive">Drive</span>
-                <div class="bar-track"><div class="bar-fill drive" style="width:78.46286488483804%"></div></div>
+                <div class="bar-track"><div class="bar-fill drive" style="width:49.57509727626459%"></div></div>
                 <span class="bar-value drive">318.5 GB</span>
               </div>
               <div class="total-line">
@@ -505,7 +451,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">8</div>
           <div class="account-content">
@@ -532,7 +477,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">9</div>
           <div class="account-content">
@@ -543,12 +487,12 @@
             <div class="bars-wrapper">
               <div class="bar-row">
                 <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:2.657962803300899%"></div></div>
+                <div class="bar-track"><div class="bar-fill mail" style="width:13.672650475184792%"></div></div>
                 <span class="bar-value mail">10.79 GB</span>
               </div>
               <div class="bar-row">
                 <span class="bar-label drive">Drive</span>
-                <div class="bar-track"><div class="bar-fill drive" style="width:81.73420371966992%"></div></div>
+                <div class="bar-track"><div class="bar-fill drive" style="width:51.6420233463035%"></div></div>
                 <span class="bar-value drive">331.8 GB</span>
               </div>
               <div class="total-line">
@@ -559,7 +503,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">10</div>
           <div class="account-content">
@@ -570,12 +513,12 @@
             <div class="bars-wrapper">
               <div class="bar-row">
                 <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
+                <div class="bar-track"><div class="bar-fill mail" style="width:5.461457233368532%"></div></div>
                 <span class="bar-value mail">4.31 GB</span>
               </div>
               <div class="bar-row">
                 <span class="bar-label drive">Drive</span>
-                <div class="bar-track"><div class="bar-fill drive" style="width:100%"></div></div>
+                <div class="bar-track"><div class="bar-fill drive" style="width:63.1828793774319%"></div></div>
                 <span class="bar-value drive">405.9 GB</span>
               </div>
               <div class="total-line">
@@ -586,7 +529,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">11</div>
           <div class="account-content">
@@ -597,12 +539,12 @@
             <div class="bars-wrapper">
               <div class="bar-row">
                 <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:2.423943835447715%"></div></div>
+                <div class="bar-track"><div class="bar-fill mail" style="width:12.4688489968321%"></div></div>
                 <span class="bar-value mail">9.84 GB</span>
               </div>
               <div class="bar-row">
                 <span class="bar-label drive">Drive</span>
-                <div class="bar-track"><div class="bar-fill drive" style="width:29.30656484788767%"></div></div>
+                <div class="bar-track"><div class="bar-fill drive" style="width:18.516731517509726%"></div></div>
                 <span class="bar-value drive">119.0 GB</span>
               </div>
               <div class="total-line">
@@ -613,7 +555,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">12</div>
           <div class="account-content">
@@ -624,7 +565,7 @@
             <div class="bars-wrapper">
               <div class="bar-row">
                 <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
+                <div class="bar-track"><div class="bar-fill mail" style="width:7.3875395987328405%"></div></div>
                 <span class="bar-value mail">5.83 GB</span>
               </div>
               <div class="bar-row">
@@ -640,7 +581,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">13</div>
           <div class="account-content">
@@ -651,7 +591,7 @@
             <div class="bars-wrapper">
               <div class="bar-row">
                 <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
+                <div class="bar-track"><div class="bar-fill mail" style="width:3.674762407602956%"></div></div>
                 <span class="bar-value mail">2.90 GB</span>
               </div>
               <div class="bar-row">
@@ -667,7 +607,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">14</div>
           <div class="account-content">
@@ -678,7 +617,7 @@
             <div class="bars-wrapper">
               <div class="bar-row">
                 <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:0%"></div></div>
+                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
                 <span class="bar-value mail">0.00 GB</span>
               </div>
               <div class="bar-row">
@@ -694,7 +633,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">15</div>
           <div class="account-content">
@@ -705,7 +643,7 @@
             <div class="bars-wrapper">
               <div class="bar-row">
                 <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:3.355092991747752%"></div></div>
+                <div class="bar-track"><div class="bar-fill mail" style="width:17.25871172122492%"></div></div>
                 <span class="bar-value mail">13.62 GB</span>
               </div>
               <div class="bar-row">
@@ -721,7 +659,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">16</div>
           <div class="account-content">
@@ -732,12 +669,12 @@
             <div class="bars-wrapper">
               <div class="bar-row">
                 <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
+                <div class="bar-track"><div class="bar-fill mail" style="width:2.597676874340021%"></div></div>
                 <span class="bar-value mail">2.05 GB</span>
               </div>
               <div class="bar-row">
                 <span class="bar-label drive">Drive</span>
-                <div class="bar-track"><div class="bar-fill drive" style="width:21.968222687523095%"></div></div>
+                <div class="bar-track"><div class="bar-fill drive" style="width:13.880155642023349%"></div></div>
                 <span class="bar-value drive">89.18 GB</span>
               </div>
               <div class="total-line">
@@ -748,7 +685,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">17</div>
           <div class="account-content">
@@ -764,18 +700,17 @@
               </div>
               <div class="bar-row">
                 <span class="bar-label drive">Drive</span>
-                <div class="bar-track"><div class="bar-fill drive" style="width:28.49119349673605%"></div></div>
+                <div class="bar-track"><div class="bar-fill drive" style="width:18.001556420233463%"></div></div>
                 <span class="bar-value drive">115.7 GB</span>
               </div>
               <div class="total-line">
                 <span class="total-label">Total</span>
                 <div class="total-bar-area"><div class="total-tick"></div></div>
-                <span class="total-value">116.3 GB</span>
+                <span class="total-value">116.2 GB</span>
               </div>
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">18</div>
           <div class="account-content">
@@ -791,7 +726,7 @@
               </div>
               <div class="bar-row">
                 <span class="bar-label drive">Drive</span>
-                <div class="bar-track"><div class="bar-fill drive" style="width:9.59724103953689%"></div></div>
+                <div class="bar-track"><div class="bar-fill drive" style="width:6.063813229571985%"></div></div>
                 <span class="bar-value drive">38.96 GB</span>
               </div>
               <div class="total-line">
@@ -802,7 +737,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">19</div>
           <div class="account-content">
@@ -813,7 +747,7 @@
             <div class="bars-wrapper">
               <div class="bar-row">
                 <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:11.663998029313955%"></div></div>
+                <div class="bar-track"><div class="bar-fill mail" style="width:60.0%"></div></div>
                 <span class="bar-value mail">47.35 GB</span>
               </div>
               <div class="bar-row">
@@ -829,7 +763,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">20</div>
           <div class="account-content">
@@ -840,7 +773,7 @@
             <div class="bars-wrapper">
               <div class="bar-row">
                 <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:6.084493164182781%"></div></div>
+                <div class="bar-track"><div class="bar-fill mail" style="width:31.29883843717001%"></div></div>
                 <span class="bar-value mail">24.70 GB</span>
               </div>
               <div class="bar-row">
@@ -856,7 +789,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">21</div>
           <div class="account-content">
@@ -867,12 +799,12 @@
             <div class="bars-wrapper">
               <div class="bar-row">
                 <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
+                <div class="bar-track"><div class="bar-fill mail" style="width:3.548046462513199%"></div></div>
                 <span class="bar-value mail">2.80 GB</span>
               </div>
               <div class="bar-row">
                 <span class="bar-label drive">Drive</span>
-                <div class="bar-track"><div class="bar-fill drive" style="width:30.08498583569405%"></div></div>
+                <div class="bar-track"><div class="bar-fill drive" style="width:19.008560311284047%"></div></div>
                 <span class="bar-value drive">122.1 GB</span>
               </div>
               <div class="total-line">
@@ -883,36 +815,16 @@
             </div>
           </div>
         </div>
-      </div><div class="section "><div class="section-title">Cuentas genéricas / de servicio <span class="count">5</span></div>
-        <div class="account">
-          <div class="num">22</div>
-          <div class="account-content">
-            <div class="account-header">
-              <span class="name">Hola La América</span>
-              <span class="email">hola@laamerica.com</span>
-            </div>
-            <div class="bars-wrapper">
-              <div class="bar-row">
-                <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
-                <span class="bar-value mail">6.42 GB</span>
-              </div>
-              <div class="bar-row">
-                <span class="bar-label drive">Drive</span>
-                <div class="bar-track"><div class="bar-fill drive" style="width:1.5%"></div></div>
-                <span class="bar-value drive">11.87 GB</span>
-              </div>
-              <div class="total-line">
-                <span class="total-label">Total</span>
-                <div class="total-bar-area"><div class="total-tick"></div></div>
-                <span class="total-value">18.29 GB</span>
-              </div>
-            </div>
-          </div>
-        </div>
+    </div>
+    <div class="section ">
+      <div class="section-title">
+        Cuentas El Buró que seguirán activas
+        <span class="count">3</span>
+        <span class="status-badge" style="background:#5b8a72">ACTIVA</span>
+      </div>
       
         <div class="account">
-          <div class="num">23</div>
+          <div class="num">22</div>
           <div class="account-content">
             <div class="account-header">
               <span class="name">Hola La America Buro</span>
@@ -937,171 +849,8 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
-          <div class="num">24</div>
-          <div class="account-content">
-            <div class="account-header">
-              <span class="name">Calendar La America</span>
-              <span class="email">calendar@laamerica.com</span>
-            </div>
-            <div class="bars-wrapper">
-              <div class="bar-row">
-                <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
-                <span class="bar-value mail">1.43 GB</span>
-              </div>
-              <div class="bar-row">
-                <span class="bar-label drive">Drive</span>
-                <div class="bar-track"><div class="bar-fill drive" style="width:100%"></div></div>
-                <span class="bar-value drive">36.324,1 GB</span>
-              </div>
-              <div class="total-line">
-                <span class="total-label">Total</span>
-                <div class="total-bar-area"><div class="total-tick"></div></div>
-                <span class="total-value">36.325,5 GB</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-        <div class="account">
-          <div class="num">25</div>
-          <div class="account-content">
-            <div class="account-header">
-              <span class="name">Out La America</span>
-              <span class="email">out@laamerica.com</span>
-            </div>
-            <div class="bars-wrapper">
-              <div class="bar-row">
-                <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
-                <span class="bar-value mail">27.31 GB</span>
-              </div>
-              <div class="bar-row">
-                <span class="bar-label drive">Drive</span>
-                <div class="bar-track"><div class="bar-fill drive" style="width:0%"></div></div>
-                <span class="bar-value drive">0.00 GB</span>
-              </div>
-              <div class="total-line">
-                <span class="total-label">Total</span>
-                <div class="total-bar-area"><div class="total-tick"></div></div>
-                <span class="total-value">27.31 GB</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-        <div class="account">
-          <div class="num">26</div>
-          <div class="account-content">
-            <div class="account-header">
-              <span class="name">Cocina Cocina</span>
-              <span class="email">cocina@laamerica.com</span>
-            </div>
-            <div class="bars-wrapper">
-              <div class="bar-row">
-                <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
-                <span class="bar-value mail">0.42 GB</span>
-              </div>
-              <div class="bar-row">
-                <span class="bar-label drive">Drive</span>
-                <div class="bar-track"><div class="bar-fill drive" style="width:0%"></div></div>
-                <span class="bar-value drive">0.00 GB</span>
-              </div>
-              <div class="total-line">
-                <span class="total-label">Total</span>
-                <div class="total-bar-area"><div class="total-tick"></div></div>
-                <span class="total-value">0.42 GB</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div><div class="section "><div class="section-title">La América Buró / México <span class="count">5</span></div>
-        <div class="account">
-          <div class="num">27</div>
-          <div class="account-content">
-            <div class="account-header">
-              <span class="name">Alejandro Dominguez</span>
-              <span class="email">alejandro@laamericaburo.com</span>
-            </div>
-            <div class="bars-wrapper">
-              <div class="bar-row">
-                <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
-                <span class="bar-value mail">0.05 GB</span>
-              </div>
-              <div class="bar-row">
-                <span class="bar-label drive">Drive</span>
-                <div class="bar-track"><div class="bar-fill drive" style="width:0%"></div></div>
-                <span class="bar-value drive">0.00 GB</span>
-              </div>
-              <div class="total-line">
-                <span class="total-label">Total</span>
-                <div class="total-bar-area"><div class="total-tick"></div></div>
-                <span class="total-value">0.05 GB</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-        <div class="account">
-          <div class="num">28</div>
-          <div class="account-content">
-            <div class="account-header">
-              <span class="name">Gustavo Chiocconi</span>
-              <span class="email">gustavo@laamericaburo.com</span>
-            </div>
-            <div class="bars-wrapper">
-              <div class="bar-row">
-                <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
-                <span class="bar-value mail">0.17 GB</span>
-              </div>
-              <div class="bar-row">
-                <span class="bar-label drive">Drive</span>
-                <div class="bar-track"><div class="bar-fill drive" style="width:0%"></div></div>
-                <span class="bar-value drive">0.00 GB</span>
-              </div>
-              <div class="total-line">
-                <span class="total-label">Total</span>
-                <div class="total-bar-area"><div class="total-tick"></div></div>
-                <span class="total-value">0.17 GB</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-        <div class="account">
-          <div class="num">29</div>
-          <div class="account-content">
-            <div class="account-header">
-              <span class="name">Joaquin Calvo</span>
-              <span class="email">joaquin@laamericaburo.com</span>
-            </div>
-            <div class="bars-wrapper">
-              <div class="bar-row">
-                <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
-                <span class="bar-value mail">0.07 GB</span>
-              </div>
-              <div class="bar-row">
-                <span class="bar-label drive">Drive</span>
-                <div class="bar-track"><div class="bar-fill drive" style="width:0%"></div></div>
-                <span class="bar-value drive">0.00 GB</span>
-              </div>
-              <div class="total-line">
-                <span class="total-label">Total</span>
-                <div class="total-bar-area"><div class="total-tick"></div></div>
-                <span class="total-value">0.07 GB</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-        <div class="account">
-          <div class="num">30</div>
+          <div class="num">23</div>
           <div class="account-content">
             <div class="account-header">
               <span class="name">Rafael D'Alvia</span>
@@ -1126,7 +875,204 @@
             </div>
           </div>
         </div>
+        <div class="account">
+          <div class="num">24</div>
+          <div class="account-content">
+            <div class="account-header">
+              <span class="name">Gustavo Chiocconi</span>
+              <span class="email">gustavo@laamericaburo.com</span>
+            </div>
+            <div class="bars-wrapper">
+              <div class="bar-row">
+                <span class="bar-label mail">Mail</span>
+                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
+                <span class="bar-value mail">0.17 GB</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label drive">Drive</span>
+                <div class="bar-track"><div class="bar-fill drive" style="width:0%"></div></div>
+                <span class="bar-value drive">0.00 GB</span>
+              </div>
+              <div class="total-line">
+                <span class="total-label">Total</span>
+                <div class="total-bar-area"><div class="total-tick"></div></div>
+                <span class="total-value">0.17 GB</span>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="section ">
+      <div class="section-title">
+        Cuentas especiales que seguirán activas
+        <span class="count">4</span>
+        <span class="status-badge" style="background:#5b8a72">ACTIVA</span>
+      </div>
       
+        <div class="account">
+          <div class="num">25</div>
+          <div class="account-content">
+            <div class="account-header">
+              <span class="name">Hola La América</span>
+              <span class="email">hola@laamerica.com</span>
+            </div>
+            <div class="bars-wrapper">
+              <div class="bar-row">
+                <span class="bar-label mail">Mail</span>
+                <div class="bar-track"><div class="bar-fill mail" style="width:8.135163674762406%"></div></div>
+                <span class="bar-value mail">6.42 GB</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label drive">Drive</span>
+                <div class="bar-track"><div class="bar-fill drive" style="width:1.8474708171206227%"></div></div>
+                <span class="bar-value drive">11.87 GB</span>
+              </div>
+              <div class="total-line">
+                <span class="total-label">Total</span>
+                <div class="total-bar-area"><div class="total-tick"></div></div>
+                <span class="total-value">18.29 GB</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="account">
+          <div class="num">26</div>
+          <div class="account-content">
+            <div class="account-header">
+              <span class="name">Calendar La America</span>
+              <span class="email">calendar@laamerica.com</span>
+            </div>
+            <div class="bars-wrapper">
+              <div class="bar-row">
+                <span class="bar-label mail">Mail</span>
+                <div class="bar-track"><div class="bar-fill mail" style="width:1.8120380147835267%"></div></div>
+                <span class="bar-value mail">1.43 GB</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label drive">Drive</span>
+                <div class="bar-track"><div class="bar-fill drive" style="width:100%"></div></div>
+                <span class="bar-value drive">36,3 TB</span>
+              </div>
+              <div class="total-line">
+                <span class="total-label">Total</span>
+                <div class="total-bar-area"><div class="total-tick"></div></div>
+                <span class="total-value">36,3 TB</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="account">
+          <div class="num">27</div>
+          <div class="account-content">
+            <div class="account-header">
+              <span class="name">Out La America</span>
+              <span class="email">out@laamerica.com</span>
+            </div>
+            <div class="bars-wrapper">
+              <div class="bar-row">
+                <span class="bar-label mail">Mail</span>
+                <div class="bar-track"><div class="bar-fill mail" style="width:34.60612460401266%"></div></div>
+                <span class="bar-value mail">27.31 GB</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label drive">Drive</span>
+                <div class="bar-track"><div class="bar-fill drive" style="width:0%"></div></div>
+                <span class="bar-value drive">0.00 GB</span>
+              </div>
+              <div class="total-line">
+                <span class="total-label">Total</span>
+                <div class="total-bar-area"><div class="total-tick"></div></div>
+                <span class="total-value">27.31 GB</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="account">
+          <div class="num">28</div>
+          <div class="account-content">
+            <div class="account-header">
+              <span class="name">Cocina Cocina</span>
+              <span class="email">cocina@laamerica.com</span>
+            </div>
+            <div class="bars-wrapper">
+              <div class="bar-row">
+                <span class="bar-label mail">Mail</span>
+                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
+                <span class="bar-value mail">0.42 GB</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label drive">Drive</span>
+                <div class="bar-track"><div class="bar-fill drive" style="width:0%"></div></div>
+                <span class="bar-value drive">0.00 GB</span>
+              </div>
+              <div class="total-line">
+                <span class="total-label">Total</span>
+                <div class="total-bar-area"><div class="total-tick"></div></div>
+                <span class="total-value">0.42 GB</span>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="section suspended">
+      <div class="section-title">
+        Cuentas que se darán de baja
+        <span class="count">11</span>
+        <span class="status-badge" style="background:#c4653a">BAJA</span>
+      </div>
+      
+        <div class="account">
+          <div class="num">29</div>
+          <div class="account-content">
+            <div class="account-header">
+              <span class="name">Alejandro Dominguez</span>
+              <span class="email">alejandro@laamericaburo.com</span>
+            </div>
+            <div class="bars-wrapper">
+              <div class="bar-row">
+                <span class="bar-label mail">Mail</span>
+                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
+                <span class="bar-value mail">0.05 GB</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label drive">Drive</span>
+                <div class="bar-track"><div class="bar-fill drive" style="width:0%"></div></div>
+                <span class="bar-value drive">0.00 GB</span>
+              </div>
+              <div class="total-line">
+                <span class="total-label">Total</span>
+                <div class="total-bar-area"><div class="total-tick"></div></div>
+                <span class="total-value">0.05 GB</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="account">
+          <div class="num">30</div>
+          <div class="account-content">
+            <div class="account-header">
+              <span class="name">Joaquin Calvo</span>
+              <span class="email">joaquin@laamericaburo.com</span>
+            </div>
+            <div class="bars-wrapper">
+              <div class="bar-row">
+                <span class="bar-label mail">Mail</span>
+                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
+                <span class="bar-value mail">0.07 GB</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label drive">Drive</span>
+                <div class="bar-track"><div class="bar-fill drive" style="width:0%"></div></div>
+                <span class="bar-value drive">0.00 GB</span>
+              </div>
+              <div class="total-line">
+                <span class="total-label">Total</span>
+                <div class="total-bar-area"><div class="total-tick"></div></div>
+                <span class="total-value">0.07 GB</span>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="account">
           <div class="num">31</div>
           <div class="account-content">
@@ -1137,12 +1083,12 @@
             <div class="bars-wrapper">
               <div class="bar-row">
                 <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:5.399898115129904%"></div></div>
+                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
                 <span class="bar-value mail">1.06 GB</span>
               </div>
               <div class="bar-row">
                 <span class="bar-label drive">Drive</span>
-                <div class="bar-track"><div class="bar-fill drive" style="width:100%"></div></div>
+                <div class="bar-track"><div class="bar-fill drive" style="width:3.0552529182879375%"></div></div>
                 <span class="bar-value drive">19.63 GB</span>
               </div>
               <div class="total-line">
@@ -1153,7 +1099,6 @@
             </div>
           </div>
         </div>
-      </div><div class="section suspended"><div class="section-title">Suspendidas <span class="count">8</span></div>
         <div class="account">
           <div class="num">32</div>
           <div class="account-content">
@@ -1164,7 +1109,7 @@
             <div class="bars-wrapper">
               <div class="bar-row">
                 <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:3.2949416342412454%"></div></div>
+                <div class="bar-track"><div class="bar-fill mail" style="width:26.82576557550159%"></div></div>
                 <span class="bar-value mail">21.17 GB</span>
               </div>
               <div class="bar-row">
@@ -1180,7 +1125,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">33</div>
           <div class="account-content">
@@ -1191,7 +1135,7 @@
             <div class="bars-wrapper">
               <div class="bar-row">
                 <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:2.480933852140078%"></div></div>
+                <div class="bar-track"><div class="bar-fill mail" style="width:20.198521647307285%"></div></div>
                 <span class="bar-value mail">15.94 GB</span>
               </div>
               <div class="bar-row">
@@ -1207,7 +1151,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">34</div>
           <div class="account-content">
@@ -1234,7 +1177,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">35</div>
           <div class="account-content">
@@ -1245,7 +1187,7 @@
             <div class="bars-wrapper">
               <div class="bar-row">
                 <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
+                <div class="bar-track"><div class="bar-fill mail" style="width:10.061246040126717%"></div></div>
                 <span class="bar-value mail">7.94 GB</span>
               </div>
               <div class="bar-row">
@@ -1261,7 +1203,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">36</div>
           <div class="account-content">
@@ -1288,7 +1229,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">37</div>
           <div class="account-content">
@@ -1315,7 +1255,6 @@
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">38</div>
           <div class="account-content">
@@ -1326,23 +1265,22 @@
             <div class="bars-wrapper">
               <div class="bar-row">
                 <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:5.842801556420233%"></div></div>
+                <div class="bar-track"><div class="bar-fill mail" style="width:47.569165786694825%"></div></div>
                 <span class="bar-value mail">37.54 GB</span>
               </div>
               <div class="bar-row">
                 <span class="bar-label drive">Drive</span>
-                <div class="bar-track"><div class="bar-fill drive" style="width:22.01089494163424%"></div></div>
+                <div class="bar-track"><div class="bar-fill drive" style="width:22.007782101167315%"></div></div>
                 <span class="bar-value drive">141.4 GB</span>
               </div>
               <div class="total-line">
                 <span class="total-label">Total</span>
                 <div class="total-bar-area"><div class="total-tick"></div></div>
-                <span class="total-value">179.0 GB</span>
+                <span class="total-value">178.9 GB</span>
               </div>
             </div>
           </div>
         </div>
-      
         <div class="account">
           <div class="num">39</div>
           <div class="account-content">
@@ -1353,7 +1291,7 @@
             <div class="bars-wrapper">
               <div class="bar-row">
                 <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
+                <div class="bar-track"><div class="bar-fill mail" style="width:2.0527983104540657%"></div></div>
                 <span class="bar-value mail">1.62 GB</span>
               </div>
               <div class="bar-row">
@@ -1369,183 +1307,7 @@
             </div>
           </div>
         </div>
-      </div></div>
-
-<script>
-const data = {
-  sections: [
-    {
-      title: "La América", type: "active",
-      accounts: [
-        { name: "Alejandro Dominguez", email: "alejandro@laamerica.com", mail: 43.92, drive: 162.09 },
-        { name: "Rafael D'Alvia", email: "rafael@laamerica.com", mail: 12.28, drive: 0.2 },
-        { name: "Sebastian Stagno", email: "sebastian@laamerica.com", mail: 21.29, drive: 2.37 },
-        { name: "Nicolas Roberts", email: "keke@laamerica.com", mail: 21.01, drive: 0.75 },
-        { name: "Christian Camean", email: "christian@laamerica.com", mail: 23.94, drive: 0.11 },
-        { name: "Audrey López", email: "audrey@laamerica.com", mail: 7.44, drive: 3.23 },
-        { name: "Martin Rubins", email: "martin@laamerica.com", mail: 0.92, drive: 318.52 },
-        { name: "Magalí Sabella", email: "magali@laamerica.com", mail: 0.03, drive: 0.0 },
-        { name: "Gustavo Chiocconi", email: "gustavo@laamerica.com", mail: 10.79, drive: 331.8 },
-        { name: "Rulo Asencio", email: "rulo@laamerica.com", mail: 4.31, drive: 405.95 },
-        { name: "Luz Lopez Moreno", email: "luz@laamerica.com", mail: 9.84, drive: 118.97 },
-        { name: "Micaela Mazziotti", email: "micaela@laamerica.com", mail: 5.83, drive: 5.09 },
-        { name: "Luciano Groba", email: "luciano@laamerica.com", mail: 2.9, drive: 0.88 },
-        { name: "Morena Joos", email: "morena@laamerica.com", mail: 0.0, drive: 1.1 },
-        { name: "Lucas Sotelo", email: "lucas@laamerica.com", mail: 13.62, drive: 4.83 },
-        { name: "Joaquin Calvo", email: "joaquin@laamerica.com", mail: 2.05, drive: 89.18 },
-        { name: "Roni Castillo", email: "roni@laamerica.com", mail: 0.59, drive: 115.66 },
-        { name: "Trini Fernandez Madero", email: "trinidad@laamerica.com", mail: 0.97, drive: 38.96 },
-        { name: "Mariel Nogues", email: "mariel@laamerica.com", mail: 47.35, drive: 0.13 },
-        { name: "Silvia Otazo", email: "silvia@laamerica.com", mail: 24.7, drive: 1.02 },
-        { name: "Damian Buckmeier", email: "damian@laamerica.com", mail: 2.8, drive: 122.13 },
-      ]
-    },
-    {
-      title: "Cuentas genéricas / de servicio", type: "service",
-      accounts: [
-        { name: "Hola La América", email: "hola@laamerica.com", mail: 6.42, drive: 11.87 },
-        { name: "Hola La America Buro", email: "hola@laamericaburo.com", mail: 0.11, drive: 0.0 },
-        { name: "Calendar La America", email: "calendar@laamerica.com", mail: 1.43, drive: 36324.05 },
-        { name: "Out La America", email: "out@laamerica.com", mail: 27.31, drive: 0.0 },
-        { name: "Cocina Cocina", email: "cocina@laamerica.com", mail: 0.42, drive: 0.0 },
-      ]
-    },
-    {
-      title: "La América Buró / México", type: "buro-mx",
-      accounts: [
-        { name: "Alejandro Dominguez", email: "alejandro@laamericaburo.com", mail: 0.05, drive: 0.0 },
-        { name: "Gustavo Chiocconi", email: "gustavo@laamericaburo.com", mail: 0.17, drive: 0.0 },
-        { name: "Joaquin Calvo", email: "joaquin@laamericaburo.com", mail: 0.07, drive: 0.0 },
-        { name: "Rafael D'Alvia", email: "rafael@laamericaburo.com", mail: 0.05, drive: 0.0 },
-        { name: "Alejandro Dominguez", email: "alejandro@laamericamexico.com", mail: 1.06, drive: 19.63 },
-      ]
-    },
-    {
-      title: "Suspendidas", type: "suspended",
-      accounts: [
-        { name: "Constanza Vanzini", email: "constanza@agencialaamerica.com", mail: 21.17, drive: 642.5 },
-        { name: "Juan Manuel Praderio", email: "juanmanuel@agencialaamerica.com", mail: 15.94, drive: 241.92 },
-        { name: "Miranda Gnida", email: "miranda.gnida@agencialaamerica.com", mail: 0.01, drive: 0.0 },
-        { name: "Nadia Greco", email: "nadia@agencialaamerica.com", mail: 7.94, drive: 30.72 },
-        { name: "Natalia Chianetta", email: "natalia@agencialaamerica.com", mail: 1.17, drive: 16.19 },
-        { name: "Nicolas Giarusso", email: "nicolasg@agencialaamerica.com", mail: 0.21, drive: 0.82 },
-        { name: "Nicolas Elizari", email: "nicolas@agencialaamerica.com", mail: 37.54, drive: 141.42 },
-        { name: "Stefania Wetzel", email: "stefania@agencialaamerica.com", mail: 1.62, drive: 72.4 },
-      ]
-    }
-  ]
-};
-
-let currentSort = 'none';
-let sortDir = 'desc';
-
-function getTotal(a) { return +(a.mail + a.drive).toFixed(2); }
-
-function fmt(n) {
-  if (n >= 1000) return n.toLocaleString('es-AR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' GB';
-  if (n >= 100) return n.toFixed(1) + ' GB';
-  return n.toFixed(2) + ' GB';
-}
-
-function getMaxInSection(accounts) {
-  let max = 0;
-  accounts.forEach(a => { if (a.mail > max) max = a.mail; if (a.drive > max) max = a.drive; });
-  return max || 1;
-}
-
-function renderSummary() {
-  let totalAll = 0, totalMail = 0, totalDrive = 0, count = 0;
-  data.sections.forEach(s => s.accounts.forEach(a => { totalAll += getTotal(a); totalMail += a.mail; totalDrive += a.drive; count++; }));
-  document.getElementById('summary').innerHTML = `
-    <div class="summary-card"><div class="label">Cuentas</div><div class="value">${count}</div><div class="sub">${data.sections[0].accounts.length} activas</div></div>
-    <div class="summary-card"><div class="label">Total</div><div class="value">${(totalAll/1000).toFixed(1)} TB</div><div class="sub">${fmt(totalAll)}</div></div>
-    <div class="summary-card"><div class="label">Mail</div><div class="value">${fmt(totalMail)}</div></div>
-    <div class="summary-card"><div class="label">Drive</div><div class="value">${(totalDrive/1000).toFixed(1)} TB</div><div class="sub">${fmt(totalDrive)}</div></div>
-  `;
-}
-
-function toggleSort(type) {
-  if (type === 'none') { currentSort = 'none'; sortDir = 'desc'; }
-  else if (currentSort === type) { sortDir = sortDir === 'desc' ? 'asc' : 'desc'; }
-  else { currentSort = type; sortDir = 'desc'; }
-  updateSortButtons();
-  render();
-}
-
-function updateSortButtons() {
-  document.querySelectorAll('.sort-btn').forEach(btn => {
-    const sort = btn.dataset.sort;
-    const arrow = btn.querySelector('.arrow');
-    btn.classList.toggle('active', sort === currentSort || (sort === 'none' && currentSort === 'none'));
-    if (arrow) arrow.textContent = (sort === currentSort && sortDir === 'asc') ? '↑' : '↓';
-  });
-}
-
-function sortAccounts(accounts) {
-  if (currentSort === 'none') return [...accounts];
-  const sorted = [...accounts];
-  const getValue = (a) => currentSort === 'total' ? getTotal(a) : currentSort === 'mail' ? a.mail : a.drive;
-  sorted.sort((a, b) => sortDir === 'desc' ? getValue(b) - getValue(a) : getValue(a) - getValue(b));
-  return sorted;
-}
-
-function render() {
-  let html = '';
-  let globalIdx = 1;
-
-  data.sections.forEach(section => {
-    const sorted = sortAccounts(section.accounts);
-    const isSuspended = section.type === 'suspended';
-    const maxVal = getMaxInSection(section.accounts);
-
-    html += `<div class="section ${isSuspended ? 'suspended' : ''}">`;
-    html += `<div class="section-title">${section.title} <span class="count">${section.accounts.length}</span></div>`;
-
-    sorted.forEach(a => {
-      const total = getTotal(a);
-      const mailPct = Math.max((a.mail / maxVal) * 100, a.mail > 0 ? 1.5 : 0);
-      const drivePct = Math.max((a.drive / maxVal) * 100, a.drive > 0 ? 1.5 : 0);
-
-      html += `
-        <div class="account">
-          <div class="num">${globalIdx}</div>
-          <div class="account-content">
-            <div class="account-header">
-              <span class="name">${a.name}</span>
-              <span class="email">${a.email}</span>
-            </div>
-            <div class="bars-wrapper">
-              <div class="bar-row">
-                <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:${mailPct}%"></div></div>
-                <span class="bar-value mail">${fmt(a.mail)}</span>
-              </div>
-              <div class="bar-row">
-                <span class="bar-label drive">Drive</span>
-                <div class="bar-track"><div class="bar-fill drive" style="width:${drivePct}%"></div></div>
-                <span class="bar-value drive">${fmt(a.drive)}</span>
-              </div>
-              <div class="total-line">
-                <span class="total-label">Total</span>
-                <div class="total-bar-area"><div class="total-tick"></div></div>
-                <span class="total-value">${fmt(total)}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-      globalIdx++;
-    });
-
-    html += '</div>';
-  });
-
-  document.getElementById('content').innerHTML = html;
-}
-
-renderSummary();
-render();
-</script>
-
-
-</body></html>
+    </div>
+ 
+</body>
+</html>
