@@ -7,229 +7,58 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Lora:wght@400;600;700&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #faf8f4;
-    --card: #ffffff;
-    --border: #e8e4de;
-    --text: #2c2825;
-    --text-secondary: #7a7168;
-    --accent: #c4653a;
-    --mail-color: #5b8a72;
-    --mail-bar: #6fa88a;
-    --drive-color: #4a72a8;
-    --drive-bar: #6b92c4;
-    --total-color: #8b7355;
-    --suspended: #b8a99a;
-    --hover: #f5f2ed;
-    --bar-track: #eae6e0;
-    --mantiene-green: #5b8a72;
+    --bg: #faf8f4; --card: #ffffff; --border: #e8e4de; --text: #2c2825;
+    --text-secondary: #7a7168; --accent: #c4653a; --mail-color: #5b8a72;
+    --mail-bar: #6fa88a; --drive-color: #4a72a8; --drive-bar: #6b92c4;
+    --total-color: #8b7355; --suspended: #b8a99a; --hover: #f5f2ed;
+    --bar-track: #eae6e0; --mantiene-green: #5b8a72;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: 'Source Serif 4', Georgia, serif;
-    background: var(--bg);
-    color: var(--text);
-    padding: 2rem 1.5rem;
-    max-width: 960px;
-    margin: 0 auto;
-    -webkit-font-smoothing: antialiased;
-  }
-  header {
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 2px solid var(--text);
-  }
-  header h1 {
-    font-family: 'Lora', serif;
-    font-weight: 700;
-    font-size: 1.6rem;
-    letter-spacing: -0.02em;
-  }
-  header p {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    margin-top: 0.4rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-  .summary-row {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-  }
-  .summary-card {
-    flex: 1;
-    min-width: 120px;
-    padding: 1rem;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: var(--card);
-  }
-  .summary-card.highlight {
-    border-color: var(--mantiene-green);
-    background: #f4faf6;
-  }
-  .summary-card.baja-card {
-    border-color: var(--accent);
-    background: #fef6f4;
-  }
-  .summary-card .label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-secondary);
-    margin-bottom: 0.3rem;
-  }
-  .summary-card .value {
-    font-family: 'Lora', serif;
-    font-weight: 700;
-    font-size: 1.3rem;
-  }
+  body { font-family: 'Source Serif 4', Georgia, serif; background: var(--bg); color: var(--text); padding: 2rem 1.5rem; max-width: 960px; margin: 0 auto; -webkit-font-smoothing: antialiased; }
+  header { margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--text); }
+  header h1 { font-family: 'Lora', serif; font-weight: 700; font-size: 1.6rem; letter-spacing: -0.02em; }
+  header p { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.4rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .summary-row { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .summary-card { flex: 1; min-width: 120px; padding: 1rem; border-radius: 8px; border: 1px solid var(--border); background: var(--card); }
+  .summary-card.highlight { border-color: var(--mantiene-green); background: #f4faf6; }
+  .summary-card.baja-card { border-color: var(--accent); background: #fef6f4; }
+  .summary-card .label { font-family: 'DM Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); margin-bottom: 0.3rem; }
+  .summary-card .value { font-family: 'Lora', serif; font-weight: 700; font-size: 1.3rem; }
   .summary-card.highlight .value { color: var(--mantiene-green); }
   .summary-card.baja-card .value { color: var(--accent); }
-  .summary-card .sub {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--text-secondary);
-    margin-top: 0.15rem;
-  }
-  .legend {
-    display: flex;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--text-secondary);
-  }
+  .summary-card .sub { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--text-secondary); margin-top: 0.15rem; }
+  .legend { display: flex; gap: 1.5rem; margin-bottom: 1.5rem; font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--text-secondary); }
   .legend-item { display: flex; align-items: center; gap: 0.4rem; }
   .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
   .section { margin-bottom: 2rem; }
-  .section-title {
-    font-family: 'Lora', serif;
-    font-weight: 600;
-    font-size: 1.05rem;
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.4rem;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .section-title .count {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--text-secondary);
-    background: var(--hover);
-    padding: 0.15rem 0.5rem;
-    border-radius: 10px;
-  }
-  .status-badge {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    font-weight: 500;
-    color: white;
-    padding: 0.15rem 0.6rem;
-    border-radius: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-left: auto;
-  }
-  .account {
-    padding: 0.75rem;
-    border-radius: 8px;
-    transition: background 0.15s ease;
-    margin-bottom: 4px;
-    display: grid;
-    grid-template-columns: 2rem 1fr;
-    gap: 0.6rem;
-    align-items: start;
-  }
+  .section-title { font-family: 'Lora', serif; font-weight: 600; font-size: 1.05rem; margin-bottom: 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.5rem; }
+  .section-title .count { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--text-secondary); background: var(--hover); padding: 0.15rem 0.5rem; border-radius: 10px; }
+  .status-badge { font-family: 'DM Mono', monospace; font-size: 0.6rem; font-weight: 500; color: white; padding: 0.15rem 0.6rem; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.06em; margin-left: auto; }
+  .account { padding: 0.75rem; border-radius: 8px; transition: background 0.15s ease; margin-bottom: 4px; display: grid; grid-template-columns: 2rem 1fr; gap: 0.6rem; align-items: start; }
   .account:hover { background: var(--hover); }
-  .account .num {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: #ccc5bb;
-    text-align: right;
-    padding-top: 0.15rem;
-  }
+  .account .num { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: #ccc5bb; text-align: right; padding-top: 0.15rem; }
   .account-content { display: flex; flex-direction: column; gap: 0.55rem; min-width: 0; }
   .account-header { display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; }
   .account .name { font-family: 'Lora', serif; font-weight: 600; font-size: 0.92rem; }
   .account .email { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--text-secondary); }
   .bars-wrapper { display: flex; flex-direction: column; gap: 5px; }
   .bar-row { display: flex; align-items: center; gap: 0.5rem; height: 20px; }
-  .bar-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    width: 40px;
-    text-align: right;
-    flex-shrink: 0;
-  }
+  .bar-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.04em; width: 40px; text-align: right; flex-shrink: 0; }
   .bar-label.mail { color: var(--mail-color); }
   .bar-label.drive { color: var(--drive-color); }
-  .bar-track {
-    flex: 1;
-    height: 100%;
-    background: var(--bar-track);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  .bar-fill {
-    height: 100%;
-    border-radius: 4px;
-    transition: width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-    position: relative;
-  }
+  .bar-track { flex: 1; height: 100%; background: var(--bar-track); border-radius: 4px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); position: relative; }
   .bar-fill.mail { background: var(--mail-bar); }
   .bar-fill.drive { background: var(--drive-bar); }
-  .bar-fill::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 60%);
-    border-radius: 4px;
-  }
-  .bar-value {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.66rem;
-    font-weight: 500;
-    width: 72px;
-    text-align: right;
-    flex-shrink: 0;
-  }
+  .bar-fill::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 60%); border-radius: 4px; }
+  .bar-value { font-family: 'DM Mono', monospace; font-size: 0.66rem; font-weight: 500; width: 72px; text-align: right; flex-shrink: 0; }
   .bar-value.mail { color: var(--mail-color); }
   .bar-value.drive { color: var(--drive-color); }
-  .total-line {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 1px;
-  }
-  .total-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    width: 40px;
-    text-align: right;
-    color: var(--total-color);
-    flex-shrink: 0;
-  }
+  .total-line { display: flex; align-items: center; gap: 0.5rem; margin-top: 1px; }
+  .total-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.04em; width: 40px; text-align: right; color: var(--total-color); flex-shrink: 0; }
   .total-bar-area { flex: 1; display: flex; align-items: center; }
   .total-tick { height: 0; border-top: 1.5px dashed var(--total-color); opacity: 0.35; flex: 1; }
-  .total-value {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    font-weight: 500;
-    color: var(--total-color);
-    width: 72px;
-    text-align: right;
-    flex-shrink: 0;
-  }
+  .total-value { font-family: 'DM Mono', monospace; font-size: 0.72rem; font-weight: 500; color: var(--total-color); width: 72px; text-align: right; flex-shrink: 0; }
   .section.suspended .account .name { color: var(--suspended); }
   .section.suspended .account .email { color: var(--suspended); }
   @media (max-width: 600px) {
@@ -243,24 +72,20 @@
 </style>
 </head>
 <body>
- 
 <header>
   <h1>Google Workspace — Decisión de Licencias</h1>
   <p>La América · 39 cuentas · Abril 2026</p>
 </header>
- 
 <div class="summary-row">
   <div class="summary-card"><div class="label">Cuentas totales</div><div class="value">39</div></div>
-  <div class="summary-card highlight"><div class="label">Licencias a mantener</div><div class="value">28</div><div class="sub">21 La América + 3 El Buró + 4 especiales</div></div>
-  <div class="summary-card baja-card"><div class="label">Bajas</div><div class="value">11</div></div>
+  <div class="summary-card highlight"><div class="label">Licencias a mantener</div><div class="value">26</div><div class="sub">21 La América + 1 El Buró + 4 especiales</div></div>
+  <div class="summary-card baja-card"><div class="label">Bajas</div><div class="value">13</div></div>
 </div>
- 
 <div class="legend">
   <div class="legend-item"><div class="legend-dot" style="background:var(--mail-bar)"></div> Mail</div>
   <div class="legend-item"><div class="legend-dot" style="background:var(--drive-bar)"></div> Drive</div>
   <div class="legend-item"><div class="legend-dot" style="background:transparent; border:1.5px dashed var(--total-color);"></div> Total</div>
 </div>
- 
  
     <div class="section ">
       <div class="section-title">
@@ -819,7 +644,7 @@
     <div class="section ">
       <div class="section-title">
         Cuentas El Buró que seguirán activas
-        <span class="count">3</span>
+        <span class="count">1</span>
         <span class="status-badge" style="background:#5b8a72">ACTIVA</span>
       </div>
       
@@ -849,58 +674,6 @@
             </div>
           </div>
         </div>
-        <div class="account">
-          <div class="num">23</div>
-          <div class="account-content">
-            <div class="account-header">
-              <span class="name">Rafael D'Alvia</span>
-              <span class="email">rafael@laamericaburo.com</span>
-            </div>
-            <div class="bars-wrapper">
-              <div class="bar-row">
-                <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
-                <span class="bar-value mail">0.05 GB</span>
-              </div>
-              <div class="bar-row">
-                <span class="bar-label drive">Drive</span>
-                <div class="bar-track"><div class="bar-fill drive" style="width:0%"></div></div>
-                <span class="bar-value drive">0.00 GB</span>
-              </div>
-              <div class="total-line">
-                <span class="total-label">Total</span>
-                <div class="total-bar-area"><div class="total-tick"></div></div>
-                <span class="total-value">0.05 GB</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="account">
-          <div class="num">24</div>
-          <div class="account-content">
-            <div class="account-header">
-              <span class="name">Gustavo Chiocconi</span>
-              <span class="email">gustavo@laamericaburo.com</span>
-            </div>
-            <div class="bars-wrapper">
-              <div class="bar-row">
-                <span class="bar-label mail">Mail</span>
-                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
-                <span class="bar-value mail">0.17 GB</span>
-              </div>
-              <div class="bar-row">
-                <span class="bar-label drive">Drive</span>
-                <div class="bar-track"><div class="bar-fill drive" style="width:0%"></div></div>
-                <span class="bar-value drive">0.00 GB</span>
-              </div>
-              <div class="total-line">
-                <span class="total-label">Total</span>
-                <div class="total-bar-area"><div class="total-tick"></div></div>
-                <span class="total-value">0.17 GB</span>
-              </div>
-            </div>
-          </div>
-        </div>
     </div>
     <div class="section ">
       <div class="section-title">
@@ -910,7 +683,7 @@
       </div>
       
         <div class="account">
-          <div class="num">25</div>
+          <div class="num">23</div>
           <div class="account-content">
             <div class="account-header">
               <span class="name">Hola La América</span>
@@ -936,7 +709,7 @@
           </div>
         </div>
         <div class="account">
-          <div class="num">26</div>
+          <div class="num">24</div>
           <div class="account-content">
             <div class="account-header">
               <span class="name">Calendar La America</span>
@@ -962,7 +735,7 @@
           </div>
         </div>
         <div class="account">
-          <div class="num">27</div>
+          <div class="num">25</div>
           <div class="account-content">
             <div class="account-header">
               <span class="name">Out La America</span>
@@ -988,7 +761,7 @@
           </div>
         </div>
         <div class="account">
-          <div class="num">28</div>
+          <div class="num">26</div>
           <div class="account-content">
             <div class="account-header">
               <span class="name">Cocina Cocina</span>
@@ -1017,10 +790,62 @@
     <div class="section suspended">
       <div class="section-title">
         Cuentas que se darán de baja
-        <span class="count">11</span>
+        <span class="count">13</span>
         <span class="status-badge" style="background:#c4653a">BAJA</span>
       </div>
       
+        <div class="account">
+          <div class="num">27</div>
+          <div class="account-content">
+            <div class="account-header">
+              <span class="name">Rafael D'Alvia</span>
+              <span class="email">rafael@laamericaburo.com</span>
+            </div>
+            <div class="bars-wrapper">
+              <div class="bar-row">
+                <span class="bar-label mail">Mail</span>
+                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
+                <span class="bar-value mail">0.05 GB</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label drive">Drive</span>
+                <div class="bar-track"><div class="bar-fill drive" style="width:0%"></div></div>
+                <span class="bar-value drive">0.00 GB</span>
+              </div>
+              <div class="total-line">
+                <span class="total-label">Total</span>
+                <div class="total-bar-area"><div class="total-tick"></div></div>
+                <span class="total-value">0.05 GB</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="account">
+          <div class="num">28</div>
+          <div class="account-content">
+            <div class="account-header">
+              <span class="name">Gustavo Chiocconi</span>
+              <span class="email">gustavo@laamericaburo.com</span>
+            </div>
+            <div class="bars-wrapper">
+              <div class="bar-row">
+                <span class="bar-label mail">Mail</span>
+                <div class="bar-track"><div class="bar-fill mail" style="width:1.5%"></div></div>
+                <span class="bar-value mail">0.17 GB</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label drive">Drive</span>
+                <div class="bar-track"><div class="bar-fill drive" style="width:0%"></div></div>
+                <span class="bar-value drive">0.00 GB</span>
+              </div>
+              <div class="total-line">
+                <span class="total-label">Total</span>
+                <div class="total-bar-area"><div class="total-tick"></div></div>
+                <span class="total-value">0.17 GB</span>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="account">
           <div class="num">29</div>
           <div class="account-content">
@@ -1308,6 +1133,5 @@
           </div>
         </div>
     </div>
- 
 </body>
 </html>
