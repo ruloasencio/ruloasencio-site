@@ -1,1 +1,166 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Predio en Alquiler — Buenos Aires 1348, Firmat</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FAF8F4;--bg-card:#FFFFFF;--text-primary:#1A1A1A;--text-secondary:#6B6B6B;--text-tertiary:#9A9A9A;--accent:#2C5F2D;--accent-light:#E8F0E8;--border:#E8E4DE;--border-light:#F0ECE6;--warm-rose:#F5E6E0;--warm-blue:#E0EAF5;--warm-green:#E4F0E4;--warm-amber:#F5F0E0;--font-display:'Playfair Display',Georgia,serif;--font-body:'DM Sans',-apple-system,sans-serif;--radius:12px;--shadow-sm:0 1px 3px rgba(0,0,0,0.04),0 1px 2px rgba(0,0,0,0.06);--shadow-md:0 4px 16px rgba(0,0,0,0.06),0 2px 4px rgba(0,0,0,0.04);--shadow-lg:0 12px 40px rgba(0,0,0,0.08),0 4px 12px rgba(0,0,0,0.04)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary);-webkit-font-smoothing:antialiased;line-height:1.6}
+.container{max-width:920px;margin:0 auto;padding:0 24px}
+.hero{padding:60px 0 40px;text-align:center;animation:fadeIn .8s ease-out}
+.hero-label{font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);background:var(--accent-light);display:inline-block;padding:6px 16px;border-radius:20px;margin-bottom:24px}
+.hero h1{font-family:var(--font-display);font-size:clamp(28px,5vw,44px);font-weight:600;line-height:1.15;color:var(--text-primary);margin-bottom:12px;letter-spacing:-.5px}
+.hero-address{font-size:17px;color:var(--text-secondary);font-weight:400}
+.video-section{margin-bottom:40px}
+.video-container{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-md);aspect-ratio:16/9}
+.video-container iframe{width:100%;height:100%;border:none}
+.video-placeholder{background:#E8E4DE;border-radius:var(--radius);aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;overflow:hidden;box-shadow:var(--shadow-md)}
+.video-placeholder .play-icon{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-md)}
+.video-placeholder .play-icon::after{content:'';display:block;width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:20px solid var(--accent);margin-left:4px}
+.video-placeholder .video-label{font-size:14px;color:var(--text-secondary);font-weight:500}
+.gallery-section{margin-bottom:16px}
+.gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.gallery-item{border-radius:8px;aspect-ratio:4/3;overflow:hidden;transition:transform .2s ease;cursor:pointer;background:#E8E4DE;display:flex;align-items:center;justify-content:center}
+.gallery-item:hover{transform:scale(1.02)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block}
+.gallery-item .photo-number{font-size:13px;font-weight:600;color:var(--text-tertiary);background:rgba(255,255,255,.8);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.amount{font-family:var(--font-display);font-size:36px;font-weight:600;color:var(--text-primary);letter-spacing:-1px}
+.period{font-size:14px;color:var(--text-tertiary);font-weight:400}
+.section-title{font-family:var(--font-display);font-size:26px;font-weight:600;margin-bottom:24px;color:var(--text-primary);letter-spacing:-.3px}
+.dist-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.dist-card{border-radius:var(--radius);padding:24px 20px;text-align:center}
+.dist-card .dist-name{font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.8px}
+.dist-card .dist-value{font-family:var(--font-display);font-size:24px;font-weight:600;color:var(--text-primary)}
+.dist-card .dist-unit{font-size:14px;font-weight:400;color:var(--text-secondary)}
+.floorplan{margin-bottom:48px}
+.plan-img{width:100%;border-radius:var(--radius);display:block;cursor:zoom-in}
+.plan-img-container{position:relative}
+.plan-img-container .zoom-btn{position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:50%;background:rgba(26,26,26,.85);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-md);z-index:10;pointer-events:none}
+.features{margin-bottom:48px}
+.features-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.feature-item{display:flex;align-items:center;gap:14px;background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius);padding:16px 20px;box-shadow:var(--shadow-sm)}
+.feature-icon{width:40px;height:40px;border-radius:10px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.feature-text{font-size:14px;font-weight:500;color:var(--text-primary)}
+.contract{margin-bottom:48px}
+.contract-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.contract-item{background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius);padding:20px;text-align:center;box-shadow:var(--shadow-sm)}
+.contract-item .c-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-tertiary);margin-bottom:6px}
+.contract-item .c-value{font-size:16px;font-weight:600;color:var(--text-primary)}
+.cta{text-align:center;padding:48px 0 60px}
+.cta-text{font-size:15px;color:var(--text-secondary);margin-bottom:20px}
+.cta-button{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#fff;font-family:var(--font-body);font-size:15px;font-weight:600;padding:14px 36px;border-radius:50px;border:none;cursor:pointer;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease;box-shadow:var(--shadow-md)}
+.cta-button:hover{transform:translateY(-1px);box-shadow:var(--shadow-lg)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:768px){.dist-grid{grid-template-columns:repeat(2,1fr)}.features-grid{grid-template-columns:1fr}.contract-grid{grid-template-columns:1fr}.price-boxes{flex-direction:column}.price-boxes>div{border-radius:var(--radius)!important;border:2px solid var(--text-primary)!important;margin-bottom:8px}}
+@media(max-width:480px){.hero{padding:40px 0 28px}}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <section class="hero">
+    <span class="hero-label">En alquiler</span>
+    <h1>Complejo apto depósito, logística e industria</h1>
+    <p style="font-family: var(--font-display); font-size: clamp(20px, 3vw, 28px); font-weight: 500; color: var(--text-secondary); margin-bottom: 12px;">1.000 m² — 600 cubiertos</p>
+    <p class="hero-address">Buenos Aires 1348, Firmat</p>
+  </section>
+
+  <section class="video-section">
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/A6eZUoPstN8" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <section class="gallery-section">
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="https://drive.google.com/thumbnail?id=1yRnIbtVKP2QWcfAYmGqLM3AjY6PCOX3T&sz=w800" alt="Foto 1"></div>
+      <div class="gallery-item"><img src="https://drive.google.com/thumbnail?id=1Q9BeXsWX5gNcyMwHWU4DR_YAimaHquoR&sz=w800" alt="Foto 2"></div>
+      <div class="gallery-item"><img src="https://drive.google.com/thumbnail?id=1nxGbVHEE35AhWUi8LGtfZtMIRV4WFVrW&sz=w800" alt="Foto 3"></div>
+      <div class="gallery-item"><img src="https://drive.google.com/thumbnail?id=19NSLaiv3wpb5psDBAhUYg3KVLQudtqGV&sz=w800" alt="Foto 4"></div>
+      <div class="gallery-item"><img src="https://drive.google.com/thumbnail?id=1MMK6k2m8iw8qOjp4O9D0J3TCTwy07rQu&sz=w800" alt="Foto 5"></div>
+      <div class="gallery-item"><img src="https://drive.google.com/thumbnail?id=1_UfRH3YhtfittW2jaKK0PIFIL0oeRHtQ&sz=w800" alt="Foto 6"></div>
+      <div class="gallery-item"><img src="https://drive.google.com/thumbnail?id=1Ivt1-yekslhR6uNBwWXIYGlkuUh_Gh3H&sz=w800" alt="Foto 7"></div>
+      <div class="gallery-item"><img src="https://drive.google.com/thumbnail?id=1xxS_LAmuXKAQbztDY0SCma6Y8i7gkGCN&sz=w800" alt="Foto 8"></div>
+    </div>
+  </section>
+
+  <div style="margin-bottom: 48px;">
+    <div class="feature-item" style="justify-content: center;">
+      <a href="https://maps.app.goo.gl/xNJmvkWmxXzp4yhn7" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 8px; text-decoration: none; font-size: 14px; font-weight: 500; color: var(--text-primary);">
+        📍 Click acá para ver ubicación en Google Maps
+      </a>
+    </div>
+  </div>
+
+  <section class="floorplan">
+    <h2 class="section-title">Distribución</h2>
+    <a href="https://drive.google.com/file/d/1RqlYGicgQhxs6evp-Oxcjcva4qrpGP8p/view?usp=sharing" target="_blank" rel="noopener" style="display: block; text-decoration: none; cursor: zoom-in;">
+      <div class="plan-img-container">
+        <div class="zoom-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+        </div>
+        <img class="plan-img" src="https://drive.google.com/thumbnail?id=1lIjsHqWPhO4fY0TZZXIM1JbI-iynDukz&sz=w1200" alt="Plano del complejo">
+      </div>
+    </a>
+    <p style="text-align: center; margin-top: 12px; margin-bottom: 24px; font-size: 13px; color: var(--text-tertiary);">Hacé click en el plano para abrir en alta resolución</p>
+    <div class="dist-grid" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="dist-card" style="background: var(--warm-green);">
+        <div class="dist-name">Superficie total</div>
+        <div class="dist-value">1.000 <span class="dist-unit">m²</span></div>
+      </div>
+      <div class="dist-card" style="background: var(--warm-blue);">
+        <div class="dist-name">Cubiertos</div>
+        <div class="dist-value">600 <span class="dist-unit">m²</span></div>
+      </div>
+      <div class="dist-card" style="background: var(--warm-amber);">
+        <div class="dist-name">Descubiertos</div>
+        <div class="dist-value">400 <span class="dist-unit">m²</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <h2 class="section-title">Características</h2>
+    <div class="features-grid">
+      <div class="feature-item"><div class="feature-icon">🏗️</div><div class="feature-text">6 depósitos con portones corredizos</div></div>
+      <div class="feature-item"><div class="feature-icon">🏢</div><div class="feature-text">2 oficinas de 30 m²</div></div>
+      <div class="feature-item"><div class="feature-icon">🚛</div><div class="feature-text">Ingreso y maniobra de camiones dentro del predio</div></div>
+      <div class="feature-item"><div class="feature-icon">🅿️</div><div class="feature-text">Cobertizo de 80 m² para guardado de vehículos</div></div>
+      <div class="feature-item"><div class="feature-icon">⚡</div><div class="feature-text">Instalación eléctrica alta tensión 100% renovada</div></div>
+      <div class="feature-item"><div class="feature-icon">📍</div><div class="feature-text">Ubicación estratégica en el centro de la ciudad</div></div>
+    </div>
+  </section>
+
+  <section class="contract">
+    <h2 class="section-title">Condiciones</h2>
+    <div class="contract-grid">
+      <div class="contract-item"><div class="c-label">Contrato</div><div class="c-value">24 meses</div></div>
+      <div class="contract-item"><div class="c-label">Ajuste</div><div class="c-value">Cuatrimestral por IPC</div></div>
+      <div class="contract-item"><div class="c-label">Forma de pago</div><div class="c-value" style="font-size: 14px; line-height: 1.4;">Del 1 al 5 de cada mes, vía transferencia bancaria</div></div>
+      <div class="contract-item"><div class="c-label">Garantía</div><div class="c-value" style="font-size: 14px; line-height: 1.4;">Seguro de caución o depósito en garantía a convenir</div></div>
+      <div class="contract-item"><div class="c-label">Servicios a cargo del inquilino</div><div class="c-value" style="font-size: 14px;">Agua · Luz</div></div>
+      <div class="contract-item"><div class="c-label">100% a cargo del propietario</div><div class="c-value" style="font-size: 13px; line-height: 1.5;">TGI Municipal + API Inmobiliario</div></div>
+    </div>
+  </section>
+
+  <section style="margin-bottom: 48px;">
+    <div style="text-align: center; padding: 32px 24px; border: 2px solid var(--text-primary); border-radius: var(--radius); background: var(--bg-card); box-shadow: var(--shadow-md);">
+      <span style="display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: #185FA5; background: #E6F1FB; padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;">Alquiler en pesos · pago mensual</span>
+      <div class="amount" style="font-size: 40px;">$2.000.000</div>
+      <p style="font-size: 12px; color: var(--text-tertiary); margin-top: 16px;">* Consultá por bonificación especial por pago único anual en dólares.</p>
+    </div>
+  </section>
+
+  <section class="cta">
+    <p class="cta-text">¿Interesado en este complejo? Coordinemos una visita.</p>
+    <a href="https://wa.me/5493465662672?text=Hola%2C%20acabo%20de%20ver%20la%20p%C3%A1gina%20web%20del%20complejo%20de%20dep%C3%B3sitos%20en%20alquiler%20de%20Calle%20Buenos%20Aires%201348%20y%20me%20gustar%C3%ADa%20obtener%20mayor%20informaci%C3%B3n." class="cta-button">Consultar por WhatsApp</a>
+  </section>
+
+</div>
+</body>
+</html>
+
