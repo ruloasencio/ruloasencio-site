@@ -1,0 +1,961 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ualá & La América — Campaña Relanzamiento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-2: #f3efe7;
+  --ink: #1a2942;
+  --ink-soft: #3d4a63;
+  --ink-light: #6b7489;
+  --accent: #e85a7a;
+  --accent-soft: #f7d4dc;
+  --ualá-blue: #1e3a8a;
+  --ualá-pink: #ff4d6d;
+  --green: #4a6b3a;
+  --green-soft: #dce5d3;
+  --ochre: #b8894a;
+  --ochre-soft: #f3e6cf;
+  --line: #d9d2c3;
+  --line-soft: #e8e2d4;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  font-size: 17px;
+  font-weight: 400;
+}
+.container { max-width: 960px; margin: 0 auto; padding: 60px 40px; }
+
+/* Header */
+.header {
+  text-align: center;
+  padding: 40px 0 60px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 30px;
+}
+.header .brand-mark {
+  font-family: 'Lora', serif;
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+.header .brand-mark .amp { color: var(--accent); font-style: italic; margin: 0 6px; }
+.header .subtitle {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--ink-light);
+  margin-top: 16px;
+}
+.header .date {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--accent);
+  margin-top: 10px;
+}
+
+/* Sections */
+section {
+  padding: 50px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+section:last-of-type { border-bottom: none; }
+
+.section-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: block;
+}
+
+h1 {
+  font-family: 'Lora', serif;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 1.15;
+  color: var(--ink);
+  letter-spacing: -0.8px;
+  margin-bottom: 24px;
+}
+h2 {
+  font-family: 'Lora', serif;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1.2;
+  color: var(--ink);
+  letter-spacing: -0.4px;
+  margin-bottom: 20px;
+}
+h3 {
+  font-family: 'Lora', serif;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.3;
+  color: var(--ink);
+  margin-bottom: 14px;
+  margin-top: 28px;
+}
+h4 {
+  font-family: 'Source Serif 4', serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--accent);
+  margin-bottom: 8px;
+  margin-top: 20px;
+}
+p { margin-bottom: 16px; color: var(--ink-soft); }
+p.lead { font-size: 20px; line-height: 1.5; color: var(--ink); }
+strong { color: var(--ink); font-weight: 600; }
+em { color: var(--accent); font-style: italic; }
+
+/* Data blocks */
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+.data-cell {
+  background: var(--bg-2);
+  border-left: 3px solid var(--accent);
+  padding: 16px 20px;
+}
+.data-cell .data-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 6px;
+}
+.data-cell .data-value {
+  font-family: 'Lora', serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ink);
+}
+.data-cell .data-sub {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-top: 4px;
+}
+
+/* Timeline */
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 4px;
+  margin: 30px 0 20px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+}
+.tl-cell {
+  padding: 18px 8px;
+  text-align: center;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+}
+.tl-cell.platform { background: rgba(30, 58, 138, 0.08); border-color: var(--ualá-blue); color: var(--ualá-blue); }
+.tl-cell.launch { background: var(--green-soft); border-color: var(--green); color: var(--green); }
+.tl-cell.wave { background: rgba(184, 137, 74, 0.15); border-color: var(--ochre); color: var(--ochre); }
+.tl-cell .tl-month { font-weight: 500; font-size: 11px; letter-spacing: 1px; }
+.tl-cell .tl-note { font-size: 9px; margin-top: 4px; opacity: 0.85; }
+
+/* Stage blocks (Slide 4) */
+.stage {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.stage:last-child { border-bottom: none; }
+.stage .stage-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+  display: block;
+}
+.stage h3 {
+  font-family: 'Lora', serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0 0 14px 0;
+  letter-spacing: -0.2px;
+}
+.stage p {
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+.stage .stage-entregable {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--ualá-blue);
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+}
+
+/* Deliverables (Slide 8) */
+.deliv {
+  margin: 24px 0;
+}
+.deliv-item {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.deliv-item:first-child { border-top: 1px solid var(--line); }
+.deliv-item h4 {
+  margin-top: 0;
+  color: var(--ink);
+  font-family: 'Lora', serif;
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  letter-spacing: -0.2px;
+}
+.deliv-item h4 .deliv-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--accent);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+.deliv-item ul {
+  list-style: none;
+  padding: 0;
+}
+.deliv-item ul li {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 8px;
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.5;
+}
+.deliv-item ul li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+.deliv-total {
+  margin-top: 18px;
+  padding: 12px 16px;
+  background: rgba(30, 58, 138, 0.06);
+  border-left: 3px solid var(--ualá-blue);
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  color: var(--ualá-blue);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* Two-column production (Slide 9) */
+.prod-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin: 30px 0;
+}
+.prod-col {
+  background: var(--bg-2);
+  padding: 26px 28px;
+  border-top: 3px solid var(--accent);
+  border-radius: 2px;
+}
+.prod-col h4 {
+  margin-top: 0;
+  color: var(--ink);
+  font-family: 'Lora', serif;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.prod-col .prod-tagline {
+  font-family: 'Source Serif 4', serif;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+/* Budget table */
+.budget-table {
+  width: 100%;
+  margin: 24px 0;
+  border-collapse: collapse;
+  font-family: 'Source Serif 4', serif;
+}
+.budget-table th {
+  text-align: left;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  padding: 10px 12px;
+  border-bottom: 2px solid var(--line);
+  font-weight: 500;
+}
+.budget-table th.num { text-align: right; }
+.budget-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--line-soft);
+  color: var(--ink-soft);
+  font-size: 15px;
+}
+.budget-table td.num {
+  text-align: right;
+  font-family: 'DM Mono', monospace;
+  color: var(--ink);
+  font-weight: 500;
+}
+.budget-table tr.total td {
+  border-top: 1px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  padding-top: 16px;
+  padding-bottom: 16px;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* Payment schedule */
+.payment-schedule {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+}
+.payment-schedule li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line-soft);
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  gap: 20px;
+  align-items: baseline;
+}
+.payment-schedule li .pct {
+  font-family: 'DM Mono', monospace;
+  font-size: 15px;
+  color: var(--accent);
+  font-weight: 500;
+}
+.payment-schedule li .desc {
+  color: var(--ink-soft);
+  font-size: 15px;
+}
+.payment-schedule li .amount {
+  font-family: 'DM Mono', monospace;
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* Exclusions */
+.exclusions ul {
+  list-style: none;
+  padding: 0;
+  columns: 2;
+  column-gap: 40px;
+}
+.exclusions ul li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 12px;
+  color: var(--ink-soft);
+  font-size: 15px;
+  break-inside: avoid;
+}
+.exclusions ul li::before {
+  content: "×";
+  position: absolute;
+  left: 0;
+  color: var(--ink-light);
+  font-weight: 500;
+}
+
+/* Team chips */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 24px 0;
+}
+.team-chip {
+  background: var(--bg-2);
+  padding: 14px 16px;
+  border-radius: 2px;
+  border-left: 2px solid var(--accent);
+}
+.team-chip .name {
+  font-family: 'Lora', serif;
+  font-weight: 500;
+  color: var(--ink);
+  font-size: 15px;
+}
+.team-chip .role {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  color: var(--ink-light);
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+.team-chip .pct {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  float: right;
+  font-weight: 500;
+}
+.team-chip .phase {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  color: var(--ink-light);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 4px;
+  opacity: 0.7;
+}
+
+/* Seniority section */
+.seniority-content {
+  background: var(--bg-2);
+  padding: 36px 40px;
+  border-left: 3px solid var(--accent);
+  margin: 24px 0;
+}
+.seniority-content p {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+}
+.seniority-content p:last-child {
+  margin-bottom: 0;
+  color: var(--ink);
+  font-style: italic;
+  font-family: 'Lora', serif;
+  font-size: 18px;
+}
+
+/* Closing */
+.closing {
+  text-align: center;
+  padding: 100px 0 60px;
+  border-top: 1px solid var(--line);
+}
+.closing h1 {
+  font-size: 56px;
+  margin-bottom: 20px;
+}
+.closing h1 .accent { color: var(--accent); }
+
+/* Director's notes */
+.dir-note {
+  background: var(--ochre-soft);
+  border: 1px dashed var(--ochre);
+  padding: 16px 20px;
+  margin: 24px 0;
+  font-family: 'Source Serif 4', serif;
+  font-size: 14px;
+  color: #7a5a2a;
+  font-style: italic;
+  border-radius: 3px;
+}
+.dir-note strong { color: var(--ochre); font-weight: 600; font-style: normal; }
+.dir-note::before {
+  content: "NOTA INTERNA · ";
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--ochre);
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* Internal-only section */
+.internal-section {
+  background: var(--ochre-soft);
+  border: 2px dashed var(--ochre);
+  padding: 40px;
+  margin: 50px 0;
+  border-radius: 6px;
+}
+.internal-section .internal-badge {
+  display: inline-block;
+  background: var(--ochre);
+  color: white;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+}
+.internal-section h2 { color: #6a4a1a; }
+.internal-section h3 { color: #6a4a1a; }
+.internal-section p { color: #7a5a2a; }
+.internal-math {
+  background: white;
+  padding: 20px 26px;
+  border-radius: 4px;
+  margin: 20px 0;
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  line-height: 1.9;
+  border: 1px solid var(--ochre);
+}
+.internal-math strong { color: var(--ink); font-weight: 600; }
+.internal-math .arrow { color: var(--ochre); }
+
+@media (max-width: 640px) {
+  .container { padding: 30px 20px; }
+  h1 { font-size: 36px; }
+  h2 { font-size: 26px; }
+  .timeline { grid-template-columns: repeat(4, 1fr); }
+  .exclusions ul { columns: 1; }
+  .prod-grid { grid-template-columns: 1fr; }
+  .payment-schedule li { grid-template-columns: 50px 1fr; }
+  .payment-schedule li .amount { grid-column: 2; font-size: 13px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<header class="header">
+  <div class="brand-mark">Ualá <span class="amp">&</span> La América</div>
+  <div class="subtitle">Campaña Relanzamiento</div>
+  <div class="date">ABRIL · 2026</div>
+</header>
+
+<!-- SLIDE 1 -->
+<section id="slide-1">
+  <span class="section-num">01</span>
+  <h2>El próximo paso.</h2>
+  <p class="lead">Venimos avanzando alineados y estamos cada vez más cerca de cerrar el deck estratégico que funcionará como la nueva ruta de navegación para todo lo que haga Ualá.</p>
+  <p class="lead">Pero esto será un punto de partida más que de llegada, porque inmediatamente vamos a emprender otro viaje igual de importante: lograr que esa nueva narrativa y propuesta de valor salga del deck y llegue a la gente.</p>
+  <p class="lead">Lo que sigue a continuación es nuestra propuesta para hacerlo juntos.</p>
+</section>
+
+<!-- SLIDE 2 -->
+<section id="slide-2">
+  <span class="section-num">02</span>
+  <h2>Del PowerPoint a la gente.</h2>
+  <p>Una estrategia vale lo que logra atravesar. Un deck, por bueno que sea, no cambia la relación que una marca tiene con la gente. Una campaña integral de alineación y relanzamiento, sí.</p>
+  <p>Entendemos esta campaña como <strong>el primer acto de la estrategia</strong> que estamos construyendo juntos. Su trabajo no es solo comunicar. Es <strong>hacer que la América de Ualá sea reconocible, memorable y relevante</strong>. Y claro está, que también funcione internamente como <strong>GPS orientador</strong> de todas las iniciativas que lleven adelante las diferentes verticales.</p>
+</section>
+
+<!-- SLIDE 3 -->
+<section id="slide-3">
+  <span class="section-num">03</span>
+  <h2>Una plataforma dinámica de comunicación.</h2>
+  <p>Esta campaña no es un evento de un par de semanas. Es una <strong>presencia sostenida</strong> que va a acompañar a Ualá desde su relanzamiento el 1° de septiembre hasta fin de año.</p>
+  <p>Las charlas que venimos manteniendo nos ayudaron a visualizar la foto — o mejor dicho, la película completa — y reconfigurar la naturaleza de la propuesta que están viendo.</p>
+  <p>No estamos pensando en una campaña tradicional conformada por una pieza hero, reducciones y un key visual. Sino en <strong>una plataforma dinámica de comunicación</strong> que permita completar la grilla digital que Ualá maneja mes a mes, iterándose sin perder coherencia ni fuerza. Contenidos que se combinan, se relevan y se renuevan, pero hablando siempre con la misma voz.</p>
+</section>
+
+<!-- SLIDE 4 -->
+<section id="slide-4">
+  <span class="section-num">04</span>
+  <h2>Las cuatro etapas de este proceso.</h2>
+
+  <div class="stage">
+    <span class="stage-label">Etapa 1 · 3 semanas</span>
+    <h3>Del deck estratégico al territorio creativo</h3>
+    <p>Partiendo de la plataforma estratégica aprobada, empezamos a allanar el terreno para encontrar un espacio creativo fértil donde convivan tagline, tono y códigos visuales.</p>
+    <div class="stage-entregable">Entregable: Presentación de territorio y concepto para aprobación</div>
+  </div>
+
+  <div class="stage">
+    <span class="stage-label">Etapa 2 · 5 semanas</span>
+    <h3>Del concepto a la idea ejecutable</h3>
+    <p>Desarrollamos la idea de campaña completa. Guión del hero masterbrand, storyboard, key visuals principales, arquitectura de plataforma dinámica de comunicación. Definimos los códigos visuales que van a funcionar como lenguaje de campaña durante los siguientes 4 meses.</p>
+    <div class="stage-entregable">Entregable: Aprobación de guión hero + KV principal</div>
+  </div>
+
+  <div class="stage">
+    <span class="stage-label">Etapa 3 · 8 semanas</span>
+    <h3>De la idea aprobada a las piezas finales</h3>
+    <p>Coordinamos y supervisamos toda la producción de la plataforma dinámica de comunicación: hero masterbrand con productora externa, key visuals y sistema digital con El Buró, adaptaciones para las grillas de Google y Meta. Entregamos todo listo para salir al aire el 1° de septiembre.</p>
+    <div class="stage-entregable">Entregable: Delivery completo + guidelines de campaña para operación posterior</div>
+  </div>
+
+  <div class="stage">
+    <span class="stage-label">Etapa 4 · 12 semanas</span>
+    <h3>3 diferentes waves para mantener la campaña activa</h3>
+    <p>Tomando como base lo conversado, consideramos <strong>3 waves (Octubre + Noviembre + Diciembre)</strong> que parten de la plataforma creativa aprobada y generan nuevas piezas a partir de variaciones de copys y nuevos diseños, generando consistencia a partir de un mismo sistema pero con tres respiraciones distintas.</p>
+    <div class="stage-entregable">Entregable: Paquete digital completo por wave, listo para medios</div>
+  </div>
+</section>
+
+<!-- SLIDE 5: TIMELINE -->
+<section id="slide-5">
+  <span class="section-num">05</span>
+  <h2>Timeline.</h2>
+
+  <div class="timeline">
+    <div class="tl-cell platform">
+      <div class="tl-month">MAY</div>
+      <div class="tl-note">Kick-off 1 May</div>
+    </div>
+    <div class="tl-cell platform">
+      <div class="tl-month">JUN</div>
+      <div class="tl-note">Etapas 1 · 2</div>
+    </div>
+    <div class="tl-cell platform">
+      <div class="tl-month">JUL</div>
+      <div class="tl-note">Etapa 2 · 3</div>
+    </div>
+    <div class="tl-cell platform">
+      <div class="tl-month">AGO</div>
+      <div class="tl-note">Producción</div>
+    </div>
+    <div class="tl-cell launch">
+      <div class="tl-month">SEP</div>
+      <div class="tl-note">1 Sep Launch<br />Delivery & Roll out</div>
+    </div>
+    <div class="tl-cell wave">
+      <div class="tl-month">OCT</div>
+      <div class="tl-note">Wave 1</div>
+    </div>
+    <div class="tl-cell wave">
+      <div class="tl-month">NOV</div>
+      <div class="tl-note">Wave 2</div>
+    </div>
+    <div class="tl-cell wave">
+      <div class="tl-month">DIC</div>
+      <div class="tl-note">Wave 3 · Fin 31 Dic</div>
+    </div>
+  </div>
+
+  <div class="data-grid" style="grid-template-columns: repeat(2, 1fr);">
+    <div class="data-cell">
+      <div class="data-label">Desarrollo creativo y producción integral</div>
+      <div class="data-value">16 semanas</div>
+      <div class="data-sub">Mayo → Agosto · Delivery 1 septiembre</div>
+    </div>
+    <div class="data-cell">
+      <div class="data-label">3 Waves de iteraciones</div>
+      <div class="data-value">12 semanas</div>
+      <div class="data-sub">Octubre → Noviembre → Diciembre · Finalización 31 diciembre</div>
+    </div>
+  </div>
+
+  <div class="dir-note">
+    <strong>Ale:</strong> es altamente probable que Connie quiera adelantar la fecha de lanzamiento — el mundial termina la última semana de julio. Tenemos un gap de 4 semanas de agosto que podríamos ajustar restándole tiempo a desarrollo conceptual, desarrollo creativo o producción. Ya veremos qué nos dice.
+  </div>
+</section>
+
+<!-- SLIDE 6: LA AMÉRICA Y EL SENIORITY -->
+<section id="slide-6">
+  <span class="section-num">06</span>
+  <h2>La América y el seniority.</h2>
+
+  <div class="seniority-content">
+    <p>Nuestro equipo está conformado por socios y directores con trayectorias consolidadas en algunas de las agencias más relevantes de la región, con experiencia liderando marcas globales y desarrollando ideas que marcaron cultura.</p>
+    <p>Cada uno de los proyectos que llevamos adelante cuenta con liderazgo directo de al menos dos socios fundadores, combinando mirada estratégica, criterio creativo y capacidad operativa en cada instancia del proceso.</p>
+    <p>Creemos que en un contexto donde las marcas necesitan velocidad, claridad y consistencia, el verdadero diferencial está en la calidad y experiencia de quienes están pensando y haciendo el trabajo.</p>
+    <p>El seniority no supervisa desde lejos: participa, construye y hace avanzar el trabajo.</p>
+  </div>
+</section>
+
+<!-- SLIDE 7: EL EQUIPO (unificado) -->
+<section id="slide-7">
+  <span class="section-num">07</span>
+  <h2>El equipo.</h2>
+
+  <p>Equipo asignado al proyecto.</p>
+
+  <div class="team-grid">
+    <div class="team-chip">
+      <div class="name">Chris Camean</div>
+      <div class="role">Creative Partner</div>
+    </div>
+    <div class="team-chip">
+      <div class="name">Audrey Prieto</div>
+      <div class="role">Directora Creativa</div>
+    </div>
+    <div class="team-chip">
+      <div class="name">Lucho Groba</div>
+      <div class="role">Director de Arte</div>
+    </div>
+    <div class="team-chip">
+      <div class="name">TBD</div>
+      <div class="role">Redactora</div>
+    </div>
+    <div class="team-chip">
+      <div class="name">Ale Dominguez</div>
+      <div class="role">Strategy Partner</div>
+    </div>
+    <div class="team-chip">
+      <div class="name">Martín Rubins</div>
+      <div class="role">Dir. de Estrategia</div>
+    </div>
+    <div class="team-chip">
+      <div class="name">Magui Sabella</div>
+      <div class="role">Dir. de Insights</div>
+    </div>
+    <div class="team-chip">
+      <div class="name">TBD</div>
+      <div class="role">Estratega</div>
+    </div>
+    <div class="team-chip">
+      <div class="name">Trini Fernández</div>
+      <div class="role">Comms & Digital</div>
+    </div>
+    <div class="team-chip">
+      <div class="name">Gus Chiocconi</div>
+      <div class="role">Dir. de Diseño</div>
+    </div>
+    <div class="team-chip">
+      <div class="name">Lucas Sotelo</div>
+      <div class="role">Diseñador</div>
+    </div>
+    <div class="team-chip">
+      <div class="name">Luz Lopez Moreno</div>
+      <div class="role">Productora</div>
+    </div>
+    <div class="team-chip">
+      <div class="name">Rulo Asencio</div>
+      <div class="role">Dir. de Operaciones</div>
+    </div>
+  </div>
+
+  <div class="dir-note">
+    <strong>Ale,</strong> acá quizás conviene volver a calcular los % dedicados para llegar a los 170 MM que estamos planteando, no? <br><br>Y quería tener tu POV sobre si dejamos el cálculo de % dedicados todo junto, o separamos lo que será el equipo para la campaña y en otro bloque lo que imaginamos el equipo que llevará adelante cada una (o las 3) waves. ¿Qué te parece mejor?
+  </div>
+</section>
+
+<!-- SLIDE 8: ENTREGABLES -->
+<section id="slide-8">
+  <span class="section-num">08</span>
+  <h2>Los entregables en detalle.</h2>
+
+  <div class="deliv">
+    <div class="deliv-item">
+      <h4><span class="deliv-num">Entregable 1</span>Territorio conceptual</h4>
+      <ul>
+        <li>Main idea y posible tagline de campaña</li>
+        <li>Tono de marca</li>
+        <li>Proofs of concepts visuales</li>
+      </ul>
+    </div>
+
+    <div class="deliv-item">
+      <h4><span class="deliv-num">Entregable 2</span>Pieza Hero + versiones</h4>
+      <ul>
+        <li>Hero Full 45"</li>
+        <li>Hero Versión 30"</li>
+        <li>Hero Reducción 15"</li>
+        <li>Hero Reducción 10"</li>
+        <li>Hero Bumper 6" (Google / Pre-roll)</li>
+        <li>Todas las piezas versionadas en los formatos: Landscape 16:9, Square 1:1, Portrait 9:16</li>
+        <li>Dirección creativa, guión, storyboard y supervisión integral de producción</li>
+        <li>Producida con productora audiovisual externa high end</li>
+      </ul>
+      <div class="deliv-total">Total de piezas a entregar: 15</div>
+    </div>
+
+    <div class="deliv-item">
+      <h4><span class="deliv-num">Entregable 3</span>Plataforma dinámica de comunicación</h4>
+      <ul>
+        <li>3 key visuals estáticos para Google Ads</li>
+        <li>3 key visuals estáticos para Meta</li>
+        <li>3 copys + headline + descripción para Meta y TikTok</li>
+        <li>3 copys + headline + descripción para Google Ads</li>
+        <li>Todas las piezas versionadas en los formatos: Landscape 16:9, Square 1:1, Portrait 9:16</li>
+        <li>Dirección creativa, seguimiento y supervisión integral en conjunto con El Buró, nuestro hub de producción, animación y diseño</li>
+      </ul>
+      <div class="deliv-total">Total de piezas a entregar: 36</div>
+    </div>
+
+    <div class="deliv-item">
+      <h4><span class="deliv-num">Entregable 4</span>Waves 1 · 2 · 3 con iteraciones</h4>
+      <ul>
+        <li>Briefing y ajuste estratégico de cada iteración</li>
+        <li>Desarrollo de nuevas variaciones creativas sobre el sistema</li>
+        <li>Nuevos enfoques de mensaje y nuevos copys</li>
+        <li>Nuevo paquete de adaptaciones y piezas: key visuals estáticos, GIFs, animaciones cortas</li>
+        <li>Entrega de materiales listos para subir a la grilla de placements del mes en los diferentes medios</li>
+        <li>Dirección creativa, seguimiento y supervisión integral en conjunto con El Buró, nuestro hub de producción, animación y diseño</li>
+      </ul>
+      <div class="deliv-total">Piezas por cada Wave: 36 + 36 + 36<br />Total de piezas a entregar: 108</div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 09: PROPUESTA ECONÓMICA -->
+<section id="slide-9">
+  <span class="section-num">09</span>
+  <h2>Propuesta económica.</h2>
+
+  <p>A continuación compartimos la propuesta económica sobre la que estuvimos trabajando, donde se encuentran la calidad que buscamos en cada proyecto que llevamos adelante con la eficiencia económica que Ualá está buscando.</p>
+
+  <table class="budget-table">
+    <thead>
+      <tr>
+        <th style="width: 32%;">Etapa</th>
+        <th style="width: 48%;">Qué incluye</th>
+        <th class="num" style="width: 20%;">ARS + IVA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Fee Campaña Relanzamiento</strong><br /><span style="font-size:12px;color:var(--ink-light);">16 semanas · Etapas 1 a 3</span></td>
+        <td>Desarrollo conceptual, desarrollo creativo, producción integral, supervisión de productora audiovisual y de El Buró.</td>
+        <td class="num">$170.000.000</td>
+      </tr>
+      <tr>
+        <td><strong>Fee Wave 1 + Wave 2 + Wave 3</strong><br /><span style="font-size:12px;color:var(--ink-light);">12 semanas · Oct + Nov + Dic</span></td>
+        <td>Iteraciones mensuales: briefing, ajuste creativo, nuevas variaciones y supervisión de producción para cada una de las 3 waves.</td>
+        <td class="num">$90.000.000</td>
+      </tr>
+      <tr class="total">
+        <td colspan="2"><strong>Fee Total</strong></td>
+        <td class="num">$260.000.000</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Forma de pago — Campaña Relanzamiento</h3>
+  <ul class="payment-schedule">
+    <li>
+      <span class="pct">30%</span>
+      <span class="desc">Aprobación de este presupuesto</span>
+      <span class="amount">$51.000.000 + IVA</span>
+    </li>
+    <li>
+      <span class="pct">20%</span>
+      <span class="desc">Finalización Etapa 1 (Desarrollo Conceptual)</span>
+      <span class="amount">$34.000.000 + IVA</span>
+    </li>
+    <li>
+      <span class="pct">20%</span>
+      <span class="desc">Finalización Etapa 2 (Desarrollo Creativo)</span>
+      <span class="amount">$34.000.000 + IVA</span>
+    </li>
+    <li>
+      <span class="pct">15%</span>
+      <span class="desc">Entrega Pieza Hero</span>
+      <span class="amount">$25.500.000 + IVA</span>
+    </li>
+    <li>
+      <span class="pct">15%</span>
+      <span class="desc">Entrega de la totalidad de las piezas</span>
+      <span class="amount">$25.500.000 + IVA</span>
+    </li>
+  </ul>
+
+  <h3>Forma de pago — Wave 1 + Wave 2 + Wave 3</h3>
+  <p style="font-size: 14px; color: var(--ink-light); margin-bottom: 12px;">Distribución del fee total de waves ($90.000.000 + IVA).</p>
+  <ul class="payment-schedule">
+    <li>
+      <span class="pct">40%</span>
+      <span class="desc">Aprobación de este presupuesto</span>
+      <span class="amount">$36.000.000 + IVA</span>
+    </li>
+    <li>
+      <span class="pct">20%</span>
+      <span class="desc">Con la entrega de todas las piezas de Wave 1</span>
+      <span class="amount">$18.000.000 + IVA</span>
+    </li>
+    <li>
+      <span class="pct">20%</span>
+      <span class="desc">Con la entrega de todas las piezas de Wave 2</span>
+      <span class="amount">$18.000.000 + IVA</span>
+    </li>
+    <li>
+      <span class="pct">20%</span>
+      <span class="desc">Con la entrega de todas las piezas de Wave 3</span>
+      <span class="amount">$18.000.000 + IVA</span>
+    </li>
+  </ul>
+
+  <h3>Condiciones generales</h3>
+  <p><strong>Ajuste:</strong> Según índice IPC a la fecha de emisión de cada factura.</p>
+  <p><strong>Condiciones de pago:</strong> 30 días fecha de factura.</p>
+  <p><strong>Validez del presupuesto:</strong> 15 días hábiles.</p>
+
+  <h3>Qué NO incluye este presupuesto</h3>
+  <div class="exclusions">
+    <ul>
+      <li>Producción audiovisual de la pieza Hero y sus adaptaciones (se cotiza aparte con productora externa)</li>
+      <li>Producción gráfica, animaciones y adaptaciones (se cotizan aparte con el Buró según tarifario estandarizado)</li>
+      <li>Costos de talento, cesiones y derechos de uso de imagen</li>
+      <li>Música original, derechos SADAIC, composición, locución</li>
+      <li>Retoque fotográfico profesional y banco de imágenes</li>
+      <li>Planificación y compra de medios</li>
+      <li>Investigación de mercado y social listening</li>
+      <li>Reportes de performance de canales digitales</li>
+      <li>Campañas de performance</li>
+      <li>Cualquier entregable no detallado en esta propuesta será cotizado por separado</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SLIDE 10: POLÍTICA DE FEES -->
+<section id="slide-10">
+  <span class="section-num">10</span>
+  <h2>Política de fees.</h2>
+
+  <p>Nuestro modelo es <strong>100% transparente</strong>. No cobramos comisiones ni markup sobre ningún costo de producción. Esto no es una frase de venta: es la política de fees que aplicamos con todos nuestros clientes desde siempre.</p>
+
+  <div class="prod-grid">
+    <div class="prod-col">
+      <h4>Producción audiovisual</h4>
+      <div class="prod-tagline">Craft high end, con libro abierto</div>
+      <p>Para la realización de la pieza Hero y sus adaptaciones convocaremos a <strong>3 productoras audiovisuales externas</strong> de primer nivel. A partir de las devoluciones y tratamientos recibidos, elegiremos junto a ustedes al partner que consideremos más adecuado para este proyecto.</p>
+      <p>Las productoras cotizan con presupuesto detallado y abierto para que — si lo prefieren — Ualá revise, negocie y apruebe directamente antes de empezar.</p>
+    </div>
+
+    <div class="prod-col">
+      <h4>Producción gráfica, animaciones y adaptaciones</h4>
+      <div class="prod-tagline">El Buró, nuestro hub de producción</div>
+      <p>El Buró es el hub de producción, animación y diseño de La América. Funciona en el mismo espacio físico que la agencia, lo que asegura <strong>consistencia, calidad y velocidad</strong> a la hora de resolver.</p>
+      <p>Respecto de los costos de producción, nos manejamos con un <strong>tarifario simple y estandarizado</strong> al que todos los clientes tienen acceso.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INTERNAL-ONLY SECTION FOR ALE -->
+<div class="internal-section">
+  <span class="internal-badge">Solo para La América · No se incluye en la presentación</span>
+  <h2>Notas internas pendientes</h2>
+
+  <h3>Preguntas abiertas para Ale</h3>
+  <p><strong>USD 170K de producción audiovisual:</strong> ¿sentís que está bien ese monto separado para producir la pieza Hero con la calidad que queremos, o deberíamos incrementarlo?</p>
+</div>
+
+</div>
+</body>
+</html>
