@@ -1,0 +1,688 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contrato Firmat 1350 — Consultas para Meli</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f4;
+    --bg-card: #ffffff;
+    --bg-consulta: #eef4fb;
+    --bg-consulta-border: #4a6fa5;
+    --text-primary: #1a1a1a;
+    --text-secondary: #4a4a4a;
+    --text-muted: #8a8a8a;
+    --text-consulta: #1e3a5f;
+    --rule: #e6e0d4;
+    --accent-warm: #b8763a;
+    --serif-heading: 'Lora', Georgia, serif;
+    --serif-body: 'Source Serif 4', Georgia, serif;
+    --mono: 'DM Mono', 'SF Mono', Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--serif-body);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 22px 80px;
+  }
+
+  /* HEADER */
+  .header {
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 28px;
+    margin-bottom: 36px;
+  }
+
+  .header .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+  }
+
+  .header h1 {
+    font-family: var(--serif-heading);
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+
+  .header .subtitle {
+    font-family: var(--serif-body);
+    font-size: 16px;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+
+  /* INTRO ME-A-MELI */
+  .intro {
+    background: var(--bg-card);
+    border-left: 3px solid var(--accent-warm);
+    padding: 22px 24px;
+    margin-bottom: 40px;
+    border-radius: 2px;
+  }
+
+  .intro p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+  }
+
+  .intro p:last-child { margin-bottom: 0; }
+
+  .intro strong { color: var(--text-primary); font-weight: 600; }
+
+  /* INDICE */
+  .indice {
+    background: var(--bg-card);
+    padding: 22px 24px;
+    margin-bottom: 40px;
+    border-radius: 2px;
+    border: 1px solid var(--rule);
+  }
+
+  .indice h2 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+
+  .indice ol {
+    list-style: none;
+    counter-reset: item;
+  }
+
+  .indice li {
+    counter-increment: item;
+    padding: 6px 0;
+    border-bottom: 1px dotted var(--rule);
+    font-size: 15px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .indice li:last-child { border-bottom: none; }
+
+  .indice li::before {
+    content: counter(item, decimal-leading-zero);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent-warm);
+    min-width: 24px;
+    font-weight: 500;
+  }
+
+  .indice a {
+    color: var(--text-primary);
+    text-decoration: none;
+    flex: 1;
+  }
+
+  .indice a:hover { color: var(--accent-warm); }
+
+  .indice .clausula-ref {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* CLAUSULAS */
+  .clausula {
+    margin-bottom: 36px;
+  }
+
+  .clausula-header {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-warm);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .clausula-titulo {
+    font-family: var(--serif-heading);
+    font-size: 19px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    color: var(--text-primary);
+  }
+
+  .clausula-texto {
+    font-family: var(--serif-body);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .clausula-texto p { margin-bottom: 10px; }
+
+  .clausula-texto strong { color: var(--text-primary); font-weight: 600; }
+
+  /* MARCAS DE CONSULTA EN EL TEXTO */
+  .marca {
+    display: inline-block;
+    background: var(--bg-consulta-border);
+    color: white;
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    padding: 1px 7px;
+    border-radius: 3px;
+    margin: 0 3px;
+    vertical-align: 1px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .marca:hover { background: #1e3a5f; }
+
+  .resaltado {
+    background: #fff3d6;
+    padding: 1px 3px;
+    border-radius: 2px;
+  }
+
+  /* CAJA DE CONSULTA */
+  .consulta {
+    background: var(--bg-consulta);
+    border-left: 3px solid var(--bg-consulta-border);
+    padding: 20px 22px;
+    margin: 18px 0;
+    border-radius: 2px;
+    scroll-margin-top: 20px;
+  }
+
+  .consulta-numero {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--bg-consulta-border);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .consulta-titulo {
+    font-family: var(--serif-heading);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-consulta);
+    margin-bottom: 12px;
+    line-height: 1.35;
+  }
+
+  .consulta-cuerpo {
+    font-family: var(--serif-body);
+    font-size: 15.5px;
+    color: var(--text-consulta);
+    line-height: 1.65;
+  }
+
+  .consulta-cuerpo p { margin-bottom: 10px; }
+
+  .consulta-cuerpo p:last-child { margin-bottom: 0; }
+
+  .consulta-cuerpo em {
+    font-style: italic;
+    color: #2d4a6e;
+  }
+
+  .consulta-cuerpo .opciones {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dotted #b8c8dc;
+    font-size: 14.5px;
+    font-style: italic;
+  }
+
+  /* SECCIÓN PIE */
+  .pie {
+    margin-top: 60px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+  }
+
+  .pie p {
+    font-family: var(--serif-body);
+    font-size: 15px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 6px;
+  }
+
+  /* DESKTOP - dos columnas */
+  @media (min-width: 1100px) {
+    .container {
+      max-width: 1180px;
+      padding: 48px 32px 100px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .col-contrato { min-width: 0; }
+
+    .col-consultas {
+      position: sticky;
+      top: 32px;
+      max-height: calc(100vh - 64px);
+      overflow-y: auto;
+      padding-right: 8px;
+    }
+
+    .col-consultas::-webkit-scrollbar { width: 6px; }
+    .col-consultas::-webkit-scrollbar-thumb {
+      background: var(--rule);
+      border-radius: 3px;
+    }
+
+    /* En desktop las consultas viven en la columna derecha, pero las dejamos también inline */
+    /* Para simplicidad mantenemos inline en ambos modos */
+  }
+
+  /* PRINT */
+  @media print {
+    body { background: white; }
+    .consulta { background: #f5f5f5; border-left-color: #333; }
+    .marca { background: #333; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header class="header">
+    <div class="label">Consultas sobre borrador de contrato · 24 abril 2026</div>
+    <h1>Contrato de locación — Buenos Aires 1350, Firmat</h1>
+  </header>
+
+  <!-- CONTRATO ANOTADO -->
+
+  <!-- ENCABEZADO DEL CONTRATO -->
+  <div class="clausula">
+    <h2 class="clausula-titulo" style="text-align:center; margin-bottom:20px;">Contrato de locación inmobiliaria</h2>
+    <p class="clausula-texto">Entre los Sres. <strong>ASENCIO LELLI MATIAS FRANCISCO</strong>, D.N.I. Nº 27.334.531, casado, domiciliado en calle <span class="resaltado">Buenos Aires Nº 1242</span> <a href="#consulta-1" class="marca">01</a> de la ciudad de Firmat, en adelante denominado <strong>«LOCADOR»</strong> y la <strong>PATRICIA PAMELA TORELLI</strong>, D.N.I. Nº 24.048.105, domiciliada en calle Alberdi Nº 1138 de la ciudad de Firmat, por la otra parte, en adelante denominada <strong>«LOCATARIO»</strong>, celebran este <em>CONTRATO DE LOCACIÓN DE LOCAL COMERCIAL</em>.</p>
+  </div>
+
+  <div class="consulta" id="consulta-1">
+    <div class="consulta-numero">Consulta 01 · Encabezado del contrato</div>
+    <h4 class="consulta-titulo">¿Qué domicilio del LOCADOR ponemos?</h4>
+    <div class="consulta-cuerpo">
+      <p>En el encabezado figura mi domicilio como <strong>"Buenos Aires Nº 1242"</strong>, pero la dirección que tengo registrada en el DNI es <strong>"Corrientes 850"</strong>.</p>
+      <p>Mi consulta:</p>
+      <p style="padding-left:14px;"><em>· ¿Qué dirección conviene poner — la del DNI o la otra?</em></p>
+    </div>
+  </div>
+
+  <!-- CLAUSULA 1 -->
+  <div class="clausula">
+    <div class="clausula-header">Cláusula primera</div>
+    <h3 class="clausula-titulo">Objeto</h3>
+    <div class="clausula-texto">
+      <p><strong>1.</strong> El LOCADOR da en locación al LOCATARIO un inmueble de su propiedad, local comercial situado en calle Buenos Aires Nº 1350.</p>
+      <p><strong>2.</strong> Consta de un local comercial de 170 m² aprox. El salón está sobre línea de edificación con aberturas con vidrios fijos, puerta de ingreso vidriada y persiana de enrollar. Puerta de servicio sobre línea de edificación. Baño completo y cocina equipada. Depósito con ingreso por portón de dos hojas de hierro. Calefactor tiro balanceado marca Eskabe. Los pisos son de mosaicos y tiene colocados todos los artefactos de luz instalados, <span class="resaltado">todo en perfecto estado de conservación</span> <a href="#consulta-2" class="marca">02</a>.</p>
+      <p><strong>3.</strong> Al desocupar el LOCATARIO reintegrará todo en el mismo estado al recibido. La LOCADORA puede negarse a recibir el inmueble si no se encuentra en las condiciones entregadas. En ese caso el LOCATARIO deberá abonar el canon por el lapso que insuman las reparaciones, ajustándose mensualmente según IPC publicado por el INDEC.</p>
+      <p><strong>4.</strong> Al finalizar el contrato la UNIDAD LOCADA se entregará pintada con pintura de la misma calidad y color.</p>
+    </div>
+  </div>
+
+  <!-- CONSULTA 6 (la pongo acá porque está marcada en cláusula 1) -->
+  <div class="consulta" id="consulta-2">
+    <div class="consulta-numero">Consulta 02 · Cláusula 1ª</div>
+    <h4 class="consulta-titulo">Registro fotográfico + inventario al firmar</h4>
+    <div class="consulta-cuerpo">
+      <p>El contrato dice "perfecto estado de conservación" pero esa frase es interpretable a 36 meses vista.</p>
+      <p>¿Te parece que hagamos un <strong>registro fotográfico fechado</strong> y un <strong>inventario detallado</strong> (pisos, paredes, baño, cocina, calefactor, persiana, vidrios, instalaciones) anexo al contrato, firmado por las dos partes?</p>
+      <p>Es para que el día de la devolución no sea tema de discusión.</p>
+      <p class="opciones"><em>¿Lo hacemos? ¿O en Firmat no se estila y te parece exagerado?</em></p>
+    </div>
+  </div>
+
+  <!-- CLAUSULA 2 -->
+  <div class="clausula">
+    <div class="clausula-header">Cláusula segunda</div>
+    <h3 class="clausula-titulo">Destino</h3>
+    <div class="clausula-texto">
+      <p><strong>1.</strong> La UNIDAD LOCADA solo podrá destinarse a uso comercial rubro pañalera y afines.</p>
+      <p><strong>2.</strong> Están prohibidas cualesquiera sublocaciones y/o transmisiones, sean parciales o totales, gratuitas u onerosas, y la mutación del destino comercial. En caso de violación, el LOCATARIO pagará una cláusula penal de $200.000 ante cada acto vulnerador.</p>
+      <p><strong>3.</strong> El LOCATARIO deberá hacer uso conforme su destino, observando reglas de vecindad, urbanismo y buenas costumbres.</p>
+    </div>
+  </div>
+
+  <!-- CLAUSULA 3 -->
+  <div class="clausula">
+    <div class="clausula-header">Cláusula tercera</div>
+    <h3 class="clausula-titulo">Plazo</h3>
+    <div class="clausula-texto">
+      <p><strong>1.</strong> El plazo total e improrrogable del CONTRATO será de <strong>treinta y seis (36) meses</strong>, comenzando el día 1 de Mayo de 2026 y finalizando el día 30 de Abril de 2029 a las 12:00 hs.</p>
+      <p><strong>2.</strong> Al vencimiento del plazo el LOCATARIO restituirá la UNIDAD LOCADA sin interpelación alguna, caso contrario como cláusula penal pagará al LOCADOR la suma de <span class="resaltado">PESOS CIEN MIL ($100.000) por día</span> <a href="#consulta-3" class="marca">03</a>, exigible por adelantado hasta la devolución.</p>
+      <p><strong>3.</strong> La cláusula penal por irrestitución es independiente de la obligación de pagar el alquiler.</p>
+      <p><strong>4.</strong> La entrega de llaves o restitución deberá acreditarse por escrito, no admitiéndose otro medio de prueba.</p>
+    </div>
+  </div>
+
+  <!-- CONSULTA 7 -->
+  <div class="consulta" id="consulta-3">
+    <div class="consulta-numero">Consulta 03 · Cláusula 3ª.2</div>
+    <h4 class="consulta-titulo">¿Dejamos $100.000/día o lo atamos a un % del canon?</h4>
+    <div class="consulta-cuerpo">
+      <p>$100.000/día <strong>hoy</strong> está bien. Pero el contrato es a 3 años. En 2029, con inflación, esos $100.000 pueden quedar bajos.</p>
+      <p>Una opción es cambiar el monto fijo por un <strong>% del canon mensual vigente al momento de la mora</strong>. Por ejemplo: <em>"10% del alquiler mensual vigente por cada día de demora"</em>. Así se actualiza solo.</p>
+      <p class="opciones"><em>¿Te parece útil o complica de más?</em></p>
+    </div>
+  </div>
+
+  <!-- CLAUSULA 4 -->
+  <div class="clausula">
+    <div class="clausula-header">Cláusula cuarta</div>
+    <h3 class="clausula-titulo">Precio del alquiler</h3>
+    <div class="clausula-texto">
+      <p><strong>1.</strong> Por la locación, las partes convienen un canon locativo de <strong>PESOS NOVECIENTOS MIL ($900.000)</strong> por mes para el primer cuatrimestre del año de contrato (es decir, por los cuatro meses iniciales: desde el 01/05/26 hasta el 31/08/26).</p>
+      <p><strong>2. AJUSTE CUATRIMESTRAL:</strong> Para los siguientes cuatrimestres del tiempo de duración del contrato, el canon mensual del cuatrimestre anterior se actualizará conforme el <span class="resaltado">Índice elaborado y publicado mensualmente por el Banco Central de la República Argentina (BCRA) aplicable a los contratos de locación: "ICL"</span> <a href="#consulta-4" class="marca">04</a>, tomando el valor inicial. La LOCADORA realizará el cálculo con una anticipación de DIEZ (10) días al vencimiento del cuatrimestre en curso e informará el nuevo valor al <span class="resaltado">LOCATORIO</span> <a href="#consulta-5" class="marca">05</a> mediante correo electrónico denunciado en la cláusula décimo cuarta. <a href="#consulta-6" class="marca">06</a></p>
+      <p><strong>3.</strong> El LOCATARIO se obliga a abonar el alquiler informado por la LOCADORA por mes entero y adelantado, entre el 1 y el 5 de cada mes. El pago se efectuará por transferencia bancaria a la cuenta Banco Macro CBU 2850744840095406413918, alias <em>asenciomacro</em>.</p>
+    </div>
+  </div>
+
+  <!-- CONSULTA 1 -->
+  <div class="consulta" id="consulta-4">
+    <div class="consulta-numero">Consulta 04 · Cláusula 4ª.2</div>
+    <h4 class="consulta-titulo">Cambiar índice ICL del BCRA por IPC nacional del INDEC</h4>
+    <div class="consulta-cuerpo">
+      <p>El borrador dice ajuste <strong>cuatrimestral por ICL del BCRA</strong>. La frecuencia cuatrimestral está bien.</p>
+      <p>Mi consulta es por el <strong>índice</strong>: yo venía pensando en <strong>IPC nacional del INDEC</strong>, no ICL.</p>
+      <p>Sé que el ICL es un promedio que combina inflación y salarios y suele correr por debajo del IPC puro. Quería saber tu visión:</p>
+      <p style="padding-left:14px;"><em>· ¿Pros y contras de cada uno desde tu experiencia?</em><br>
+      <em>· ¿Qué se está usando hoy en contratos comerciales en Firmat?</em><br>
+      <em>· ¿Qué me recomendás vos?</em></p>
+    </div>
+  </div>
+
+  <!-- CONSULTA 10 (tipográfica) -->
+  <div class="consulta" id="consulta-5">
+    <div class="consulta-numero">Consulta 05 · Cláusula 4ª.2</div>
+    <h4 class="consulta-titulo">Tipográfico: "LOCATORIO" → "LOCATARIO"</h4>
+    <div class="consulta-cuerpo">
+      <p>En el segundo párrafo dice <em>"informará el nuevo valor al <strong>LOCATORIO</strong>"</em>.</p>
+    </div>
+  </div>
+
+  <div class="consulta" id="consulta-6">
+    <div class="consulta-numero">Consulta 06 · Cláusula 4ª.2</div>
+    <h4 class="consulta-titulo">Mecánica del ajuste: que quede cristalino para Patricia</h4>
+    <div class="consulta-cuerpo">
+      <p>Más allá del índice que terminemos usando (consulta 04), me importa que la <strong>mecánica</strong> del ajuste quede claríssima para Patricia, así no hay sorpresas en septiembre. Dos cosas:</p>
+      <p><strong>(a) ¿La cláusula deja claro</strong> que la cuota del <strong>1 de septiembre de 2026 ya viene con el primer ajuste aplicado</strong>, y que esto se repite cada 4 meses durante toda la vigencia del contrato? ¿Conviene reforzar la redacción con algo tipo: <em>"el primer ajuste operará sobre el canon correspondiente al mes de septiembre de 2026, y los sucesivos cada 4 meses"</em>?</p>
+      <p><strong>(b) Patricia → consciencia de la progresión.</strong> Armé un <strong>PDF didáctico</strong> con una simulación de la escala de cuotas a 36 meses, asumiendo un escenario de inflación escalonada. Los números exactos los vamos a ir conociendo recién al cierre de cada cuatrimestre cuando salga el índice oficial — pero la simulación sirve para que Patricia <strong>vea la mecánica y la dinámica</strong>, no los valores definitivos.</p>
+      <p style="padding-left:14px; margin-top:14px;">
+        <a href="simulacion-ajuste.pdf" target="_blank" rel="noopener" style="display:inline-block; font-family: var(--mono); font-size: 13px; color: var(--bg-consulta-border); text-decoration: none; padding: 10px 16px; background: white; border: 1px solid var(--bg-consulta-border); border-radius: 3px; letter-spacing: 0.05em;">📄 Ver simulación de ajustes (PDF)</a>
+      </p>
+      <p style="margin-top:14px;">¿Te parece <strong>compartirle el PDF a Patricia</strong> antes de la firma como anexo informativo (no vinculante en los números, pero sí en la mecánica)? Mejor que lo entienda ahora a que sea sorpresa el 1 de septiembre.</p>
+      <p class="opciones"><em>¿Qué pensás de las dos cosas — la redacción y compartirle el PDF?</em></p>
+    </div>
+  </div>
+
+  <!-- CLAUSULA 5 -->
+  <div class="clausula">
+    <div class="clausula-header">Cláusula quinta</div>
+    <h3 class="clausula-titulo">Intereses por mora</h3>
+    <div class="clausula-texto">
+      <p><strong>1.</strong> Ante el impago en plazo del ALQUILER por parte del LOCATARIO, pagará al LOCADOR una Cláusula Penal del 2% diario acumulativo.</p>
+      <p><strong>2.</strong> La mora en el pago del alquiler se producirá de forma automática.</p>
+      <p><strong>3.</strong> Todo pago que el LOCATARIO efectúe a cuenta de mayores importes será imputado en primer término a la cancelación de intereses y luego de cánones locativos.</p>
+    </div>
+  </div>
+
+  <!-- CLAUSULA 6 -->
+  <div class="clausula">
+    <div class="clausula-header">Cláusula sexta</div>
+    <h3 class="clausula-titulo">Mejoras</h3>
+    <div class="clausula-texto">
+      <p><strong>1.</strong> El LOCATARIO libera al LOCADOR del pago de cualesquiera mejoras, así fueren necesarias y/o urgentes, y las toma a su exclusivo cargo y las dejará en beneficio de la UNIDAD LOCADA sin indemnización <a href="#consulta-8" class="marca">08</a>.</p>
+      <p><strong>2.</strong> Asimismo pagará también el arreglo de cualesquiera averías que acaecieren, renunciando al derecho de repetición contra el LOCADOR.</p>
+      <p><span class="resaltado"><strong>[Falta el punto 3]</strong> <a href="#consulta-7" class="marca">07</a></span></p>
+      <p><strong>4.</strong> A todos los efectos el LOCATARIO renuncia a la facultad de compensar gastos efectuados en concepto de mejoras con cánones locativos futuros.</p>
+    </div>
+  </div>
+
+  <!-- CONSULTA 2 -->
+  <div class="consulta" id="consulta-7">
+    <div class="consulta-numero">Consulta 07 · Cláusula 6ª</div>
+    <h4 class="consulta-titulo">La numeración salta del 2 al 4</h4>
+    <div class="consulta-cuerpo">
+      <p>Repasando vi que en la cláusula sexta los puntos van <strong>1, 2, 4</strong> — falta el <strong>3</strong>.</p>
+    </div>
+  </div>
+
+  <!-- CONSULTA 3 -->
+  <div class="consulta" id="consulta-8">
+    <div class="consulta-numero">Consulta 08 · Cláusula 6ª.1</div>
+    <h4 class="consulta-titulo">Distinguir mejoras de uso vs mejoras estructurales</h4>
+    <div class="consulta-cuerpo">
+      <p>Qué opinás de distinguir mejoras de uso vs mejoras estructurales?</p>
+      <p>Poner que las <strong>mejoras necesarias estructurales</strong> (techo, instalación eléctrica de fondo, caños maestros) nos corresponden a nosotros, y que las <strong>mejoras locativas / de uso</strong> sean a cargo de la inquilina ✓</p>
+      <p class="opciones"><em>¿Vos qué pensás? ¿Cómo se redacta normalmente acá?</em></p>
+    </div>
+  </div>
+
+  <!-- CLAUSULA 7 -->
+  <div class="clausula">
+    <div class="clausula-header">Cláusula séptima</div>
+    <h3 class="clausula-titulo">Daños</h3>
+    <div class="clausula-texto">
+      <p><strong>1.</strong> El LOCADOR no responderá por los daños y perjuicios que sufran el LOCATARIO o terceros por causa de accidentes, averías, catástrofes, cortocircuitos, derrumbes, explosiones, filtraciones, humedades, incendios, inundaciones, pérdidas, roturas, incluyendo caso fortuito y fuerza mayor.</p>
+      <p><strong>2.</strong> El LOCATARIO no ingresará materiales contaminantes, estupefacientes, inflamables, riesgosos, tóxicos y/o peligrosos en la UNIDAD LOCADA.</p>
+      <p><strong>3.</strong> El locatario se obliga a contratar desde la firma del presente un <strong>seguro de incendio y responsabilidad civil</strong> por todo el tiempo de vigencia del contrato y hasta la efectiva restitución, designando beneficiario al locador. La póliza deberá cubrir el <span class="resaltado">100% del valor de mercado del inmueble</span> <a href="#consulta-9" class="marca">09</a>.</p>
+      <p><strong>4.</strong> Se excluye al LOCADOR de toda responsabilidad emergente de obligaciones tributarias, laborales o legales que se desprendan de la explotación comercial.</p>
+      <p><strong>5.</strong> El LOCATARIO se obliga a someterse a las ordenanzas municipales vigentes para la habilitación del local.</p>
+      <p><strong>6.</strong> Las partes acuerdan que LA LOCADORA y/o la Sra. <strong>Melina Luciani</strong>, DNI 30.390.233, tendrán derecho a visitar la unidad locada, debiendo avisar con un (1) día de anticipación al LOCATARIO.</p>
+    </div>
+  </div>
+
+  <!-- CONSULTA 4 -->
+  <div class="consulta" id="consulta-9">
+    <div class="consulta-numero">Consulta 09 · Cláusula 7ª.3</div>
+    <h4 class="consulta-titulo">¿Póliza al 100% del valor de mercado o monto fijo en USD?</h4>
+    <div class="consulta-cuerpo">
+      <p>Sentís que es mejor dejarlo como está?</p>
+      <p><strong>(a)</strong> Como está, <em>"100% del valor de mercado del inmueble"</em>.</p>
+      <p>O</p>
+      <p><strong>(b)</strong> Reemplazarlo por un <strong>monto concreto en dólares</strong>, por ejemplo <strong>USD 60.000</strong>.</p>
+      <p>La pregunta viene porque si es verdad que las aseguradoras suelen trabajar con valor de reconstrucción, no de mercado, y "valor de mercado" puede ser ambiguo a la hora de un siniestro.</p>
+      <p>Es un tema que ojalá nunca tengamos que tocar, pero no quería dejar de consultarte.</p>
+    </div>
+  </div>
+
+  <!-- CLAUSULA 8 -->
+  <div class="clausula">
+    <div class="clausula-header">Cláusula octava</div>
+    <h3 class="clausula-titulo">Otras cargas</h3>
+    <div class="clausula-texto">
+      <p><strong>1.</strong> Serán a cargo del LOCATARIO: Gas Natural (Firmat Gas), Electricidad (EPE) y servicios de agua corriente y desagües cloacales (Aguas Santafesinas). El Impuesto Inmobiliario y la TGI serán a cargo del locador.</p>
+      <p><strong>2.</strong> Todas las cargas del LOCATARIO subsistirán hasta la restitución de la UNIDAD LOCADA con la conformidad del LOCADOR.</p>
+      <p><strong>3.</strong> El LOCATARIO entregará al LOCADOR los comprobantes de pago de todas estas obligaciones.</p>
+      <p><strong>4.</strong> El LOCATARIO se obliga a registrar a su nombre los servicios a los 3 días de la firma del presente.</p>
+    </div>
+  </div>
+
+  <!-- CLAUSULA 9 -->
+  <div class="clausula">
+    <div class="clausula-header">Cláusula novena</div>
+    <h3 class="clausula-titulo">Verificaciones</h3>
+    <div class="clausula-texto">
+      <p><strong>1.</strong> El LOCATARIO ha visitado la UNIDAD LOCADA, asintiendo el perfecto estado de la misma.</p>
+      <p><strong>2.</strong> El LOCATARIO libera al LOCADOR de toda responsabilidad por interrupción parcial o total de los servicios brindados por prestadoras externas.</p>
+    </div>
+  </div>
+
+  <!-- CLAUSULA 10 -->
+  <div class="clausula">
+    <div class="clausula-header">Cláusula décima</div>
+    <h3 class="clausula-titulo">Falta de pago</h3>
+    <div class="clausula-texto">
+      <p>La falta de pago de dos (2) meses de alquiler consecutivos dará derecho a la LOCADORA a considerar irrevocablemente rescindido el contrato y tramitar la acción de desalojo. La mora se producirá de forma automática, sin necesidad de interpelación previa.</p>
+    </div>
+  </div>
+
+  <!-- CLAUSULA 11 -->
+  <div class="clausula">
+    <div class="clausula-header">Cláusula undécima</div>
+    <h3 class="clausula-titulo">Resolución anticipada</h3>
+    <div class="clausula-texto">
+      <p><strong>1.</strong> El LOCATARIO podrá, en cualquier momento, resolver el presente contrato abonando a la LOCADORA <span class="resaltado">el equivalente al diez por ciento (10%) del saldo del canon locativo futuro, calculado desde la fecha de la notificación de la rescisión hasta la fecha de finalización pactada en el contrato. Que para el cálculo, se adicionará a cada canon futuro un incremento del 10% en su valor</span> <a href="#consulta-10" class="marca">10</a>.</p>
+    </div>
+  </div>
+
+  <!-- CONSULTA 5 -->
+  <div class="consulta" id="consulta-10">
+    <div class="consulta-numero">Consulta 10 · Cláusula 11ª</div>
+    <h4 class="consulta-titulo">Resolución anticipada</h4>
+    <div class="consulta-cuerpo">
+      <p>Te parece que puede ser más claro y concreto tanto para Patricia como para nosotros plasmar algo más concreto tipo:</p>
+      <p style="padding-left:14px;"><em>"El LOCATARIO podrá rescindir anticipadamente con <strong>preaviso fehaciente de 60 días</strong>, abonando al LOCADOR una indemnización equivalente a <strong>X meses de alquiler</strong> vigente al momento de la rescisión."</em></p>
+      <p>Esto nos daría previsibilidad (60 días para buscar otro inquilino) y a ella claridad sobre cuánto paga. Faltaría definir cuántos meses (¿1?, ¿2?).</p>
+      <p class="opciones"><em>¿Te parece? ¿Vos cuántos meses pondrías?</em></p>
+    </div>
+  </div>
+
+  <!-- CLAUSULA 12 -->
+  <div class="clausula">
+    <div class="clausula-header">Cláusula décima segunda</div>
+    <h3 class="clausula-titulo">Fianza</h3>
+    <div class="clausula-texto">
+      <p><strong>1.</strong> Afianzan absolutamente todas las obligaciones del LOCATARIO los señores <strong>CONTE GERÓNIMO</strong>, CUIT 20-32444552-9, domiciliado en Bv. Seguí 2412 de Rosario; y <strong>NÉSTOR EDGARDO MUJICA</strong>, CUIT 20-18109555-6, domiciliado en Salta 1136 de Firmat. Acreditan solvencia con recibo de sueldo de Autoservicio Mayorista Líder S.R.L. e Inscripción como Responsable Inscripto ante ARCA respectivamente.</p>
+      <p><strong>2.</strong> Se constituyen en codeudores, fiadores solidarios, lisos, llanos y principales pagadores, renunciando al beneficio de excusión, hasta que el LOCATARIO haya entregado el inmueble totalmente desocupado.</p>
+      <p><strong>3.</strong> El FIADOR extiende su garantía a la eventual responsabilidad extracontractual hacia terceros del LOCATARIO derivada del uso de la UNIDAD LOCADA.</p>
+    </div>
+  </div>
+
+  <!-- CLAUSULA 13 -->
+  <div class="clausula">
+    <div class="clausula-header">Cláusula décima tercera</div>
+    <h3 class="clausula-titulo">Rescisión</h3>
+    <div class="clausula-texto">
+      <p>Cualquier incumplimiento del LOCATARIO habilitará al LOCADOR a rescindir el CONTRATO y reclamar desalojo, además de las cláusulas penales y otras sanciones previstas. Al extinguirse el contrato, la LOCATARIA deberá restituir el inmueble en perfecto estado de uso y conservación, pintado.</p>
+    </div>
+  </div>
+
+  <!-- CLAUSULA 14 -->
+  <div class="clausula">
+    <div class="clausula-header">Cláusula décima cuarta</div>
+    <h3 class="clausula-titulo">Constitución de domicilios</h3>
+    <div class="clausula-texto">
+      <p>Se constituyen como domicilios especiales los designados en el encabezado. Las partes denuncian sus correos electrónicos: <strong>LOCADORA: lucianimelina@gmail.com</strong> — LOCATARIO: <em>(a completar antes de la firma)</em>.</p>
+    </div>
+  </div>
+
+  <!-- CLAUSULA 15 -->
+  <div class="clausula">
+    <div class="clausula-header">Cláusula décima quinta</div>
+    <h3 class="clausula-titulo">Litigios</h3>
+    <div class="clausula-texto">
+      <p><strong>1.</strong> En caso de litigio ambas partes y los FIADORES se someterán a la competencia judicial civil de los tribunales ordinarios de la ciudad de Firmat, renunciando al fuero federal.</p>
+      <p><strong>2.</strong> También declinan el derecho procesal de recusación sin expresión de causa.</p>
+    </div>
+  </div>
+
+  <!-- CLAUSULA 16 -->
+  <div class="clausula">
+    <div class="clausula-header">Cláusula décima sexta</div>
+    <h3 class="clausula-titulo">Tributos</h3>
+    <div class="clausula-texto">
+      <p>El impuesto de sellos o timbrado que gravare el CONTRATO será pagado por el LOCATARIO.</p>
+    </div>
+  </div>
+
+  <!-- CLAUSULA 17 -->
+  <div class="clausula">
+    <div class="clausula-header">Cláusula décima séptima</div>
+    <h3 class="clausula-titulo">Firmas e instrumentación</h3>
+    <div class="clausula-texto">
+      <p>Se suscriben tres (3) juegos de ejemplares de igual tenor y al mismo efecto, recibiendo un ejemplar cada parte y otro el FIADOR.</p>
+    </div>
+  </div>
+
+  <!-- CLAUSULA 18 -->
+  <div class="clausula">
+    <div class="clausula-header">Cláusula décima octava</div>
+    <h3 class="clausula-titulo">Lugar y fecha</h3>
+    <div class="clausula-texto">
+      <p>Celebrado en Firmat, el día 25 del mes de Abril del año 2026.</p>
+    </div>
+  </div>
+
+  <!-- CONSULTAS NUEVAS (sin marca en el texto porque son cláusulas que NO existen) -->
+
+  <div class="consulta" id="consulta-11" style="margin-top:48px;">
+    <div class="consulta-numero">Consulta 11 · Cláusula nueva</div>
+    <h4 class="consulta-titulo">¿Conviene incluir cláusula de renovación o derecho de preferencia?</h4>
+    <div class="consulta-cuerpo">
+      <p>El contrato no dice nada sobre qué pasa al final de los 36 meses: si tiene derecho de preferencia, si hay aviso previo, si renueva automáticamente o no.</p>
+      <p>Mi consulta:</p>
+      <p style="padding-left:14px;"><em>· ¿Conviene incluir una cláusula de renovación / preferencia?</em><br>
+      <em>· ¿Cómo la redactarías? (plazo de aviso, condiciones de renovación, etc.)</em><br>
+      <em>· ¿O es mejor dejarlo abierto y conversarlo cuando se acerque el vencimiento?</em></p>
+    </div>
+  </div>
+
+  <div class="consulta" id="consulta-12">
+    <div class="consulta-numero">Consulta 12 · Cláusula nueva</div>
+    <h4 class="consulta-titulo">¿Reajuste durante prórroga de hecho / "tolerancia"?</h4>
+    <div class="consulta-cuerpo">
+      <p>Si se da la situación de que Patricia se queda más allá del 30/04/2029 y no firmamos contrato nuevo (situación de "se sigue quedando un mes más"):</p>
+      <p>¿Conviene incluir una cláusula que diga, por ejemplo: <em>"Vencido el plazo, si el LOCATARIO continuara en uso del inmueble, abonará un canon equivalente al último canon ajustado, incrementado en un X%, sin que ello implique prórroga del contrato"</em>?</p>
+      <p class="opciones"><em>¿Te parece útil o es adelantarnos a un problema que no tenemos?</em></p>
+    </div>
+  </div>
+
+  <!-- PIE -->
+  <footer class="pie">
+    <p>Cualquier punto que no esté acá, lo confío a tu criterio.</p>
+    <p style="margin-top:14px;">Gracias Meli 🙌</p>
+    <p style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.05em; color: var(--text-muted); margin-top:24px; text-transform:uppercase;">Rulo · 24 abril 2026</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
