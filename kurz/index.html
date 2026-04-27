@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#faf8f4">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>Antes del micrófono — Kurz</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* ============================================================
+     Tokens
+     ============================================================ */
+  :root {
+    --bg: #faf8f4;
+    --bg-warm: #f0ebe0;
+    --bg-soft: #f5f1e8;
+    --ink: #1a1a1a;
+    --ink-soft: #4a4a4a;
+    --ink-mute: #8a8a8a;
+    --line: #d4cfc4;
+    --line-soft: #e8e3d8;
+    --gold: #b88a2e;
+    --gold-soft: #d9b85e;
+    --terra: #b8472e;
+    --terra-soft: #f5e8e3;
+    --olive: #5a7a3a;
+    --olive-soft: #eef0e8;
+
+    --serif-head: 'Lora', Georgia, serif;
+    --serif-body: 'Source Serif 4', Georgia, serif;
+    --mono: 'DM Mono', 'Courier New', monospace;
+
+    --max: 540px;
+    --gutter: 24px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif-body);
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overscroll-behavior-y: none;
+    padding-bottom: 100px;
+  }
+
+  /* ============================================================
+     Progress bar fija arriba
+     ============================================================ */
+  .progress {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: transparent;
+    z-index: 100;
+    pointer-events: none;
+  }
+  .progress__fill {
+    height: 100%;
+    width: 0%;
+    background: var(--gold);
+    transition: width 0.1s ease-out;
+  }
+
+  /* ============================================================
+     Sticky header (minimal)
+     ============================================================ */
+  .header {
+    position: sticky;
+    top: 0;
+    background: rgba(250, 248, 244, 0.92);
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    border-bottom: 0.5px solid var(--line-soft);
+    z-index: 50;
+    padding: 12px var(--gutter) 11px;
+  }
+  .header__row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: var(--max);
+    margin: 0 auto;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+  }
+  .header__brand { font-weight: 500; color: var(--ink); }
+
+  /* ============================================================
+     Layout container
+     ============================================================ */
+  main {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  section { padding: 56px 0 8px; }
+
+  /* ============================================================
+     Hero
+     ============================================================ */
+  .hero {
+    padding: 48px 0 24px;
+  }
+  .hero__eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .hero__title {
+    font-family: var(--serif-head);
+    font-weight: 600;
+    font-size: clamp(36px, 10vw, 44px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .hero__title em {
+    font-style: italic;
+    font-weight: 500;
+  }
+  .hero__rule {
+    height: 1px;
+    background: var(--ink);
+    margin-top: 22px;
+    width: 40px;
+  }
+
+  /* ============================================================
+     Mantra
+     ============================================================ */
+  .mantra {
+    background: var(--bg-warm);
+    padding: 22px 22px 24px;
+    border-radius: 2px;
+    margin-top: 26px;
+    border-left: 2px solid var(--gold);
+  }
+  .mantra__label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .mantra__text {
+    font-family: var(--serif-head);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+
+  /* ============================================================
+     Section titles
+     ============================================================ */
+  .section-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .section-title-rule {
+    height: 0.5px;
+    background: var(--line);
+    margin-bottom: 24px;
+  }
+
+  .section-head {
+    font-family: var(--serif-head);
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    margin-bottom: 16px;
+  }
+
+  /* ============================================================
+     Anclas (antes "bastones")
+     ============================================================ */
+  .ancla {
+    margin-top: 28px;
+    padding: 4px 0 28px;
+    border-bottom: 0.5px solid var(--line-soft);
+  }
+  .ancla:last-of-type { border-bottom: none; }
+
+  .ancla__num {
+    font-family: var(--serif-head);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ancla__num::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--gold-soft);
+    opacity: 0.5;
+  }
+
+  .ancla__topic {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .ancla__quote {
+    font-family: var(--serif-head);
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .ancla__quote::before { content: '“'; color: var(--gold); }
+  .ancla__quote::after  { content: '”'; color: var(--gold); }
+
+  .ancla__note {
+    font-family: var(--serif-body);
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+
+  /* ============================================================
+     Trampas - tabla de 5 filas
+     ============================================================ */
+  .traps {
+    margin-top: 8px;
+    border-top: 1px solid var(--ink);
+  }
+  .trap {
+    padding: 14px 0;
+    border-bottom: 0.5px solid var(--line-soft);
+  }
+  .trap__q {
+    font-family: var(--serif-body);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .trap__a {
+    font-family: var(--serif-body);
+    font-size: 16px;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+
+  /* ============================================================
+     SI/NO en dos columnas mobile-friendly (apiladas)
+     ============================================================ */
+  .lex {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .lex__col {
+    padding: 18px 18px 20px;
+    border-radius: 2px;
+  }
+  .lex__col--si  { background: var(--olive-soft); border-left: 2px solid var(--olive); }
+  .lex__col--no  { background: var(--terra-soft); border-left: 2px solid var(--terra); }
+  .lex__head {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .lex__col--si .lex__head { color: var(--olive); }
+  .lex__col--no .lex__head { color: var(--terra); }
+  .lex__list {
+    list-style: none;
+    font-family: var(--serif-body);
+    font-size: 15.5px;
+    line-height: 1.7;
+  }
+  .lex__list li { color: var(--ink); }
+  .lex__list span { color: var(--ink-mute); font-size: 13px; font-style: italic; }
+
+  /* ============================================================
+     Banco de respuestas - acordeón
+     ============================================================ */
+  .qa {
+    border-top: 0.5px solid var(--line);
+    margin-top: 8px;
+  }
+  .qa__item {
+    border-bottom: 0.5px solid var(--line-soft);
+  }
+  .qa__btn {
+    width: 100%;
+    background: transparent;
+    border: none;
+    font-family: var(--serif-body);
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.4;
+    color: var(--ink);
+    text-align: left;
+    padding: 18px 32px 18px 0;
+    position: relative;
+    cursor: pointer;
+    display: block;
+  }
+  .qa__btn::after {
+    content: '+';
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--mono);
+    font-size: 18px;
+    color: var(--gold);
+    transition: transform 0.25s ease;
+    line-height: 1;
+  }
+  .qa__item--open .qa__btn::after {
+    content: '–';
+    transform: translateY(-50%) rotate(0deg);
+  }
+  .qa__answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.25s ease;
+  }
+  .qa__item--open .qa__answer {
+    max-height: 600px;
+    padding: 0 0 22px;
+  }
+  .qa__answer-inner {
+    font-family: var(--serif-body);
+    font-size: 16.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    padding-left: 14px;
+    border-left: 2px solid var(--gold-soft);
+  }
+
+  /* ============================================================
+     Política - bloque sensible
+     ============================================================ */
+  .politica {
+    background: linear-gradient(to bottom, var(--terra-soft) 0%, transparent 100%);
+    padding: 24px 22px;
+    border-radius: 2px;
+    margin-top: 16px;
+    border-top: 2px solid var(--terra);
+  }
+  .politica__warn {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--terra);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .politica__intro {
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    margin-bottom: 18px;
+    line-height: 1.5;
+  }
+  .politica__q {
+    font-family: var(--serif-body);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink-soft);
+    margin: 14px 0 6px;
+  }
+  .politica__a {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .politica__evitar {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 0.5px dashed var(--terra);
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+  .politica__evitar b {
+    font-family: var(--mono);
+    font-weight: 500;
+    color: var(--terra);
+    letter-spacing: 0.08em;
+  }
+
+  /* ============================================================
+     Esquema universal de respuesta
+     ============================================================ */
+  .esquema {
+    margin-top: 14px;
+  }
+  .esquema__intro {
+    font-size: 16px;
+    color: var(--ink);
+    margin-bottom: 18px;
+    line-height: 1.5;
+  }
+  .esquema__step {
+    display: flex;
+    gap: 16px;
+    padding: 18px 0;
+    border-bottom: 0.5px solid var(--line-soft);
+  }
+  .esquema__step:last-child { border-bottom: none; }
+  .esquema__num {
+    font-family: var(--serif-head);
+    font-weight: 600;
+    font-size: 30px;
+    color: var(--gold);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 40px;
+  }
+  .esquema__name {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 4px;
+  }
+  .esquema__desc {
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+
+  /* ============================================================
+     Las 3 cosas obligadas (orden: disco / gente / Roxy)
+     ============================================================ */
+  .obligadas { margin-top: 20px; }
+  .obligada {
+    display: flex;
+    gap: 18px;
+    padding: 18px 0;
+    border-bottom: 0.5px solid var(--line-soft);
+  }
+  .obligada:last-child { border-bottom: none; }
+  .obligada__n {
+    font-family: var(--serif-head);
+    font-weight: 600;
+    font-size: 32px;
+    color: var(--olive);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 36px;
+  }
+  .obligada__title {
+    font-family: var(--serif-head);
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--ink);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .obligada__title em { font-style: italic; font-weight: 500; }
+  .obligada__sub {
+    font-family: var(--serif-body);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-mute);
+    line-height: 1.4;
+  }
+
+  /* ============================================================
+     Cierre — invitación al Roxy
+     ============================================================ */
+  .invitation {
+    margin-top: 64px;
+    padding: 40px 28px 44px;
+    background: var(--ink);
+    color: var(--bg);
+    text-align: left;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+  .invitation::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
+  }
+  .invitation__label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    margin-bottom: 18px;
+  }
+  .invitation__title {
+    font-family: var(--serif-head);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.3;
+    margin-bottom: 24px;
+    color: var(--bg);
+  }
+  .invitation__details {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 18px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--line);
+    margin-bottom: 26px;
+    padding-top: 18px;
+    border-top: 0.5px solid rgba(212, 207, 196, 0.2);
+  }
+  .invitation__details dt {
+    color: var(--gold-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 10px;
+    align-self: center;
+  }
+  .invitation__details dd {
+    color: var(--bg);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+  }
+  .invitation__link {
+    color: var(--gold-soft);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(217, 184, 94, 0.4);
+    padding-bottom: 1px;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  .invitation__link:hover,
+  .invitation__link:active {
+    color: var(--bg);
+    border-bottom-color: var(--gold-soft);
+  }
+  .invitation__close {
+    font-family: var(--serif-body);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--line);
+    border-top: 0.5px solid rgba(212, 207, 196, 0.2);
+    padding-top: 24px;
+  }
+  .invitation__close strong {
+    font-family: var(--serif-head);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--bg);
+    font-size: 17px;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .invitation__signed {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    margin-bottom: 14px;
+  }
+
+  /* ============================================================
+     Footer minimal
+     ============================================================ */
+  .foot {
+    text-align: center;
+    padding: 32px 24px 12px;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+  }
+
+  /* ============================================================
+     Selección
+     ============================================================ */
+  ::selection { background: var(--gold-soft); color: var(--ink); }
+
+  /* ============================================================
+     Reveal on scroll
+     ============================================================ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal--in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- progress bar -->
+<div class="progress" aria-hidden="true">
+  <div class="progress__fill" id="progressFill"></div>
+</div>
+
+<!-- header sticky -->
+<header class="header">
+  <div class="header__row">
+    <span class="header__brand">1 minuto antes de que se encienda el micrófono</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1 class="hero__title">El mantra <br>que todo <br><em>lo ordena.</em></h1>
+    <div class="hero__rule"></div>
+
+    <div class="mantra">
+      <p class="mantra__text">Este momento no es ni mejor ni peor. Es diferente.<br><br>Hablá de lo que viene desde lo que fuiste, sin pelear con nada ni con nadie.</p>
+    </div>
+  </section>
+
+  <!-- LAS 4 ANCLAS (orden: búsqueda / gente / disco / Roxy) -->
+  <section>
+    <div class="section-title">Las 3 anclas</div>
+    <div class="section-title-rule"></div>
+
+    <div class="ancla reveal">
+      <div class="ancla__num">01</div>
+      <div class="ancla__topic">La búsqueda</div>
+      <p class="ancla__quote">Componer tiene una búsqueda de soledad — está en mi ADN.</p>
+      <p class="ancla__note">Para “¿por qué solo y ellos juntos?”. Saca el conflicto del medio, lo vuelve estructural — algo que estaba ahí desde siempre.</p>
+    </div>
+
+    <div class="ancla reveal">
+      <div class="ancla__num">02</div>
+      <div class="ancla__topic">La gente</div>
+      <p class="ancla__quote">Mañana no soy si no tuve tu ayer.</p>
+      <p class="ancla__note">Frase tuya. Es agradecimiento sin quedarse en el pasado, y es un guiño al fan que la reconoce.</p>
+    </div>
+
+    <div class="ancla reveal">
+      <div class="ancla__num">03</div>
+      <div class="ancla__topic">El disco</div>
+      <p class="ancla__quote">La Otra Mitad — siempre hay otra mitad por escribirse.</p>
+      <p class="ancla__note">Para reorientar la conversación. Pasado y futuro caben en el título. La narrativa es tuya.</p>
+    </div>
+  </section>
+
+  <!-- TRAMPAS -->
+  <section>
+    <div class="section-title">Las 5 trampas — salida en una línea</div>
+    <div class="section-title-rule"></div>
+
+    <div class="traps">
+      <div class="trap">
+        <div class="trap__q">“¿Cómo terminaron con el Bordo?”</div>
+        <div class="trap__a">Con los chicos, la mejor — silencio amable, nada explícito. Hoy mi foco está acá.</div>
+      </div>
+      <div class="trap">
+        <div class="trap__q">“¿Y que ellos sigan tocando tus temas?”</div>
+        <div class="trap__a">Las canciones ya son de la gente. Qué lindo que sigan sonando.</div>
+      </div>
+      <div class="trap">
+        <div class="trap__q">“¿Por qué ellos juntos y vos solo?”</div>
+        <div class="trap__a">El compositor es solitario por ADN. Esa búsqueda hoy me trae acá.</div>
+      </div>
+      <div class="trap">
+        <div class="trap__q">“¿Volverían algún día?”</div>
+        <div class="trap__a">Los vínculos sanan, las cosas cambian. Hoy estamos donde tenemos que estar.</div>
+      </div>
+      <div class="trap">
+        <div class="trap__q">“¿Qué opinás del gobierno / la política?”</div>
+        <div class="trap__a">Me preocupa más el mundo que la grieta. Salud, educación, jubilados — ahí no se discute.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEXICÓN SI/NO -->
+  <section>
+    <div class="section-title">Do &amp; Don'ts</div>
+    <div class="section-title-rule"></div>
+
+    <div class="lex">
+      <div class="lex__col lex__col--si">
+        <div class="lex__head">Sí — decilo así</div>
+        <ul class="lex__list">
+          <li>“Los chicos” <span>(siempre en plural, cariñoso)</span></li>
+          <li>“El viaje”, “el camino”, “la búsqueda”</li>
+          <li>“Renovación”, “otra etapa”</li>
+          <li>“Acompañado” <span>(banda nueva, Peque, gente)</span></li>
+          <li>“Diferente — ni mejor ni peor”</li>
+        </ul>
+      </div>
+      <div class="lex__col lex__col--no">
+        <div class="lex__head">No — palabras prohibidas</div>
+        <ul class="lex__list">
+          <li>“El Bordo” <span>(de tu boca, nunca)</span></li>
+          <li>“Silencio de radio” <span>(titular asegurado)</span></li>
+          <li>“Tocábamos un techo” <span>(suena a queja)</span></li>
+          <li>Nombrar a integrantes individualmente</li>
+          <li>“Pelea”, “conflicto”, “diferencias”</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DOSSIER (la noche anterior) ===== -->
+
+  <!-- BANCO -->
+  <section>
+    <h2 class="section-head">Banco de respuestas.</h2>
+    <div class="section-title">Tocá cada pregunta para abrirla</div>
+    <div class="section-title-rule"></div>
+
+    <div class="qa">
+      <div class="qa__item">
+        <button class="qa__btn">“Bueno, acá está Ale, después de 25 años del Bordo, ahora solista. ¿Qué pasó?”</button>
+        <div class="qa__answer"><div class="qa__answer-inner">
+          Me agarra en un momento increíble. Más que una etapa nueva musical, es una etapa nueva de mi vida. Llegó Antón, cumplí 40 — son cosas más grandes que la música. Y todo eso te empuja a renovar la piel. No a cambiar — a renovar. Es distinto.
+        </div></div>
+      </div>
+
+      <div class="qa__item">
+        <button class="qa__btn">“¿Cómo terminaron con los chicos?”</button>
+        <div class="qa__answer"><div class="qa__answer-inner">
+          Con los chicos, la mejor. No hubo pelea, no hubo confrontación. Hubo un momento donde cada uno necesitó otra cosa — y eso también es parte del cariño. Mañana no soy si no tuve tu ayer. Lo que viene no podría haber pasado sin todo lo que pasó.
+        </div></div>
+      </div>
+
+      <div class="qa__item">
+        <button class="qa__btn">“¿Hablás con ellos?”</button>
+        <div class="qa__answer"><div class="qa__answer-inner">
+          Sí, todo bien. Cada uno está en lo suyo y eso está buenísimo.
+        </div></div>
+      </div>
+
+      <div class="qa__item">
+        <button class="qa__btn">“¿Y que ellos sigan tocando tus temas?”</button>
+        <div class="qa__answer"><div class="qa__answer-inner">
+          Las canciones ya son de la gente. En algún momento dejan de ser de uno. Qué lindo que se sigan cantando — eso es lo más para alguien que las escribió.
+        </div></div>
+      </div>
+
+      <div class="qa__item">
+        <button class="qa__btn">“¿Por qué ellos siguen juntos y vos no?”</button>
+        <div class="qa__answer"><div class="qa__answer-inner">
+          Componer tiene algo solitario en la génesis. Aún cuando estás en grupo, hay un momento donde te sentás con la hoja en blanco y eso pasa solo. Yo lo viví desde chico. Hoy esa búsqueda me trajo acá — pero no estoy solo, estoy acompañado. De una banda nueva, de Peque, de la gente.
+        </div></div>
+      </div>
+
+      <div class="qa__item">
+        <button class="qa__btn">“¿Volverían algún día?”</button>
+        <div class="qa__answer"><div class="qa__answer-inner">
+          Los vínculos sanan, las cosas cambian, en la música los regresos siempre son lindos. Pero hoy el foco está acá — y todo lo que está pasando es increíble.
+        </div></div>
+      </div>
+
+      <div class="qa__item">
+        <button class="qa__btn">“¿Por qué Kurz y no Ale Kurz? ¿Por qué tu apellido?”</button>
+        <div class="qa__answer"><div class="qa__answer-inner">
+          El mayor desafío lo tenía con Ale. El de los 20, el que tenía que animarse a algo. Por eso el disco se llama Kurz — parece raro hablar en tercera persona, pero hubo un Ale que le tuvo que pasar la posta a Kurz.
+        </div></div>
+      </div>
+
+      <div class="qa__item">
+        <button class="qa__btn">“¿Qué representa La otra mitad?”</button>
+        <div class="qa__answer"><div class="qa__answer-inner">
+          Hay una mitad de la vida que ya viví — y hay otra mitad que está por escribirse. El disco habla de eso. De los 40, de Antón, de la energía nueva. Y conceptualmente, siempre va a haber otra mitad. Eso es lo lindo.
+        </div></div>
+      </div>
+
+      <div class="qa__item">
+        <button class="qa__btn">“Te dicen mucho que vuelva el Bordo en redes. ¿Cómo lo procesás?”</button>
+        <div class="qa__answer"><div class="qa__answer-inner">
+          El cariño de la gente lo recibo con gratitud.
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POLÍTICA -->
+  <section>
+    <h2 class="section-head" style="color: var(--terra);">Política.</h2>
+    <div class="section-title">Bloque sensible</div>
+    <div class="section-title-rule"></div>
+
+    <div class="politica">
+      <div class="politica__warn">⚠ Atención</div>
+      <p class="politica__intro">
+        Si el medio te lleva ahí, una sola respuesta corta y pivot inmediato. No entrar en nombres ni en grieta. Quedarse en lo indiscutible.
+      </p>
+
+      <div class="politica__q">“¿Qué pensás de la situación del país / del gobierno?”</div>
+      <p class="politica__a">
+        Me preocupa más el mundo que la grieta. El mundo está rarísimo y eso nos atraviesa a todos, vivamos donde vivamos. Y después hay cosas que para mí no se discuten desde ningún lugar — la salud, la educación, los jubilados, los maestros, los médicos. Eso está más allá de cualquier color político.
+      </p>
+
+      <div class="politica__q">Si insisten:</div>
+      <p class="politica__a">
+        No tengo todas las respuestas. Sí tengo claro que hay que cuidar lo que nos hace ser quienes somos. Y desde mi lugar lo que puedo hacer es esto — escribir canciones que acompañen.
+      </p>
+
+      <div class="politica__evitar">
+        <b>Evitar —</b> nombrar presidentes, hablar de votación pasada, opinar sobre medidas específicas, comparar gobiernos. Cualquiera de esas tres cosas se vuelve titular.
+      </div>
+    </div>
+  </section>
+
+  <!-- ESQUEMA UNIVERSAL -->
+  <section>
+    <h2 class="section-head">El esquema universal.</h2>
+    <div class="section-title">Cómo se ordena cualquier respuesta difícil</div>
+    <div class="section-title-rule"></div>
+
+    <div class="esquema">
+      <p class="esquema__intro">
+        Todo intento de “hacerte pisar el palito” se desarma con la misma estructura de tres tiempos:
+      </p>
+      <div class="esquema__step">
+        <div class="esquema__num">1</div>
+        <div>
+          <div class="esquema__name">Reconocer</div>
+          <div class="esquema__desc">Aceptás la pregunta sin negarla. Calidez.</div>
+        </div>
+      </div>
+      <div class="esquema__step">
+        <div class="esquema__num">2</div>
+        <div>
+          <div class="esquema__name">Responder corto</div>
+          <div class="esquema__desc">Una frase. La que ya tenés preparada.</div>
+        </div>
+      </div>
+      <div class="esquema__step">
+        <div class="esquema__num">3</div>
+        <div>
+          <div class="esquema__name">Pivot</div>
+          <div class="esquema__desc">Conducir al presente: disco, búsqueda, gente.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EL MÉTODO (movido a esta posición) -->
+  <section>
+    <h2 class="section-head">El método.</h2>
+    <div class="section-title">Tres ideas que sostienen todo</div>
+    <div class="section-title-rule"></div>
+
+    <div class="ancla">
+      <div class="ancla__topic">01 · La autopista, no el volantazo</div>
+      <p class="ancla__note" style="font-style: normal; color: var(--ink); font-size: 16px;">
+        Cuando alguien intente desviarte hacia el conflicto, no claves los frenos ni cambies de carril bruscamente. Agarrá colectora. Reconocé la pregunta, dale dos segundos de aire, y volvé a tu vía. La pausa es elegancia, no traba.
+      </p>
+    </div>
+
+    <div class="ancla">
+      <div class="ancla__topic">02 · El silencio cuenta</div>
+      <p class="ancla__note" style="font-style: normal; color: var(--ink); font-size: 16px;">
+        Si te trabás, parate. Tomate dos, tres, cuatro segundos. Vas a parecer más interesante, no menos. La velocidad de la entrevista es del periodista — el ritmo de tu respuesta lo elegís vos.
+      </p>
+    </div>
+
+    <div class="ancla">
+      <div class="ancla__topic">03 · Hablá de lo que querés hablar</div>
+      <p class="ancla__note" style="font-style: normal; color: var(--ink); font-size: 16px;">
+        Toda pregunta es un puente. Reconocela, agradecela si hace falta, y conducila hacia el disco, esta etapa, Antón, la búsqueda. No es evadir — es liderar la conversación.
+      </p>
+    </div>
+  </section>
+
+  <!-- LAS 3 OBLIGADAS (nuevo orden: disco / gente / Roxy) -->
+  <section>
+    <h2 class="section-head" style="color: var(--olive);">Las 3 obligadas.</h2>
+    <div class="section-title">Tienen que aparecer en cada entrevista</div>
+    <div class="section-title-rule"></div>
+
+    <div class="obligadas">
+      <div class="obligada">
+        <div class="obligada__n">1</div>
+        <div>
+          <div class="obligada__title">El nombre del disco. <em>“La otra mitad.”</em></div>
+          <div class="obligada__sub">Repetilo. Que sea memorable. Que el SEO trabaje a tu favor.</div>
+        </div>
+      </div>
+      <div class="obligada">
+        <div class="obligada__n">2</div>
+        <div>
+          <div class="obligada__title">La gratitud al cariño de la gente.</div>
+          <div class="obligada__sub">A los que estaban, a los que están, a los que vendrán. Es la frase que te conecta con el oyente del otro lado.</div>
+        </div>
+      </div>
+      <div class="obligada">
+        <div class="obligada__n">3</div>
+        <div>
+          <div class="obligada__title">La fecha y el lugar — como invitación.</div>
+          <div class="obligada__sub">Hacia el final, no como cuña. “Si quieren, los espero el sábado en el Roxy.”</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INVITACIÓN AL ROXY (cierre) -->
+  <section>
+    <div class="invitation">
+      <div class="invitation__label">Cierre</div>
+      <p class="invitation__title">
+        “Los espero el sábado 16, con la otra mitad — donde todo esto que estoy contando, se escucha.”
+      </p>
+      <dl class="invitation__details">
+        <dt>Cuándo</dt><dd>Sábado 16 de mayo</dd>
+        <dt>Dónde</dt><dd>The Roxy · Buenos Aires</dd>
+        <dt>Disco</dt><dd>La Otra Mitad</dd>
+        <dt>Entradas</dt><dd><a href="https://www.allaccess.com.ar/" target="_blank" rel="noopener" class="invitation__link">allaccess.com.ar</a></dd>
+      </dl>
+      <div class="invitation__close">
+        <strong>No tenés que ganar la entrevista. Tenés que hacerla tuya.</strong>
+        Sos una persona generosa, buena madera y para nada tirabombas.<br><br>
+        Todo esto es genuino y se nota.<br><br>
+        Ni el periodista más hábil de la galaxia puede sacarte de ahí si vos no querés salir.
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="foot">
+  Kurz · La Otra Mitad · Roxy 16 May
+</div>
+
+<script>
+  // Progress bar
+  const progressFill = document.getElementById('progressFill');
+  function updateProgress() {
+    const h = document.documentElement;
+    const scrolled = h.scrollTop;
+    const max = h.scrollHeight - h.clientHeight;
+    const pct = max > 0 ? (scrolled / max) * 100 : 0;
+    progressFill.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+
+  // Acordeón
+  document.querySelectorAll('.qa__btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      item.classList.toggle('qa__item--open');
+    });
+  });
+
+  // Reveal on scroll (anclas)
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('reveal--in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
