@@ -54,6 +54,40 @@
     padding-top: 8px;
   }
 
+  .video-embed {
+    margin-top: 36px;
+  }
+
+  .video-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .video-frame {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 2px;
+    background: var(--paper);
+    box-shadow: 0 2px 12px var(--shadow);
+  }
+
+  .video-frame iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
   .eyebrow {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
@@ -461,6 +495,12 @@
   <header class="header">
     <h1>Pier, en <em>sus propias palabras</em>.</h1>
     <p class="lede">Una entrevista de 54 minutos en Seul Radio. Quotes textuales seleccionadas y agrupadas en cinco ejes, para leer en paralelo al desarrollo estratégico que terminaremos de pulir y completar para presentar el miércoles.</p>
+    <div class="video-embed">
+      <span class="video-label">La entrevista completa</span>
+      <div class="video-frame">
+        <iframe src="https://www.youtube.com/embed/X2u29CqJ8RQ?start=3035" title="Pier Paolo Barbieri en Seul Radio" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </div>
   </header>
 
   <div class="premisa">
