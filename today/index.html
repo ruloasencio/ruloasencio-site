@@ -1,1 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Today · Status</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
+  :root {
+    --bg: #faf8f4;
+    --surface: #ffffff;
+    --border: rgba(0,0,0,0.08);
+    --border-strong: rgba(0,0,0,0.15);
+    --text: #1a1a1a;
+    --text-muted: #6b6b6b;
+    --text-faint: #9a9a9a;
+    --accent: #1d6fe0;
+    --accent-bg: #e8f1fc;
+    --done-bg: #f4f2ec;
+  }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 64px 24px 80px;
+  }
+
+  /* Header */
+  header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  header .label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  header h1 {
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  /* Section title */
+  .section-title {
+    margin-bottom: 16px;
+  }
+  .section-title h2 {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  /* Grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+
+  /* Card */
+  .card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    transition: border-color 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .card:hover {
+    border-color: var(--border-strong);
+  }
+
+  .card-asset {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .card-action {
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+  }
+  .card-who {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+  .card-footer {
+    margin-top: auto;
+    padding-top: 8px;
+    border-top: 0.5px solid var(--border);
+    display: flex;
+    justify-content: flex-end;
+  }
+  .responsible {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 9px;
+    border-radius: 100px;
+  }
+  .responsible.mati {
+    background: #e8f1fc;
+    color: #1d6fe0;
+  }
+  .responsible.luci {
+    background: #fbe8f0;
+    color: #c2256a;
+  }
+  .responsible.manu {
+    background: #ece4fb;
+    color: #6a3fc7;
+  }
+
+
+  /* Status badge */
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    padding: 4px 9px 4px 8px;
+    border-radius: 100px;
+    line-height: 1;
+  }
+  .status svg { flex-shrink: 0; }
+  .status.todo {
+    background: #f1efe8;
+    color: #6b6b6b;
+  }
+  .status.doing {
+    background: #fef4e0;
+    color: #8a5a0b;
+  }
+  .status.ready {
+    background: #e3f5e8;
+    color: #2d6b3f;
+  }
+  .status.soon {
+    background: #ebe3d2;
+    color: #6b5530;
+  }
+
+  .card-footer {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Done cards */
+  .card.done {
+    background: var(--done-bg);
+    border-color: transparent;
+  }
+  .card.done .card-asset { color: var(--text-faint); }
+  .card.done .card-action {
+    color: var(--text-faint);
+    text-decoration: line-through;
+    font-weight: 400;
+  }
+  .card.done .card-who { color: var(--text-faint); }
+  .card.done .card-footer { border-top-color: rgba(0,0,0,0.05); }
+  .card.done .responsible {
+    background: rgba(0,0,0,0.05);
+    color: var(--text-faint);
+  }
+
+  /* Mobile */
+  @media (max-width: 600px) {
+    .wrap { padding: 40px 16px 60px; }
+    header { margin-bottom: 40px; }
+    header h1 { font-size: 26px; }
+    .grid { grid-template-columns: 1fr; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <p class="label">Status</p>
+    <h1>Today</h1>
+  </header>
+
+  <!-- PRÓXIMOS PASOS (azules) -->
+  <div class="section-title">
+    <h2>Status</h2>
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <p class="card-asset">Abuela Angela</p>
+      <p class="card-action">Baja de convenio</p>
+      <p class="card-who">Municipalidad</p>
+      <div class="card-footer"><span class="status doing"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1.2"/><path d="M5 1 A4 4 0 0 1 5 9 Z" fill="currentColor"/></svg>En curso</span><span class="responsible luci">Luci</span></div>
+    </div>
+
+    <div class="card">
+      <p class="card-asset">Casa Mati</p>
+      <p class="card-action">Denuncia del bien</p>
+      <p class="card-who">Keco</p>
+      <div class="card-footer"><span class="status doing"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1.2"/><path d="M5 1 A4 4 0 0 1 5 9 Z" fill="currentColor"/></svg>En curso</span><span class="responsible mati">Mati</span></div>
+    </div>
+
+    <div class="card">
+      <p class="card-asset">Campo Chovet</p>
+      <p class="card-action">Rectificación escritura</p>
+      <p class="card-who">Keco</p>
+      <div class="card-footer"><span class="status doing"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1.2"/><path d="M5 1 A4 4 0 0 1 5 9 Z" fill="currentColor"/></svg>En curso</span><span class="responsible manu">Manu</span></div>
+    </div>
+
+    <div class="card">
+      <p class="card-asset">Tía Liliana</p>
+      <p class="card-action">300 quintales</p>
+      <p class="card-who">Por cobrar</p>
+      <div class="card-footer"><span class="status soon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1.2"/><path d="M5 3 V5 L6.5 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>Coming soon</span><span class="responsible manu">Manu</span></div>
+    </div>
+
+
+    <div class="card">
+      <p class="card-asset">Predio 1350</p>
+      <p class="card-action">Inicio usucapión</p>
+      <p class="card-who">Abogada Melina</p>
+      <div class="card-footer"><span class="status todo"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1.2"/></svg>Por iniciar</span><span class="responsible mati">Mati</span></div>
+    </div>
+
+    <div class="card">
+      <p class="card-asset">Casa Mati</p>
+      <p class="card-action">Plano de obra</p>
+      <p class="card-who">Activar con Arq. Eficon</p>
+      <div class="card-footer"><span class="status todo"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1.2"/></svg>Por iniciar</span><span class="responsible mati">Mati</span></div>
+    </div>
+
+    <div class="card">
+      <p class="card-asset">Casa Luci</p>
+      <p class="card-action">Plano de obra</p>
+      <p class="card-who">Activar con Arq. Franceschini</p>
+      <div class="card-footer"><span class="status todo"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1.2"/></svg>Por iniciar</span><span class="responsible luci">Luci</span></div>
+    </div>
+
+    <div class="card">
+      <p class="card-asset">Casa Mati</p>
+      <p class="card-action">Escritura</p>
+      <p class="card-who">Elisa</p>
+      <div class="card-footer"><span class="status todo"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1.2"/></svg>Por iniciar</span><span class="responsible mati">Mati</span></div>
+    </div>
+
+  </div>
+
+  <!-- DONE (grises) -->
+  <div class="section-title">
+    <h2>Done</h2>
+  </div>
+
+  <div class="grid">
+
+    <div class="card done">
+      <p class="card-asset">Predio 1350</p>
+      <p class="card-action">Mensura usucapión</p>
+      <p class="card-who">Caro Tenaglia</p>
+    </div>
+
+
+    <div class="card done">
+      <p class="card-asset">Lote Manu</p>
+      <p class="card-action">Venta</p>
+      <p class="card-who">Inmobiliaria Melina</p>
+    </div>
+
+    <div class="card done">
+      <p class="card-asset">Lote Manu</p>
+      <p class="card-action">Plano de obra</p>
+      <p class="card-who">Consultar en municipalidad</p>
+    </div>
+
+    <div class="card done">
+      <p class="card-asset">Lote Manu</p>
+      <p class="card-action">Escritura 30%</p>
+      <p class="card-who">Elisa</p>
+    </div>
+
+    <div class="card done">
+      <p class="card-asset">Depto Manu</p>
+      <p class="card-action">Venta</p>
+      <p class="card-who">Inmobiliaria Cosa</p>
+    </div>
+
+    <div class="card done">
+      <p class="card-asset">Depto Manu</p>
+      <p class="card-action">Compensación</p>
+      <p class="card-who">% en dólares a Luci + Mati</p>
+    </div>
+
+    <div class="card done">
+      <p class="card-asset">Casa Luci</p>
+      <p class="card-action">Escritura</p>
+      <p class="card-who">Elisa · ya finalizada, esperando original</p>
+    </div>
+
+    <div class="card done">
+      <p class="card-asset">Predio 1350</p>
+      <p class="card-action">Cesión de derechos</p>
+      <p class="card-who">Elisa</p>
+    </div>
+
+    <div class="card done">
+      <p class="card-asset">Predio 1350</p>
+      <p class="card-action">Compra a Pita</p>
+      <p class="card-who">Inmobiliaria Melina</p>
+    </div>
+
+    <div class="card done">
+      <p class="card-asset">Campo Cañada</p>
+      <p class="card-action">Escritura</p>
+      <p class="card-who">Elisa</p>
+    </div>
+
+    <div class="card done">
+      <p class="card-asset">Campo Cañada</p>
+      <p class="card-action">Cesión de derechos</p>
+      <p class="card-who">Elisa</p>
+    </div>
+
+    <div class="card done">
+      <p class="card-asset">Campo Cañada</p>
+      <p class="card-action">Denuncia del bien</p>
+      <p class="card-who">Keco</p>
+    </div>
+
+    <div class="card done">
+      <p class="card-asset">Casa Tito</p>
+      <p class="card-action">Firmar escritura a Lelio</p>
+      <p class="card-who">Elisa</p>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
