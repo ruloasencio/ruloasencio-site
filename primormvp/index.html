@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MVP Panquecas Primor — Resumen</title>
+<title>MVP Panquecitas Primor — Minuta interna</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Serif+4:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -18,12 +19,12 @@
     --card: #ffffff;
     --accent-warm: #b85c2e;
     --accent-deep: #6b3410;
-    --accent-olive: #6e6a3b;
-    --accent-mustard: #c89b3c;
-    --accent-clay: #a8623f;
-    --accent-sage: #8a8b6a;
     --accent-rust: #8c3d1f;
+    --accent-mustard: #c89b3c;
     --accent-cream: #f3ead8;
+    --accent-violet: #4a3f8c;
+    --accent-violet-deep: #26215c;
+    --accent-violet-soft: #efedfb;
   }
 
   * { box-sizing: border-box; }
@@ -76,8 +77,21 @@
     font-family: 'Source Serif 4', serif;
     font-size: 17px;
     color: var(--ink-soft);
+    margin: 0 0 16px;
+    max-width: 640px;
+  }
+
+  .attendees {
+    font-size: 16px;
+    color: var(--ink-soft);
     margin: 0;
     max-width: 640px;
+    line-height: 1.6;
+  }
+
+  .attendees strong {
+    color: var(--ink);
+    font-weight: 500;
   }
 
   .meta {
@@ -206,13 +220,7 @@
   .data-cell .value.italic {
     font-style: italic;
     font-weight: 500;
-  }
-
-  .data-cell .sub {
-    font-family: 'Source Serif 4', serif;
-    font-size: 13px;
-    color: var(--ink-muted);
-    margin-top: 6px;
+    font-size: 19px;
   }
 
   /* CARDS */
@@ -224,13 +232,6 @@
     margin-bottom: 16px;
     border-left: 3px solid var(--accent-warm);
   }
-
-  .card.olive { border-left-color: var(--accent-olive); }
-  .card.mustard { border-left-color: var(--accent-mustard); }
-  .card.clay { border-left-color: var(--accent-clay); }
-  .card.sage { border-left-color: var(--accent-sage); }
-  .card.rust { border-left-color: var(--accent-rust); }
-  .card.deep { border-left-color: var(--accent-deep); }
 
   .card h4 {
     font-family: 'Lora', serif;
@@ -317,36 +318,24 @@
     margin: 0;
   }
 
+  .timeline-item.critical {
+    background: #fbeaea;
+    margin: 0 -24px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
   .timeline-item.critical .timeline-date {
-    color: var(--accent-rust);
+    color: #8c1f1f;
     font-weight: 600;
   }
 
   .timeline-item.critical h5 {
-    color: var(--accent-rust);
+    color: #6b1818;
   }
 
-  /* QUOTE */
-  .quote {
-    font-family: 'Lora', serif;
-    font-style: italic;
-    font-size: 19px;
-    line-height: 1.5;
-    color: var(--ink);
-    border-left: 2px solid var(--accent-warm);
-    padding: 8px 0 8px 24px;
-    margin: 24px 0;
-  }
-
-  .quote .attr {
-    display: block;
-    margin-top: 12px;
-    font-size: 13px;
-    font-style: normal;
-    font-family: 'DM Mono', monospace;
-    color: var(--ink-muted);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+  .timeline-item.critical p {
+    color: #8c1f1f;
   }
 
   /* LIST */
@@ -357,7 +346,7 @@
   }
 
   .clean-list li {
-    padding: 12px 0;
+    padding: 14px 0;
     border-bottom: 1px solid var(--rule-soft);
     color: var(--ink-soft);
     display: grid;
@@ -408,19 +397,7 @@
     font-size: 16px;
   }
 
-  /* FOOTER */
-  .footer {
-    margin-top: 80px;
-    padding-top: 32px;
-    border-top: 1px solid var(--rule);
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--ink-muted);
-    text-transform: uppercase;
-  }
-
-  /* EMPHASIS BOX */
+  /* ALERT BOX (ámbar) */
   .alert-box {
     background: #fff8ed;
     border: 1px solid var(--accent-mustard);
@@ -446,11 +423,58 @@
     font-size: 16px;
   }
 
+  /* DOUBT BOX (violeta) */
+  .doubt-box {
+    background: var(--accent-violet-soft);
+    border: 1px solid #ccc6ee;
+    border-left: 3px solid var(--accent-violet);
+    padding: 20px 24px;
+    border-radius: 3px;
+    margin: 24px 0;
+  }
+
+  .doubt-box .doubt-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-violet);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .doubt-box h4 {
+    font-family: 'Lora', serif;
+    font-weight: 600;
+    font-size: 17px;
+    margin: 0 0 8px;
+    color: var(--accent-violet-deep);
+  }
+
+  .doubt-box p {
+    margin: 0;
+    color: var(--accent-violet);
+    font-size: 16px;
+  }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+  }
+
   @media (max-width: 640px) {
     .wrap { padding: 40px 20px 60px; }
     h1.title { font-size: 32px; }
     h2 { font-size: 24px; }
     .timeline-item { grid-template-columns: 1fr; gap: 6px; }
+    .timeline-item.critical { margin: 0 -20px; padding-left: 20px; padding-right: 20px; }
   }
 </style>
 </head>
@@ -458,103 +482,87 @@
 <div class="wrap">
 
 <header class="header">
-  <div class="eyebrow">Minuta de Reunión · Empresas Polar</div>
-  <h1 class="title">MVP Panquecas Primor</h1>
-  <p class="subtitle">Sesión de calibración con el equipo de Innovación &amp; Desarrollo de Empresas Polar para reajustar tiempos del MVP, alcance de piezas para trade y enfoque del estudio.</p>
+  <div class="eyebrow">Empresas Polar</div>
+  <h1 class="title">MVP Panquecitas Primor</h1>
+  <p class="subtitle">Sesión de calibración con I+D de Polar para reajustar tiempos del MVP, alcance de piezas para trade y enfoque del estudio.</p>
+  <p class="attendees"><strong>Asistieron:</strong> el equipo de La América y, por parte de Polar, María Gabriela, Mikaela y el equipo de I+D.</p>
   <div class="meta">
     <div class="meta-item">Fecha<strong>28 de abril, 2026</strong></div>
     <div class="meta-item">Cliente<strong>Empresas Polar — Primor</strong></div>
-    <div class="meta-item">Proyecto<strong>Lanzamiento Panquecas Primor</strong></div>
+    <div class="meta-item">Proyecto<strong>Lanzamiento Panquecitas</strong></div>
   </div>
 </header>
 
 <nav class="nav">
-  <a href="#contexto">Contexto</a>
+  <a href="#timing">Cambio de fechas</a>
   <a href="#fechas">Fechas clave</a>
+  <a href="#linea">Línea de tiempo</a>
   <a href="#temas">Temas tratados</a>
-  <a href="#decisiones">Decisiones tomadas</a>
-  <a href="#señales">Señales estratégicas</a>
+  <a href="#decisiones">Decisiones</a>
+  <a href="#radar">Radar</a>
   <a href="#proximos">Próximos pasos</a>
 </nav>
 
-<section id="contexto">
-  <div class="section-num">01 / Contexto</div>
-  <h2>Por qué se convocó la reunión</h2>
-
-  <p>La dirección de Polar adelantó la fecha del MVP por la llegada anticipada de los registros sanitarios. El cronograma original que veníamos manejando ya no aplica: el MVP arranca el <strong>15 de julio de 2026</strong>, no más adelante como estaba previsto. Esto comprime los tiempos de manera significativa, especialmente porque trade marketing necesita las piezas con tres semanas de anticipación para producción e impresión.</p>
-
-  <p>Asistieron por La América: Ale Domínguez, Magui (Insights), Mica, Mariana y Rulo. Por Polar: María Gabriela Carrillo (Dirección de Innovación), Micaela y el equipo de I+D. La conversación se centró en alinear expectativas sobre qué es realista entregar en este nuevo timing, cómo enriquecer la prueba piloto más allá de las cuatro piezas básicas de trade, y cómo enmarcar el aprendizaje del MVP para que la medición sea justa.</p>
-
+<section id="timing">
   <div class="alert-box">
-    <div class="alert-label">⚑ Punto crítico de timing</div>
-    <p>Quedan aproximadamente <strong>ocho semanas</strong> desde la reunión hasta la entrega de originales a trade marketing. Esto obliga a comprimir la fase de entrevistas e ideación, llegar antes con un key message, y trabajar la campaña completa después del MVP.</p>
+    <div class="alert-label">⚑ Cambio de fechas respecto del timing original</div>
+    <p>Quedan aproximadamente ocho semanas hasta la entrega de originales a trade marketing. Esto obliga a acelerar toda la primera etapa. Estamos chequeando si se imaginan llegar con opciones de key message a este MVP.</p>
   </div>
 </section>
 
 <section id="fechas">
-  <div class="section-num">02 / Fechas clave</div>
-  <h2>Mapa de fechas mencionadas</h2>
-
-  <p>Levanté todas las fechas que aparecieron en la conversación, ordenadas cronológicamente, para que vos, Magui, Martín y Mica puedan rearmar el timing interno con visibilidad completa.</p>
+  <div class="section-num">01 / Fechas clave</div>
+  <h2>Mapa de fechas</h2>
 
   <div class="data-grid">
     <div class="data-cell">
       <div class="label">Inicio MVP</div>
       <div class="value">15 jul 2026</div>
-      <div class="sub">Confirmado por Mica y María Gabriela</div>
     </div>
     <div class="data-cell">
-      <div class="label">Entrega originales a trade</div>
-      <div class="value italic">~22 jun 2026</div>
-      <div class="sub">3 semanas antes del MVP</div>
+      <div class="label">Originales a trade</div>
+      <div class="value">~22 jun 2026</div>
     </div>
     <div class="data-cell">
       <div class="label">Duración MVP</div>
       <div class="value">2 meses</div>
-      <div class="sub">Julio – septiembre 2026</div>
     </div>
     <div class="data-cell">
       <div class="label">Rebranding Primor</div>
-      <div class="value">Junio 2026</div>
-      <div class="sub">Reposicionamiento marca paraguas</div>
+      <div class="value">Junio / Julio 2026</div>
     </div>
     <div class="data-cell">
-      <div class="label">Ventana post-MVP</div>
+      <div class="label">Análisis post-MVP</div>
       <div class="value">2–3 meses</div>
-      <div class="sub">Análisis + decisión de escalar</div>
     </div>
     <div class="data-cell">
       <div class="label">Lanzamiento nacional</div>
-      <div class="value italic">Inicios 2027</div>
-      <div class="sub">Si el MVP valida</div>
+      <div class="value italic">Finales 2026 / Inicios 2027</div>
     </div>
   </div>
+</section>
+
+<section id="linea">
+  <div class="section-num">02 / Línea de tiempo</div>
+  <h2>Cronología del proyecto</h2>
 
   <div class="timing-wrap">
-    <div class="timing-title">⌁ Línea de tiempo</div>
+    <div class="timing-title">⌁ De abril 2026 a inicios 2027</div>
     <ol class="timeline">
 
       <li class="timeline-item">
-        <div class="timeline-date">Esta semana →<br>Abril 2026</div>
+        <div class="timeline-date">Esta semana →<br>Abr 2026</div>
         <div class="timeline-content">
-          <h5>Arranque de entrevistas internas</h5>
-          <p>Magui inicia las cinco entrevistas medulares con personas clave de Polar. Lista recortada del listado original más ambicioso para ajustarse al nuevo timing.</p>
-        </div>
-      </li>
-
-      <li class="timeline-item">
-        <div class="timeline-date">Junio 2026</div>
-        <div class="timeline-content">
-          <h5>Rebranding Primor en mercado</h5>
-          <p>Empieza a verse la nueva estética y reposicionamiento de Primor como marca paraguas multicategoría. Importante para que el packaging y comunicación de panquecas convivan con la marca madre.</p>
+          <h5>Arrancamos entrevistas internas</h5>
+          <p>Iniciamos las cinco entrevistas medulares con personas clave de Polar. Lista recortada del listado original más ambicioso para ajustarse al nuevo timing.</p>
         </div>
       </li>
 
       <li class="timeline-item critical">
-        <div class="timeline-date">~22 jun 2026<br>Crítico</div>
+        <div class="timeline-date">~22 jun 2026</div>
         <div class="timeline-content">
-          <h5>Entrega de originales a trade marketing</h5>
-          <p>Hito no negociable. Tres semanas antes del MVP. Cuatro piezas para trade (cenefas, afiches, cartelería para abastos, bodegas, supermercados independientes, cadenas y panaderías). Cualquier formato más raro complica la impresión.</p>
+          <h5>Entrega de originales a trade</h5>
+          <p>Tres semanas antes del MVP. Cuatro piezas para trade: cenefas, afiches, materiales para abastos/bodegas y materiales para cadenas.</p>
         </div>
       </li>
 
@@ -562,7 +570,15 @@
         <div class="timeline-date">15 jul 2026<br>MVP arranca</div>
         <div class="timeline-content">
           <h5>Inicio del MVP</h5>
-          <p>Despacho de producto en La Guaira y Cumaná. Aproximadamente 500 puntos de venta en 5 segmentos: abastos, bodegas, supermercados independientes, cadenas y panaderías. Sampling y degustaciones a definir según segmento.</p>
+          <p>Despacho en La Guaira y Cumaná. Aproximadamente 500 puntos de venta en 5 segmentos: abastos, bodegas, supermercados independientes, cadenas y panaderías.</p>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <div class="timeline-date">Junio / Julio 2026</div>
+        <div class="timeline-content">
+          <h5>Rebranding Primor en mercado</h5>
+          <p>Empieza a verse la nueva estética y reposicionamiento de Primor como marca paraguas multicategoría.</p>
         </div>
       </li>
 
@@ -570,7 +586,7 @@
         <div class="timeline-date">Jul – Sep 2026</div>
         <div class="timeline-content">
           <h5>Ventana del MVP</h5>
-          <p>Dos meses de medición. KPIs principales: volumen, rotación, feedback del consumidor. Pendiente definir mecanismo de captura de feedback (exit polls, recompensa por feedback, etc).</p>
+          <p>Dos meses de medición. KPIs principales: volumen, rotación, feedback del consumidor. Pendiente definir mecanismo de captura de feedback.</p>
         </div>
       </li>
 
@@ -583,7 +599,7 @@
       </li>
 
       <li class="timeline-item">
-        <div class="timeline-date">Inicios 2027</div>
+        <div class="timeline-date">Finales 2026<br>Inicios 2027</div>
         <div class="timeline-content">
           <h5>Lanzamiento nacional + rollout</h5>
           <p>Despliegue en todo el país con campaña de comunicación completa. Es la fecha donde la campaña que estamos desarrollando llega a góndola a nivel nacional.</p>
@@ -593,9 +609,15 @@
     </ol>
   </div>
 
+  <div class="doubt-box">
+    <div class="doubt-label">? Duda pendiente de validar</div>
+    <h4>¿Se evaluará el impacto comunicacional de los Key Messages en el MVP?</h4>
+    <p>En las piezas que se piden para el MVP, ¿se medirá el impacto comunicacional de los posibles Key Messages que se plasmen allí? De ser así, nuestro tiempo para llegar a esos Key Messages sería mucho más breve que el del timing original. Estamos coordinando un call con Mika (Primor) para entender y dejar en claro este punto.</p>
+  </div>
+
   <div class="alert-box">
-    <div class="alert-label">⚑ Lo que tenemos que resolver internamente</div>
-    <p>En las próximas <strong>ocho semanas</strong> hay que llegar con un <em>key message</em> que funcione como eslabón coherente con la campaña que vendrá después. La fase de entrevistas con Polar (originalmente más larga) se recortó a cinco conversaciones medulares. Hay que acelerar el arranque para llegar a tiempo con piezas de trade que no comprometan el desarrollo creativo posterior.</p>
+    <div class="alert-label">⚑ Lo que tenemos que resolver internamente (a confirmar)</div>
+    <p>En las próximas ocho semanas quizás tengamos que llegar con algunos posibles key messages que funcionen como eslabón coherente con la campaña que vendrá después. La fase de entrevistas con Polar (originalmente más larga) se recortó a cinco conversaciones medulares.</p>
   </div>
 </section>
 
@@ -606,51 +628,50 @@
   <div class="card">
     <span class="tag">MVP · Alcance</span>
     <h4>Plazas, puntos de venta y segmentos</h4>
-    <p>El MVP se hace en <strong>La Guaira y Cumaná</strong> (oriente de Venezuela), en aproximadamente 500 puntos de venta categorizados en cinco segmentos: abastos, bodegas, supermercados independientes, cadenas de supermercados (pocas) y panaderías. La realidad de los puntos de venta del oriente es muy diferente a la de Caracas: muchas bodegas son artesanales, con cartelería hecha a mano. Esto condiciona el tipo de piezas viables.</p>
+    <p>El MVP se hace en La Guaira y Cumaná (oriente de Venezuela), en aproximadamente 500 puntos de venta categorizados en cinco segmentos: abastos, bodegas, supermercados independientes, cadenas de supermercados (pocas) y panaderías. La realidad de los puntos de venta del oriente es muy diferente a la de Caracas: muchas bodegas son artesanales, con cartelería hecha a mano. Esto condiciona el tipo de piezas viables.</p>
   </div>
 
-  <div class="card olive">
+  <div class="card">
     <span class="tag">MVP · Medición</span>
     <h4>El factor de éxito no puede ser solo rotación</h4>
-    <p>María Gabriela insistió en que medir el MVP solo con KPIs de volumen y recompra sería injusto: la categoría de mezclas para panquecas no está establecida en Venezuela, y soltar el producto en góndola sin acompañamiento educativo puede llevar a una conclusión errónea sobre su potencial. Hay que pensar mecanismos de captura de feedback (exit polls, incentivos por feedback, sampling) que permitan medir comprensión de la propuesta de valor, no solo conversión.</p>
+    <p>María Gabriela insistió en que medir el MVP solo con KPIs de volumen y recompra sería injusto: la categoría de mezclas para panquecitas no está establecida en Venezuela, y soltar el producto en góndola sin acompañamiento educativo puede llevar a una conclusión errónea sobre su potencial. Hay que pensar mecanismos de captura de feedback (exit polls, incentivos por feedback, sampling) que permitan medir comprensión de la propuesta de valor, no solo conversión.</p>
   </div>
 
-  <div class="card mustard">
+  <div class="card">
     <span class="tag">Trade · Piezas</span>
     <h4>Cuatro formatos básicos + posible refuerzo</h4>
     <p>Trade marketing necesita aproximadamente cuatro piezas: cenefas de góndola, afiches, materiales para abastos/bodegas, materiales para cadenas. Magui propuso pensar refuerzos adicionales en puntos emblema o de alto tráfico (sampling, cartelería extra) para acompañar el desembarco y no dejar al producto solo. Polar va a compartir mock-ups, fotos reales y planos mecánicos de las piezas que trade negocia con cada formato de cliente.</p>
   </div>
 
-  <div class="card clay">
+  <div class="card">
     <span class="tag">Producto · Mensaje</span>
-    <h4>Probar más de un mensaje en el MVP</h4>
-    <p>Polar quiere probar dos líneas de mensaje en distintos puntos de venta: <strong>nutrición</strong> (que en Venezuela todavía no resuena tanto pero es central a la razón de ser del producto) y <strong>practicidad/rendimiento</strong> (solo agregás agua, ya tiene los ingredientes, rinde, ahorra). Esto da material para que la creatividad pueda construir hipótesis a testear.</p>
+    <h4>Probar dos líneas de mensaje en el MVP</h4>
+    <p>Polar quiere probar dos líneas de mensaje en distintos puntos de venta durante el MVP, para ver cuál resuena más con el consumidor. Esto da material para que la creatividad pueda construir hipótesis a testear.</p>
   </div>
 
-  <div class="card sage">
+  <div class="card">
     <span class="tag">Marca · Arquitectura</span>
     <h4>Primor pasa a ser marca paraguas multicategoría</h4>
-    <p>El rebranding de Primor en junio expande el rol de la marca: deja de ser solo pasta y arroz para convertirse en marca de despensa. Incorpora cereal infantil, panquecas y un nuevo player en otra categoría. La intención es competir con el principal competidor que ya está jugando en granos, azúcar y harina. El packaging de panquecas ya está aprobado y testeado, debería mantenerse coherente con la nueva identidad de Primor (códigos de color, elementos gráficos), aunque panquecas tiene una identidad visual con cierta disonancia por haber ido en paralelo.</p>
+    <p>El rebranding de junio / julio expande el rol de la marca: deja de ser solo pasta y arroz para convertirse en marca de despensa. Incorpora cereal infantil, panquecitas y un nuevo player en otra categoría. La intención es competir con el principal competidor que ya está jugando en granos, azúcar y harina. El packaging de panquecitas ya está aprobado y testeado, debería mantenerse coherente con la nueva identidad de Primor (códigos de color, elementos gráficos), aunque tiene una identidad visual con cierta disonancia por haber ido en paralelo.</p>
   </div>
 
-  <div class="card rust">
+  <div class="card">
     <span class="tag">Cultura · Categoría</span>
     <h4>Existe una panqueca venezolana</h4>
     <p>Dato muy útil del estudio: en Venezuela existe una referencia clara de "panqueca venezolana" que es distinta a la pancake norteamericana. Es más fina, de perfil salado (aunque la masa lleve algo de azúcar), se acompaña con margarina y queso blanco rallado (el mismo de la arepa). Los competidores actuales muestran panquecas con frutas y miel, ninguno muestra la versión venezolana. El empaque de Primor sí incluye queso rallado en la imagen — diferenciador relevante.</p>
   </div>
 
-  <div class="card deep">
+  <div class="card">
     <span class="tag">Audiencias internas</span>
     <h4>Las barreras no están solo afuera</h4>
-    <p>María Gabriela y Mica fueron muy claras: hay <strong>escepticismo interno</strong> en áreas de ventas, I+D y finanzas sobre la metodología MVP en una compañía acostumbrada a manejar grandes volúmenes. La frase clave: <em>"estamos movilizando un proyecto completo para unas pocas toneladas que al final no sabemos si van o no van"</em>. Mercadeo tampoco rechaza el proyecto, pero hay que sensibilizarlos sobre que esto no es un producto más — el approach (jobs to be done, partir del consumidor) es nuevo para Polar y necesita defensa interna.</p>
+    <p>María Gabriela y Mikaela fueron muy claras: hay escepticismo interno en áreas de ventas, I+D y finanzas sobre la metodología MVP en una compañía acostumbrada a manejar grandes volúmenes. La frase clave: <em>"estamos movilizando un proyecto completo para unas pocas toneladas que al final no sabemos si van o no van"</em>. Mercadeo tampoco rechaza el proyecto, pero hay que sensibilizarlos sobre que esto no es un producto más — el approach (jobs to be done, partir del consumidor) es nuevo para Polar y necesita defensa interna.</p>
   </div>
 
   <div class="card">
     <span class="tag">Referencias internas</span>
     <h4>Casos Polar para construir hype interno</h4>
-    <p>Aparecieron dos referencias de hitos internos que vale recuperar: la <strong>harina pan</strong>, que en su momento revolucionó la dieta venezolana al transformar 20 horas de proceso en un kilo de harina precocida; y <strong>Mi Gusto</strong> (yogur, ~2013), que democratizó el consumo de yogur con una fórmula estable sin refrigeración y proyectó a 10 años lo que se logró en 3. Polar va a compartir data histórica de Mi Gusto. Sirven como analogía: panquecas premezcladas sin huevo ni leche es innovación de la misma familia.</p>
+    <p>Aparecieron dos referencias de hitos internos que vale recuperar: la harina pan, que en su momento revolucionó la dieta venezolana al transformar 20 horas de proceso en un kilo de harina precocida; y Mi Gusto (yogur, ~2013), que democratizó el consumo de yogur con una fórmula estable sin refrigeración y proyectó a 10 años lo que se logró en 3. Sirven como analogía: panquecitas premezcladas sin huevo ni leche es innovación de la misma familia.</p>
   </div>
-
 </section>
 
 <section id="decisiones">
@@ -659,18 +680,18 @@
 
   <ul class="clean-list">
     <li><span class="marker">01</span><span>Recortar la lista de entrevistas a <strong>cinco personas medulares</strong> de Polar para arrancar esta misma semana, en lugar del listado más amplio que se venía manejando.</span></li>
-    <li><span class="marker">02</span><span>El equipo arranca <strong>esta semana del 28 de abril</strong> con el proceso de inducción acelerado por el ajuste de timing.</span></li>
-    <li><span class="marker">03</span><span>Polar comparte: arquitectura de marca Primor, estrategia de marca, empaques aprobados de panquecas, mock-ups de los segmentos de PDV, fotos reales de anaqueles del oriente, planos mecánicos de las piezas de trade, e información histórica de la categoría de yogur (Mi Gusto).</span></li>
-    <li><span class="marker">04</span><span>Probar <strong>dos líneas de mensaje</strong> en distintos PDV durante el MVP: nutrición vs practicidad/rendimiento.</span></li>
-    <li><span class="marker">05</span><span>El equipo de Mercadeo de Primor se irá incorporando orgánicamente al proyecto. Ellos también participarán en las entrevistas que va a llevar Magui.</span></li>
+    <li><span class="marker">02</span><span>Arrancar la inducción acelerada por el ajuste de timing.</span></li>
+    <li><span class="marker">03</span><span>Polar comparte: arquitectura de marca Primor, estrategia de marca, empaques aprobados de panquecitas, mock-ups de los segmentos de PDV, fotos reales de anaqueles del oriente, planos mecánicos de las piezas de trade.</span></li>
+    <li><span class="marker">04</span><span>Empezar a trabajar posibles líneas de mensaje para los distintos PDV durante el MVP.</span></li>
+    <li><span class="marker">05</span><span>El equipo de Mercadeo de Primor se irá incorporando orgánicamente al proyecto y participa en las entrevistas que iremos desarrollando.</span></li>
     <li><span class="marker">06</span><span>Buscar mecanismos de captura de feedback más allá de KPIs de rotación: exit polls, recompensas, sampling estratégico en segmentos donde es habitual.</span></li>
-    <li><span class="marker">07</span><span>Programar una <strong>sesión de trabajo específica</strong> entre Magui y el equipo de Polar para profundizar en cómo segmentar la medición del MVP y definir el approach de feedback.</span></li>
+    <li><span class="marker">07</span><span>Programar una <strong>sesión de trabajo específica</strong> entre La América y el equipo de Polar para profundizar en cómo segmentar la medición del MVP y definir el approach de feedback.</span></li>
   </ul>
 </section>
 
-<section id="señales">
-  <div class="section-num">05 / Señales estratégicas</div>
-  <h2>Lo que tengo en el radar</h2>
+<section id="radar">
+  <div class="section-num">05 / Cosas para tener en el radar</div>
+  <h2>Lo que no perdemos de vista</h2>
 
   <div class="signal">
     <div class="signal-num">01</div>
@@ -683,37 +704,29 @@
   <div class="signal">
     <div class="signal-num">02</div>
     <div>
-      <h4>Tenemos audiencia múltiple antes del consumidor</h4>
-      <p>Como dijo Ale: esto es ajedrez, no llegar al rey. Hay que convencer a Ventas, I+D, Finanzas y Mercadeo de Primor con datos duros, no solo con pasión. Pedirle a Polar todo el dato cuantitativo disponible es clave para construir el caso interno.</p>
+      <h4>El packaging es zona protegida</h4>
+      <p>El empaque ya está aprobado tras múltiples focus groups. Polar lo defiende internamente. A priori, no parece haber espacio para hacer cambios. Pero sí podemos leer hacia dónde va Primor para que el tono de la comunicación dialogue con la marca madre.</p>
     </div>
   </div>
 
   <div class="signal">
     <div class="signal-num">03</div>
     <div>
-      <h4>El packaging es zona protegida</h4>
-      <p>El empaque ya está aprobado tras múltiples focus groups. Polar lo defiende internamente. Nuestro rol es trabajar con él, no proponer cambios. Lo que sí podemos es leer hacia dónde va Primor para que el tono de la comunicación dialogue con la marca madre.</p>
+      <h4>La harina pan es nuestra competencia silenciosa</h4>
+      <p>Insight clave de María Gabriela: la verdadera barrera no son otras mezclas para panquecitas, es la harina pan. La pregunta interna es <em>"¿quién come panquecitas si tenemos arepa?"</em>. La respuesta del estudio: la gente quiere variedad, está aburrida del menú habitual, y la panqueca aparece en el 54% de los hogares aunque no la declaren como tal.</p>
     </div>
   </div>
 
   <div class="signal">
     <div class="signal-num">04</div>
     <div>
-      <h4>La harina pan es nuestra competencia silenciosa</h4>
-      <p>Insight clave de María Gabriela: la verdadera barrera no son otras mezclas para panquecas, es la harina pan. La pregunta interna es <em>"¿quién come panquecas si tenemos arepa?"</em>. La respuesta del estudio: la gente quiere variedad, está aburrida del menú habitual, y la panqueca aparece en el 54% de los hogares aunque no la declaren como tal.</p>
+      <h4>Hay un legado fundacional que apalanca el discurso</h4>
+      <p>María Gabriela mencionó algo poderoso: Polar volvió a una filosofía de escuchar al consumidor que estaba en su origen (los maestros cerveceros que se sentaban en bares para entender el paladar venezolano) y que se había perdido en una etapa de "supervivencia" donde se producía desde la capacidad ociosa. El MVP de panquecitas es parte de esa vuelta a las fuentes. Es relato que podemos integrar.</p>
     </div>
   </div>
 
   <div class="signal">
     <div class="signal-num">05</div>
-    <div>
-      <h4>Hay un legado fundacional que apalanca el discurso</h4>
-      <p>María Gabriela mencionó algo poderoso: Polar volvió a una filosofía de escuchar al consumidor que estaba en su origen (los maestros cerveceros que se sentaban en bares para entender el paladar venezolano) y que se había perdido en una etapa de "supervivencia" donde se producía desde la capacidad ociosa. El MVP de panquecas es parte de esa vuelta a las fuentes. Es relato que podemos integrar.</p>
-    </div>
-  </div>
-
-  <div class="signal">
-    <div class="signal-num">06</div>
     <div>
       <h4>La panqueca venezolana es territorio creativo</h4>
       <p>Salada, fina, con margarina y queso blanco rallado. Ningún competidor está mostrando esto. Todos muestran la pancake americana con miel y frutas. Hay terreno fértil para una creatividad que reconozca el ritual real del consumidor venezolano.</p>
@@ -726,16 +739,16 @@
   <h2>Qué sigue</h2>
 
   <ul class="clean-list">
-    <li><span class="marker">↦</span><span>Recibir de Polar: arquitectura de marca, empaques finales, mocks de PDV, fotos reales de anaqueles del oriente, info de Mi Gusto.</span></li>
-    <li><span class="marker">↦</span><span>Magui arranca entrevistas internas (cinco personas clave) con foco especial en escuchar las barreras de Ventas y la sensibilización pendiente con Mercadeo.</span></li>
-    <li><span class="marker">↦</span><span>Internamente (Rulo, Ale, Magui, Martín, Mica): rearmar el cronograma del proyecto contemplando entrega de originales a trade <strong>tres semanas antes del 15 de julio</strong>, y validar con el equipo qué es realista llegar a producir en ese plazo.</span></li>
-    <li><span class="marker">↦</span><span>Definir con Polar el mecanismo de captura de feedback del MVP: cómo, cuándo, con qué incentivo y en qué segmentos.</span></li>
-    <li><span class="marker">↦</span><span>Empezar a explorar el key message que pueda funcionar como eslabón inicial coherente con la campaña posterior, sabiendo que probaremos dos líneas (nutrición vs practicidad) en distintos PDV.</span></li>
+    <li><span class="marker">↦</span><span>Recibir de Polar: arquitectura de marca, empaques finales, mocks de PDV, fotos reales de anaqueles del oriente.</span></li>
+    <li><span class="marker">↦</span><span>Arrancamos entrevistas internas con foco especial en escuchar las barreras de Ventas y la sensibilización pendiente con Mercadeo.</span></li>
+    <li><span class="marker">↦</span><span>Internamente: rearmar el cronograma contemplando entrega de originales tres semanas antes del 15 de julio, y validar con el equipo de Primor y La América a qué tipo de entregable realista podemos comprometernos para llegar en ese plazo.</span></li>
+    <li><span class="marker">↦</span><span>Definir con Mika y María Gabriela el mecanismo de captura de feedback del MVP: cómo, cuándo, con qué incentivo y en qué segmentos.</span></li>
+    <li><span class="marker">↦</span><span>Empezar a trabajar posibles líneas de mensaje para los distintos PDV durante el MVP.</span></li>
   </ul>
 </section>
 
 <div class="footer">
-  La América · Resumen interno · Empresas Polar / Primor
+  La América · Resumen interno · Polar / Primor
 </div>
 
 </div>
