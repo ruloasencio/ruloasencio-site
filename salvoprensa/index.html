@@ -1,1 +1,505 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gacetilla Salvo · Cambios de Legales P&G</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f4;
+    --paper: #ffffff;
+    --ink: #2a2522;
+    --ink-soft: #5c534d;
+    --ink-mute: #8a8079;
+    --rule: #e8e2d8;
+    --accent: #8b5a3c;
+    --accent-soft: #c9a87c;
+    --add-bg: #eaf3e8;
+    --add-ink: #3d6b3a;
+    --add-rule: #b8d4b3;
+    --del-bg: #f5e6e3;
+    --del-ink: #8a3d35;
+    --del-rule: #d9b8b2;
+    --note-bg: #f4ecd9;
+    --note-ink: #6b5a2a;
+    --note-rule: #d9c896;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 56px 32px 96px;
+  }
+  header.doc-head {
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 28px;
+    margin-bottom: 40px;
+  }
+  .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  h1 {
+    font-family: 'Lora', Georgia, serif;
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 1.2;
+    margin: 12px 0 8px;
+    letter-spacing: -0.01em;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .subtitle {
+    color: var(--ink-soft);
+    font-size: 17px;
+    margin: 0;
+  }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 24px;
+  }
+  .meta-cell {
+    border-left: 2px solid var(--accent-soft);
+    padding-left: 12px;
+  }
+  .meta-cell .label { display: block; margin-bottom: 4px; }
+  .meta-cell .val {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--ink);
+  }
+
+  /* TOC */
+  nav.toc {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 22px 26px;
+    margin-bottom: 48px;
+    border-radius: 2px;
+  }
+  nav.toc .label { margin-bottom: 12px; display: block; }
+  nav.toc ol {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+    counter-reset: toc;
+  }
+  nav.toc li {
+    counter-increment: toc;
+    padding: 6px 0;
+    border-bottom: 1px dotted var(--rule);
+  }
+  nav.toc li:last-child { border-bottom: none; }
+  nav.toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    margin-right: 14px;
+  }
+  nav.toc a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 15px;
+  }
+  nav.toc a:hover { color: var(--accent); }
+
+  /* Sections */
+  section {
+    margin-bottom: 56px;
+    scroll-margin-top: 24px;
+  }
+  section h2 {
+    font-family: 'Lora', Georgia, serif;
+    font-weight: 600;
+    font-size: 22px;
+    margin: 0 0 6px;
+    letter-spacing: -0.005em;
+  }
+  section .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+  section .lede {
+    color: var(--ink-soft);
+    font-size: 15px;
+    margin: 0 0 22px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 16px;
+  }
+
+  /* Diff cards */
+  .diff {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .diff-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 18px 20px;
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+  .diff-card.before {
+    border-left: 3px solid var(--del-rule);
+  }
+  .diff-card.after {
+    border-left: 3px solid var(--add-rule);
+  }
+  .diff-card .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-bottom: 10px;
+  }
+  .diff-card.before .tag {
+    background: var(--del-bg);
+    color: var(--del-ink);
+  }
+  .diff-card.after .tag {
+    background: var(--add-bg);
+    color: var(--add-ink);
+  }
+  .diff-card p { margin: 0 0 8px; }
+  .diff-card p:last-child { margin-bottom: 0; }
+
+  mark.del {
+    background: var(--del-bg);
+    color: var(--del-ink);
+    text-decoration: line-through;
+    text-decoration-color: var(--del-ink);
+    padding: 1px 3px;
+    border-radius: 2px;
+  }
+  mark.add {
+    background: var(--add-bg);
+    color: var(--add-ink);
+    padding: 1px 3px;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+
+  /* Why box */
+  .why {
+    background: var(--note-bg);
+    border-left: 3px solid var(--note-rule);
+    padding: 14px 18px;
+    margin-top: 14px;
+    font-size: 14px;
+    color: var(--note-ink);
+    border-radius: 2px;
+  }
+  .why .label {
+    color: var(--note-ink);
+    opacity: 0.7;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .why p { margin: 0; }
+
+  /* Summary table */
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    margin-top: 8px;
+    font-size: 14px;
+  }
+  .summary-table th, .summary-table td {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .summary-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-mute);
+    font-weight: 500;
+    background: #fbf8f1;
+  }
+  .summary-table tr:last-child td { border-bottom: none; }
+  .summary-table .pill {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 2px 7px;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+  .pill.minor { background: var(--note-bg); color: var(--note-ink); }
+  .pill.major { background: var(--del-bg); color: var(--del-ink); }
+  .pill.format { background: #e8e2d8; color: var(--ink-soft); }
+
+  /* Recommendation */
+  .reco {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--accent);
+    padding: 26px 30px;
+    border-radius: 2px;
+  }
+  .reco h2 { margin-top: 0; }
+  .reco p { margin: 0 0 12px; font-size: 15px; }
+  .reco p:last-child { margin-bottom: 0; }
+
+  /* Footer */
+  footer.doc-foot {
+    margin-top: 64px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-mute);
+    letter-spacing: 0.05em;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 720px) {
+    .wrap { padding: 36px 20px 64px; }
+    h1 { font-size: 28px; }
+    .meta-grid { grid-template-columns: 1fr; }
+    .diff { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="doc-head">
+  <span class="label">Documento interno · Para revisión de Ale</span>
+  <h1>Gacetilla Salvo · <em>cambios de Legales P&amp;G</em></h1>
+  <p class="subtitle">Comparativa entre la versión enviada por La América y la devuelta por el equipo de Legales de Procter &amp; Gamble.</p>
+  <div class="meta-grid">
+    <div class="meta-cell">
+      <span class="label">Cliente</span>
+      <span class="val">P&amp;G · Salvo</span>
+    </div>
+    <div class="meta-cell">
+      <span class="label">Mercado</span>
+      <span class="val">México</span>
+    </div>
+    <div class="meta-cell">
+      <span class="label">Estado</span>
+      <span class="val">Pendiente OK Ale</span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <span class="label">Índice</span>
+  <ol>
+    <li><a href="#resumen">Resumen ejecutivo</a></li>
+    <li><a href="#cambio-1">Cambio clave: del título al territorio</a></li>
+    <li><a href="#cambio-2">Reescritura del primer párrafo</a></li>
+    <li><a href="#cambio-3">Reescritura del segundo párrafo</a></li>
+    <li><a href="#cambio-4">Ajustes menores y de forma</a></li>
+    <li><a href="#sin-cambios">Lo que P&amp;G dejó intacto</a></li>
+    <li><a href="#reco">Recomendación</a></li>
+  </ol>
+</nav>
+
+<section id="resumen">
+  <span class="section-num">01 — Resumen</span>
+  <h2>De un vistazo</h2>
+  <p class="lede">Legales de P&amp;G hizo tres cambios sustantivos y varios menores. La quote de Ale no fue tocada. Ningún integrante de los equipos fue removido.</p>
+
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Cambio</th>
+        <th>Tipo</th>
+        <th>Impacto</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>“Platos Llorosos” pasó a ser <strong>“Trastes Llorosos”</strong> (título y mención de campaña)</td>
+        <td><span class="pill major">Sustantivo</span></td>
+        <td>Cambia el nombre de la campaña en toda la gacetilla.</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Reescritura del <strong>primer párrafo</strong>: nueva definición del insight</td>
+        <td><span class="pill major">Sustantivo</span></td>
+        <td>Introduce el concepto de “grasa invisible”.</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Reescritura del <strong>segundo párrafo</strong>: del “motor de efectividad” al “ángulo divertido”</td>
+        <td><span class="pill major">Sustantivo</span></td>
+        <td>Reposiciona el approach creativo.</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Fecha actualizada a <strong>1 de Mayo 2026</strong></td>
+        <td><span class="pill format">Forma</span></td>
+        <td>Actualización lógica.</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>“Maria Castillo” → <strong>“Maria Jose Castillo”</strong></td>
+        <td><span class="pill minor">Menor</span></td>
+        <td>Corrección de nombre completo.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="cambio-1">
+  <span class="section-num">02 — Cambio sustantivo</span>
+  <h2>Del título al territorio: “Platos” → “Trastes”</h2>
+  <p class="lede">P&amp;G unifica el nombre de la campaña en el término más mexicano y más alineado con la categoría: <em>trastes</em>.</p>
+
+  <div class="diff">
+    <div class="diff-card before">
+      <span class="tag">Versión La América</span>
+      <p><strong>“Platos Llorosos”</strong>: La América amplía su trabajo en el consumo masivo mexicano junto a Salvo de P&amp;G</p>
+    </div>
+    <div class="diff-card after">
+      <span class="tag">Versión P&amp;G</span>
+      <p><strong>“Trastes Llorosos”</strong>: La América amplía su trabajo en el consumo masivo mexicano junto a Salvo de P&amp;G</p>
+    </div>
+  </div>
+
+  <div class="why">
+    <span class="label">Por qué</span>
+    <p>“Trastes” es el término coloquial mexicano y coincide con el nombre interno del proyecto (que en el header de la gacetilla La América ya tenía como “Trastes Llorosos”). Quedaba una inconsistencia entre el header y el título de la nota.</p>
+  </div>
+</section>
+
+<section id="cambio-2">
+  <span class="section-num">03 — Cambio sustantivo</span>
+  <h2>Reescritura del primer párrafo</h2>
+  <p class="lede">P&amp;G reformula la definición del insight. Pasamos de “platos chorreados de grasa” a “grasa invisible que se siente al enjuagar”.</p>
+
+  <div class="diff">
+    <div class="diff-card before">
+      <span class="tag">Versión La América</span>
+      <p>La América presenta “Platos Llorosos”, su nuevo trabajo para Salvo de P&amp;G en México, desarrollado a partir de un hallazgo <mark class="del">surgido en investigación</mark> con consumidoras mexicanas: <mark class="del">la expresión “platos llorosos” para describir aquellos que quedan chorreados de grasa después del lavado.</mark></p>
+    </div>
+    <div class="diff-card after">
+      <span class="tag">Versión P&amp;G</span>
+      <p>La América presenta “Trastes Llorosos”, su nuevo trabajo para Salvo de P&amp;G en México, desarrollado a partir de un hallazgo con consumidoras mexicanas: <mark class="add">a veces en el lavado los trastes quedan con una grasa invisible que no se ve, pero que se siente al enjuagarlos. De ahí la expresión “Trastes llorosos”, aquellos trastes que lloran por esa grasa invisible que no se ha podido remover.</mark></p>
+    </div>
+  </div>
+
+  <div class="why">
+    <span class="label">Por qué (lectura nuestra)</span>
+    <p>P&amp;G prefiere construir el insight desde el problema (la grasa invisible) y no desde la jerga. El término “investigación” fue removido — probablemente por consistencia con cómo Legales prefiere referirse a research no publicado. La nueva versión es más larga pero más demostrativa: explica el porqué del nombre.</p>
+  </div>
+</section>
+
+<section id="cambio-3">
+  <span class="section-num">04 — Cambio sustantivo</span>
+  <h2>Reescritura del segundo párrafo</h2>
+  <p class="lede">El cambio más significativo en términos de tono: P&amp;G suaviza la afirmación sobre “demostración como motor de efectividad” y lo reemplaza por un ángulo de “novedad y diversión”.</p>
+
+  <div class="diff">
+    <div class="diff-card before">
+      <span class="tag">Versión La América</span>
+      <p>En una categoría donde históricamente <mark class="del">la demostración clara del producto es el principal motor de efectividad, la campaña se apoya en ese código probado para reforzar el beneficio central.</mark> Desde ese territorio funcional, la pieza incorpora un guiño inspirado en el lenguaje cotidiano del hogar mexicano, aportando cercanía sin perder claridad.</p>
+    </div>
+    <div class="diff-card after">
+      <span class="tag">Versión P&amp;G</span>
+      <p>En una categoría donde históricamente <mark class="add">solo se muestra el beneficio principal de remoción de grasa, esta campaña se apoya de un ángulo divertido que denota novedad y busca salirse de lo convencional.</mark> Desde ese territorio funcional, la pieza incorpora un guiño inspirado en el lenguaje cotidiano del hogar mexicano, aportando cercanía sin perder claridad.</p>
+    </div>
+  </div>
+
+  <div class="why">
+    <span class="label">Por qué (lectura nuestra)</span>
+    <p>Dos cosas pasan acá. Primero, P&amp;G evita afirmaciones sobre “efectividad” (terreno sensible para Legales en categorías comparativas). Segundo, prefiere posicionar la campaña como <em>novedad / ruptura</em> en lugar de <em>código probado</em>. Es un giro de tono: nuestro framing era “respetamos el código”, el suyo es “salimos de lo convencional”. Conviene revisar si el nuevo framing es coherente con la línea editorial que queremos sostener desde La América.</p>
+  </div>
+</section>
+
+<section id="cambio-4">
+  <span class="section-num">05 — Forma</span>
+  <h2>Ajustes menores y de forma</h2>
+  <p class="lede">Cambios sin impacto editorial pero que conviene marcar para que queden documentados.</p>
+
+  <div class="diff">
+    <div class="diff-card before">
+      <span class="tag">Antes</span>
+      <p><strong>Fecha:</strong> 30 de marzo de 2026</p>
+      <p><strong>Equipo P&amp;G:</strong> Suvi Napolitano, Leonardo Ficarella, <mark class="del">Maria Castillo</mark>, Isabella Altafulla.</p>
+    </div>
+    <div class="diff-card after">
+      <span class="tag">Después</span>
+      <p><strong>Fecha:</strong> Mayo 1 de 2026</p>
+      <p><strong>Equipo P&amp;G:</strong> Suvi Napolitano, Leonardo Ficarella, <mark class="add">Maria Jose Castillo</mark>, Isabella Altafulla.</p>
+    </div>
+  </div>
+
+  <div class="why">
+    <span class="label">Nota</span>
+    <p>El documento que devolvieron incluye marcas de agua “Business Use” en el header, lo que indica que están aplicando su template interno antes de aprobar. Es un signo de que el documento pasó por su flujo formal de Legales.</p>
+  </div>
+</section>
+
+<section id="sin-cambios">
+  <span class="section-num">06 — Lo que NO cambió</span>
+  <h2>Lo que P&amp;G dejó intacto</h2>
+  <p class="lede">Importante leerlo en positivo: los pilares de la nota se mantienen.</p>
+
+  <div class="diff-card after" style="grid-column: 1 / -1;">
+    <span class="tag">Aprobado tal cual</span>
+    <p>✓ La <strong>quote completa de Alejandro Domínguez</strong> se mantiene palabra por palabra.</p>
+    <p>✓ El <strong>Equipo La América</strong> se mantiene íntegro (14 personas, mismo orden).</p>
+    <p>✓ El <strong>tercer párrafo</strong> sobre “guiño inspirado en el lenguaje cotidiano del hogar mexicano” queda intacto.</p>
+    <p>✓ La estructura general de la gacetilla y los bloques (País, Fecha, Agencia, Anunciante, Campaña, Equipos) se respetan.</p>
+  </div>
+</section>
+
+<section id="reco" class="reco">
+  <span class="section-num">07 — Recomendación</span>
+  <h2>Cómo seguimos</h2>
+  <p>Los cambios de Legales son razonables y no afectan la firma editorial de la nota. Sugiero <strong>aceptar la versión P&amp;G tal como vino</strong> con dos consideraciones para conversar con Ale:</p>
+  <p><strong>1.</strong> El cambio del segundo párrafo (“motor de efectividad” → “ángulo divertido”) reposiciona ligeramente el discurso. Si queremos mantener nuestra lectura más sobria sobre la categoría, podríamos proponer una redacción intermedia. Si no, aceptarlo es lo más rápido para salir.</p>
+  <p><strong>2.</strong> El primer párrafo de P&amp;G es más extenso y didáctico. Funciona bien para medios, así que conviene aceptarlo.</p>
+  <p>Una vez que tengamos OK de Ale, completo los equipos pendientes (<em>La Doble</em> y <em>Post On</em>) y mando a circular.</p>
+</section>
+
+<footer class="doc-foot">
+  <span>La América · Buenos Aires</span>
+  <span>v1 · Para Ale</span>
+</footer>
+
+</div>
+</body>
+</html>
