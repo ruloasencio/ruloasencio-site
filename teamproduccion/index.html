@@ -1,1 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brief Ale — Mica</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  :root {
+    --bg: #faf8f4;
+    --bg-card: #f4f1ec;
+    --bg-dark: #2c2825;
+    --border: #e0d9cf;
+    --border-strong: #c8bfb0;
+    --text-primary: #2c2825;
+    --text-secondary: #6b6259;
+    --text-muted: #9c9088;
+    --text-light: #b8b0a5;
+    --accent-brown: #8b6f5e;
+    --accent-terracotta: #c4715a;
+    --accent-sage: #7a9b76;
+    --accent-gold: #b8924a;
+    --accent-blue: #5a7fa0;
+    --tag-bg: #ede8e0;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    padding: 56px 24px 80px;
+    line-height: 1.6;
+  }
+
+  .page { max-width: 620px; margin: 0 auto; }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: 'Lora', serif;
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+
+  h1 em { color: var(--accent-terracotta); font-style: italic; }
+
+  .subtitle {
+    font-size: 15px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-secondary);
+    margin-bottom: 48px;
+  }
+
+  .divider { height: 1px; background: var(--border); margin: 36px 0; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* STAT ROW */
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .stat-row:last-child { border-bottom: none; }
+
+  .stat-label {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text-secondary);
+  }
+
+  .stat-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-primary);
+    text-align: right;
+  }
+
+  .stat-value.sage { color: var(--accent-sage); font-size: 16px; }
+  .stat-value.blue { color: var(--accent-blue); font-size: 16px; }
+  .stat-value.gold { color: var(--accent-gold); font-size: 16px; }
+  .stat-value.muted { color: var(--text-muted); }
+
+  /* TIMELINE ROWS */
+  .t-row {
+    display: flex;
+    align-items: center;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--border);
+    gap: 12px;
+  }
+  .t-row:last-child { border-bottom: none; }
+
+  .t-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    width: 52px;
+    flex-shrink: 0;
+  }
+
+  .t-bar-wrap { flex: 1; }
+  .t-bar-bg { height: 3px; background: var(--tag-bg); border-radius: 2px; overflow: hidden; }
+  .t-bar-fill { height: 100%; border-radius: 2px; background: var(--accent-brown); }
+
+  .t-pct {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--accent-sage);
+    width: 40px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .t-neto {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    width: 152px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* INSIGHT */
+  .insight {
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-top: 12px;
+  }
+  .insight.sage { background: #f0f4ef; border-left: 3px solid var(--accent-sage); }
+  .insight.gold { background: #f6f1e8; border-left: 3px solid var(--accent-gold); }
+  .insight.terra { background: #f7f0ee; border-left: 3px solid var(--accent-terracotta); }
+
+  .insight-text {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--text-primary);
+  }
+  .insight-text strong { font-weight: 600; }
+
+  /* BULLET POINTS */
+  .bullet-list { margin-top: 4px; }
+  .bullet {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .bullet:last-child { border-bottom: none; }
+  .bullet-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-brown);
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
+  .bullet-text {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  /* CLOSING */
+  .closing {
+    background: var(--bg-dark);
+    border-radius: 14px;
+    padding: 28px;
+    text-align: center;
+    margin-top: 40px;
+  }
+  .closing-text {
+    font-family: 'Source Serif 4', serif;
+    font-size: 15px;
+    font-weight: 300;
+    font-style: italic;
+    color: #a09585;
+    line-height: 1.8;
+  }
+  .closing-text strong { color: #d4c4a8; font-weight: 400; font-style: normal; }
+
+  /* COMPARATIVE TABLE */
+  .comp-header, .comp-row {
+    display: grid;
+    grid-template-columns: 1.6fr 0.8fr 0.8fr 0.8fr;
+    gap: 8px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+  }
+  .comp-header {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-bottom: 8px;
+  }
+  .comp-fecha { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-muted); }
+  .comp-col { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text-primary); text-align: right; }
+  .comp-col.gap { color: var(--accent-sage); }
+  .comp-col.gap.neutral { color: var(--text-muted); }
+  .highlight-row { background: #f6f1e8; margin: 0 -8px; padding: 11px 8px; border-radius: 6px; border-bottom: none; }
+  .highlight-row .comp-fecha { color: var(--accent-gold); }
+  .highlight-row .comp-col.gap { color: var(--accent-terracotta); font-weight: 600; }
+  .total-row { border-top: 2px solid var(--border-strong); border-bottom: none; padding-top: 14px; margin-top: 2px; }
+  .total-row .comp-fecha { color: var(--text-primary); font-weight: 400; }
+  .total-row .comp-col { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+  .total-row .total-gap { color: var(--accent-sage); font-size: 15px; }
+  .comp-note { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-muted); margin-top: 12px; letter-spacing: 0.04em; }
+
+  .footnote {
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--text-light);
+    margin-top: 48px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <h1>Escenario<br><em>Mica & Luz</em></h1>
+
+  <!-- RESUMEN EJECUTIVO -->
+  <div class="section-label">Resumen ejecutivo</div>
+
+  <div class="stat-row">
+    <div class="stat-label">Fecha de ingreso</div>
+    <div class="stat-value">Jun 2024</div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-label">Sueldo bruto inicial</div>
+    <div class="stat-value">$783.132</div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-label">Sueldo bruto actual (mar '26)</div>
+    <div class="stat-value">$1.807.229</div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-label">Sueldo neto inicial</div>
+    <div class="stat-value blue">$650.000</div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-label">Sueldo neto actual</div>
+    <div class="stat-value blue">$1.500.000</div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-label">Incremento total · bruto</div>
+    <div class="stat-value sage">+130,7%</div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-label">Incremento total · neto</div>
+    <div class="stat-value blue">+131%</div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-label">IPC mismo período</div>
+    <div class="stat-value muted">+82%</div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-label">Diferencia real vs inflación</div>
+    <div class="stat-value sage">+49 puntos</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- HISTORIAL DE AUMENTOS -->
+  <div class="section-label">5 aumentos en 21 meses</div>
+
+  <div class="t-row" style="padding-bottom:6px">
+    <div class="t-date"></div>
+    <div class="t-bar-wrap"></div>
+    <div class="t-pct"></div>
+    <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);width:108px;text-align:right;flex-shrink:0;letter-spacing:0.08em;text-transform:uppercase">Bruto · Neto</div>
+  </div>
+  <div class="t-row">
+    <div class="t-date">Ene '25</div>
+    <div class="t-bar-wrap"><div class="t-bar-bg"><div class="t-bar-fill" style="width:100%"></div></div></div>
+    <div class="t-pct">+25%</div>
+    <div class="t-neto">$978.915 · <span style="color:var(--accent-blue)">~$812.000</span></div>
+  </div>
+  <div class="t-row">
+    <div class="t-date">May '25</div>
+    <div class="t-bar-wrap"><div class="t-bar-bg"><div class="t-bar-fill" style="width:48%"></div></div></div>
+    <div class="t-pct">+12%</div>
+    <div class="t-neto">$1.096.385 · <span style="color:var(--accent-blue)">~$909.000</span></div>
+  </div>
+  <div class="t-row">
+    <div class="t-date">Jun '25</div>
+    <div class="t-bar-wrap"><div class="t-bar-bg"><div class="t-bar-fill" style="width:40%"></div></div></div>
+    <div class="t-pct">+10%</div>
+    <div class="t-neto">$1.206.023 · <span style="color:var(--accent-blue)">~$1.000.000</span></div>
+  </div>
+  <div class="t-row">
+    <div class="t-date">Oct '25</div>
+    <div class="t-bar-wrap"><div class="t-bar-bg"><div class="t-bar-fill" style="width:100%; background:var(--accent-terracotta)"></div></div></div>
+    <div class="t-pct" style="color:var(--accent-terracotta)">+30%</div>
+    <div class="t-neto">$1.567.469 · <span style="color:var(--accent-blue)">~$1.300.000</span></div>
+  </div>
+  <div class="t-row">
+    <div class="t-date">Ene '26</div>
+    <div class="t-bar-wrap"><div class="t-bar-bg"><div class="t-bar-fill" style="width:61%"></div></div></div>
+    <div class="t-pct">+15%</div>
+    <div class="t-neto">$1.807.229 · <span style="color:var(--accent-blue)">$1.500.000</span></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- POST CARREFOUR -->
+  <div class="section-label">Post-Carrefour · julio 2025 → marzo 2026</div>
+
+  <div class="stat-row">
+    <div class="stat-label">Sueldo al momento del anuncio · bruto</div>
+    <div class="stat-value">$1.206.023</div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-label">Sueldo al momento del anuncio · neto</div>
+    <div class="stat-value" style="color:var(--accent-blue)">~$1.000.000</div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-label">Sueldo actual · bruto</div>
+    <div class="stat-value">$1.807.229</div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-label">Sueldo actual · neto</div>
+    <div class="stat-value" style="color:var(--accent-blue)">$1.500.000</div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-label">IPC en ese período</div>
+    <div class="stat-value muted">+18%</div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-label">Aumento real otorgado</div>
+    <div class="stat-value sage">+49,8%</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- COMPARATIVO IPC VS AGENCIA -->
+  <div class="section-label">Agencia vs. inflación · por período</div>
+
+  <div class="comp-header">
+    <div class="comp-fecha"></div>
+    <div class="comp-col" style="color:var(--text-muted)">IPC período</div>
+    <div class="comp-col" style="color:var(--text-muted)">Agencia</div>
+    <div class="comp-col" style="color:var(--accent-sage)">Gap</div>
+  </div>
+  <div class="comp-row">
+    <div class="comp-fecha">Jun '24 → Ene '25</div>
+    <div class="comp-col">+21,4%</div>
+    <div class="comp-col">+25,0%</div>
+    <div class="comp-col gap">+3,6pp</div>
+  </div>
+  <div class="comp-row">
+    <div class="comp-fecha">Ene '25 → May '25</div>
+    <div class="comp-col">+12,8%</div>
+    <div class="comp-col">+12,0%</div>
+    <div class="comp-col gap neutral">≈ IPC</div>
+  </div>
+  <div class="comp-row">
+    <div class="comp-fecha">May '25 → Jun '25</div>
+    <div class="comp-col">+2,7%</div>
+    <div class="comp-col">+10,0%</div>
+    <div class="comp-col gap">+7,3pp</div>
+  </div>
+  <div class="comp-row highlight-row">
+    <div class="comp-fecha">Jun '25 → Oct '25 ★</div>
+    <div class="comp-col">+9,6%</div>
+    <div class="comp-col">+30,0%</div>
+    <div class="comp-col gap">+20,4pp</div>
+  </div>
+  <div class="comp-row">
+    <div class="comp-fecha">Oct '25 → Ene '26</div>
+    <div class="comp-col">+11,1%</div>
+    <div class="comp-col">+15,3%</div>
+    <div class="comp-col gap">+4,2pp</div>
+  </div>
+  <div class="comp-row total-row">
+    <div class="comp-fecha">Total acumulado</div>
+    <div class="comp-col">+82%</div>
+    <div class="comp-col">+131%</div>
+    <div class="comp-col gap total-gap">+49pp</div>
+  </div>
+
+  <div class="comp-note">★ Período post-Carrefour · aumento 3× por encima del IPC</div>
+
+  <div class="divider"></div>
+
+  <!-- PROYECCIÓN MAYO — SOLO INTERNA -->
+  <div class="section-label">Proyección mayo 2026 · ejercicio interno</div>
+
+  <div class="stat-row">
+    <div class="stat-label">IPC estimado ene–abr 2026</div>
+    <div class="stat-value">+12,8%</div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-label">Nuevo bruto estimado</div>
+    <div class="stat-value">$2.037.948</div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-label">Nuevo neto estimado</div>
+    <div class="stat-value blue">$1.691.497</div>
+  </div>
+
+
+
+  <div class="footnote">Interno · No compartir · La América · Abril 2026</div>
+
+</div>
+</body>
+</html>
