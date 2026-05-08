@@ -1,1 +1,386 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Anónima · Resumen Reunión 8 de mayo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf8f4;
+  --ink:#2b2620;
+  --ink-soft:#5a4f44;
+  --muted:#8a7e72;
+  --rule:#e8e1d6;
+  --card:#ffffff;
+  --card-edge:#efe8db;
+  --terracota:#b85c3c;
+  --ocre:#c89343;
+  --olive:#6b7a3a;
+  --teal:#3d6b6e;
+  --wine:#7a3845;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:880px;margin:0 auto;padding:56px 32px 96px}
+header{border-bottom:1px solid var(--rule);padding-bottom:28px;margin-bottom:40px}
+.eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+h1{font-family:'Lora',Georgia,serif;font-weight:600;font-size:42px;line-height:1.1;letter-spacing:-0.01em;margin:0 0 14px;color:var(--ink)}
+.sub{font-family:'Source Serif 4',Georgia,serif;font-style:italic;font-size:18px;color:var(--ink-soft);max-width:640px;margin:0}
+.meta{display:flex;gap:24px;flex-wrap:wrap;margin-top:24px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+.meta span strong{color:var(--ink);font-weight:500}
+
+nav.toc{background:var(--card);border:1px solid var(--card-edge);border-radius:6px;padding:22px 26px;margin-bottom:48px}
+nav.toc .toc-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+nav.toc ol{list-style:none;padding:0;margin:0;counter-reset:toc;display:grid;grid-template-columns:1fr 1fr;gap:8px 32px}
+nav.toc ol li{counter-increment:toc;font-size:15px;padding-left:32px;position:relative}
+nav.toc ol li::before{content:counter(toc,decimal-leading-zero);position:absolute;left:0;top:1px;font-family:'DM Mono',monospace;font-size:11px;color:var(--terracota);font-weight:500}
+nav.toc a{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s}
+nav.toc a:hover{border-bottom-color:var(--terracota)}
+
+section{margin-bottom:56px;scroll-margin-top:24px}
+.sec-num{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--terracota);margin-bottom:8px;display:block}
+h2{font-family:'Lora',Georgia,serif;font-weight:600;font-size:28px;line-height:1.2;margin:0 0 20px;color:var(--ink);letter-spacing:-0.005em}
+h3{font-family:'Lora',Georgia,serif;font-weight:600;font-size:18px;margin:24px 0 10px;color:var(--ink)}
+p{margin:0 0 14px;color:var(--ink)}
+p.lead{font-size:18px;color:var(--ink-soft);margin-bottom:22px}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:680px){.grid-2,.grid-3,nav.toc ol{grid-template-columns:1fr}}
+
+.card{background:var(--card);border:1px solid var(--card-edge);border-radius:6px;padding:20px 22px}
+.card .label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.card h4{font-family:'Lora',Georgia,serif;font-weight:600;font-size:17px;margin:0 0 8px;color:var(--ink)}
+.card p{font-size:15px;margin:0;color:var(--ink-soft)}
+
+.data-cell{background:var(--card);border:1px solid var(--card-edge);border-left:3px solid var(--terracota);border-radius:4px;padding:16px 20px}
+.data-cell .num{font-family:'Lora',Georgia,serif;font-weight:600;font-size:30px;color:var(--ink);line-height:1}
+.data-cell .lbl{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.data-cell.ocre{border-left-color:var(--ocre)}
+.data-cell.olive{border-left-color:var(--olive)}
+.data-cell.teal{border-left-color:var(--teal)}
+.data-cell.wine{border-left-color:var(--wine)}
+
+.timeline{margin:18px 0;border-left:2px solid var(--rule);padding-left:24px}
+.timeline .item{position:relative;padding-bottom:18px}
+.timeline .item::before{content:'';position:absolute;left:-30px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--terracota)}
+.timeline .when{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.1em;color:var(--terracota);text-transform:uppercase;margin-bottom:4px}
+.timeline .what{font-size:16px;color:var(--ink)}
+
+.calendar{display:grid;grid-template-columns:120px 1fr;gap:6px 18px;margin:14px 0;font-size:15px}
+.calendar .date{font-family:'DM Mono',monospace;font-size:13px;color:var(--terracota);font-weight:500;padding-top:2px}
+.calendar .city{color:var(--ink)}
+
+ul.clean{list-style:none;padding:0;margin:0 0 14px}
+ul.clean li{padding:8px 0 8px 22px;border-bottom:1px solid var(--rule);position:relative;font-size:16px}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{content:'·';position:absolute;left:6px;top:6px;color:var(--terracota);font-size:22px;line-height:1}
+
+.brand-tag{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;padding:3px 10px;border-radius:3px;margin-right:6px;vertical-align:middle}
+.tag-nac{background:#fbe9e2;color:var(--terracota)}
+.tag-loc{background:#e7ede2;color:var(--olive)}
+.tag-mix{background:#e2ecec;color:var(--teal)}
+
+.action-row{display:grid;grid-template-columns:auto 1fr;gap:14px;padding:12px 0;border-bottom:1px dashed var(--rule)}
+.action-row:last-child{border-bottom:none}
+.action-row .who{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ocre);padding-top:3px;min-width:90px}
+.action-row .task{font-size:15px;color:var(--ink)}
+
+blockquote{border-left:3px solid var(--ocre);padding:6px 0 6px 18px;margin:18px 0;font-style:italic;color:var(--ink-soft);font-size:16px}
+
+.kicker{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+
+footer{margin-top:64px;padding-top:24px;border-top:1px solid var(--rule);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Reunión · Pre-presentación lunes</div>
+  <h1>La Anónima &mdash; Llegada a Paseo Libertad</h1>
+  <p class="sub">Repaso con Marion para alinear estrategia, mensajes y convivencia con la comunicación nacional, de cara a la mesa del miércoles con Nicolás y Federico.</p>
+  <div class="meta">
+    <span><strong>08·05·2026</strong></span>
+    <span>Con · <strong>Marion + equipo La Anónima</strong></span>
+    <span>Próxima · <strong>Lunes previa / Miércoles mesa</strong></span>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Índice">
+  <div class="toc-title">Índice</div>
+  <ol>
+    <li><a href="#contexto">Contexto de plazas</a></li>
+    <li><a href="#cronograma">Cronograma de aperturas</a></li>
+    <li><a href="#estrategia">Estrategia de llegada</a></li>
+    <li><a href="#convivencia">Convivencia nacional · local</a></li>
+    <li><a href="#mensajes">Priorización de mensajes</a></li>
+    <li><a href="#audiencias">Audiencias y empleados</a></li>
+    <li><a href="#research">Research · Opinaia</a></li>
+    <li><a href="#proximos">Próximos pasos</a></li>
+  </ol>
+</nav>
+
+<!-- 1 -->
+<section id="contexto">
+  <span class="sec-num">01 · Contexto</span>
+  <h2>Lectura de plazas tras el viaje</h2>
+  <p class="lead">Marion y equipo recorrieron sucursales y competencia en Córdoba, Tucumán, Salta y otros puntos. La conclusión es que el desafío competitivo es real y obliga a posicionarse fuerte desde la llegada.</p>
+
+  <div class="grid-3" style="margin-bottom:22px">
+    <div class="data-cell">
+      <div class="num">12</div>
+      <div class="lbl">Plazas a abrir</div>
+    </div>
+    <div class="data-cell ocre">
+      <div class="num">~Nulo</div>
+      <div class="lbl">Conocimiento de marca</div>
+    </div>
+    <div class="data-cell olive">
+      <div class="num">Media</div>
+      <div class="lbl">Clase predominante</div>
+    </div>
+  </div>
+
+  <h3>Lo que encontraron</h3>
+  <ul class="clean">
+    <li><strong>Clase media / media-baja</strong> dominante en casi todas las plazas, con foco en precio. Hoy es el segmento más apretado.</li>
+    <li><strong>Jumbo</strong> ya tiene su posicionamiento claro en el extremo alto.</li>
+    <li><strong>Cordiez (Córdoba)</strong> y <strong>Supermami (Tucumán)</strong> son los locales más fuertes: tres o cuatro sucursales, frescos impecables, surtido, precio, edificios nuevos. Quedamos &ldquo;en el medio&rdquo;, sin atributo diferencial obvio.</li>
+    <li><strong>Salta</strong> aparece distinta: shopping prolijo tipo Paseo Pilar, mejor iluminado, con servicios y cines.</li>
+    <li><strong>Libertad</strong>, en el momento de la visita, está vendiendo expectativa baja: salones achicados, faltantes, clientes enojados. Hay un <em>run run</em> negativo previo por notas de despidos.</li>
+  </ul>
+
+  <blockquote>&ldquo;Tenemos que ir fuerte con el mensaje de que somos, tenemos buenas ofertas y una buena propuesta comercial. En un contexto con muchos mayoristas y locales fuertes, decir 'precios convenientes' a secas no alcanza.&rdquo; <span style="font-style:normal;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted)"> &mdash; Marion</span></blockquote>
+</section>
+
+<!-- 2 -->
+<section id="cronograma">
+  <span class="sec-num">02 · Cronograma</span>
+  <h2>Calendario de cierres y aperturas</h2>
+  <p>Libertad cierra escalonadamente y La Anónima abre escalonadamente entre el <strong>5 y el 14 de junio</strong>. Esta brecha condiciona toda la estrategia de comunicación.</p>
+
+  <div class="grid-3" style="margin-bottom:24px">
+    <div class="data-cell teal">
+      <div class="num">21·05</div>
+      <div class="lbl">Arranca &ldquo;Los dejamos en buenas manos&rdquo;</div>
+    </div>
+    <div class="data-cell wine">
+      <div class="num">27·05</div>
+      <div class="lbl">Cierre Libertad (persiana baja)</div>
+    </div>
+    <div class="data-cell ocre">
+      <div class="num">05·06</div>
+      <div class="lbl">Primera apertura · Rosario</div>
+    </div>
+  </div>
+
+  <h3>Aperturas escalonadas</h3>
+  <div class="calendar">
+    <div class="date">JUE 05·06</div><div class="city">Rosario</div>
+    <div class="date">LUN 08·06</div><div class="city">Córdoba (1) y otra plaza</div>
+    <div class="date">SEM 09·06+</div><div class="city">Córdoba (2) · Posadas</div>
+    <div class="date">JUE 12·06</div><div class="city">San Juan</div>
+    <div class="date">DOM 14·06</div><div class="city">Última apertura</div>
+  </div>
+  <p style="font-size:14px;color:var(--muted);font-family:'DM Mono',monospace">Cronograma sujeto a ajustes &mdash; Marion confirma con el detalle definitivo.</p>
+</section>
+
+<!-- 3 -->
+<section id="estrategia">
+  <span class="sec-num">03 · Estrategia</span>
+  <h2>Tres etapas de comunicación</h2>
+  <p class="lead">La presentación del miércoles tiene que armarse en tres tramos claros antes de aterrizar lo creativo. Esto es lo que necesita ver el auditorio (ingenieros y contadores) antes que las piezas.</p>
+
+  <div class="timeline">
+    <div class="item">
+      <div class="when">Etapa 1 · desde 21·05</div>
+      <div class="what"><strong>Despedida con calma.</strong> Libertad y los Paseos comunican &ldquo;Los dejamos en buenas manos&rdquo;. Validado.</div>
+    </div>
+    <div class="item">
+      <div class="when">Etapa 2 · transición / puertas cerradas</div>
+      <div class="what"><strong>Teaser de llegada.</strong> Sostener la voz durante el bache entre cierre y apertura para evitar el silencio. Pendiente sumar a la propuesta.</div>
+    </div>
+    <div class="item">
+      <div class="when">Etapa 3 · desde apertura</div>
+      <div class="what"><strong>Llegada institucional + comercial conviviendo.</strong> Mensaje de marca de La Anónima en paralelo a la oferta dura (carne, canasta, insuperables).</div>
+    </div>
+  </div>
+
+  <h3>Lo no negociable</h3>
+  <ul class="clean">
+    <li><strong>Llegamos quién.</strong> Quién llega es tan importante como que llegamos. Hay que presentar la marca desde cero.</li>
+    <li><strong>Surtido + precio + financiación</strong> como ejes argumentales del mensaje grande.</li>
+    <li>El sistema de comunicación nacional <strong>no se cambia</strong>. La campaña creativa convive con él, no lo reemplaza.</li>
+    <li>Aprendizaje de Resistencia: <strong>no salir el día uno con todos los mensajes encima</strong>. Escalonar.</li>
+  </ul>
+</section>
+
+<!-- 4 -->
+<section id="convivencia">
+  <span class="sec-num">04 · Convivencia</span>
+  <h2>Autopista nacional &amp; colectora local</h2>
+  <p class="lead">El insight central de la reunión: existen dos carriles paralelos que conviven, no se integran. Lo nacional sigue como está; lo local lleva el mensaje de llegada.</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="label">Autopista · nacional</div>
+      <h4>Sigue como vive hoy</h4>
+      <p>TN, C5N, La Nación+, A24, señales satelitales. Canasta nacional con los mismos precios que las 12 plazas nuevas (esfuerzo de margen para ser consistentes). No puede decir &ldquo;llegamos&rdquo; porque ya estamos en el resto del país.</p>
+    </div>
+    <div class="card">
+      <div class="label">Colectora · 12 plazas</div>
+      <h4>Lleva la llegada</h4>
+      <p>Mensaje institucional &ldquo;Llega La Anónima · encontranos en Paseo Libertad&rdquo; + ofertas locales con anclaje territorial. Acá vive el creativo nuevo.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:28px">Cómo se cruzan</h3>
+  <p>El de <strong>Carnes</strong> es el único spot nacional que vamos a tunear con licencia local en las 12 plazas (no corre nacional como tal). El de <strong>Canasta</strong> vive nacional con un cierre adaptado: cambio de fachada en la apertura tipo shopping (filmado en Neuquén) + placa final &ldquo;Supermercados La Anónima · encontranos en Paseo Libertad&rdquo;, más eventual frase conectora del creativo.</p>
+
+  <blockquote>&ldquo;Si yo te pongo la fachada de mi sucursal en el Paseo Libertad, vas a decir 'che, ¿dónde está esto?'. Por eso filmamos un ingreso tipo shopping, parecido a cómo entrás a Libertad.&rdquo;</blockquote>
+</section>
+
+<!-- 5 -->
+<section id="mensajes">
+  <span class="sec-num">05 · Priorización</span>
+  <h2>Qué decimos · cuándo · dónde</h2>
+  <p class="lead">Cinco frentes para el arranque. La sugerencia (de Marion y propia) es <strong>no salir el día uno con todo</strong>, escalonar mensajes y dejar que el creativo central abra paso.</p>
+
+  <div style="margin:22px 0">
+    <div class="action-row">
+      <div class="who"><span class="brand-tag tag-nac">Nacional</span></div>
+      <div class="task"><strong>Canasta</strong> &mdash; arranca <strong>junio</strong> con apertura. ~50 productos por zona, mismos precios entre plazas. Cierre adaptado para 12 plazas.</div>
+    </div>
+    <div class="action-row">
+      <div class="who"><span class="brand-tag tag-loc">12 plazas</span></div>
+      <div class="task"><strong>Carnes</strong> &mdash; arranca <strong>junio</strong>. Único spot 100% local, con licencia creativa para integrar idea troncal.</div>
+    </div>
+    <div class="action-row">
+      <div class="who"><span class="brand-tag tag-loc">12 plazas</span></div>
+      <div class="task"><strong>Tarjeta de crédito</strong> &mdash; <strong>desde apertura</strong>. <em>4 cuotas sin interés en comestibles · hasta 12 en no-comestibles</em>. También con Naranja X.</div>
+    </div>
+    <div class="action-row">
+      <div class="who"><span class="brand-tag tag-loc">12 plazas</span></div>
+      <div class="task"><strong>E-commerce</strong> &mdash; <strong>fecha a definir</strong> (cuando las sucursales den ok operativo). Surtido amplio en electro y no-comestibles, también alimentos.</div>
+    </div>
+    <div class="action-row">
+      <div class="who"><span class="brand-tag tag-loc">12 plazas</span></div>
+      <div class="task"><strong>Programa Plus + App</strong> &mdash; <strong>desde apertura</strong>. Reemplaza Club Libertad. Sin sobre-promesa: comunicar como &ldquo;club de beneficios&rdquo;, sin obligar a bajar la app para ofertas masivas.</div>
+    </div>
+    <div class="action-row">
+      <div class="who"><span class="brand-tag tag-nac">Nacional</span></div>
+      <div class="task"><strong>Insuperables</strong> &mdash; arranca <strong>fines de junio / julio</strong>. Cautela inicial por riesgo de quiebre de stock sin historial.</div>
+    </div>
+  </div>
+
+  <h3>Mensaje transversal a sumar</h3>
+  <p>Más allá de las piezas, hay un atributo a destacar como diferencial: <strong>surtido amplio + buena financiación + e-commerce 24hs</strong>. La idea no es tanto &ldquo;diferenciarnos&rdquo; como evitar que el cliente sienta que pierde algo respecto a Libertad. La superficie ya la achicó Libertad el año pasado, no vamos a hablar de hiper.</p>
+</section>
+
+<!-- 6 -->
+<section id="audiencias">
+  <span class="sec-num">06 · Audiencias</span>
+  <h2>A quién le hablamos</h2>
+  <p>Marion lo planteó a nivel estratégico, no creativo, pero conviene tenerlo claro de cara al miércoles:</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="label">Audiencia 1</div>
+      <h4>Masivo · todos</h4>
+      <p>Llegada institucional + sistema comercial nacional. Habla a clientes y no clientes por igual.</p>
+    </div>
+    <div class="card">
+      <div class="label">Audiencia 2</div>
+      <h4>Cliente Libertad heredado</h4>
+      <p>Continuidad &mdash;&ldquo;te seguimos atendiendo&rdquo;&mdash;. Tono uno-a-uno.</p>
+    </div>
+    <div class="card">
+      <div class="label">Audiencia 3</div>
+      <h4>Cliente del mall</h4>
+      <p>Aprovechar el flujo del Paseo. Mensaje de invitación a entrar a la nueva sucursal.</p>
+    </div>
+    <div class="card">
+      <div class="label">Audiencia 4</div>
+      <h4>No-cliente a recuperar</h4>
+      <p>El que se fue de Libertad o nunca fue. Aquí entra fuerte el mensaje de quién es La Anónima.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:28px">Embajadores invisibles</h3>
+  <p>Marion subrayó que <strong>los empleados que quedan</strong> son embajadores naturales. Mantener las fuentes de trabajo es un dato fuerte que <em>no</em> va en campaña pero sí en prensa. Multiplicado por núcleo familiar, hay conversación orgánica sobre la marca en cada plaza.</p>
+</section>
+
+<!-- 7 -->
+<section id="research">
+  <span class="sec-num">07 · Research</span>
+  <h2>Sobre el informe Opinaia</h2>
+  <p class="lead">Punto incómodo de la reunión anterior. Marion confirma que comparte nuestras dudas y abre la puerta a pedir aclaraciones formales.</p>
+
+  <ul class="clean">
+    <li>El informe parece <strong>generado con NotebookLM</strong> (Marion lo verificó con Gemini, probabilidad cercana a 100%): formato citas, redacción tipo IA, falsos mapas de Rosario.</li>
+    <li>No alucina datos &mdash; la info es real &mdash; pero el output es vago, sin escalas claras, sin insights nuevos.</li>
+    <li>Marion va a <strong>reclamar el estudio cerrado hoy mismo</strong> y circularlo con Nicolás antes del miércoles, para que todos hablemos sobre la misma fuente.</li>
+    <li>El dato concreto a confirmar: <strong>nivel de conocimiento de marca</strong> en las plazas. Informalmente la lectura es &ldquo;casi nulo&rdquo;; queremos el número formal para respaldar el mensaje de llegada.</li>
+  </ul>
+
+  <h3>Acción comprometida</h3>
+  <p>Le mandamos a Marion por mail las dudas puntuales sobre el informe (escalas sin referencia, métricas sin definir) y ella las reenvía literal a Opinaia. Lo mismo con dudas sobre audiencias y competencia local en cada plaza, sobre todo <strong>Cordiez (Córdoba)</strong> y <strong>Supermami (Tucumán)</strong>.</p>
+</section>
+
+<!-- 8 -->
+<section id="proximos">
+  <span class="sec-num">08 · Próximos pasos</span>
+  <h2>Qué tenemos que cerrar antes del miércoles</h2>
+
+  <div style="margin:18px 0">
+    <div class="action-row">
+      <div class="who">Nosotros</div>
+      <div class="task">Armar timing con las <strong>3 etapas</strong> (despedida · transición · llegada) más sumar propuesta de <strong>teaser</strong> para el bache puertas cerradas.</div>
+    </div>
+    <div class="action-row">
+      <div class="who">Nosotros</div>
+      <div class="task">Aterrizar las <strong>2 alternativas creativas</strong> que ya tenemos estructuradas, mostrando cómo articulan con canasta, carnes, tarjeta, e-commerce y plus.</div>
+    </div>
+    <div class="action-row">
+      <div class="who">Nosotros</div>
+      <div class="task">Mostrar cómo <strong>intervenimos las piezas existentes</strong> (canasta nacional con cierre nuevo · carnes con licencia local), sin romper el sistema.</div>
+    </div>
+    <div class="action-row">
+      <div class="who">Nosotros</div>
+      <div class="task">Mandar mail a Marion con <strong>dudas puntuales sobre el informe Opinaia</strong> + dudas de audiencias y competencia local.</div>
+    </div>
+    <div class="action-row">
+      <div class="who">Marion</div>
+      <div class="task">Reclamar el <strong>estudio cerrado de Opinaia</strong> y circularlo con Nicolás antes del miércoles.</div>
+    </div>
+    <div class="action-row">
+      <div class="who">Marion</div>
+      <div class="task">Mandar <strong>cronograma final de aperturas</strong> y agendar formalmente la reunión del miércoles (no estaba en calendar).</div>
+    </div>
+    <div class="action-row">
+      <div class="who">Santi</div>
+      <div class="task">Abrir el miércoles con un <strong>chart ordenador</strong> (fechas, paralelo con campañas nacionales de aniversario y coleccionable) para encuadrar la conversación, sobre todo si participa Federico.</div>
+    </div>
+  </div>
+
+  <h3>Logística del lunes y miércoles</h3>
+  <ul class="clean">
+    <li><strong>Lunes:</strong> previa entre nosotros para repasar la presentación armada.</li>
+    <li><strong>Miércoles:</strong> mesa con Nicolás, Federico y equipo. Formato presencial + remoto, igual que la vez anterior. Marion ofrece sala un rato antes para preparar.</li>
+  </ul>
+</section>
+
+<footer>
+  <span>La América · La Anónima</span>
+  <span>Resumen reunión · 08 · 05 · 26</span>
+</footer>
+
+</div>
+</body>
+</html>
+
