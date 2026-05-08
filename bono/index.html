@@ -1,1 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indicadores de bono campaña verano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f4;
+    --ink: #1f1d1a;
+    --ink-soft: #4a463f;
+    --ink-mute: #8a8479;
+    --line: #e6e0d4;
+    --line-soft: #efeae0;
+    --terracotta: #b8593a;
+    --ochre: #c08a2e;
+    --olive: #6b7a3a;
+    --teal: #2f6b6b;
+    --wine: #7a2e3a;
+    --paper: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 64px 32px 96px;
+  }
+  /* Header */
+  .meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 14px;
+    margin-bottom: 28px;
+  }
+  h1 {
+    font-family: 'Lora', serif;
+    font-weight: 600;
+    font-size: 38px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0 0 12px;
+  }
+  .subtitle {
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 19px;
+    margin: 0 0 40px;
+    max-width: 580px;
+  }
 
+  /* Anchor nav */
+  nav.toc {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 18px 22px;
+    margin: 0 0 44px;
+  }
+  nav.toc .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 10px;
+  }
+  nav.toc ol {
+    margin: 0; padding: 0;
+    list-style: none;
+    counter-reset: toc;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 24px;
+  }
+  nav.toc li {
+    counter-increment: toc;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+  }
+  nav.toc li::before {
+    content: counter(toc, decimal-leading-zero) "  ";
+    color: var(--ink-mute);
+  }
+  nav.toc a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  nav.toc a:hover { border-bottom-color: var(--terracotta); }
+
+  /* Sections */
+  section { margin: 0 0 56px; scroll-margin-top: 24px; }
+  h2 {
+    font-family: 'Lora', serif;
+    font-weight: 600;
+    font-size: 22px;
+    margin: 0 0 18px;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 10px;
+  }
+  h2 .num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-mute);
+    letter-spacing: 0.1em;
+  }
+  h3 {
+    font-family: 'Lora', serif;
+    font-weight: 600;
+    font-size: 16px;
+    margin: 24px 0 8px;
+    color: var(--ink);
+  }
+  p { margin: 0 0 14px; }
+
+  /* Data cells */
+  .data-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin: 18px 0;
+  }
+  .data-cell {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--terracotta);
+    padding: 16px 18px;
+    border-radius: 2px;
+  }
+  .data-cell.ochre { border-left-color: var(--ochre); }
+  .data-cell.olive { border-left-color: var(--olive); }
+  .data-cell.teal { border-left-color: var(--teal); }
+  .data-cell.wine { border-left-color: var(--wine); }
+  .data-cell .k {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 6px;
+  }
+  .data-cell .v {
+    font-family: 'Lora', serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .data-cell .v small {
+    display: block;
+    font-family: 'Source Serif 4', serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin-top: 4px;
+  }
+
+  /* Cards (KPIs) */
+  .kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--line);
+    border-radius: 4px;
+    padding: 20px 22px;
+    margin: 14px 0;
+    position: relative;
+  }
+  .kpi.timing  { border-left-color: #6b8a3a; }
+  .kpi.pr      { border-left-color: #c08a2e; }
+  .kpi.digital { border-left-color: #a83a3a; }
+  .kpi .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  .kpi.timing .tag { background: #dde8d4; color: #4a6b2a; }
+  .kpi.pr .tag     { background: #f4dec0; color: #b8742a; }
+  .kpi.digital .tag{ background: #ecd0d0; color: #8a2e2e; }
+  .kpi h4 {
+    font-family: 'Lora', serif;
+    font-size: 17px;
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+  .kpi .desc { color: var(--ink-soft); font-size: 15px; margin: 0 0 12px; }
+  .kpi .verdict {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    border-top: 1px dashed var(--line);
+    padding-top: 10px;
+    color: var(--ink-soft);
+  }
+  .kpi .verdict strong { color: var(--ink); }
+
+  /* Quote / context box */
+  .ctx {
+    background: #f3eee3;
+    border-radius: 3px;
+    padding: 16px 20px;
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 15px;
+    margin: 18px 0;
+    border-left: 3px solid var(--ochre);
+  }
+
+  /* Question list for Ale */
+  ul.q-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  ul.q-list li {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+    font-size: 15.5px;
+    position: relative;
+    padding-left: 44px;
+  }
+  ul.q-list li::before {
+    content: "?";
+    position: absolute;
+    left: 16px;
+    top: 13px;
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    color: var(--wine);
+    font-size: 18px;
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+    margin-top: 64px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-mute);
+    letter-spacing: 0.08em;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 600px) {
+    .wrap { padding: 40px 22px 80px; }
+    h1 { font-size: 30px; }
+    .data-grid { grid-template-columns: 1fr; }
+    nav.toc ol { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="meta">
+    <span>Resumen llamada · Para Ale</span>
+    <span>08 May · viernes 18hs</span>
+  </div>
+
+  <h1>Indicadores de bono<br>campaña verano</h1>
+  <p class="subtitle">Llamada con Juli Calka — pide nuestra opinión sobre qué variables sumar al NPS para construir el bono del año, dado que la marca recién lanza en diciembre.</p>
+
+  <nav class="toc">
+    <div class="label">Contenido</div>
+    <ol>
+      <li><a href="#contexto">Contexto del pedido</a></li>
+      <li><a href="#variables">Las 3 variables que propone</a></li>
+      <li><a href="#postura">Mi postura durante la llamada</a></li>
+    </ol>
+  </nav>
+
+  <!-- 1 -->
+  <section id="contexto">
+    <h2><span class="num">01</span>Contexto del pedido</h2>
+    <p>Juli nos llamó porque del lado de ellos están terminando de cerrar el esquema de bonos del año. Con Brahma ella viene más demorada por una particularidad: <strong>los bonos se construyen normalmente como NPS + KPI de negocio</strong>, pero como nosotros recién lanzamos la idea en diciembre, no es fair atarnos a un indicador de negocio durante 2026.</p>
+
+    <div class="ctx">
+      "El bono se contempla por lo laburado en el año, aunque se cobre el siguiente. Como la idea recién la lanzamos en diciembre, no hay espacio para meter un indicador de negocio porque no vas a mover la aguja en 2026."
+    </div>
+
+    <p>Por eso busca <strong>variables más cualitativas</strong> que cubran el lugar del KPI duro este primer año. Mínimo tienen que ser 2 variables (hoy ya está el NPS); ella propone sumar 3 más para que elijamos.</p>
+
+    <div class="data-grid">
+      <div class="data-cell">
+        <div class="k">Estructura habitual</div>
+        <div class="v">NPS + KPI de negocio<small>variable cualitativa + dato duro</small></div>
+      </div>
+      <div class="data-cell ochre">
+        <div class="k">Estructura propuesta 2026</div>
+        <div class="v">NPS + 2 o 3 variables<small>sin KPI duro este año</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section id="variables">
+    <h2><span class="num">02</span>Las 3 variables que propone Juli</h2>
+
+    <div class="kpi timing">
+      <span class="tag">Variable 01 · Timing</span>
+      <h4>Entrega de campaña de verano</h4>
+      <p class="desc">Tener la campaña entregada al <strong>20 de noviembre</strong>. Ese deadline contempla los tiempos de implementación de TV (72hs hábiles que en la práctica son 2 semanas, dependiendo del canal y si hay que tocar el máster).</p>
+      <div class="verdict"><strong>Mi lectura:</strong> es duro y concreto, fácil de medir, nos corre el calendario igual. Sentí que estoy ok con esto.</div>
+    </div>
+
+    <div class="kpi pr">
+      <span class="tag">Variable 02 · PR</span>
+      <h4>Idea de PR vinculada a la campaña de verano</h4>
+      <p class="desc">Que dentro del ATL de verano venga una <strong>idea de PR a la campaña</strong>. Después se hace o no se hace, pero que esté presentada como parte del paquete creativo.</p>
+      <div class="verdict"><strong>Mi lectura:</strong> razonable, encaja con cómo trabajamos. No la marqué como conflictiva.</div>
+    </div>
+
+    <div class="kpi digital">
+      <span class="tag">Variable 03 · Digital</span>
+      <h4>Estrategia de bajada digital de la campaña</h4>
+      <p class="desc">Acá Juli aclara que va a tener "doble sombrero" en dos agencias y es su punto de dolor. Pide que cuando bajemos la campaña de verano <strong>venga vinculada una estrategia de aplicación digital</strong> ("este territorio se baja así en digital"), aunque después la ejecute Draft Line.</p>
+      <div class="verdict"><strong>Mi lectura:</strong> esta es la que me genera dudas. Siento que se vuelve un entregable más. <strong>Le dije que lo charlaba con vos, que no podía darle una respuesta.</strong></div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section id="postura">
+    <h2><span class="num">03</span>Mi postura durante la llamada</h2>
+    <p>Le adelanté que de las tres, las que <strong>siento más en línea con cómo veníamos pensando</strong> son <em>timing</em> y quizás <em>PR</em>.</p>
+    <p>La de <em>digital</em> es la que puse en duda, porque me parece que ahí entra una discusión de scope y que esto se convierte en un entregable más que no cotizamos. Siempre está la línea gris de qué es digital y qué no, pero es clave cómo lo ves vos Ale. Le dije que <strong>el lunes vuelvo con respuesta</strong>, después de charlarlo con vos.</p>
+  </section>
+
+  <footer>
+    <span>La América × Cliente</span>
+    <span>Rulo · 08.05.2026</span>
+  </footer>
+
+</div>
+</body>
+</html>
