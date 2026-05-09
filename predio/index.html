@@ -13,7 +13,6 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
 .hero{padding:60px 0 40px;text-align:center;animation:fadeIn .8s ease-out}
 .hero-label{font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);background:var(--accent-light);display:inline-block;padding:9px 22px;border-radius:24px;margin-bottom:24px}
 .hero h1{font-family:var(--font-display);font-size:clamp(28px,5vw,44px);font-weight:600;line-height:1.15;color:var(--text-primary);margin-bottom:12px;letter-spacing:-.5px}
-.hero-address{font-size:17px;color:var(--text-secondary);font-weight:400}
 .video-section{margin-bottom:40px}
 .video-container{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-md);aspect-ratio:16/9}
 .video-container iframe{width:100%;height:100%;border:none}
@@ -31,7 +30,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
 .period{font-size:14px;color:var(--text-tertiary);font-weight:400}
 .section-title{font-family:var(--font-display);font-size:26px;font-weight:600;margin-bottom:24px;color:var(--text-primary);letter-spacing:-.3px}
 .dist-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.dist-card{border-radius:var(--radius);padding:24px 20px;text-align:center}
+.dist-card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius);padding:24px 20px;text-align:center;box-shadow:var(--shadow-sm)}
 .dist-card .dist-name{font-size:12px;font-weight:600;color:var(--text-primary);margin-bottom:6px;text-transform:uppercase;letter-spacing:.6px;line-height:1.3}
 .dist-card .dist-value{font-family:var(--font-display);font-size:24px;font-weight:600;color:var(--text-primary)}
 .dist-card .dist-unit{font-size:14px;font-weight:400;color:var(--text-secondary)}
@@ -41,9 +40,36 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
 .plan-img-container .zoom-btn{position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:50%;background:rgba(26,26,26,.85);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-md);z-index:10;pointer-events:none}
 .features{margin-bottom:48px}
 .features-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.feature-item{display:flex;align-items:center;gap:14px;background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius);padding:16px 20px;box-shadow:var(--shadow-sm)}
+.feature-item{display:flex;align-items:center;gap:14px;background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius);padding:18px 22px;box-shadow:var(--shadow-sm)}
 .feature-icon{width:40px;height:40px;border-radius:10px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
 .feature-text{font-size:14px;font-weight:500;color:var(--text-primary)}
+.uses{margin-bottom:48px}
+.uses-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.why{margin-bottom:48px}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.why-card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius);padding:28px 26px;box-shadow:var(--shadow-sm);position:relative}
+.why-number{font-family:var(--font-display);font-size:14px;font-weight:600;color:var(--accent);margin-bottom:10px;letter-spacing:.5px}
+.why-title{font-family:var(--font-display);font-size:19px;font-weight:600;color:var(--text-primary);line-height:1.3;margin-bottom:8px;letter-spacing:-.2px}
+.why-text{font-size:14px;font-weight:400;color:var(--text-secondary);line-height:1.55}
+@media(max-width:768px){.why-grid{grid-template-columns:1fr}}
+.location{margin-bottom:48px}
+.map-container{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-md);aspect-ratio:16/9;margin-bottom:24px}
+.map-container iframe{width:100%;height:100%;border:none;display:block}
+.refs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
+.ref-card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius);padding:18px 16px;text-align:center;box-shadow:var(--shadow-sm)}
+.ref-distance{font-family:var(--font-display);font-size:20px;font-weight:600;color:var(--accent);margin-bottom:4px;letter-spacing:-.3px}
+.ref-name{font-size:13px;font-weight:500;color:var(--text-secondary);line-height:1.4}
+.location-cta{text-align:center;margin-top:8px}
+.map-button{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-size:14px;font-weight:500;color:var(--text-primary);text-decoration:none;padding:10px 20px;border:1px solid var(--border);border-radius:50px;background:var(--bg-card);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.map-button:hover{transform:translateY(-1px);box-shadow:var(--shadow-sm);border-color:var(--text-primary)}
+@media(max-width:768px){.refs-grid{grid-template-columns:repeat(2,1fr)}}
+.use-card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius);padding:24px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;box-shadow:var(--shadow-sm);transition:transform .2s ease,box-shadow .2s ease}
+.use-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.use-illustration{width:56px;height:56px;display:flex;align-items:center;justify-content:center;color:var(--accent);opacity:.85}
+.use-illustration svg{width:100%;height:100%}
+.use-label{font-size:14px;font-weight:600;color:var(--text-primary);line-height:1.35}
+@media(max-width:768px){.uses-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.uses-grid{grid-template-columns:repeat(2,1fr);gap:10px}.use-card{padding:18px 12px}.use-illustration{width:44px;height:44px}}
 .contract{margin-bottom:48px}
 .contract-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 .contract-item{background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius);padding:20px;text-align:center;box-shadow:var(--shadow-sm)}
@@ -71,10 +97,8 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
 <div class="container">
 
   <section class="hero">
-    <span class="hero-label">Oportunidad</span>
-    <h1>Centro de manzana en alquiler</h1>
-    <p style="font-family: var(--font-display); font-size: clamp(20px, 3vw, 28px); font-weight: 500; color: var(--text-secondary); margin-top: 8px; margin-bottom: 16px;">Apto logística, industria y/o estacionamiento</p>
-    <p class="hero-address">Buenos Aires 1348, Firmat</p>
+    <span class="hero-label">Oportunidad Alquiler</span>
+    <h1>1.000 m² escondidos en el centro de Firmat.</h1>
   </section>
 
   <section class="video-section">
@@ -96,13 +120,118 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
     </div>
   </section>
 
-  <div style="margin-bottom: 48px;">
-    <div class="feature-item" style="justify-content: center;">
-      <a href="https://maps.app.goo.gl/xNJmvkWmxXzp4yhn7" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 8px; text-decoration: none; font-size: 14px; font-weight: 500; color: var(--text-primary);">
-        📍 Click acá para ver ubicación en Google Maps
+  <section class="location">
+    <h2 class="section-title">Ubicación</h2>
+    <div class="map-container">
+      <iframe
+        src="https://www.google.com/maps?q=Buenos+Aires+1348,+Firmat,+Santa+Fe,+Argentina&output=embed&z=16"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen></iframe>
+    </div>
+    <div class="refs-grid">
+      <div class="ref-card">
+        <div class="ref-distance">800 m</div>
+        <div class="ref-name">Ruta 33</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-distance">400 m</div>
+        <div class="ref-name">Banco Nación</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-distance">400 m</div>
+        <div class="ref-name">Supermercado</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-distance">200 m</div>
+        <div class="ref-name">Municipalidad</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-distance">200 m</div>
+        <div class="ref-name">Plaza Rivadavia</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-distance">100 m</div>
+        <div class="ref-name">Terminal de Ómnibus</div>
+      </div>
+    </div>
+    <div class="location-cta">
+      <a href="https://maps.app.goo.gl/xNJmvkWmxXzp4yhn7" target="_blank" rel="noopener" class="map-button">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Abrir en Google Maps
       </a>
     </div>
-  </div>
+  </section>
+
+  <section class="uses">
+    <h2 class="section-title">Posibles usos</h2>
+    <div class="uses-grid">
+      <div class="use-card">
+        <div class="use-illustration">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 24L32 12l24 12v28H8V24z"/>
+            <path d="M8 24h48"/>
+            <rect x="18" y="32" width="10" height="10"/>
+            <rect x="36" y="32" width="10" height="10"/>
+          </svg>
+        </div>
+        <div class="use-label">Depósito logístico</div>
+      </div>
+      <div class="use-card">
+        <div class="use-illustration">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="8" y="14" width="48" height="36" rx="2"/>
+            <path d="M14 22h36M14 30h36M14 38h36M22 14v36M32 14v36M42 14v36"/>
+          </svg>
+        </div>
+        <div class="use-label">Estacionamiento de flota</div>
+      </div>
+      <div class="use-card">
+        <div class="use-illustration">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 28h48v22H8z"/>
+            <path d="M8 28l6-12h36l6 12"/>
+            <path d="M14 50v4M50 50v4"/>
+            <rect x="16" y="34" width="10" height="10"/>
+            <rect x="38" y="34" width="10" height="10"/>
+          </svg>
+        </div>
+        <div class="use-label">Showroom + depósito</div>
+      </div>
+      <div class="use-card">
+        <div class="use-illustration">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M52 12 a 8 8 0 0 0 -10 10 L 14 50 L 18 54 L 46 26 a 8 8 0 0 0 10 -10 L 50 22 L 42 14 Z"/>
+            <path d="M12 12 a 8 8 0 0 1 10 10 L 50 50 L 46 54 L 18 26 a 8 8 0 0 1 -10 -10 L 14 22 L 22 14 Z" opacity="0.4"/>
+          </svg>
+        </div>
+        <div class="use-label">Taller mecánico o industrial</div>
+      </div>
+      <div class="use-card">
+        <div class="use-illustration">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 50V28l14-10 14 10v22"/>
+            <path d="M38 50V20l8-4 8 4v30"/>
+            <path d="M6 50h52"/>
+            <rect x="16" y="34" width="6" height="8"/>
+            <rect x="44" y="28" width="6" height="8"/>
+          </svg>
+        </div>
+        <div class="use-label">Galpón para empresa constructora</div>
+      </div>
+      <div class="use-card">
+        <div class="use-illustration">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="22" width="32" height="20"/>
+            <path d="M38 28h12l6 8v6H38z"/>
+            <circle cx="18" cy="46" r="4"/>
+            <circle cx="48" cy="46" r="4"/>
+          </svg>
+        </div>
+        <div class="use-label">Distribución de mercadería</div>
+      </div>
+    </div>
+  </section>
 
   <section class="floorplan">
     <h2 class="section-title">Plano Depósitos</h2>
@@ -128,43 +257,89 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
     <p style="text-align: center; margin-top: 12px; margin-bottom: 24px; font-size: 13px; color: var(--text-tertiary);">Hacé click en el plano para verlo ampliado</p>
 
     <div class="dist-grid" style="grid-template-columns: repeat(4, 1fr);">
-      <div class="dist-card" style="background: var(--warm-green);">
+      <div class="dist-card">
         <div class="dist-name">Superficie total</div>
         <div class="dist-value">1.000 <span class="dist-unit">m²</span></div>
       </div>
-      <div class="dist-card" style="background: var(--warm-blue);">
+      <div class="dist-card">
         <div class="dist-name">Depósitos cubiertos</div>
         <div class="dist-value">400 <span class="dist-unit">m²</span></div>
       </div>
-      <div class="dist-card" style="background: var(--warm-rose);">
+      <div class="dist-card">
         <div class="dist-name">Cocheras cubiertas</div>
         <div class="dist-value">18 <span class="dist-unit">vehículos</span></div>
       </div>
-      <div class="dist-card" style="background: var(--warm-amber);">
+      <div class="dist-card">
         <div class="dist-name">Oficinas con entrepiso</div>
         <div class="dist-value">100 <span class="dist-unit">m²</span></div>
       </div>
     </div>
   </section>
 
-  <section class="features">
-    <h2 class="section-title">Características</h2>
-    <div class="features-grid">
-      <div class="feature-item"><div class="feature-icon">🚛</div><div class="feature-text">Ingreso y maniobra de camiones dentro del predio</div></div>
-      <div class="feature-item"><div class="feature-icon">🅿️</div><div class="feature-text">Cobertizo de 80 m² para guardado de vehículos</div></div>
-      <div class="feature-item"><div class="feature-icon">⚡</div><div class="feature-text">Instalación eléctrica alta tensión 100% renovada</div></div>
-      <div class="feature-item"><div class="feature-icon">📍</div><div class="feature-text">Ubicación estratégica en el centro de la ciudad</div></div>
+
+
+
+
+  <section class="why">
+    <h2 class="section-title">Por qué este predio</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-number">01</div>
+        <div class="why-title">Una superficie poco común en una zona tan céntrica</div>
+        <div class="why-text">1.000 m² operativos en pleno centro de Firmat. Una combinación que no abunda dentro del radio comercial.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-number">02</div>
+        <div class="why-title">Cerca de todo lo que tu negocio necesita</div>
+        <div class="why-text">Bancos, proveedores, trámites, estaciones de servicio y talleres a pocas cuadras. La logística diaria se vuelve más simple.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-number">03</div>
+        <div class="why-title">Doble uso simultáneo</div>
+        <div class="why-text">El predio admite dividir el uso: parte como depósito, parte como cocheras. Una renta, dos lógicas operativas.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-number">04</div>
+        <div class="why-title">Contrato pensado a largo plazo</div>
+        <div class="why-text">De 3 a 10 años según perfil. Pensado para inquilinos que quieren estabilidad y previsibilidad.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-number">05</div>
+        <div class="why-title">Listo para operar desde el primer día</div>
+        <div class="why-text">Instalación eléctrica trifásica renovada, servicios funcionando, sin obras pendientes. Ingresás y operás.</div>
+      </div>
     </div>
   </section>
-
+  <section class="features">
+    <h2 class="section-title">Ficha técnica</h2>
+    <div class="features-grid">
+      <div class="feature-item"><div class="feature-text">100% disponible para ingresar al firmar</div></div>
+      <div class="feature-item"><div class="feature-text">Amplio espacio de maniobra para camiones</div></div>
+      <div class="feature-item"><div class="feature-text">Altura libre de 3,00 a 4,30 m según depósito</div></div>
+      <div class="feature-item"><div class="feature-text">14 portones corredizos de 3,10 × 2,70 m</div></div>
+      <div class="feature-item"><div class="feature-text">Sector semi-cubierto de 80 m²</div></div>
+      <div class="feature-item"><div class="feature-text">Pisos de cemento / mejorado según depósito</div></div>
+      <div class="feature-item"><div class="feature-text">Gas natural · Agua de red · Cloacas de red</div></div>
+      <div class="feature-item"><div class="feature-text">Instalación eléctrica trifásica 100% renovada</div></div>
+      <div class="feature-item"><div class="feature-text">Ubicación estratégica en el centro de la ciudad</div></div>
+    </div>
+  </section>
+  <section class="features">
+    <h2 class="section-title">Condiciones</h2>
+    <div class="features-grid">
+      <div class="feature-item"><div class="feature-text">Contrato de 3 a 10 años según perfil del inquilino</div></div>
+      <div class="feature-item"><div class="feature-text">Garantía a convenir según perfil del inquilino</div></div>
+      <div class="feature-item"><div class="feature-text">Pago por transferencia bancaria · Factura C</div></div>
+      <div class="feature-item"><div class="feature-text">Ajuste cuatrimestral por IPC</div></div>
+    </div>
+  </section>
   <section style="margin-bottom: 40px;">
-    <h2 class="section-title">Alquiler Mensual</h2>
-    <div style="text-align: center; padding: 32px 24px; border: 2px solid var(--text-primary); border-radius: var(--radius); background: var(--bg-card); box-shadow: var(--shadow-md);">
+    <h2 class="section-title">Inversión mensual</h2>
+    <div style="text-align: center; padding: 32px 24px; border: 1px solid var(--border-light); border-radius: var(--radius); background: var(--bg-card); box-shadow: var(--shadow-sm);">
       <span style="display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: #185FA5; background: #E6F1FB; padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;">En pesos</span>
       <div class="amount" style="font-size: 40px;">$1.700.000</div>
     </div>
   </section>
-
   <section class="cta">
     <p class="cta-text">¿Interesado en este predio? Coordinemos una visita.</p>
     <div class="cta-buttons">
