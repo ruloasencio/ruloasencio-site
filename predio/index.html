@@ -32,7 +32,9 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
 .container{max-width:920px;margin:0 auto;padding:0 24px}
 .hero{padding:60px 0 40px;text-align:center;animation:fadeIn .8s ease-out}
 .hero-label{font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);background:var(--accent-light);display:inline-block;padding:9px 22px;border-radius:24px;margin-bottom:24px}
-.hero h1{font-family:var(--font-display);font-size:clamp(28px,5vw,44px);font-weight:600;line-height:1.15;color:var(--text-primary);margin-bottom:12px;letter-spacing:-.5px}
+.hero h1{font-family:var(--font-display);font-size:clamp(26px,4.6vw,42px);font-weight:600;line-height:1.18;color:var(--text-primary);margin-bottom:12px;letter-spacing:-.5px}
+.hero h1 br{display:inline}
+@media(min-width:600px){.hero h1 br{display:block}}
 .video-section{margin-bottom:40px}
 .video-container{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-md);aspect-ratio:16/9}
 .video-container iframe{width:100%;height:100%;border:none}
@@ -118,7 +120,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
 
   <section class="hero">
     <span class="hero-label">Oportunidad Alquiler</span>
-    <h1>1.000 m² escondidos en el centro de Firmat.</h1>
+    <h1>Descubrí estos 1.000 m²<br>que no sabías que existían<br>en el centro de Firmat.</h1>
   </section>
 
   <section class="video-section">
