@@ -1,1 +1,412 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculador de Bono Variable InBev</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f7; color: #1d1d1f; min-height: 100vh; }
+  .container { max-width: 1400px; margin: 0 auto; padding: 20px 28px 60px; }
+
+  /* ---------- HEADER ---------- */
+  .header { padding: 40px 28px 24px; max-width: 1400px; margin: 0 auto; }
+  .header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
+  .header .subtitle { font-size: 14px; color: #86868b; margin-top: 6px; }
+
+  /* ---------- PROJECT TAG ---------- */
+  .tag-row { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
+  .project-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; padding: 8px 16px; border-radius: 100px; color: #fff; letter-spacing: -0.2px; box-shadow: 0 4px 14px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.06); }
+  .project-tag .tag-year { font-size: 12px; font-weight: 500; opacity: 0.65; margin-left: 2px; }
+  .reset-pill { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; padding: 7px 14px; border-radius: 100px; background: #fff; color: #86868b; border: 1px solid #d2d2d7; cursor: pointer; transition: all 0.2s; font-family: inherit; letter-spacing: -0.1px; margin-left: auto; }
+  .reset-pill:hover { color: #1d1d1f; border-color: #1d1d1f; background: #fafafa; }
+  .reset-pill:active { transform: scale(0.96); }
+  .reset-pill svg { width: 11px; height: 11px; }
+
+  /* ---------- PROJECTS GRID ---------- */
+  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 24px; }
+  @media (max-width: 1100px) { .projects-grid { grid-template-columns: 1fr; } }
+  .project-col { display: flex; flex-direction: column; gap: 14px; }
+
+  /* ---------- BONO INFO ---------- */
+  .bono-info { padding: 12px 16px; background: #fff; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .bono-info .lbl { font-size: 10px; color: #86868b; text-transform: uppercase; letter-spacing: 0.7px; font-weight: 600; }
+  .bono-info .val { font-size: 16px; font-weight: 700; letter-spacing: -0.2px; font-variant-numeric: tabular-nums; margin-top: 1px; }
+
+  /* ---------- MAIN CARD ---------- */
+  .master-card { background: #fff; border-radius: 18px; border: 1px solid rgba(0,0,0,0.06); padding: 20px 22px 16px; }
+
+  /* ---------- KPI ROW ---------- */
+  .kpi-slider-row { padding: 12px 0; border-top: 1px solid rgba(0,0,0,0.06); }
+  .kpi-slider-row:first-of-type { border-top: none; padding-top: 4px; }
+  .kpi-slider-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; gap: 10px; }
+  .kpi-slider-head-left { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
+  .kpi-letter { width: 22px; height: 22px; border-radius: 6px; background: #f0f0f3; color: #86868b; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.3s; letter-spacing: 0; }
+  .kpi-slider-row.active .kpi-letter { background: var(--project-tint); color: var(--project-color); }
+  .kpi-name-block { min-width: 0; flex: 1; }
+  .kpi-slider-name { font-size: 13px; font-weight: 700; letter-spacing: -0.1px; color: #1d1d1f; line-height: 1.25; display: block; word-break: break-word; }
+  .kpi-tag { display: inline-block; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; padding: 2px 6px; border-radius: 4px; background: #f0f0f3; color: #86868b; margin-top: 4px; }
+  .kpi-tag.soft { background: #fff4d6; color: #946400; }
+  .kpi-tag.hard { background: #e3f0ff; color: #0a5cb8; }
+  .kpi-tag.tbd { background: #f0f0f3; color: #86868b; border: 1px dashed #c7c7cc; padding: 1px 6px; }
+  .kpi-slider-pct-block { display: flex; flex-direction: column; align-items: flex-end; font-variant-numeric: tabular-nums; gap: 1px; }
+  .kpi-slider-pct { font-size: 17px; font-weight: 700; letter-spacing: -0.4px; transition: color 0.3s; color: #c7c7cc; line-height: 1; }
+  .kpi-slider-row.active .kpi-slider-pct { color: var(--project-color); }
+  .kpi-slider-monto { font-size: 11px; font-weight: 600; color: #86868b; }
+
+  /* ---------- SLIDER ---------- */
+  .slider-wrap { position: relative; height: 32px; display: flex; align-items: center; width: 100%; }
+  .slider-track { position: absolute; left: 0; right: 0; height: 6px; background: #ececef; border-radius: 3px; overflow: hidden; }
+  .slider-fill { position: absolute; left: 0; top: 0; bottom: 0; transition: width 0.05s linear, background 0.3s; border-radius: 3px; background: var(--project-color); }
+  .slider-thumb { position: absolute; width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.22), 0 0 0 1px rgba(0,0,0,0.08); pointer-events: none; z-index: 2; transition: left 0.05s linear, transform 0.15s; display: flex; align-items: center; justify-content: center; }
+  .thumb-inner { width: 9px; height: 9px; border-radius: 50%; background: #d2d2d7; transition: background 0.3s; }
+  .kpi-slider-row.active .thumb-inner { background: var(--project-color); }
+  .slider-input { position: absolute; left: 0; right: 0; width: 100%; height: 32px; opacity: 0; cursor: pointer; margin: 0; z-index: 3; }
+  .slider-input:active ~ .slider-thumb { transform: scale(1.15); }
+  .slider-ticks { position: relative; height: 12px; margin-top: 2px; }
+  .slider-tick { position: absolute; transform: translateX(-50%); font-size: 9px; color: #c7c7cc; font-variant-numeric: tabular-nums; font-weight: 500; }
+
+  /* ---------- RESULT ---------- */
+  .result-section { background: #fff; border-radius: 18px; border: 1px solid rgba(0,0,0,0.06); overflow: hidden; }
+  .result-title { padding: 18px 22px 0; font-size: 10px; font-weight: 600; color: #86868b; text-transform: uppercase; letter-spacing: 1px; }
+  .result-body { padding: 14px 22px 22px; }
+  .breakdown-bar { display: flex; gap: 2px; margin: 0 0 16px; border-radius: 6px; overflow: hidden; height: 6px; background: #ececef; }
+  .breakdown-bar-seg { height: 100%; transition: width 0.2s ease; background: var(--project-color); }
+  .total-row { display: flex; flex-direction: column; gap: 4px; }
+  .total-label { font-size: 11px; font-weight: 600; color: #86868b; text-transform: uppercase; letter-spacing: 0.8px; }
+  .total-val { font-size: 28px; font-weight: 700; letter-spacing: -0.9px; font-variant-numeric: tabular-nums; line-height: 1.1; transition: color 0.3s; color: #c7c7cc; }
+  .total-sub { font-size: 11px; color: #86868b; font-variant-numeric: tabular-nums; }
+  .total-sub strong { color: #1d1d1f; font-weight: 600; }
+
+  /* Cumplimiento line inside result */
+  .cumplimiento-line { margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.06); display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #86868b; }
+  .cumplimiento-line strong { font-weight: 700; color: #1d1d1f; font-variant-numeric: tabular-nums; transition: color 0.3s; }
+
+  /* ---------- GRAND TOTAL ---------- */
+  .grand-total { margin-top: 18px; padding: 28px 32px; background: linear-gradient(135deg, #1a4d2e 0%, #2d6a4a 100%); border-radius: 18px; color: #fff; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; box-shadow: 0 8px 24px rgba(26, 77, 46, 0.25); position: relative; overflow: hidden; }
+  .grand-total::before { content: ''; position: absolute; top: -50%; right: -10%; width: 60%; height: 200%; background: radial-gradient(circle, rgba(245, 180, 0, 0.12) 0%, transparent 60%); pointer-events: none; }
+  .grand-total-left { position: relative; z-index: 1; }
+  .grand-total-right { position: relative; z-index: 1; text-align: right; }
+  .gt-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.4px; opacity: 0.6; }
+  .gt-sub { font-size: 13px; opacity: 0.7; margin-top: 6px; font-variant-numeric: tabular-nums; }
+  .gt-sub strong { opacity: 1; font-weight: 700; }
+  .gt-val { font-size: 44px; font-weight: 700; letter-spacing: -1.5px; font-variant-numeric: tabular-nums; line-height: 1; transition: color 0.3s; }
+  .gt-pct { font-size: 13px; opacity: 0.7; margin-top: 6px; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Calculador de Bono Variable InBev</h1>
+  <div class="subtitle">Los 3 proyectos asignados para 2026.</div>
+</div>
+
+<div class="container">
+
+  <div class="projects-grid" id="projectsGrid"></div>
+
+  <!-- GRAND TOTAL -->
+  <div class="grand-total">
+    <div class="grand-total-left">
+      <div class="gt-label">Bono total a cobrar (3 proyectos)</div>
+      <div class="gt-sub">de <strong id="gtMax">$248.000.000</strong> posibles</div>
+    </div>
+    <div class="grand-total-right">
+      <div class="gt-val" id="gtVal">$0</div>
+      <div class="gt-pct" id="gtPct">0% de cumplimiento global</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Config: los 3 proyectos
+  // sliderType: 'pct' = slider 0-25 paso 5 (% directo) | 'puntaje' = slider 0-10 paso 1 (puntaje que se traduce a %)
+  const PROJECTS = [
+    {
+      id: 'megusta',
+      name: 'Me Gusta Argentina',
+      year: 'Q1 2026',
+      bono: 45000000,
+      color: '#0071e3',
+      colorDark: '#0058b3',
+      tint: '#e3f0ff',
+      sliderType: 'puntaje',
+    },
+    {
+      id: 'qrock',
+      name: 'Quilmes Rock',
+      year: '2026',
+      bono: 73000000,
+      color: '#1d1d1f',
+      colorDark: '#000',
+      tint: '#ececef',
+      sliderType: 'puntaje',
+    },
+    {
+      id: 'brahma',
+      name: 'Brahma Masterbrand',
+      year: '2026',
+      bono: 130000000,
+      color: '#c93c1f',
+      colorDark: '#a32d14',
+      tint: '#fde6e0',
+      sliderType: 'puntaje',
+    },
+  ];
+
+  // KPIs por defecto (para proyectos que aún no definimos en detalle)
+  const KPIS_DEFAULT = [
+    { id: 'A', letter: 'A', name: 'NPS',         tag: 'soft',      tagLabel: 'Soft · subjetiva' },
+    { id: 'B', letter: 'B', name: 'Variable B',  tag: null,        tagLabel: null },
+    { id: 'C', letter: 'C', name: 'Variable C',  tag: null,        tagLabel: null },
+    { id: 'D', letter: 'D', name: 'Variable D',  tag: null,        tagLabel: null },
+  ];
+
+  // KPIs específicos por proyecto (override del default)
+  const KPIS_BY_PROJECT = {
+    megusta: [
+      { id: 'A', letter: 'A', name: 'NPS',                                  tag: 'soft', tagLabel: 'Soft · subjetiva' },
+      { id: 'B', letter: 'B', name: 'To Be Defined',                        tag: 'tbd',  tagLabel: 'TBD' },
+      { id: 'C', letter: 'C', name: 'Indicador de salud de marca',          tag: 'tbd',  tagLabel: 'TBD' },
+      { id: 'D', letter: 'D', name: 'Indicador de negocio · Share',         tag: 'tbd',  tagLabel: 'TBD' },
+    ],
+    qrock: [
+      { id: 'A', letter: 'A', name: 'NPS',                                  tag: 'soft', tagLabel: 'Soft · subjetiva' },
+      { id: 'B', letter: 'B', name: 'To Be Defined',                        tag: 'tbd',  tagLabel: 'TBD' },
+      { id: 'C', letter: 'C', name: 'Indicador de salud de marca',          tag: 'tbd',  tagLabel: 'TBD' },
+      { id: 'D', letter: 'D', name: 'Indicador de negocio · Share',         tag: 'tbd',  tagLabel: 'TBD' },
+    ],
+    brahma: [
+      { id: 'A', letter: 'A', name: 'NPS',                       tag: 'soft', tagLabel: 'Soft · subjetiva' },
+      { id: 'B', letter: 'B', name: 'Entrega Campaña 20 Nov',    tag: 'hard', tagLabel: 'Hard · entrega' },
+      { id: 'C', letter: 'C', name: 'Entregable Idea PR',        tag: 'hard', tagLabel: 'Hard · entrega' },
+      { id: 'D', letter: 'D', name: 'Entregable Idea Digital',   tag: 'hard', tagLabel: 'Hard · entrega' },
+    ],
+  };
+
+  // Helper: devuelve los KPIs para un proyecto dado
+  function kpisFor(projectId) {
+    return KPIS_BY_PROJECT[projectId] || KPIS_DEFAULT;
+  }
+
+  const state = {};
+  PROJECTS.forEach(p => { state[p.id] = { A: 0, B: 0, C: 0, D: 0 }; });
+
+  const fmt = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 });
+  const formatARS = (n) => fmt.format(Math.round(n));
+
+  function renderProjectColumn(project) {
+    const maxKpi = project.bono * 0.25;
+    const projectKpis = kpisFor(project.id);
+
+    const col = document.createElement('div');
+    col.className = 'project-col';
+    col.dataset.projectId = project.id;
+    col.style.setProperty('--project-color', project.color);
+    col.style.setProperty('--project-tint', project.tint);
+
+    col.innerHTML = `
+      <!-- Bono info -->
+      <div class="bono-info">
+        <div>
+          <div class="lbl">Bono total</div>
+          <div class="val">${formatARS(project.bono)}</div>
+        </div>
+        <div style="text-align: right;">
+          <div class="lbl">Por KPI (25%)</div>
+          <div class="val">${formatARS(maxKpi)}</div>
+        </div>
+      </div>
+
+      <!-- Master card -->
+      <div class="master-card">
+        <div class="tag-row">
+          <span class="project-tag" style="background: linear-gradient(135deg, ${project.color} 0%, ${project.colorDark} 100%);">
+            ${project.name}
+            <span class="tag-year">${project.year}</span>
+          </span>
+          <button class="reset-pill" data-reset="${project.id}" type="button" title="Resetear puntajes de ${project.name}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="1 4 1 10 7 10"></polyline>
+              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+            </svg>
+            Reset
+          </button>
+        </div>
+
+        ${projectKpis.map(kpi => {
+          // Definir el slider según el sliderType del proyecto
+          const isPuntaje = project.sliderType === 'puntaje';
+          const sliderMax = isPuntaje ? 10 : 25;
+          const sliderStep = isPuntaje ? 1 : 5;
+          // Generar ticks: 0..max con paso visual
+          let ticks = '';
+          if (isPuntaje) {
+            // 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+            for (let t = 0; t <= 10; t += 1) {
+              ticks += `<span class="slider-tick" style="left: ${(t / 10) * 100}%">${t}</span>`;
+            }
+          } else {
+            // 0, 5, 10, 15, 20, 25
+            for (let t = 0; t <= 25; t += 5) {
+              ticks += `<span class="slider-tick" style="left: ${(t / 25) * 100}%">${t}</span>`;
+            }
+          }
+          return `
+          <div class="kpi-slider-row" id="row-${project.id}-${kpi.id}">
+            <div class="kpi-slider-head">
+              <div class="kpi-slider-head-left">
+                <div class="kpi-letter">${kpi.letter}</div>
+                <div class="kpi-name-block">
+                  <span class="kpi-slider-name">${kpi.name}</span>
+                  ${kpi.tagLabel ? `<span class="kpi-tag ${kpi.tag || ''}">${kpi.tagLabel}</span>` : ''}
+                </div>
+              </div>
+              <div class="kpi-slider-pct-block">
+                <span class="kpi-slider-pct" id="srpct-${project.id}-${kpi.id}">${isPuntaje ? '0/10' : '0%'}</span>
+                <span class="kpi-slider-monto" id="srmonto-${project.id}-${kpi.id}">${formatARS(0)}</span>
+              </div>
+            </div>
+            <div class="slider-wrap">
+              <div class="slider-track">
+                <div class="slider-fill" id="srfill-${project.id}-${kpi.id}" style="width:0%"></div>
+              </div>
+              <input type="range" min="0" max="${sliderMax}" step="${sliderStep}" value="0" class="slider-input" data-project="${project.id}" data-kpi="${kpi.id}" data-slidertype="${project.sliderType}">
+              <div class="slider-thumb" id="srthumb-${project.id}-${kpi.id}" style="left: calc(0% - 9px)">
+                <div class="thumb-inner"></div>
+              </div>
+            </div>
+            <div class="slider-ticks">
+              ${ticks}
+            </div>
+          </div>
+          `;
+        }).join('')}
+      </div>
+
+      <!-- Result -->
+      <div class="result-section">
+        <div class="result-title">Bono de este proyecto</div>
+        <div class="result-body">
+          <div class="breakdown-bar">
+            <div class="breakdown-bar-seg" data-bd="${project.id}-0"></div>
+            <div class="breakdown-bar-seg" data-bd="${project.id}-1"></div>
+            <div class="breakdown-bar-seg" data-bd="${project.id}-2"></div>
+            <div class="breakdown-bar-seg" data-bd="${project.id}-3"></div>
+          </div>
+          <div class="total-row">
+            <span class="total-label">A cobrar</span>
+            <span class="total-val" id="totalVal-${project.id}">$0</span>
+            <span class="total-sub">de <strong>${formatARS(project.bono)}</strong> posibles</span>
+          </div>
+          <div class="cumplimiento-line">
+            <span>Cumplimiento</span>
+            <strong id="mpct-${project.id}">0%</strong>
+          </div>
+        </div>
+      </div>
+    `;
+    return col;
+  }
+
+  function updateProject(project) {
+    const maxKpi = project.bono * 0.25;
+    const projectKpis = kpisFor(project.id);
+    const isPuntaje = project.sliderType === 'puntaje';
+    const sliderMax = isPuntaje ? 10 : 25;
+    let totalCobrado = 0;
+    let totalPct = 0;
+
+    projectKpis.forEach((kpi, i) => {
+      const val = state[project.id][kpi.id]; // 0..sliderMax
+      const kpiFillRatio = val / sliderMax; // 0..1 — qué tan lleno está este KPI
+      const monto = maxKpi * kpiFillRatio;
+      const kpiContributionPct = kpiFillRatio * 25; // contribución al 100% global del proyecto (0..25)
+      totalCobrado += monto;
+      totalPct += kpiContributionPct;
+      const active = val > 0;
+      const widthPct = kpiFillRatio * 100;
+
+      // Row active state (drives color via CSS)
+      const row = document.getElementById(`row-${project.id}-${kpi.id}`);
+      if (row) row.classList.toggle('active', active);
+
+      // Slider visuals
+      const fillEl = document.getElementById(`srfill-${project.id}-${kpi.id}`);
+      const thumbEl = document.getElementById(`srthumb-${project.id}-${kpi.id}`);
+      const pctEl = document.getElementById(`srpct-${project.id}-${kpi.id}`);
+      const montoEl = document.getElementById(`srmonto-${project.id}-${kpi.id}`);
+      if (fillEl) fillEl.style.width = `${widthPct}%`;
+      if (thumbEl) thumbEl.style.left = `calc(${widthPct}% - 9px)`;
+      if (pctEl) {
+        // Si es puntaje: mostramos "X/10" y debajo se infiere el %; si es pct: mostramos "X%" directo
+        pctEl.textContent = isPuntaje ? `${val}/10` : `${val}%`;
+      }
+      if (montoEl) montoEl.textContent = formatARS(monto);
+
+      // Breakdown bar
+      const bdSeg = document.querySelector(`.breakdown-bar-seg[data-bd="${project.id}-${i}"]`);
+      if (bdSeg) bdSeg.style.width = `${(monto / project.bono) * 100}%`;
+    });
+
+    // Total + cumplimiento line
+    const totalEl = document.getElementById(`totalVal-${project.id}`);
+    totalEl.textContent = formatARS(totalCobrado);
+    if (totalPct === 0) totalEl.style.color = '#c7c7cc';
+    else if (totalPct === 100) totalEl.style.color = '#34a853';
+    else totalEl.style.color = '#1d1d1f';
+
+    const mpctEl = document.getElementById(`mpct-${project.id}`);
+    // Mostrar con un decimal si no es entero
+    mpctEl.textContent = Number.isInteger(totalPct) ? `${totalPct}%` : `${totalPct.toFixed(1)}%`;
+    if (totalPct === 0) mpctEl.style.color = '#c7c7cc';
+    else if (totalPct === 100) mpctEl.style.color = '#34a853';
+    else mpctEl.style.color = '#1d1d1f';
+
+    return totalCobrado;
+  }
+
+  function updateGrandTotal() {
+    let total = 0;
+    let totalMax = 0;
+    PROJECTS.forEach(p => {
+      total += updateProject(p);
+      totalMax += p.bono;
+    });
+    document.getElementById('gtVal').textContent = formatARS(total);
+    document.getElementById('gtMax').textContent = formatARS(totalMax);
+    const pct = (total / totalMax) * 100;
+    document.getElementById('gtPct').textContent = `${pct.toFixed(1)}% de cumplimiento global`;
+  }
+
+  // ---------- Init ----------
+  const grid = document.getElementById('projectsGrid');
+  PROJECTS.forEach(p => grid.appendChild(renderProjectColumn(p)));
+
+  document.querySelectorAll('.slider-input').forEach(input => {
+    input.addEventListener('input', (e) => {
+      const projectId = e.target.dataset.project;
+      const kpiId = e.target.dataset.kpi;
+      state[projectId][kpiId] = parseInt(e.target.value, 10);
+      updateGrandTotal();
+    });
+  });
+
+  // Reset por proyecto
+  document.querySelectorAll('.reset-pill').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const projectId = e.currentTarget.dataset.reset;
+      state[projectId] = { A: 0, B: 0, C: 0, D: 0 };
+      // Resetear visualmente los inputs del proyecto a 0
+      document.querySelectorAll(`.slider-input[data-project="${projectId}"]`).forEach(i => { i.value = 0; });
+      updateGrandTotal();
+    });
+  });
+
+  updateGrandTotal();
+</script>
+
+</body>
+</html>
