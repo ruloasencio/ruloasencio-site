@@ -1,1 +1,539 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alquileres temporarios CABA · Research operadores</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f4;
+    --ink: #2b2622;
+    --ink-soft: #5a504a;
+    --line: #e6dfd4;
+    --line-soft: #efeae0;
+    --accent-1: #8b5a3c; /* terracota */
+    --accent-2: #a67c52; /* tierra */
+    --accent-3: #6b7a4f; /* olivo */
+    --accent-4: #b8763b; /* ocre */
+    --accent-5: #7d5a4a; /* castaño */
+    --highlight: #f4ead9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 56px 32px 96px;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Lora', Georgia, serif;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  h1 {
+    font-size: 38px;
+    line-height: 1.15;
+    margin: 0 0 12px;
+    font-weight: 700;
+  }
+  .subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 8px;
+  }
+  .lede {
+    font-size: 19px;
+    color: var(--ink-soft);
+    margin: 16px 0 0;
+    max-width: 680px;
+  }
+  hr.sep {
+    border: 0;
+    border-top: 1px solid var(--line);
+    margin: 48px 0;
+  }
+  h2 {
+    font-size: 26px;
+    margin: 48px 0 8px;
+    padding-top: 12px;
+  }
+  h2 .num {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--accent-1);
+    font-weight: 400;
+    margin-right: 12px;
+    vertical-align: 4px;
+  }
+  h3 { font-size: 20px; margin: 28px 0 8px; }
+  p { margin: 0 0 14px; }
+  a { color: var(--accent-1); text-decoration: none; border-bottom: 1px solid rgba(139,90,60,0.3); }
+  a:hover { border-bottom-color: var(--accent-1); }
+  .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+  }
+  .toc {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 32px 0;
+  }
+  .toc ol {
+    margin: 0;
+    padding-left: 20px;
+    font-family: 'Lora', serif;
+  }
+  .toc li { margin: 4px 0; font-size: 16px; }
+  .toc a { border-bottom: none; }
+  .toc a:hover { color: var(--accent-1); }
+
+  /* Tarjetas de operadores */
+  .op-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin: 20px 0;
+    position: relative;
+  }
+  .op-card.featured {
+    border-left: 4px solid var(--accent-1);
+    background: linear-gradient(to right, #fefcf8, white 40%);
+  }
+  .op-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .op-name {
+    font-family: 'Lora', serif;
+    font-size: 23px;
+    font-weight: 600;
+    margin: 0;
+  }
+  .op-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 4px 10px;
+    border-radius: 3px;
+    background: var(--highlight);
+    color: var(--accent-5);
+    white-space: nowrap;
+  }
+  .op-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+  .op-meta span + span::before {
+    content: "  ·  ";
+    color: var(--line);
+  }
+  .data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin: 16px 0 18px;
+    padding: 16px 0;
+    border-top: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .data-cell .data-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .data-cell .data-val {
+    font-family: 'Lora', serif;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .op-card p { font-size: 16px; }
+  .actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 9px 16px;
+    border: 1px solid var(--accent-1);
+    border-radius: 4px;
+    color: var(--accent-1);
+    background: white;
+    display: inline-block;
+  }
+  .btn.primary {
+    background: var(--accent-1);
+    color: white;
+  }
+  .btn.secondary {
+    border-color: var(--ink-soft);
+    color: var(--ink-soft);
+  }
+  .btn:hover { opacity: 0.85; border-bottom: 1px solid currentColor; }
+
+  /* Sección estrategia */
+  .strategy-box {
+    background: #f4ead9;
+    border-radius: 6px;
+    padding: 24px 28px;
+    margin: 24px 0;
+  }
+  .strategy-box h3 { margin-top: 0; color: var(--accent-5); }
+
+  /* Template email */
+  .template {
+    background: white;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent-3);
+    border-radius: 4px;
+    padding: 24px 28px;
+    margin: 16px 0;
+    font-family: 'Source Serif 4', serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .template .field {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 2px;
+  }
+  .template .field-val {
+    font-family: 'Lora', serif;
+    font-weight: 500;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .template .body { white-space: pre-line; }
+  .placeholder { background: var(--highlight); padding: 1px 6px; border-radius: 3px; font-family: 'DM Mono', monospace; font-size: 13px; }
+
+  /* Footer */
+  .foot {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  ul.clean {
+    list-style: none;
+    padding-left: 0;
+  }
+  ul.clean li {
+    padding: 6px 0 6px 22px;
+    position: relative;
+  }
+  ul.clean li::before {
+    content: "›";
+    color: var(--accent-1);
+    position: absolute;
+    left: 4px;
+    top: 6px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 32px 20px 64px; }
+    h1 { font-size: 30px; }
+    .op-card { padding: 22px 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="subtitle">Research · Rulo · Mayo 2026</div>
+  <h1>Alquileres temporarios CABA<br>Operadores tipo BeeMyHost</h1>
+  <p class="lede">Empresas que administran portfolios de departamentos amoblados en Palermo y Recoleta. Un solo interlocutor, estándar de servicio replicable, margen para negociar tarifa por compromiso de varios meses.</p>
+
+  <div class="toc">
+    <div class="label" style="margin-bottom: 8px;">Contenido</div>
+    <ol>
+      <li><a href="#contexto">Por qué este enfoque tiene sentido</a></li>
+      <li><a href="#operadores">Operadores recomendados (4)</a></li>
+      <li><a href="#estrategia">Estrategia de negociación</a></li>
+      <li><a href="#template">Template de mensaje para contactarlos</a></li>
+      <li><a href="#pasos">Próximos pasos</a></li>
+    </ol>
+  </div>
+
+  <hr class="sep">
+
+  <h2 id="contexto"><span class="num">01</span>Por qué este enfoque tiene sentido</h2>
+  <p>Tu intuición es correcta. Los operadores tipo BeeMyHost no son dueños de un departamento, son <strong>property managers</strong> que administran 20, 50 o 200 unidades de distintos propietarios bajo una misma marca. Eso significa:</p>
+  <ul class="clean">
+    <li>Un único interlocutor para todas tus estadías del año, con tu file de cliente recurrente.</li>
+    <li>Estándar de check-in, limpieza, amenities y resolución de problemas replicado en cada unidad.</li>
+    <li>Capacidad real de negociar tarifa: por volumen (varias semanas al año) y por reservar fuera del canal Airbnb/Booking, donde ellos pagan 14-18% de comisión que se puede dividir entre ambos.</li>
+    <li>Flexibilidad de unidad: si una está tomada, te ofrecen otra del mismo nivel, sin tener que volver a investigar.</li>
+  </ul>
+
+  <h2 id="operadores"><span class="num">02</span>Operadores recomendados</h2>
+  <p style="margin-bottom: 24px;">Ordenados por encaje con tu caso (1 dormitorio amplio, Palermo/Recoleta, estadías recurrentes de 2 semanas).</p>
+
+  <!-- BUERENTALS -->
+  <div class="op-card featured">
+    <div class="op-head">
+      <h3 class="op-name">BueRentals</h3>
+      <span class="op-tag">Top pick</span>
+    </div>
+    <div class="op-meta">
+      <span>Palermo · Puerto Madero · Recoleta · Downtown</span>
+      <span>Multi-edificio</span>
+    </div>
+    <p>Operador con varios edificios propios bajo línea de producto: <em>Modern</em>, <em>Modern&amp;New</em>, <em>Deluxe</em>, <em>Trendy</em>, <em>Luxury</em>, <em>Family</em>, <em>Downtown</em>. Equipo dedicado (Lucia, Ruben aparecen en reseñas) y reputación consistente: 9.6/10 en KAYAK con 1.893 opiniones para el Modern&amp;New de Palermo. Edificios con amenities (pileta en terraza, gimnasio, parrilla, lavandería).</p>
+    <p><strong>Lo más importante para tu caso:</strong> en su propio sitio declaran textualmente que <em>"siempre vas a encontrar nuestras tarifas más bajas en el canal de venta directa"</em>. Es decir, contactarlos por fuera de Booking/Airbnb es lo que ellos mismos incentivan.</p>
+
+    <div class="data-grid">
+      <div class="data-cell">
+        <span class="data-label">Tipo de unidad</span>
+        <span class="data-val">Studio, 1BR, 2BR, 3BR</span>
+      </div>
+      <div class="data-cell">
+        <span class="data-label">Ubicación clave</span>
+        <span class="data-val">Palermo Soho</span>
+      </div>
+      <div class="data-cell">
+        <span class="data-label">Canal directo</span>
+        <span class="data-val">Web propia + IG</span>
+      </div>
+      <div class="data-cell">
+        <span class="data-label">Rating Booking</span>
+        <span class="data-val">9.7 (Family)</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a class="btn primary" href="https://buerentals.com/" target="_blank">Sitio oficial</a>
+      <a class="btn" href="https://www.instagram.com/buerentals/" target="_blank">Instagram @buerentals</a>
+    </div>
+  </div>
+
+  <!-- BE LOCAL -->
+  <div class="op-card featured">
+    <div class="op-head">
+      <h3 class="op-name">Be Local Argentina</h3>
+      <span class="op-tag">Solidez</span>
+    </div>
+    <div class="op-meta">
+      <span>Sede: Nicaragua 4806, Palermo</span>
+      <span>Fundada 2015 · 11–50 empleados</span>
+    </div>
+    <p>Empresa de property management constituida formalmente, especializada en short-term rental y vacation rental. Tienen varios edificios bajo la marca: <em>Floralis Suites</em>, <em>Arevalo Apartment</em>, <em>Palermo Soho</em>, <em>Peña Apartment</em>. Las reseñas mencionan recurrentemente al equipo (Maria, los "Be Local associates") como diferenciador. Edificios con pileta de temporada, gym, lavandería.</p>
+    <p><strong>Lo más importante para tu caso:</strong> al ser una empresa con estructura (no un host individual), tienen procesos formales y pueden firmar contratos por períodos largos. La oficina física en Palermo permite reunión presencial para cerrar deal.</p>
+
+    <div class="data-grid">
+      <div class="data-cell">
+        <span class="data-label">Tipo de unidad</span>
+        <span class="data-val">1BR · 2BR · Suites</span>
+      </div>
+      <div class="data-cell">
+        <span class="data-label">Ubicación clave</span>
+        <span class="data-val">Palermo Soho/Hollywood</span>
+      </div>
+      <div class="data-cell">
+        <span class="data-label">Canal directo</span>
+        <span class="data-val">Web + LinkedIn</span>
+      </div>
+      <div class="data-cell">
+        <span class="data-label">Antigüedad</span>
+        <span class="data-val">+10 años</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a class="btn primary" href="https://www.belocalargentina.com/" target="_blank">Sitio oficial</a>
+      <a class="btn" href="https://ar.linkedin.com/company/be-local-argentina" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+
+  <!-- ATTICO -->
+  <div class="op-card featured">
+    <div class="op-head">
+      <h3 class="op-name">Attico</h3>
+      <span class="op-tag">Mejor encaje estético</span>
+    </div>
+    <div class="op-meta">
+      <span>Palermo Nuevo · Palermo Soho · Barrio Norte · Recoleta (próx.)</span>
+      <span>Edificios completos operados</span>
+    </div>
+    <p>El más alineado a tu estética. Se posicionan como <em>"the future of hospitality: hotel amenities without hotel formality"</em> y operan edificios completos diseñados específicamente para short-term rental con foco en diseño curado y tecnología: check-in contactless por QR, sin recepción, sin llaves, soporte 24/7 vía chat. Portfolio actual: <em>Attico Juncal</em> (Palermo Nuevo), <em>Attico Calas</em> (Barrio Norte), <em>Attico Oro</em> (Palermo Soho), <em>Attico Bustamante</em> (Recoleta, abriendo) y <em>Attico Dorrego</em> (Palermo, abriendo).</p>
+    <p><strong>Lo más importante para tu caso:</strong> en su web tienen una sección explícita de <em>"Groups &amp; Long Stays"</em>, o sea ya están preparados para conversaciones B2B y estadías extendidas. La propuesta de diseño y la operación digital (todo por app, sin fricción) encajan muy bien con cómo pensás vos los productos. Es el operador donde más probabilidad hay de cerrar un acuerdo "marca con marca".</p>
+
+    <div class="data-grid">
+      <div class="data-cell">
+        <span class="data-label">Tipo de unidad</span>
+        <span class="data-val">Studio · 1BR · 2BR</span>
+      </div>
+      <div class="data-cell">
+        <span class="data-label">Ubicación clave</span>
+        <span class="data-val">Palermo + Recoleta</span>
+      </div>
+      <div class="data-cell">
+        <span class="data-label">Canal directo</span>
+        <span class="data-val">Web + Hostfully</span>
+      </div>
+      <div class="data-cell">
+        <span class="data-label">Long stays</span>
+        <span class="data-val">Declarado en web</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a class="btn primary" href="https://www.stayattico.com/" target="_blank">Sitio oficial</a>
+      <a class="btn" href="https://book.hostfully.com/attico/search" target="_blank">Ver disponibilidad</a>
+      <a class="btn secondary" href="https://www.stayattico.com/partners" target="_blank">Contacto B2B</a>
+    </div>
+  </div>
+
+  <!-- FEEL BUENOS AIRES -->
+  <div class="op-card">
+    <div class="op-head">
+      <h3 class="op-name">Feel Buenos Aires Hotel Apartments</h3>
+      <span class="op-tag">Apart-hotel</span>
+    </div>
+    <div class="op-meta">
+      <span>Palermo Soho</span>
+      <span>Modelo apart-hotel</span>
+    </div>
+    <p>Operador focalizado solo en Palermo Soho. Comunican explícitamente <em>"Sin comisiones"</em> y precio que incluye expensas, impuestos y WiFi todo-incluido. Posicionamiento más cerca de apart-hotel que de short-term Airbnb. Buena opción de backup o segundo proveedor.</p>
+
+    <div class="data-grid">
+      <div class="data-cell">
+        <span class="data-label">Tipo de unidad</span>
+        <span class="data-val">1BR · 2BR</span>
+      </div>
+      <div class="data-cell">
+        <span class="data-label">Ubicación clave</span>
+        <span class="data-val">Palermo Soho</span>
+      </div>
+      <div class="data-cell">
+        <span class="data-label">Canal directo</span>
+        <span class="data-val">Web propia</span>
+      </div>
+      <div class="data-cell">
+        <span class="data-label">All-inclusive</span>
+        <span class="data-val">Sí (servicios)</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a class="btn primary" href="https://www.feelbuenosairesapartments.com/alquilertemporario" target="_blank">Sitio oficial</a>
+    </div>
+  </div>
+
+  <h2 id="estrategia"><span class="num">03</span>Estrategia de negociación</h2>
+
+  <div class="strategy-box">
+    <h3>El argumento que te da ventaja</h3>
+    <p>No sos un huésped más. Sos un cliente que les ofrece <strong>algo que valoran más que el precio: previsibilidad</strong>.</p>
+    <ul class="clean">
+      <li><strong>~26 semanas al año garantizadas</strong> (2 de cada 3 semanas en CABA = 24-26 semanas/año).</li>
+      <li><strong>Cero canal externo:</strong> reserva directa, sin pagar 14-18% de Airbnb/Booking/VRBO.</li>
+      <li><strong>Cero costo de adquisición:</strong> no hay que captar, fotografiar ni promocionar al huésped.</li>
+      <li><strong>Cliente argentino, perfil corporate:</strong> nada de problemas de idioma, sin riesgo de fiestas, sin reseñas problemáticas.</li>
+      <li><strong>Flexibilidad de unidad:</strong> aceptás que la unidad pueda variar entre estadías, lo que les permite acomodar tu calendario en huecos que de otra forma quedarían vacíos.</li>
+    </ul>
+  </div>
+
+  <h3>Rango razonable de descuento a pedir</h3>
+  <p>El benchmark de la industria para estadías mensuales en Airbnb ronda <strong>20-30% off</strong> sobre la tarifa diaria. Lo que vos podés sumar por sobre eso, dado el compromiso anual:</p>
+  <ul class="clean">
+    <li><strong>30-35% off</strong> tarifa pública: piso razonable para entrar a la conversación.</li>
+    <li><strong>40% off</strong>: zona objetivo, justificada por el volumen anual.</li>
+    <li>Pago en USD billete: pedir como contrapartida tarifa más estable (no atada a fluctuaciones).</li>
+    <li>Prepago de bloque: ofrecer pagar 2 o 3 estadías por adelantado a cambio de fijar precio del año.</li>
+  </ul>
+
+  <h2 id="template"><span class="num">04</span>Template de mensaje para contactarlos</h2>
+  <p>Sirve para mail, WhatsApp o formulario web. Mismo tono firme-cordial Rioplatense, mobile-friendly.</p>
+
+  <div class="template">
+    <div class="field">Asunto</div>
+    <div class="field-val">Consulta — estadías recurrentes en CABA (2 semanas / mes)</div>
+
+    <div class="field">Cuerpo</div>
+    <div class="body">Hola, ¿cómo va?
+
+Soy Matías Asencio, COO de La América. Vivo entre Buenos Aires y Firmat (Santa Fe) y estoy buscando establecer una relación con un único operador de alquileres temporarios en CABA para mis estadías recurrentes.
+
+Mi caso, en concreto:
+
+• 2 semanas en CABA, 1 semana en Firmat, y así sucesivamente.
+• Aprox. <span class="placeholder">24-26 semanas al año</span> en Buenos Aires.
+• Busco 1 dormitorio amplio, idealmente en Palermo o Recoleta.
+• A veces viajo solo, a veces con mi esposa.
+• Reserva directa con ustedes, fuera de Airbnb/Booking.
+
+Lo que me interesa de un operador como ustedes es la consistencia de estándar: en lugar de estar buscando lugar nuevo cada vez, prefiero construir una relación con quien ya conoce mis preferencias.
+
+¿Podríamos coordinar una llamada de 20 minutos para ver si tiene sentido armar un acuerdo de tarifa por volumen anual? Disponibilidad esta semana:
+
+• <span class="placeholder">[Día] de [hora] a [hora] (ARG)</span>
+• <span class="placeholder">[Día] de [hora] a [hora] (ARG)</span>
+
+Confirmame cuál te queda mejor y te mando el link del Meet.
+
+Abrazo,
+Rulo</div>
+  </div>
+
+  <h2 id="pasos"><span class="num">05</span>Próximos pasos sugeridos</h2>
+  <ul class="clean">
+    <li><strong>Mandar el mensaje a los 3 primeros (BueRentals, Be Local, Attico) el mismo día.</strong> Tener 3 ofertas en paralelo es la única forma de negociar bien.</li>
+    <li><strong>Reuniones de 20 min cada una</strong>, en una misma semana. Comparar: precio por noche, descuento por volumen, política de cancelación, qué pasa si la unidad preferida está tomada.</li>
+    <li><strong>Probar 1 estadía con cada uno antes de comprometerte</strong> a un acuerdo anual. Una semana en cada operador te da material real para decidir.</li>
+    <li><strong>Cerrar con el ganador por 6 meses</strong>, no por 12. Te da margen de salida si la experiencia cae.</li>
+  </ul>
+
+  <div class="foot">
+    Research preparado para Rulo · Mayo 2026 · 4 operadores evaluados
+  </div>
+
+</div>
+</body>
+</html>
