@@ -1,1 +1,433 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instalación TV 72" — Proveedores CABA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf8f4;
+    --ink:#2b2722;
+    --ink-soft:#5c5448;
+    --line:#e3ddd1;
+    --card:#fffdf9;
+    --accent:#9a6b3f;       /* tierra cálida */
+    --accent-deep:#7d5430;
+    --green:#5f6e4a;        /* instaladores */
+    --blue:#4a5c6e;         /* corporativo / red social */
+    --plum:#6e4a5c;         /* tiendas home theater */
+    --gold:#a8853f;         /* destacados */
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Source Serif 4',Georgia,serif;
+    line-height:1.62;
+    font-size:17px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:56px 28px 90px;}
+
+  /* ---- Header ---- */
+  header{margin-bottom:44px;}
+  .kicker{
+    font-family:'DM Mono',monospace;
+    font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:14px;
+  }
+  h1{
+    font-family:'Lora',serif;font-weight:600;
+    font-size:38px;line-height:1.18;letter-spacing:-.01em;
+    margin-bottom:16px;
+  }
+  .lead{font-size:18px;color:var(--ink-soft);max-width:620px;}
+  .meta-row{
+    display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;
+  }
+  .meta-cell{
+    font-family:'DM Mono',monospace;font-size:12px;
+    background:var(--card);border:1px solid var(--line);
+    border-radius:7px;padding:9px 13px;color:var(--ink-soft);
+  }
+  .meta-cell b{color:var(--ink);font-weight:500;}
+
+  /* ---- Nav anchors ---- */
+  nav.toc{
+    margin:36px 0 8px;padding:20px 22px;
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+  }
+  nav.toc .toc-title{
+    font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:12px;
+  }
+  nav.toc ol{list-style:none;display:flex;flex-direction:column;gap:7px;}
+  nav.toc a{
+    color:var(--ink);text-decoration:none;font-size:15.5px;
+    display:flex;gap:10px;align-items:baseline;
+  }
+  nav.toc a:hover{color:var(--accent-deep);}
+  nav.toc .n{
+    font-family:'DM Mono',monospace;font-size:12px;color:var(--accent);
+    min-width:20px;
+  }
+
+  /* ---- Section ---- */
+  section{margin-top:52px;}
+  .sec-head{
+    display:flex;align-items:baseline;gap:14px;margin-bottom:8px;
+    padding-bottom:12px;border-bottom:2px solid var(--line);
+  }
+  .sec-num{
+    font-family:'DM Mono',monospace;font-size:14px;font-weight:500;
+    color:var(--accent);
+  }
+  h2{
+    font-family:'Lora',serif;font-weight:600;font-size:25px;
+    letter-spacing:-.005em;
+  }
+  .sec-intro{color:var(--ink-soft);margin:18px 0 26px;font-size:16.5px;}
+
+  /* ---- Context callout ---- */
+  .callout{
+    background:#f3ede2;border:1px solid var(--line);
+    border-left:3px solid var(--accent);
+    border-radius:9px;padding:20px 22px;margin:24px 0;
+  }
+  .callout h3{
+    font-family:'Lora',serif;font-size:17px;font-weight:600;margin-bottom:8px;
+  }
+  .callout p{font-size:15.5px;color:var(--ink-soft);}
+  .callout p + p{margin-top:9px;}
+
+  /* ---- Provider cards ---- */
+  .card{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:13px;padding:24px 24px 22px;margin-bottom:18px;
+    position:relative;
+  }
+  .card-top{display:flex;align-items:flex-start;gap:14px;margin-bottom:6px;}
+  .opt-circle{
+    width:44px;height:44px;flex-shrink:0;border-radius:50%;
+    background:var(--green);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Lora',serif;font-weight:700;font-size:21px;
+    margin-top:1px;
+  }
+  .badge{
+    font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.06em;
+    text-transform:uppercase;padding:4px 9px;border-radius:5px;
+    color:#fff;white-space:nowrap;margin-top:3px;line-height:1.5;
+    display:inline-block;
+  }
+  .card-top .badge{margin-bottom:7px;}
+  .b-green{background:var(--green);}
+  .b-blue{background:var(--blue);}
+  .b-plum{background:var(--plum);}
+  .card h3{
+    font-family:'Lora',serif;font-size:20px;font-weight:600;line-height:1.3;
+  }
+  .card .tag{
+    font-family:'DM Mono',monospace;font-size:12px;color:var(--ink-soft);
+    margin-top:2px;
+  }
+  .card p.desc{font-size:15.5px;color:var(--ink-soft);margin:12px 0 14px;}
+  .card .why{
+    font-size:14.5px;background:#f3ede2;border-radius:7px;
+    padding:11px 14px;margin-bottom:14px;
+  }
+  .card .why b{color:var(--accent-deep);font-weight:600;}
+
+  .data-grid{
+    display:grid;grid-template-columns:auto 1fr;gap:7px 16px;
+    font-size:14.5px;border-top:1px solid var(--line);padding-top:14px;
+  }
+  .data-grid .lbl{
+    font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--accent);padding-top:2px;
+  }
+  .data-grid .val{color:var(--ink);}
+  .data-grid a{color:var(--accent-deep);text-decoration:none;
+    border-bottom:1px solid var(--line);}
+  .data-grid a:hover{border-color:var(--accent);}
+
+  /* ---- Checklist ---- */
+  .checklist{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:13px;padding:24px;margin-top:8px;
+  }
+  .checklist ul{list-style:none;display:flex;flex-direction:column;gap:13px;}
+  .checklist li{display:flex;gap:13px;font-size:15.5px;}
+  .checklist .mark{
+    font-family:'DM Mono',monospace;color:var(--accent);font-size:13px;
+    border:1px solid var(--accent);border-radius:5px;
+    width:24px;height:24px;display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;margin-top:1px;
+  }
+  .checklist li b{font-weight:600;}
+
+  /* ---- Recommendation ---- */
+  .reco{
+    background:#2b2722;color:#f0ebe1;border-radius:13px;
+    padding:26px 26px 24px;margin-top:8px;
+  }
+  .reco .kicker{color:var(--gold);}
+  .reco h3{font-family:'Lora',serif;font-size:19px;font-weight:600;
+    margin-bottom:12px;color:#fff;}
+  .reco p{font-size:15.5px;color:#d9d2c5;}
+  .reco p + p{margin-top:10px;}
+  .reco .step{
+    display:flex;gap:12px;margin-top:14px;align-items:baseline;
+  }
+  .reco .step .sn{
+    font-family:'DM Mono',monospace;font-size:12px;color:var(--gold);
+    border:1px solid #4a443c;border-radius:5px;padding:3px 8px;flex-shrink:0;
+  }
+  .reco .step span.t{font-size:15px;color:#e5dfd3;}
+
+  @media(max-width:560px){
+    .wrap{padding:40px 18px 70px;}
+    h1{font-size:30px;}
+    .data-grid{grid-template-columns:1fr;gap:3px 0;}
+    .data-grid .lbl{padding-top:9px;}
+    .data-grid .lbl:first-child{padding-top:0;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Instalación TV 72" en la agencia</h1>
+  <p class="lead">Shortlist de proveedores en CABA para montar la pantalla sobre superficie no tradicional (mueble de madera + durlock).</p>
+  <div class="meta-row">
+    <div class="meta-cell">Ubicación · <b>CABA</b></div>
+    <div class="meta-cell">Pantalla · <b>72"</b></div>
+    <div class="meta-cell">Superficie · <b>Madera / Durlock</b></div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="toc-title">Contenido</div>
+  <ol>
+    <li><a href="#contexto"><span class="n">00</span> El desafío técnico real</a></li>
+    <li><a href="#instaladores"><span class="n">01</span> Instaladores especializados en soportes</a></li>
+    <li><a href="#corporativo"><span class="n">02</span> Integrador audiovisual corporativo</a></li>
+    <li><a href="#tiendas"><span class="n">03</span> Tiendas de home theater (venta + instalación)</a></li>
+    <li><a href="#checklist"><span class="n">04</span> Qué pedir en la visita técnica</a></li>
+    <li><a href="#reco"><span class="n">05</span> Recomendación de cotización</a></li>
+  </ol>
+</nav>
+
+<!-- 00 -->
+<section id="contexto">
+  <div class="sec-head">
+    <span class="sec-num">00</span>
+    <h2>El desafío técnico real</h2>
+  </div>
+  <p class="sec-intro">Antes de los proveedores, el punto que conviene tener claro al cotizar — y que define la diferencia entre un buen trabajo y un problema futuro.</p>
+  <div class="callout">
+    <h3>No es colgar una TV: es resolver el anclaje</h3>
+    <p>Una TV de 72" pesa aproximadamente 30–40 kg, y a eso se le suma el peso del soporte. El durlock y un mueble de madera <b>no son superficies portantes por sí solas</b>, por lo que es muy probable que haya que sumar algún tipo de bastidor o placa de madera a modo de refuerzo.</p>
+    <p>El instalador tiene que ubicar los montantes o perfiles metálicos detrás del durlock, o agregar un bastidor de refuerzo de madera. Por eso conviene distinguir dos perfiles de proveedor: el <b>instalador de soportes</b> (más ágil y económico) y el <b>integrador audiovisual</b> (resuelve además cableado oculto, conexiones y terminación de oficina). Abajo están los dos tipos.</p>
+  </div>
+</section>
+
+<!-- 01 -->
+<section id="instaladores">
+  <div class="sec-head">
+    <span class="sec-num">01</span>
+    <h2>Instaladores especializados en soportes</h2>
+  </div>
+  <p class="sec-intro">Trabajan a domicilio, cotizan por WhatsApp y mencionan explícitamente durlock y madera como superficies que manejan.</p>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="opt-circle">A</div>
+      <div>
+        <span class="badge b-green">Instalador</span>
+        <h3>Servicios a Domicilio — Instalación de soportes de TV</h3>
+        <div class="tag">CABA + GBA · trabajo garantizado</div>
+      </div>
+    </div>
+    <p class="desc">Servicio a domicilio con atención personalizada. Se presentan como instaladores profesionales de televisores con cobertura en CABA, Zona Norte, Oeste y Sur, y trabajo realizado bajo normas técnicas con garantía.</p>
+    <div class="why"><b>Por qué está en la lista:</b> perfil más reciente y prolijo de los tres instaladores; cotización rápida por WhatsApp.</div>
+    <div class="data-grid">
+      <span class="lbl">Web</span>
+      <span class="val"><a href="https://serviciosadomicilio.com.ar/instalacion-de-soportes-de-tv/" target="_blank">serviciosadomicilio.com.ar</a></span>
+      <span class="lbl">Contacto</span>
+      <span class="val">Presupuestos por WhatsApp (botón en el sitio)</span>
+      <span class="lbl">Cobertura</span>
+      <span class="val">CABA, Zona Norte, Oeste y Sur</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="opt-circle">B</div>
+      <div>
+        <span class="badge b-green">Instalador</span>
+        <h3>Instalador de Soportes para TV</h3>
+        <div class="tag">CABA y Zona Norte · soportes hasta 85"</div>
+      </div>
+    </div>
+    <p class="desc">Instalación de soporte fijo o móvil de 32" hasta 85" — rango que cubre con margen los 72". Para mayor seguridad fijan el soporte con tarugos de nylon Fischer y tirafondos.</p>
+    <div class="why"><b>Por qué está en la lista:</b> es el único que indica explícitamente el rango de pulgadas y el tipo de fijación. Conviene preguntarles puntualmente cómo resuelven el anclaje sobre durlock para 72".</div>
+    <div class="data-grid">
+      <span class="lbl">Web</span>
+      <span class="val"><a href="https://instalador-soporte-tv.com/" target="_blank">instalador-soporte-tv.com</a></span>
+      <span class="lbl">Teléfono</span>
+      <span class="val">15-3138-1122</span>
+      <span class="lbl">Cobertura</span>
+      <span class="val">CABA y Zona Norte</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="opt-circle">C</div>
+      <div>
+        <span class="badge b-green">Instalador</span>
+        <h3>Instalación de Soporte de TV</h3>
+        <div class="tag">CABA + GBA · +10.000 instalaciones</div>
+      </div>
+    </div>
+    <p class="desc">Empresa dedicada exclusivamente a colocación de soportes, con instalación sobre paredes de ladrillo, madera, durlock y otros materiales. Trabajan todas las marcas y soportes fijos o móviles, con garantía.</p>
+    <div class="why"><b>Por qué está en la lista:</b> mencionan madera y durlock de forma explícita y declaran amplio volumen de trabajos. Buen tercer presupuesto para comparar.</div>
+    <div class="data-grid">
+      <span class="lbl">Web</span>
+      <span class="val"><a href="https://instalaciondesoportesdetv.com.ar/" target="_blank">instalaciondesoportesdetv.com.ar</a></span>
+      <span class="lbl">WhatsApp</span>
+      <span class="val">11-5049-2296</span>
+      <span class="lbl">Cobertura</span>
+      <span class="val">CABA y Gran Buenos Aires</span>
+    </div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section id="corporativo">
+  <div class="sec-head">
+    <span class="sec-num">02</span>
+    <h2>Integrador audiovisual corporativo</h2>
+  </div>
+  <p class="sec-intro">Perfil de gama alta. No solo monta la pantalla: resuelve cableado oculto, conexiones, control y terminación de oficina. El más alineado a una instalación impecable en una agencia.</p>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="badge b-blue">Integrador</span>
+      <div>
+        <h3>Expex — AV Technology</h3>
+        <div class="tag">Almagro, CABA · +15 años en integración AV</div>
+      </div>
+    </div>
+    <p class="desc">Empresa argentina especializada en integración audiovisual para oficinas, salas de reunión y espacios corporativos: diseñan e implementan soluciones con pantallas y sistemas de control.</p>
+    <div class="why"><b>Por qué está en la lista:</b> es el proveedor de perfil corporativo — el que deja la instalación con terminación profesional, cableado oculto y todo conectado. Probablemente no sea el más barato, pero es el de mayor nivel de la lista.</div>
+    <div class="data-grid">
+      <span class="lbl">Instagram</span>
+      <span class="val"><a href="https://www.instagram.com/expex.av/" target="_blank">@expex.av</a></span>
+      <span class="lbl">Web</span>
+      <span class="val"><a href="https://www.expex.com.ar/" target="_blank">expex.com.ar</a></span>
+      <span class="lbl">Teléfono</span>
+      <span class="val">+54 11 4865-3755</span>
+      <span class="lbl">Dirección</span>
+      <span class="val">Av. Díaz Vélez 3531, Almagro, CABA</span>
+    </div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section id="tiendas">
+  <div class="sec-head">
+    <span class="sec-num">03</span>
+    <h2>Tiendas de home theater (venta + instalación)</h2>
+  </div>
+  <p class="sec-intro">Locales que importan y venden equipos de audio/video y casi siempre ofrecen el servicio de instalación asociado.</p>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="badge b-plum">Tienda + instalación</span>
+      <div>
+        <h3>BA-Store</h3>
+        <div class="tag">Beruti 3336, CABA · diseño e instalación</div>
+      </div>
+    </div>
+    <p class="desc">Diseño e instalación de home theaters, salas de cine y de audio, domótica, hi-end y multi-room, con venta de productos de todas las marcas. Asesoran, venden e instalan sistemas de audio y video.</p>
+    <div class="why"><b>Por qué está en la lista:</b> tienen el servicio de diseño + instalación como eje del negocio, no solo venta.</div>
+    <div class="data-grid">
+      <span class="lbl">Web</span>
+      <span class="val"><a href="http://www.ba-store.com.ar/" target="_blank">ba-store.com.ar</a></span>
+      <span class="lbl">Dirección</span>
+      <span class="val">Beruti 3336, CABA</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="badge b-plum">Tienda + instalación</span>
+      <div>
+        <h3>Audio Planet Argentina</h3>
+        <div class="tag">Puerto Madero, CABA · importador oficial</div>
+      </div>
+    </div>
+    <p class="desc">Importador y distribuidor oficial de sistemas Hi-Fi, Hi-End y home theater. Ofrecen venta, instalación, acústica, domótica, ingeniería y service.</p>
+    <div class="why"><b>Por qué está en la lista:</b> es el perfil más "ingenieril" de las tiendas.</div>
+    <div class="data-grid">
+      <span class="lbl">Web</span>
+      <span class="val"><a href="https://www.audioplanet.com.ar/" target="_blank">audioplanet.com.ar</a></span>
+      <span class="lbl">Zona</span>
+      <span class="val">Puerto Madero, CABA</span>
+    </div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section id="checklist">
+  <div class="sec-head">
+    <span class="sec-num">04</span>
+    <h2>Qué pedir en la visita técnica</h2>
+  </div>
+  <p class="sec-intro">Puntos a detallarle a cada proveedor para hacer más concreta la presupuestación. Enviar fotos de lo que hay instalado y de la superficie donde se va a montar la TV. Pedir siempre cotización con visita técnica incluida — evita sorpresas.</p>
+  <div class="checklist">
+    <ul>
+      <li>
+        <span class="mark">!</span>
+        <div><b>Refuerzo y acceso trasero.</b> Dadas las características del mueble separador, es probable que haya que sumar un bastidor o refuerzo de madera. Como se puede acceder a la parte trasera del mueble, es posible usar tornillos largos pasantes — una gran ventaja para una fijación firme. Plantearlo desde el inicio para que lo coticen como parte del trabajo.</div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- 05 -->
+<section id="reco">
+  <div class="sec-head">
+    <span class="sec-num">05</span>
+    <h2>Recomendación de cotización</h2>
+  </div>
+  <div class="reco">
+    <div class="kicker">Sugerencia operativa</div>
+    <h3>Pedir cinco presupuestos para comparar con datos</h3>
+    <p>El plan ideal: tres presupuestos a los instaladores de la sección 01, más uno de cada uno de los otros dos perfiles. Con cinco números sobre la mesa, la decisión se vuelve simple.</p>
+    <div class="step">
+      <span class="sn">01</span>
+      <span class="t"><b>Tres presupuestos — sección 01.</b> Uno a cada instalador: Opción A + Opción B + Opción C.</span>
+    </div>
+    <div class="step">
+      <span class="sn">02</span>
+      <span class="t"><b>Un presupuesto — Integrador audiovisual.</b> Expex, para tener la opción de terminación premium.</span>
+    </div>
+    <div class="step">
+      <span class="sn">03</span>
+      <span class="t"><b>Un presupuesto — Tienda de home theater.</b> BA-Store o Audio Planet.</span>
+    </div>
+  </div>
+</section>
+
+</div>
+</body>
+</html>
