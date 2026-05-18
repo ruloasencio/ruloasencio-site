@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,6 +11,11 @@
     --muted: #86868b;
     --line: #e8e8ed;
     --card: #fbfbfd;
+
+    /* Cápsulas — responsable familiar */
+    --luci-bg: #fdeef0;  --luci-ink: #c0405a;
+    --manu-bg: #eaf2fb;  --manu-ink: #2f6db0;
+    --mati-bg: #eef5ec;  --mati-ink: #4a7c43;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -42,6 +46,12 @@
     color: var(--muted);
     margin-bottom: 20px;
   }
+  h2 .h2-note {
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+    color: var(--muted);
+  }
 
   .cards { display: flex; flex-direction: column; gap: 12px; }
 
@@ -55,6 +65,21 @@
     justify-content: space-between;
     gap: 16px;
   }
+  .card-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+  }
+  .card-num {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+    width: 18px;
+    text-align: right;
+  }
   .card-main { min-width: 0; }
   .card-title {
     font-size: 16px;
@@ -66,14 +91,33 @@
     color: var(--muted);
     margin-top: 2px;
   }
-  .card-meta {
-    font-size: 13px;
-    color: var(--muted);
-    white-space: nowrap;
-    text-align: right;
+
+  /* Cápsulas */
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 6px;
     flex-shrink: 0;
   }
-  .card-owner { display: block; margin-top: 2px; }
+  .pill {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  /* Responsable familiar — relleno suave */
+  .pill-luci { background: var(--luci-bg); color: var(--luci-ink); }
+  .pill-manu { background: var(--manu-bg); color: var(--manu-ink); }
+  .pill-mati { background: var(--mati-bg); color: var(--mati-ink); }
+  /* Profesional a cargo — outline neutro */
+  .pill-pro {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    font-weight: 500;
+  }
 
   .done .card-title::before {
     content: "✅";
@@ -84,8 +128,8 @@
   @media (max-width: 480px) {
     body { padding: 40px 18px 64px; }
     h1 { font-size: 34px; margin-bottom: 40px; }
-    .card { flex-direction: column; align-items: flex-start; gap: 8px; }
-    .card-meta { text-align: left; }
+    .card { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .pills { justify-content: flex-start; padding-left: 32px; }
   }
 </style>
 </head>
@@ -100,24 +144,65 @@
     <div class="cards">
 
       <div class="card">
-        <div class="card-main">
-          <div class="card-title">Predio 1350</div>
-          <div class="card-sub">Cesión derechos entre hermanos</div>
+        <div class="card-left">
+          <div class="card-num">1</div>
+          <div class="card-main">
+            <div class="card-title">Campo Chovet</div>
+            <div class="card-sub">Rectificación escritura</div>
+          </div>
         </div>
-        <div class="card-meta">
-          Elisa
-          <span class="card-owner">Mati</span>
+        <div class="pills">
+          <span class="pill pill-pro">Keco</span>
+          <span class="pill pill-luci">Luci</span>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-main">
-          <div class="card-title">Campo Chovet</div>
-          <div class="card-sub">Rectificación escritura</div>
+        <div class="card-left">
+          <div class="card-num">2</div>
+          <div class="card-main">
+            <div class="card-title">Predio 1350</div>
+            <div class="card-sub">Cesión derechos entre hermanos</div>
+          </div>
         </div>
-        <div class="card-meta">
-          Keco
-          <span class="card-owner">Manu</span>
+        <div class="pills">
+          <span class="pill pill-pro">Elisa</span>
+          <span class="pill pill-mati">Mati</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== PRIORIDADES ===================== -->
+  <section class="section">
+    <h2>Prioridades <span class="h2-note">(Junio)</span></h2>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-num">3</div>
+          <div class="card-main">
+            <div class="card-title">Tía Liliana</div>
+            <div class="card-sub">Cobro 300 quintales</div>
+          </div>
+        </div>
+        <div class="pills">
+          <span class="pill pill-manu">Manu</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-num">4</div>
+          <div class="card-main">
+            <div class="card-title">Casa Mati</div>
+            <div class="card-sub">Denuncia del bien</div>
+          </div>
+        </div>
+        <div class="pills">
+          <span class="pill pill-pro">Keco</span>
+          <span class="pill pill-mati">Mati</span>
         </div>
       </div>
 
@@ -126,69 +211,62 @@
 
   <!-- ===================== COMING SOON ===================== -->
   <section class="section">
-    <h2>Coming Soon</h2>
+    <h2>Coming Soon <span class="h2-note">(a definir)</span></h2>
     <div class="cards">
 
       <div class="card">
-        <div class="card-main">
-          <div class="card-title">Tía Liliana</div>
-          <div class="card-sub">300 quintales · Por cobrar</div>
+        <div class="card-left">
+          <div class="card-num">5</div>
+          <div class="card-main">
+            <div class="card-title">Casa Luci</div>
+            <div class="card-sub">Plano de obra</div>
+          </div>
         </div>
-        <div class="card-meta">
-          <span class="card-owner">Manu</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-main">
-          <div class="card-title">Casa Mati</div>
-          <div class="card-sub">Denuncia del bien</div>
-        </div>
-        <div class="card-meta">
-          Keco
-          <span class="card-owner">Mati</span>
+        <div class="pills">
+          <span class="pill pill-pro">Arq. Franceschini</span>
+          <span class="pill pill-luci">Luci</span>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-main">
-          <div class="card-title">Predio 1350</div>
-          <div class="card-sub">Inicio usucapión</div>
+        <div class="card-left">
+          <div class="card-num">6</div>
+          <div class="card-main">
+            <div class="card-title">Casa Mati</div>
+            <div class="card-sub">Plano de obra</div>
+          </div>
         </div>
-        <div class="card-meta">
-          Abogada Melina
-          <span class="card-owner">Mati</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-main">
-          <div class="card-title">Casa Mati</div>
-          <div class="card-sub">Plano de obra · Activar con Arq. Eficon</div>
-        </div>
-        <div class="card-meta">
-          <span class="card-owner">Mati</span>
+        <div class="pills">
+          <span class="pill pill-pro">Arq. Eficon</span>
+          <span class="pill pill-mati">Mati</span>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-main">
-          <div class="card-title">Casa Luci</div>
-          <div class="card-sub">Plano de obra · Activar con Arq. Franceschini</div>
+        <div class="card-left">
+          <div class="card-num">7</div>
+          <div class="card-main">
+            <div class="card-title">Predio 1350</div>
+            <div class="card-sub">Inicio usucapión</div>
+          </div>
         </div>
-        <div class="card-meta">
-          <span class="card-owner">Luci</span>
+        <div class="pills">
+          <span class="pill pill-pro">Melina</span>
+          <span class="pill pill-mati">Mati</span>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-main">
-          <div class="card-title">Casa Mati</div>
-          <div class="card-sub">Escritura</div>
+        <div class="card-left">
+          <div class="card-num">8</div>
+          <div class="card-main">
+            <div class="card-title">Casa Mati</div>
+            <div class="card-sub">Escritura</div>
+          </div>
         </div>
-        <div class="card-meta">
-          Elisa
-          <span class="card-owner">Mati</span>
+        <div class="pills">
+          <span class="pill pill-pro">Elisa</span>
+          <span class="pill pill-mati">Mati</span>
         </div>
       </div>
 
@@ -201,115 +279,167 @@
     <div class="cards">
 
       <div class="card">
-        <div class="card-main">
-          <div class="card-title">Abuela Angela</div>
-          <div class="card-sub">Baja de convenio</div>
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-title">Abuela Angela</div>
+            <div class="card-sub">Baja de convenio</div>
+          </div>
         </div>
-        <div class="card-meta">Municipalidad</div>
+        <div class="pills">
+          <span class="pill pill-pro">Municipalidad</span>
+        </div>
       </div>
 
       <div class="card">
-        <div class="card-main">
-          <div class="card-title">Predio 1350</div>
-          <div class="card-sub">Mensura usucapión</div>
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-title">Predio 1350</div>
+            <div class="card-sub">Mensura usucapión</div>
+          </div>
         </div>
-        <div class="card-meta">Caro Tenaglia</div>
+        <div class="pills">
+          <span class="pill pill-pro">Caro Tenaglia</span>
+        </div>
       </div>
 
       <div class="card">
-        <div class="card-main">
-          <div class="card-title">Lote Manu</div>
-          <div class="card-sub">Venta</div>
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-title">Lote Manu</div>
+            <div class="card-sub">Venta</div>
+          </div>
         </div>
-        <div class="card-meta">Inmobiliaria Melina</div>
+        <div class="pills">
+          <span class="pill pill-pro">Inmobiliaria Melina</span>
+        </div>
       </div>
 
       <div class="card">
-        <div class="card-main">
-          <div class="card-title">Lote Manu</div>
-          <div class="card-sub">Plano de obra · Consultar en municipalidad</div>
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-title">Lote Manu</div>
+            <div class="card-sub">Plano de obra · Consultar en municipalidad</div>
+          </div>
         </div>
-        <div class="card-meta"></div>
+        <div class="pills"></div>
       </div>
 
       <div class="card">
-        <div class="card-main">
-          <div class="card-title">Lote Manu</div>
-          <div class="card-sub">Escritura 30%</div>
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-title">Lote Manu</div>
+            <div class="card-sub">Escritura 30%</div>
+          </div>
         </div>
-        <div class="card-meta">Elisa</div>
+        <div class="pills">
+          <span class="pill pill-pro">Elisa</span>
+        </div>
       </div>
 
       <div class="card">
-        <div class="card-main">
-          <div class="card-title">Depto Manu</div>
-          <div class="card-sub">Venta</div>
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-title">Depto Manu</div>
+            <div class="card-sub">Venta</div>
+          </div>
         </div>
-        <div class="card-meta">Inmobiliaria Cosa</div>
+        <div class="pills">
+          <span class="pill pill-pro">Inmobiliaria Cosa</span>
+        </div>
       </div>
 
       <div class="card">
-        <div class="card-main">
-          <div class="card-title">Depto Manu</div>
-          <div class="card-sub">Compensación · % en dólares a Luci + Mati</div>
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-title">Depto Manu</div>
+            <div class="card-sub">Compensación · % en dólares a Luci + Mati</div>
+          </div>
         </div>
-        <div class="card-meta"></div>
+        <div class="pills"></div>
       </div>
 
       <div class="card">
-        <div class="card-main">
-          <div class="card-title">Casa Luci</div>
-          <div class="card-sub">Escritura · ya finalizada, esperando original</div>
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-title">Casa Luci</div>
+            <div class="card-sub">Escritura · ya finalizada, esperando original</div>
+          </div>
         </div>
-        <div class="card-meta">Elisa</div>
+        <div class="pills">
+          <span class="pill pill-pro">Elisa</span>
+        </div>
       </div>
 
       <div class="card">
-        <div class="card-main">
-          <div class="card-title">Predio 1350</div>
-          <div class="card-sub">Cesión de derechos</div>
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-title">Predio 1350</div>
+            <div class="card-sub">Cesión de derechos</div>
+          </div>
         </div>
-        <div class="card-meta">Elisa</div>
+        <div class="pills">
+          <span class="pill pill-pro">Elisa</span>
+        </div>
       </div>
 
       <div class="card">
-        <div class="card-main">
-          <div class="card-title">Predio 1350</div>
-          <div class="card-sub">Compra a Pita</div>
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-title">Predio 1350</div>
+            <div class="card-sub">Compra a Pita</div>
+          </div>
         </div>
-        <div class="card-meta">Inmobiliaria Melina</div>
+        <div class="pills">
+          <span class="pill pill-pro">Inmobiliaria Melina</span>
+        </div>
       </div>
 
       <div class="card">
-        <div class="card-main">
-          <div class="card-title">Campo Cañada</div>
-          <div class="card-sub">Escritura</div>
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-title">Campo Cañada</div>
+            <div class="card-sub">Escritura</div>
+          </div>
         </div>
-        <div class="card-meta">Elisa</div>
+        <div class="pills">
+          <span class="pill pill-pro">Elisa</span>
+        </div>
       </div>
 
       <div class="card">
-        <div class="card-main">
-          <div class="card-title">Campo Cañada</div>
-          <div class="card-sub">Cesión de derechos</div>
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-title">Campo Cañada</div>
+            <div class="card-sub">Cesión de derechos</div>
+          </div>
         </div>
-        <div class="card-meta">Elisa</div>
+        <div class="pills">
+          <span class="pill pill-pro">Elisa</span>
+        </div>
       </div>
 
       <div class="card">
-        <div class="card-main">
-          <div class="card-title">Campo Cañada</div>
-          <div class="card-sub">Denuncia del bien</div>
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-title">Campo Cañada</div>
+            <div class="card-sub">Denuncia del bien</div>
+          </div>
         </div>
-        <div class="card-meta">Keco</div>
+        <div class="pills">
+          <span class="pill pill-pro">Keco</span>
+        </div>
       </div>
 
       <div class="card">
-        <div class="card-main">
-          <div class="card-title">Casa Tito</div>
-          <div class="card-sub">Firmar escritura a Lelio</div>
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-title">Casa Tito</div>
+            <div class="card-sub">Firmar escritura a Lelio</div>
+          </div>
         </div>
-        <div class="card-meta">Elisa</div>
+        <div class="pills">
+          <span class="pill pill-pro">Elisa</span>
+        </div>
       </div>
 
     </div>
