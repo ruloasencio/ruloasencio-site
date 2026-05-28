@@ -1,1 +1,561 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La América · Investigando nuevas maneras de comunicar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf8f4;
+    --ink:#2a2520;
+    --ink-soft:#5c5347;
+    --line:#e4ddd1;
+    --line-strong:#d4c9b6;
+    --card:#fffdf9;
+    --accent:#b5532a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Source Serif 4",Georgia,serif;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:0 28px;}
+
+  /* ── Header ─────────────────────────────── */
+  header{
+    padding:80px 0 48px;
+    border-bottom:2px solid var(--ink);
+  }
+  .kicker{
+    font-family:"DM Mono",monospace;
+    font-size:12px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:22px;
+  }
+  h1{
+    font-family:"Lora",serif;
+    font-weight:600;
+    font-size:clamp(34px,5vw,52px);
+    line-height:1.08;
+    letter-spacing:-.01em;
+    margin-bottom:22px;
+  }
+  .dek{
+    font-size:19px;
+    color:var(--ink-soft);
+    max-width:62ch;
+    font-style:italic;
+  }
+
+  /* ── Section frame ──────────────────────── */
+  section{padding:54px 0;border-bottom:1px solid var(--line);}
+  .num{
+    font-family:"DM Mono",monospace;
+    font-size:13px;
+    color:var(--accent);
+    letter-spacing:.1em;
+    margin-bottom:10px;
+  }
+  h2{
+    font-family:"Lora",serif;
+    font-weight:600;
+    font-size:28px;
+    letter-spacing:-.01em;
+    margin-bottom:22px;
+  }
+  p{margin-bottom:16px;}
+  strong{font-weight:600;}
+
+  /* ── Creator card ───────────────────────── */
+  .creator{scroll-margin-top:24px;}
+  .creator h2{margin-bottom:18px;}
+  .handles-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:26px;
+  }
+  .handle-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 14px 8px 12px;
+    border:1px solid var(--line-strong);
+    border-radius:100px;
+    text-decoration:none;
+    color:var(--ink);
+    font-family:"DM Mono",monospace;
+    font-size:12.5px;
+    background:var(--card);
+    transition:all .18s ease;
+  }
+  .handle-link:hover{
+    background:var(--ink);
+    color:var(--bg);
+    border-color:var(--ink);
+    transform:translateY(-1px);
+  }
+  .handle-link svg{width:14px;height:14px;flex:none;}
+  .handle-link .arrow{
+    opacity:.4;
+    font-size:11px;
+    margin-left:2px;
+  }
+  .handle-link:hover .arrow{opacity:.9;}
+
+  /* Network blocks */
+  .networks{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+    margin-bottom:22px;
+  }
+  .net-block{
+    background:var(--card);
+    padding:18px 18px 20px;
+  }
+  .net-head{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding-bottom:13px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:14px;
+  }
+  .net-head svg{width:18px;height:18px;color:var(--ink);flex:none;}
+  .net-name{
+    font-family:"DM Mono",monospace;
+    font-size:11px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .net-stats{
+    display:flex;
+    flex-direction:column;
+    gap:11px;
+  }
+  .stat{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .stat-val{
+    font-family:"Lora",serif;
+    font-size:22px;
+    font-weight:600;
+    line-height:1;
+    letter-spacing:-.01em;
+  }
+  .stat-lab{
+    font-family:"DM Mono",monospace;
+    font-size:10px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    text-align:right;
+  }
+
+  .desc{
+    font-size:16.5px;
+    color:var(--ink);
+    line-height:1.6;
+  }
+
+  /* ── Tabla ──────────────────────────────── */
+  .table-scroll{overflow-x:auto;margin:8px 0 4px;}
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14.5px;
+    min-width:560px;
+  }
+  th,td{
+    text-align:left;
+    padding:13px 14px;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    font-family:"DM Mono",monospace;
+    font-size:10.5px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    font-weight:500;
+    border-bottom:2px solid var(--ink);
+  }
+  td:first-child{font-weight:600;font-family:"Lora",serif;}
+  td.n{font-family:"DM Mono",monospace;}
+  .sd{color:var(--line-strong);font-style:italic;}
+
+  /* ── Hoja de ruta ───────────────────────── */
+  ul.ruta{list-style:none;margin:8px 0;}
+  ul.ruta li{
+    position:relative;
+    padding:0 0 20px 30px;
+    margin-bottom:0;
+  }
+  ul.ruta li::before{
+    content:"—";
+    position:absolute;
+    left:0;
+    top:0;
+    color:var(--accent);
+    font-family:"DM Mono",monospace;
+  }
+  ul.ruta li b{font-weight:600;}
+
+  .closing{
+    margin-top:14px;
+    padding:18px 20px;
+    background:#f5efe4;
+    border-radius:10px;
+    font-size:16px;
+    color:var(--ink);
+    line-height:1.55;
+  }
+
+  footer{
+    padding:42px 0 80px;
+  }
+
+  @media(max-width:560px){
+    body{font-size:16px;}
+    header{padding:54px 0 36px;}
+    .stat-val{font-size:20px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header>
+    <div class="kicker">La América · Prensa &amp; Comunicación</div>
+    <h1>Investigando posibles nuevas maneras de comunicar.</h1>
+    <p class="dek">Un punto de partida con cinco perfiles que hablan de marketing, publicidad y negocios en formato nativo de redes. La idea es explorar y entender si existe la posibilidad de pensar una comunicación que no vaya solo de arriba hacia abajo en medios especializados.</p>
+  </header>
+
+  <!-- JAVITO -->
+  <section id="javito" class="creator">
+    <h2>Javito Ledesma</h2>
+
+    <div class="handles-row">
+      <a class="handle-link" href="https://www.instagram.com/javitoledesma/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor"/></svg>
+        @javitoledesma <span class="arrow">↗</span>
+      </a>
+      <a class="handle-link" href="https://www.tiktok.com/@javito_ledesma" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3v.3a4.7 4.7 0 0 0 4.5 4.5v3a7.7 7.7 0 0 1-4.5-1.5v6.5a5.6 5.6 0 1 1-5.6-5.6c.2 0 .4 0 .6.1v3.1a2.5 2.5 0 1 0 2 2.4V3h3z"/></svg>
+        @javito_ledesma <span class="arrow">↗</span>
+      </a>
+      <a class="handle-link" href="https://www.youtube.com/@javitoledesma" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>
+        YouTube · Bizelaneas <span class="arrow">↗</span>
+      </a>
+      <a class="handle-link" href="https://www.linkedin.com/in/javier-ledesma-cascio-83861b2b/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8.3 18.3H5.7V9.7h2.6v8.6zM7 8.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm11.3 9.8h-2.6v-4.2c0-1-.4-1.7-1.3-1.7-.7 0-1.1.5-1.3 1-.1.2-.1.4-.1.7v4.2h-2.6V9.7H13v1.1c.3-.5 1-1.3 2.4-1.3 1.8 0 3 1.2 3 3.7v5.1z"/></svg>
+        LinkedIn <span class="arrow">↗</span>
+      </a>
+    </div>
+
+    <div class="networks">
+      <div class="net-block">
+        <div class="net-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor"/></svg>
+          <span class="net-name">Instagram</span>
+        </div>
+        <div class="net-stats">
+          <div class="stat"><span class="stat-val">258 K</span><span class="stat-lab">Seguidores</span></div>
+          <div class="stat"><span class="stat-val">597</span><span class="stat-lab">Publicaciones</span></div>
+        </div>
+      </div>
+      <div class="net-block">
+        <div class="net-head">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3v.3a4.7 4.7 0 0 0 4.5 4.5v3a7.7 7.7 0 0 1-4.5-1.5v6.5a5.6 5.6 0 1 1-5.6-5.6c.2 0 .4 0 .6.1v3.1a2.5 2.5 0 1 0 2 2.4V3h3z"/></svg>
+          <span class="net-name">TikTok</span>
+        </div>
+        <div class="net-stats">
+          <div class="stat"><span class="stat-val">151,3 K</span><span class="stat-lab">Seguidores</span></div>
+          <div class="stat"><span class="stat-val">2,9 M</span><span class="stat-lab">Me gusta</span></div>
+        </div>
+      </div>
+      <div class="net-block">
+        <div class="net-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>
+          <span class="net-name">YouTube</span>
+        </div>
+        <div class="net-stats">
+          <div class="stat"><span class="stat-val">393 K</span><span class="stat-lab">Suscriptores</span></div>
+          <div class="stat"><span class="stat-val">376</span><span class="stat-lab">Videos</span></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="desc">Periodista, creador de <strong>Bizelaneas</strong>: historias y curiosidades de marcas, empresas y negocios. El canal de YouTube arrancó en 2020. Su contenido cuenta el detrás de las marcas en tono accesible.</p>
+  </section>
+
+  <!-- SABRI KOLOD -->
+  <section id="sabri" class="creator">
+    <h2>Sabri Kolod</h2>
+
+    <div class="handles-row">
+      <a class="handle-link" href="https://www.instagram.com/sabrikolod/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor"/></svg>
+        @sabrikolod <span class="arrow">↗</span>
+      </a>
+      <a class="handle-link" href="https://www.tiktok.com/@sabrikolod" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3v.3a4.7 4.7 0 0 0 4.5 4.5v3a7.7 7.7 0 0 1-4.5-1.5v6.5a5.6 5.6 0 1 1-5.6-5.6c.2 0 .4 0 .6.1v3.1a2.5 2.5 0 1 0 2 2.4V3h3z"/></svg>
+        @sabrikolod <span class="arrow">↗</span>
+      </a>
+      <a class="handle-link" href="https://www.linkedin.com/in/sabrikolod/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8.3 18.3H5.7V9.7h2.6v8.6zM7 8.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm11.3 9.8h-2.6v-4.2c0-1-.4-1.7-1.3-1.7-.7 0-1.1.5-1.3 1-.1.2-.1.4-.1.7v4.2h-2.6V9.7H13v1.1c.3-.5 1-1.3 2.4-1.3 1.8 0 3 1.2 3 3.7v5.1z"/></svg>
+        LinkedIn <span class="arrow">↗</span>
+      </a>
+    </div>
+
+    <div class="networks">
+      <div class="net-block">
+        <div class="net-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor"/></svg>
+          <span class="net-name">Instagram</span>
+        </div>
+        <div class="net-stats">
+          <div class="stat"><span class="stat-val">147 K</span><span class="stat-lab">Seguidores</span></div>
+          <div class="stat"><span class="stat-val">1.179</span><span class="stat-lab">Publicaciones</span></div>
+        </div>
+      </div>
+      <div class="net-block">
+        <div class="net-head">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3v.3a4.7 4.7 0 0 0 4.5 4.5v3a7.7 7.7 0 0 1-4.5-1.5v6.5a5.6 5.6 0 1 1-5.6-5.6c.2 0 .4 0 .6.1v3.1a2.5 2.5 0 1 0 2 2.4V3h3z"/></svg>
+          <span class="net-name">TikTok</span>
+        </div>
+        <div class="net-stats">
+          <div class="stat"><span class="stat-val">261,9 K</span><span class="stat-lab">Seguidores</span></div>
+          <div class="stat"><span class="stat-val">18,5 M</span><span class="stat-lab">Me gusta</span></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="desc">Tiene un segmento recurrente <strong>#ChismecitoMarketinero</strong> donde cada semana resume las novedades del mundo del marketing.</p>
+  </section>
+
+  <!-- FAN DEL MARKETING -->
+  <section id="fandel" class="creator">
+    <h2>Fan del Marketing</h2>
+
+    <div class="handles-row">
+      <a class="handle-link" href="https://www.instagram.com/fandelmarketing/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor"/></svg>
+        @fandelmarketing <span class="arrow">↗</span>
+      </a>
+      <a class="handle-link" href="https://www.tiktok.com/@fandelmarketing" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3v.3a4.7 4.7 0 0 0 4.5 4.5v3a7.7 7.7 0 0 1-4.5-1.5v6.5a5.6 5.6 0 1 1-5.6-5.6c.2 0 .4 0 .6.1v3.1a2.5 2.5 0 1 0 2 2.4V3h3z"/></svg>
+        @fandelmarketing <span class="arrow">↗</span>
+      </a>
+      <a class="handle-link" href="https://www.linkedin.com/in/aldana-abadi/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8.3 18.3H5.7V9.7h2.6v8.6zM7 8.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm11.3 9.8h-2.6v-4.2c0-1-.4-1.7-1.3-1.7-.7 0-1.1.5-1.3 1-.1.2-.1.4-.1.7v4.2h-2.6V9.7H13v1.1c.3-.5 1-1.3 2.4-1.3 1.8 0 3 1.2 3 3.7v5.1z"/></svg>
+        LinkedIn <span class="arrow">↗</span>
+      </a>
+    </div>
+
+    <div class="networks">
+      <div class="net-block">
+        <div class="net-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor"/></svg>
+          <span class="net-name">Instagram</span>
+        </div>
+        <div class="net-stats">
+          <div class="stat"><span class="stat-val">123 K</span><span class="stat-lab">Seguidores</span></div>
+          <div class="stat"><span class="stat-val">893</span><span class="stat-lab">Publicaciones</span></div>
+        </div>
+      </div>
+      <div class="net-block">
+        <div class="net-head">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3v.3a4.7 4.7 0 0 0 4.5 4.5v3a7.7 7.7 0 0 1-4.5-1.5v6.5a5.6 5.6 0 1 1-5.6-5.6c.2 0 .4 0 .6.1v3.1a2.5 2.5 0 1 0 2 2.4V3h3z"/></svg>
+          <span class="net-name">TikTok</span>
+        </div>
+        <div class="net-stats">
+          <div class="stat"><span class="stat-val">33,3 K</span><span class="stat-lab">Seguidores</span></div>
+          <div class="stat"><span class="stat-val">2,4 M</span><span class="stat-lab">Me gusta</span></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="desc">Aldu Abadi. Divulgación de marketing y branding. "Desarma" y explica, según su POV, las diferentes campañas que van saliendo.</p>
+  </section>
+
+  <!-- JUJA DALTON -->
+  <section id="juja" class="creator">
+    <h2>Juja Dalton</h2>
+
+    <div class="handles-row">
+      <a class="handle-link" href="https://www.instagram.com/jujadalton" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor"/></svg>
+        @jujadalton <span class="arrow">↗</span>
+      </a>
+      <a class="handle-link" href="https://www.tiktok.com/@jujadaltonn" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3v.3a4.7 4.7 0 0 0 4.5 4.5v3a7.7 7.7 0 0 1-4.5-1.5v6.5a5.6 5.6 0 1 1-5.6-5.6c.2 0 .4 0 .6.1v3.1a2.5 2.5 0 1 0 2 2.4V3h3z"/></svg>
+        @jujadaltonn <span class="arrow">↗</span>
+      </a>
+      <a class="handle-link" href="https://www.linkedin.com/in/julieta-jadull-dalton-2220681b5/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8.3 18.3H5.7V9.7h2.6v8.6zM7 8.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm11.3 9.8h-2.6v-4.2c0-1-.4-1.7-1.3-1.7-.7 0-1.1.5-1.3 1-.1.2-.1.4-.1.7v4.2h-2.6V9.7H13v1.1c.3-.5 1-1.3 2.4-1.3 1.8 0 3 1.2 3 3.7v5.1z"/></svg>
+        LinkedIn <span class="arrow">↗</span>
+      </a>
+    </div>
+
+    <div class="networks">
+      <div class="net-block">
+        <div class="net-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor"/></svg>
+          <span class="net-name">Instagram</span>
+        </div>
+        <div class="net-stats">
+          <div class="stat"><span class="stat-val">28,1 K</span><span class="stat-lab">Seguidores</span></div>
+          <div class="stat"><span class="stat-val">365</span><span class="stat-lab">Publicaciones</span></div>
+        </div>
+      </div>
+      <div class="net-block">
+        <div class="net-head">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3v.3a4.7 4.7 0 0 0 4.5 4.5v3a7.7 7.7 0 0 1-4.5-1.5v6.5a5.6 5.6 0 1 1-5.6-5.6c.2 0 .4 0 .6.1v3.1a2.5 2.5 0 1 0 2 2.4V3h3z"/></svg>
+          <span class="net-name">TikTok</span>
+        </div>
+        <div class="net-stats">
+          <div class="stat"><span class="stat-val">65,2 K</span><span class="stat-lab">Seguidores</span></div>
+          <div class="stat"><span class="stat-val">4,4 M</span><span class="stat-lab">Me gusta</span></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="desc">Aparece contenido suyo ligado a publicidades de Quilmes. Tiene un diario digital propio en Substack.</p>
+  </section>
+
+  <!-- SALVADOR POSSE -->
+  <section id="posse" class="creator">
+    <h2>Salvador Posse</h2>
+
+    <div class="handles-row">
+      <a class="handle-link" href="https://www.instagram.com/salvador.posse/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor"/></svg>
+        @salvador.posse <span class="arrow">↗</span>
+      </a>
+      <a class="handle-link" href="https://www.tiktok.com/@salvadorposse_" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3v.3a4.7 4.7 0 0 0 4.5 4.5v3a7.7 7.7 0 0 1-4.5-1.5v6.5a5.6 5.6 0 1 1-5.6-5.6c.2 0 .4 0 .6.1v3.1a2.5 2.5 0 1 0 2 2.4V3h3z"/></svg>
+        @salvadorposse_ <span class="arrow">↗</span>
+      </a>
+      <a class="handle-link" href="https://www.linkedin.com/in/salvador-gonzalo-posse-a6621317b/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8.3 18.3H5.7V9.7h2.6v8.6zM7 8.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm11.3 9.8h-2.6v-4.2c0-1-.4-1.7-1.3-1.7-.7 0-1.1.5-1.3 1-.1.2-.1.4-.1.7v4.2h-2.6V9.7H13v1.1c.3-.5 1-1.3 2.4-1.3 1.8 0 3 1.2 3 3.7v5.1z"/></svg>
+        LinkedIn <span class="arrow">↗</span>
+      </a>
+    </div>
+
+    <div class="networks">
+      <div class="net-block">
+        <div class="net-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor"/></svg>
+          <span class="net-name">Instagram</span>
+        </div>
+        <div class="net-stats">
+          <div class="stat"><span class="stat-val">5.617</span><span class="stat-lab">Seguidores</span></div>
+          <div class="stat"><span class="stat-val">118</span><span class="stat-lab">Publicaciones</span></div>
+        </div>
+      </div>
+      <div class="net-block">
+        <div class="net-head">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3v.3a4.7 4.7 0 0 0 4.5 4.5v3a7.7 7.7 0 0 1-4.5-1.5v6.5a5.6 5.6 0 1 1-5.6-5.6c.2 0 .4 0 .6.1v3.1a2.5 2.5 0 1 0 2 2.4V3h3z"/></svg>
+          <span class="net-name">TikTok</span>
+        </div>
+        <div class="net-stats">
+          <div class="stat"><span class="stat-val">31,9 K</span><span class="stat-lab">Seguidores</span></div>
+          <div class="stat"><span class="stat-val">4,2 M</span><span class="stat-lab">Me gusta</span></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="desc">Contenido sobre creatividad publicitaria. Su base de seguidores es más chica en Instagram que en TikTok, donde acumula 4,2 M de Me gusta.</p>
+  </section>
+
+  <!-- TABLA -->
+  <section id="tabla">
+    <h2>Los números, de un vistazo</h2>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Creador</th>
+            <th>IG seguidores</th>
+            <th>IG posteos</th>
+            <th>TikTok seguidores</th>
+            <th>TikTok Me gusta</th>
+            <th>Otros</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Javito Ledesma</td>
+            <td class="n">258 K</td><td class="n">597</td>
+            <td class="n">151,3 K</td><td class="n">2,9 M</td>
+            <td class="n">YT 393 K · 376 v.</td>
+          </tr>
+          <tr>
+            <td>Sabri Kolod</td>
+            <td class="n">147 K</td><td class="n">1.179</td>
+            <td class="n">261,9 K</td><td class="n">18,5 M</td>
+            <td class="sd">—</td>
+          </tr>
+          <tr>
+            <td>Fan del Marketing</td>
+            <td class="n">123 K</td><td class="n">893</td>
+            <td class="n">33,3 K</td><td class="n">2,4 M</td>
+            <td class="sd">—</td>
+          </tr>
+          <tr>
+            <td>Juja Dalton</td>
+            <td class="n">28,1 K</td><td class="n">365</td>
+            <td class="n">65,2 K</td><td class="n">4,4 M</td>
+            <td class="n">Substack</td>
+          </tr>
+          <tr>
+            <td>Salvador Posse</td>
+            <td class="n">5.617</td><td class="n">118</td>
+            <td class="n">31,9 K</td><td class="n">4,2 M</td>
+            <td class="sd">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:18px;font-size:15px;color:var(--ink-soft);">Datos tomados de la cabecera de cada perfil al 28.05.2026.</p>
+  </section>
+
+  <!-- HOJA DE RUTA -->
+  <section id="ruta">
+    <h2>Posible hoja de ruta</h2>
+    <ul class="ruta">
+      <li>Estaría bueno mirar el contenido de cada uno en detalle y entender qué publican, cómo lo cuentan, con qué marcas trabajaron, qué engagement real tienen, etc.</li>
+      <li>Desde ya es clave tu mirada sobre qué cosas ves positivas, qué cosas no, algunas ideas para plantearles.</li>
+      <li>Donde sientas que hace sentido conocerlas/os, me sumo a las videollamadas que consideres necesarias para conocernos y entender qué podríamos hacer.</li>
+      <li>Cualquier ángulo, camino distinto o posibles maneras de investigar y probar nuevas formas, bienvenido.</li>
+    </ul>
+  </section>
+
+  <footer></footer>
+</div>
+</body>
+</html>
