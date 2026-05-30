@@ -45,15 +45,18 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
 .video-placeholder .video-label{font-size:14px;color:var(--text-secondary);font-weight:500}
 .gallery-section{margin-bottom:48px}
 .mosaic{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-.mosaic-item{position:relative;flex:0 1 calc((100% - 24px)/3);aspect-ratio:4/3;margin:0;padding:0;border:none;border-radius:10px;overflow:hidden;background:#E8E4DE;cursor:zoom-in;box-shadow:var(--shadow-sm);transition:box-shadow .25s ease}
-.mosaic-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s ease}
-.mosaic-item:hover{box-shadow:var(--shadow-md)}
-.mosaic-item:hover img{transform:scale(1.05)}
-.mosaic-item:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.mosaic-item{flex:0 1 calc((100% - 24px)/3);display:flex;flex-direction:column;gap:9px;margin:0;padding:0;border:none;background:none;cursor:zoom-in;text-align:left}
+.mosaic-frame{position:relative;display:block;width:100%;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background:#E8E4DE;box-shadow:var(--shadow-sm);transition:box-shadow .25s ease}
+.mosaic-item:hover .mosaic-frame{box-shadow:var(--shadow-md)}
+.mosaic-frame img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s ease}
+.mosaic-item:hover .mosaic-frame img{transform:scale(1.05)}
+.mosaic-item:focus-visible{outline:none}
+.mosaic-item:focus-visible .mosaic-frame{outline:3px solid var(--accent);outline-offset:2px}
+.mosaic-title{font-family:var(--font-body);font-size:14px;font-weight:600;color:var(--text-primary);letter-spacing:.1px;line-height:1.3;padding:0 2px}
 .mosaic-zoom{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(20,20,20,.3);color:#fff;opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:2}
 .mosaic-item:hover .mosaic-zoom{opacity:1}
 .mosaic-zoom svg{width:36px;height:36px}
-@media(max-width:600px){.mosaic{gap:8px}.mosaic-item{flex-basis:calc((100% - 12px)/2)}.mosaic-zoom svg{width:30px;height:30px}}
+@media(max-width:600px){.mosaic{gap:8px}.mosaic-item{flex-basis:calc((100% - 12px)/2);gap:7px}.mosaic-title{font-size:13px}.mosaic-zoom svg{width:30px;height:30px}}
 .amount{font-family:var(--font-display);font-size:36px;font-weight:600;color:var(--text-primary);letter-spacing:-1px}
 .period{font-size:14px;color:var(--text-tertiary);font-weight:400}
 .section-title{font-family:var(--font-display);font-size:26px;font-weight:600;margin-bottom:24px;color:var(--text-primary);letter-spacing:-.3px}
@@ -150,33 +153,54 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
 
   <section class="gallery-section">
     <div class="mosaic" id="mosaic">
-      <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.001.jpeg" data-caption="Depósito 1" aria-label="Ampliar imagen: Depósito 1">
-        <img src="fotos/Fotoplanos.001.jpeg" loading="lazy" alt="Depósito 1 del predio en Firmat">
-        <span class="mosaic-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.001.jpeg" aria-label="Ampliar imagen: Depósito 1">
+        <span class="mosaic-frame">
+          <img src="fotos/Fotoplanos.001.jpeg" loading="lazy" alt="Depósito 1 del predio en Firmat">
+          <span class="mosaic-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+        </span>
+        <span class="mosaic-title">Depósito 1</span>
       </button>
-      <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.002.jpeg" data-caption="Depósito 2" aria-label="Ampliar imagen: Depósito 2">
-        <img src="fotos/Fotoplanos.002.jpeg" loading="lazy" alt="Depósito 2 del predio en Firmat">
-        <span class="mosaic-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.002.jpeg" aria-label="Ampliar imagen: Depósito 2">
+        <span class="mosaic-frame">
+          <img src="fotos/Fotoplanos.002.jpeg" loading="lazy" alt="Depósito 2 del predio en Firmat">
+          <span class="mosaic-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+        </span>
+        <span class="mosaic-title">Depósito 2</span>
       </button>
-      <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.003.jpeg" data-caption="Oficina 1" aria-label="Ampliar imagen: Oficina 1">
-        <img src="fotos/Fotoplanos.003.jpeg" loading="lazy" alt="Oficina 1 del predio en Firmat">
-        <span class="mosaic-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.003.jpeg" aria-label="Ampliar imagen: Salón Comercial">
+        <span class="mosaic-frame">
+          <img src="fotos/Fotoplanos.003.jpeg" loading="lazy" alt="Salón Comercial del predio en Firmat">
+          <span class="mosaic-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+        </span>
+        <span class="mosaic-title">Salón Comercial</span>
       </button>
-      <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.004.jpeg" data-caption="Oficina 2" aria-label="Ampliar imagen: Oficina 2">
-        <img src="fotos/Fotoplanos.004.jpeg" loading="lazy" alt="Oficina 2 del predio en Firmat">
-        <span class="mosaic-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.004.jpeg" aria-label="Ampliar imagen: Oficina">
+        <span class="mosaic-frame">
+          <img src="fotos/Fotoplanos.004.jpeg" loading="lazy" alt="Oficina del predio en Firmat">
+          <span class="mosaic-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+        </span>
+        <span class="mosaic-title">Oficina</span>
       </button>
-      <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.005.jpeg" data-caption="Depósito 3" aria-label="Ampliar imagen: Depósito 3">
-        <img src="fotos/Fotoplanos.005.jpeg" loading="lazy" alt="Depósito 3 del predio en Firmat">
-        <span class="mosaic-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.005.jpeg" aria-label="Ampliar imagen: Depósito 3">
+        <span class="mosaic-frame">
+          <img src="fotos/Fotoplanos.005.jpeg" loading="lazy" alt="Depósito 3 del predio en Firmat">
+          <span class="mosaic-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+        </span>
+        <span class="mosaic-title">Depósito 3</span>
       </button>
-      <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.006.jpeg" data-caption="Depósito 4" aria-label="Ampliar imagen: Depósito 4">
-        <img src="fotos/Fotoplanos.006.jpeg" loading="lazy" alt="Depósito 4 del predio en Firmat">
-        <span class="mosaic-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.006.jpeg" aria-label="Ampliar imagen: Depósito 4">
+        <span class="mosaic-frame">
+          <img src="fotos/Fotoplanos.006.jpeg" loading="lazy" alt="Depósito 4 del predio en Firmat">
+          <span class="mosaic-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+        </span>
+        <span class="mosaic-title">Depósito 4</span>
       </button>
-      <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.007.jpeg" data-caption="Depósito 5" aria-label="Ampliar imagen: Depósito 5">
-        <img src="fotos/Fotoplanos.007.jpeg" loading="lazy" alt="Depósito 5 del predio en Firmat">
-        <span class="mosaic-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.007.jpeg" aria-label="Ampliar imagen: Depósito 6">
+        <span class="mosaic-frame">
+          <img src="fotos/Fotoplanos.007.jpeg" loading="lazy" alt="Depósito 6 del predio en Firmat">
+          <span class="mosaic-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+        </span>
+        <span class="mosaic-title">Depósito 6</span>
       </button>
     </div>
   </section>
@@ -475,7 +499,8 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
       function render(){
         const it = items[idx];
         const full = it.getAttribute('data-full');
-        const cap = it.getAttribute('data-caption') || '';
+        const titleEl = it.querySelector('.mosaic-title');
+        const cap = titleEl ? titleEl.textContent.trim() : '';
         glImg.src = full;
         glImg.alt = cap || ('Foto ' + (idx + 1) + ' del predio');
         glCap.textContent = cap;
