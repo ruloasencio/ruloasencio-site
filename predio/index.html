@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -37,7 +35,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
 .hero h1 br{display:inline}
 @media(min-width:600px){.hero h1 br{display:block}}
 .video-section{margin-bottom:40px}
-.video-container{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-md);aspect-ratio:16/9}
+.video-container{position:relative;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-md);aspect-ratio:16/9}
 .video-container iframe{width:100%;height:100%;border:none}
 .video-placeholder{background:#E8E4DE;border-radius:var(--radius);aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;overflow:hidden;box-shadow:var(--shadow-md)}
 .video-placeholder .play-icon{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-md)}
@@ -135,6 +133,12 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
 .gl-hint{position:absolute;bottom:64px;left:50%;transform:translateX(-50%);color:#fff;font-family:var(--font-body);font-size:13px;font-weight:500;background:rgba(44,95,45,.9);padding:8px 18px;border-radius:50px;opacity:0;pointer-events:none;transition:opacity .4s ease;z-index:2}
 .gl-hint.show{opacity:1}
 @media(max-width:600px){.gl-nav{width:44px;height:44px;font-size:26px;background:rgba(255,255,255,.2)}.gl-prev{left:8px}.gl-next{right:8px}.gl-figure img{max-height:72vh;max-width:94vw}.gl-hint{bottom:58px}}
+.video-facade{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;border:none;background:none;cursor:pointer;display:block;overflow:hidden}
+.video-poster{width:100%;height:100%;object-fit:cover;display:block}
+.video-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:74px;height:74px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(0,0,0,.3);transition:transform .25s ease,background .25s ease}
+.video-facade:hover .video-play{transform:translate(-50%,-50%) scale(1.07);background:#fff}
+.video-play svg{width:30px;height:30px;color:var(--accent);margin-left:4px}
+@media(max-width:600px){.video-play{width:62px;height:62px}.video-play svg{width:26px;height:26px}}
 </style>
 </head>
 <body>
@@ -147,7 +151,10 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
 
   <section class="video-section">
     <div class="video-container">
-      <iframe src="https://www.youtube.com/embed/PZhBqxaGeII" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <button type="button" class="video-facade" id="video-facade" data-id="PZhBqxaGeII" aria-label="Reproducir el video del predio">
+        <img class="video-poster" src="https://img.youtube.com/vi/PZhBqxaGeII/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/PZhBqxaGeII/hqdefault.jpg'" alt="Recorrido en video del predio" loading="lazy">
+        <span class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+      </button>
     </div>
   </section>
 
@@ -195,12 +202,12 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
         </span>
         <span class="mosaic-title">Depósito 4</span>
       </button>
-      <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.007.jpeg" aria-label="Ampliar imagen: Depósito 6">
+      <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.007.jpeg" aria-label="Ampliar imagen: Depósito 5">
         <span class="mosaic-frame">
-          <img src="fotos/Fotoplanos.007.jpeg" loading="lazy" alt="Depósito 6 del predio en Firmat">
+          <img src="fotos/Fotoplanos.007.jpeg" loading="lazy" alt="Depósito 5 del predio en Firmat">
           <span class="mosaic-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
         </span>
-        <span class="mosaic-title">Depósito 6</span>
+        <span class="mosaic-title">Depósito 5</span>
       </button>
     </div>
   </section>
@@ -546,6 +553,21 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
         const dy = e.changedTouches[0].clientY - sy;
         if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)){ dx < 0 ? next() : prev(); }
       }, { passive: true });
+    })();
+
+    // --- Video facade: carga YouTube limpio (nocookie, sin sugeridos) al hacer click ---
+    (function(){
+      const f = document.getElementById('video-facade');
+      if (!f) return;
+      f.addEventListener('click', function(){
+        const id = f.getAttribute('data-id');
+        const iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+        iframe.title = 'Recorrido en video del predio';
+        iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture; fullscreen');
+        iframe.setAttribute('allowfullscreen', '');
+        f.replaceWith(iframe);
+      });
     })();
   </script>
 
