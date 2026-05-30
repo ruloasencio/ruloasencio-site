@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -42,12 +43,17 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
 .video-placeholder .play-icon{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-md)}
 .video-placeholder .play-icon::after{content:'';display:block;width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:20px solid var(--accent);margin-left:4px}
 .video-placeholder .video-label{font-size:14px;color:var(--text-secondary);font-weight:500}
-.gallery-section{margin-bottom:16px}
-.gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-.gallery-item{border-radius:8px;aspect-ratio:4/3;overflow:hidden;transition:transform .2s ease;cursor:pointer;background:#E8E4DE;display:flex;align-items:center;justify-content:center}
-.gallery-item:hover{transform:scale(1.02)}
-.gallery-item img{width:100%;height:100%;object-fit:cover;display:block}
-.gallery-item .photo-number{font-size:13px;font-weight:600;color:var(--text-tertiary);background:rgba(255,255,255,.8);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.gallery-section{margin-bottom:48px}
+.mosaic{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.mosaic-item{position:relative;flex:0 1 calc((100% - 24px)/3);aspect-ratio:4/3;margin:0;padding:0;border:none;border-radius:10px;overflow:hidden;background:#E8E4DE;cursor:zoom-in;box-shadow:var(--shadow-sm);transition:box-shadow .25s ease}
+.mosaic-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s ease}
+.mosaic-item:hover{box-shadow:var(--shadow-md)}
+.mosaic-item:hover img{transform:scale(1.05)}
+.mosaic-item:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.mosaic-zoom{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(20,20,20,.3);color:#fff;opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:2}
+.mosaic-item:hover .mosaic-zoom{opacity:1}
+.mosaic-zoom svg{width:36px;height:36px}
+@media(max-width:600px){.mosaic{gap:8px}.mosaic-item{flex-basis:calc((100% - 12px)/2)}.mosaic-zoom svg{width:30px;height:30px}}
 .amount{font-family:var(--font-display);font-size:36px;font-weight:600;color:var(--text-primary);letter-spacing:-1px}
 .period{font-size:14px;color:var(--text-tertiary);font-weight:400}
 .section-title{font-family:var(--font-display);font-size:26px;font-weight:600;margin-bottom:24px;color:var(--text-primary);letter-spacing:-.3px}
@@ -112,7 +118,20 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
 .lightbox-close:hover{background:rgba(255,255,255,.25)}
 @keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:768px){.dist-grid{grid-template-columns:repeat(2,1fr)!important}.features-grid{grid-template-columns:1fr}.contract-grid{grid-template-columns:1fr}.price-boxes{flex-direction:column}.price-boxes>div{border-radius:var(--radius)!important;border:2px solid var(--text-primary)!important;margin-bottom:8px}}
-@media(max-width:480px){.hero{padding:40px 0 28px}}
+@media(max-width:480px){.hero{padding:40px 0 28px}}.glightbox{position:fixed;inset:0;background:rgba(20,20,20,.94);display:none;align-items:center;justify-content:center;z-index:1100;padding:24px;animation:fadeIn .25s ease-out}
+.glightbox.active{display:flex}
+.gl-figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:14px;max-width:92vw}
+.gl-figure img{max-width:92vw;max-height:80vh;width:auto;height:auto;border-radius:8px;box-shadow:0 24px 70px rgba(0,0,0,.55);-webkit-user-drag:none;user-select:none}
+.gl-caption{min-height:18px;color:rgba(255,255,255,.85);font-family:var(--font-body);font-size:14px;font-weight:500;text-align:center;max-width:680px;line-height:1.5}
+.gl-nav{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.14);border:none;color:#fff;font-size:30px;line-height:1;padding-bottom:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s ease,transform .2s ease;z-index:2}
+.gl-nav:hover{background:var(--accent);transform:translateY(-50%) scale(1.06)}
+.gl-prev{left:max(16px,3vw)}
+.gl-next{right:max(16px,3vw)}
+#gl-close{z-index:3}
+.gl-counter{position:absolute;top:22px;left:50%;transform:translateX(-50%);color:#fff;font-family:var(--font-body);font-size:13px;font-weight:600;letter-spacing:.5px;background:rgba(0,0,0,.4);padding:6px 16px;border-radius:50px;z-index:2}
+.gl-hint{position:absolute;bottom:64px;left:50%;transform:translateX(-50%);color:#fff;font-family:var(--font-body);font-size:13px;font-weight:500;background:rgba(44,95,45,.9);padding:8px 18px;border-radius:50px;opacity:0;pointer-events:none;transition:opacity .4s ease;z-index:2}
+.gl-hint.show{opacity:1}
+@media(max-width:600px){.gl-nav{width:44px;height:44px;font-size:26px;background:rgba(255,255,255,.2)}.gl-prev{left:8px}.gl-next{right:8px}.gl-figure img{max-height:72vh;max-width:94vw}.gl-hint{bottom:58px}}
 </style>
 </head>
 <body>
@@ -125,20 +144,40 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
 
   <section class="video-section">
     <div class="video-container">
-      <iframe src="https://www.youtube.com/embed/A6eZUoPstN8" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/PZhBqxaGeII" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
   </section>
 
   <section class="gallery-section">
-    <div class="gallery-grid">
-      <div class="gallery-item"><img src="https://drive.google.com/thumbnail?id=1yRnIbtVKP2QWcfAYmGqLM3AjY6PCOX3T&sz=w800" alt="Foto 1"></div>
-      <div class="gallery-item"><img src="https://drive.google.com/thumbnail?id=1Q9BeXsWX5gNcyMwHWU4DR_YAimaHquoR&sz=w800" alt="Foto 2"></div>
-      <div class="gallery-item"><img src="https://drive.google.com/thumbnail?id=1nxGbVHEE35AhWUi8LGtfZtMIRV4WFVrW&sz=w800" alt="Foto 3"></div>
-      <div class="gallery-item"><img src="https://drive.google.com/thumbnail?id=19NSLaiv3wpb5psDBAhUYg3KVLQudtqGV&sz=w800" alt="Foto 4"></div>
-      <div class="gallery-item"><img src="https://drive.google.com/thumbnail?id=1MMK6k2m8iw8qOjp4O9D0J3TCTwy07rQu&sz=w800" alt="Foto 5"></div>
-      <div class="gallery-item"><img src="https://drive.google.com/thumbnail?id=1_UfRH3YhtfittW2jaKK0PIFIL0oeRHtQ&sz=w800" alt="Foto 6"></div>
-      <div class="gallery-item"><img src="https://drive.google.com/thumbnail?id=1Ivt1-yekslhR6uNBwWXIYGlkuUh_Gh3H&sz=w800" alt="Foto 7"></div>
-      <div class="gallery-item"><img src="https://drive.google.com/thumbnail?id=1xxS_LAmuXKAQbztDY0SCma6Y8i7gkGCN&sz=w800" alt="Foto 8"></div>
+    <div class="mosaic" id="mosaic">
+      <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.001.jpeg" data-caption="Depósito 1" aria-label="Ampliar imagen: Depósito 1">
+        <img src="fotos/Fotoplanos.001.jpeg" loading="lazy" alt="Depósito 1 del predio en Firmat">
+        <span class="mosaic-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </button>
+      <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.002.jpeg" data-caption="Depósito 2" aria-label="Ampliar imagen: Depósito 2">
+        <img src="fotos/Fotoplanos.002.jpeg" loading="lazy" alt="Depósito 2 del predio en Firmat">
+        <span class="mosaic-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </button>
+      <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.003.jpeg" data-caption="Oficina 1" aria-label="Ampliar imagen: Oficina 1">
+        <img src="fotos/Fotoplanos.003.jpeg" loading="lazy" alt="Oficina 1 del predio en Firmat">
+        <span class="mosaic-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </button>
+      <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.004.jpeg" data-caption="Oficina 2" aria-label="Ampliar imagen: Oficina 2">
+        <img src="fotos/Fotoplanos.004.jpeg" loading="lazy" alt="Oficina 2 del predio en Firmat">
+        <span class="mosaic-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </button>
+      <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.005.jpeg" data-caption="Depósito 3" aria-label="Ampliar imagen: Depósito 3">
+        <img src="fotos/Fotoplanos.005.jpeg" loading="lazy" alt="Depósito 3 del predio en Firmat">
+        <span class="mosaic-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </button>
+      <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.006.jpeg" data-caption="Depósito 4" aria-label="Ampliar imagen: Depósito 4">
+        <img src="fotos/Fotoplanos.006.jpeg" loading="lazy" alt="Depósito 4 del predio en Firmat">
+        <span class="mosaic-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </button>
+      <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.007.jpeg" data-caption="Depósito 5" aria-label="Ampliar imagen: Depósito 5">
+        <img src="fotos/Fotoplanos.007.jpeg" loading="lazy" alt="Depósito 5 del predio en Firmat">
+        <span class="mosaic-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+      </button>
     </div>
   </section>
 
@@ -150,38 +189,6 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
         allowfullscreen></iframe>
-    </div>
-    <div class="refs-grid">
-      <div class="ref-card">
-        <div class="ref-distance">800 m</div>
-        <div class="ref-name">Ruta 33</div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-distance">400 m</div>
-        <div class="ref-name">Banco Nación</div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-distance">400 m</div>
-        <div class="ref-name">Supermercado</div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-distance">200 m</div>
-        <div class="ref-name">Municipalidad</div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-distance">200 m</div>
-        <div class="ref-name">Plaza Rivadavia</div>
-      </div>
-      <div class="ref-card">
-        <div class="ref-distance">100 m</div>
-        <div class="ref-name">Terminal de Ómnibus</div>
-      </div>
-    </div>
-    <div class="location-cta">
-      <a href="https://maps.app.goo.gl/xNJmvkWmxXzp4yhn7" target="_blank" rel="noopener" class="map-button">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Abrir en Google Maps
-      </a>
     </div>
   </section>
 
@@ -383,6 +390,18 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
     <img id="lightbox-img" src="" alt="Plano ampliado">
   </div>
 
+  <div class="glightbox" id="glightbox" aria-hidden="true">
+    <button type="button" class="lightbox-close" id="gl-close" aria-label="Cerrar">×</button>
+    <button type="button" class="gl-nav gl-prev" id="gl-prev" aria-label="Foto anterior">‹</button>
+    <figure class="gl-figure">
+      <img id="gl-img" src="" alt="">
+      <figcaption class="gl-caption" id="gl-caption"></figcaption>
+    </figure>
+    <button type="button" class="gl-nav gl-next" id="gl-next" aria-label="Foto siguiente">›</button>
+    <div class="gl-counter" id="gl-counter">1 de 7</div>
+    <div class="gl-hint" id="gl-hint">Deslizá o usá las flechas ‹ ›</div>
+  </div>
+
   <script>
     async function shareThisPage(btn){
       const url = 'https://ruloasencio.com/predio/';
@@ -440,6 +459,69 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
     document.addEventListener('keydown', function(e){
       if (e.key === 'Escape') closeLightbox();
     });
+
+    // --- Galería con lightbox navegable ---
+    (function(){
+      const items = Array.from(document.querySelectorAll('.mosaic-item'));
+      if (!items.length) return;
+      const gl = document.getElementById('glightbox');
+      const glImg = document.getElementById('gl-img');
+      const glCap = document.getElementById('gl-caption');
+      const glCounter = document.getElementById('gl-counter');
+      const glHint = document.getElementById('gl-hint');
+      let idx = 0;
+      let hintShown = false;
+
+      function render(){
+        const it = items[idx];
+        const full = it.getAttribute('data-full');
+        const cap = it.getAttribute('data-caption') || '';
+        glImg.src = full;
+        glImg.alt = cap || ('Foto ' + (idx + 1) + ' del predio');
+        glCap.textContent = cap;
+        glCounter.textContent = (idx + 1) + ' de ' + items.length;
+      }
+      function openGallery(i){
+        idx = i;
+        render();
+        gl.classList.add('active');
+        gl.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        if (!hintShown && items.length > 1){
+          hintShown = true;
+          glHint.classList.add('show');
+          setTimeout(function(){ glHint.classList.remove('show'); }, 2600);
+        }
+      }
+      function closeGallery(){
+        gl.classList.remove('active');
+        gl.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+      function next(){ idx = (idx + 1) % items.length; render(); }
+      function prev(){ idx = (idx - 1 + items.length) % items.length; render(); }
+
+      items.forEach(function(it, i){ it.addEventListener('click', function(){ openGallery(i); }); });
+      document.getElementById('gl-next').addEventListener('click', function(e){ e.stopPropagation(); next(); });
+      document.getElementById('gl-prev').addEventListener('click', function(e){ e.stopPropagation(); prev(); });
+      document.getElementById('gl-close').addEventListener('click', function(e){ e.stopPropagation(); closeGallery(); });
+      gl.addEventListener('click', function(e){
+        if (e.target === gl || e.target.classList.contains('gl-figure')) closeGallery();
+      });
+      document.addEventListener('keydown', function(e){
+        if (!gl.classList.contains('active')) return;
+        if (e.key === 'Escape') closeGallery();
+        else if (e.key === 'ArrowRight') next();
+        else if (e.key === 'ArrowLeft') prev();
+      });
+      let sx = 0, sy = 0;
+      gl.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+      gl.addEventListener('touchend', function(e){
+        const dx = e.changedTouches[0].clientX - sx;
+        const dy = e.changedTouches[0].clientY - sy;
+        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)){ dx < 0 ? next() : prev(); }
+      }, { passive: true });
+    })();
   </script>
 
 </div>
