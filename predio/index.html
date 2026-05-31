@@ -6,13 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Descubrí este predio de 1.000 m² de depósitos — Buenos Aires 1348, Firmat</title>
+<title>Centro de manzana en Alquiler — Buenos Aires 1348, Firmat</title>
 <meta name="description" content="Una oportunidad escondida en el centro de la ciudad. Apto logística, industria o cocheras.">
 
 <!-- Open Graph / Facebook / WhatsApp / Telegram -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ruloasencio.com/predio/">
-<meta property="og:title" content="Descubrí este predio de 1.000 m² que no sabías que existían en el centro de Firmat">
+<meta property="og:title" content="Descubrí este predio de 1.000 m² que no sabías que existía en el centro de Firmat">
 <meta property="og:description" content="Una oportunidad escondida en el centro de la ciudad. Apto logística, industria o cocheras.">
 <meta property="og:image" content="https://ruloasencio.com/predio/Plano_Predio_001.jpeg">
 <meta property="og:image:width" content="1920">
@@ -23,7 +23,7 @@
 <!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="https://ruloasencio.com/predio/">
-<meta name="twitter:title" content="Descubrí este predio de 1.000 m² de depósitos que no sabías que existían en el centro de Firmat">
+<meta name="twitter:title" content="Descubrí este predio de 1.000 m² que no sabías que existía en el centro de Firmat">
 <meta name="twitter:description" content="Una oportunidad escondida en el centro de la ciudad. Apto logística, industria o cocheras.">
 <meta name="twitter:image" content="https://ruloasencio.com/predio/Plano_Predio_001.jpeg">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -54,11 +54,10 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
 .mosaic-item:focus-visible{outline:none}
 .mosaic-item:focus-visible .mosaic-frame{outline:3px solid var(--accent);outline-offset:2px}
 .mosaic-title{font-family:var(--font-body);font-size:14px;font-weight:600;color:var(--text-primary);letter-spacing:.1px;line-height:1.3;padding:0 2px}
-.mosaic-zoom{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;background:linear-gradient(to top, rgba(20,20,20,.65) 0%, rgba(20,20,20,0) 55%);color:#fff;opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:2;padding:14px 12px}
-.mosaic-item:hover .mosaic-zoom{opacity:1}
-.mosaic-zoom-label{font-family:var(--font-body);font-size:13px;font-weight:600;color:#fff;text-align:center;line-height:1.3;letter-spacing:.1px;text-shadow:0 1px 3px rgba(0,0,0,.5)}
-@media(max-width:600px){.mosaic-zoom-label{font-size:12px}}
-@media(max-width:600px){.mosaic{gap:8px}.mosaic-item{flex-basis:calc((100% - 12px)/2);gap:7px}}
+.mosaic-zoom{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(15,15,15,.42);color:#fff;opacity:1;pointer-events:none;z-index:2}
+.mosaic-item:hover .mosaic-zoom{background:rgba(15,15,15,.55)}
+.mosaic-zoom svg{width:36px;height:36px}
+@media(max-width:600px){.mosaic{gap:8px}.mosaic-item{flex-basis:calc((100% - 12px)/2);gap:7px}.mosaic-title{font-size:13px}.mosaic-zoom svg{width:30px;height:30px}}
 .amount{font-family:var(--font-display);font-size:36px;font-weight:600;color:var(--text-primary);letter-spacing:-1px}
 .period{font-size:14px;color:var(--text-tertiary);font-weight:400}
 .section-title{font-family:var(--font-display);font-size:26px;font-weight:600;margin-bottom:24px;color:var(--text-primary);letter-spacing:-.3px}
@@ -143,6 +142,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
 .video-facade:hover .video-play{transform:translate(-50%,-50%) scale(1.07);background:#fff}
 .video-play svg{width:30px;height:30px;color:var(--accent);margin-left:4px}
 @media(max-width:600px){.video-play{width:62px;height:62px}.video-play svg{width:26px;height:26px}}
+.mosaic-zoom-label{font-family:var(--font-body);font-size:14px;font-weight:700;color:#fff;text-align:center;line-height:1.35;letter-spacing:.3px;text-shadow:0 1px 4px rgba(0,0,0,.7);padding:0 10px}@media(max-width:600px){.mosaic-zoom-label{font-size:13px}}
 </style>
 </head>
 <body>
@@ -150,7 +150,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
 
   <section class="hero">
     <span class="hero-label">Oportunidad Alquiler</span>
-    <h1>Descubrí estos 1.000 m²<br>de depósitos que no sabías<br>que existían en el centro de Firmat.</h1>
+    <h1>Descubrí este predio de 1.000 m²<br>que no sabías que existía<br>en el centro de Firmat.</h1>
   </section>
 
   <section class="video-section">
@@ -162,22 +162,6 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
     </div>
   </section>
 
-  <section style="margin-bottom:48px;">
-    <div class="plan-img-container" style="border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-md);">
-      <img
-        src="https://raw.githubusercontent.com/ruloasencio/ruloasencio-site/main/predio/Fotos/planocuatrotres.jpg"
-        alt="Plano del predio — Buenos Aires 1348, Firmat"
-        loading="lazy"
-        onclick="openLightbox(this.src)"
-        style="width:100%;display:block;cursor:zoom-in;border-radius:var(--radius);"
-      >
-      <div class="zoom-btn">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-      </div>
-    </div>
-    <p style="text-align:center;margin-top:10px;font-size:13px;color:var(--text-tertiary);">Plano del predio · Hacé click para ampliar</p>
-  </section>
-
   <section class="gallery-section">
     <div class="mosaic" id="mosaic">
       <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.001.jpeg" aria-label="Ampliar imagen: Depósito 1">
@@ -185,42 +169,49 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
           <img src="fotos/Fotoplanos.001.jpeg" loading="lazy" alt="Depósito 1 del predio en Firmat">
           <span class="mosaic-zoom" aria-hidden="true"><span class="mosaic-zoom-label">Depósito 1</span></span>
         </span>
+        <span class="mosaic-title">Depósito 1</span>
       </button>
       <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.002.jpeg" aria-label="Ampliar imagen: Depósito 2">
         <span class="mosaic-frame">
           <img src="fotos/Fotoplanos.002.jpeg" loading="lazy" alt="Depósito 2 del predio en Firmat">
           <span class="mosaic-zoom" aria-hidden="true"><span class="mosaic-zoom-label">Depósito 2</span></span>
         </span>
+        <span class="mosaic-title">Depósito 2</span>
       </button>
       <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.003.jpeg" aria-label="Ampliar imagen: Salón Comercial">
         <span class="mosaic-frame">
           <img src="fotos/Fotoplanos.003.jpeg" loading="lazy" alt="Salón Comercial del predio en Firmat">
           <span class="mosaic-zoom" aria-hidden="true"><span class="mosaic-zoom-label">Salón Comercial</span></span>
         </span>
+        <span class="mosaic-title">Salón Comercial</span>
       </button>
       <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.004.jpeg" aria-label="Ampliar imagen: Oficina">
         <span class="mosaic-frame">
           <img src="fotos/Fotoplanos.004.jpeg" loading="lazy" alt="Oficina del predio en Firmat">
           <span class="mosaic-zoom" aria-hidden="true"><span class="mosaic-zoom-label">Oficina</span></span>
         </span>
+        <span class="mosaic-title">Oficina</span>
       </button>
       <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.005.jpeg" aria-label="Ampliar imagen: Depósito 3">
         <span class="mosaic-frame">
           <img src="fotos/Fotoplanos.005.jpeg" loading="lazy" alt="Depósito 3 del predio en Firmat">
           <span class="mosaic-zoom" aria-hidden="true"><span class="mosaic-zoom-label">Depósito 3</span></span>
         </span>
+        <span class="mosaic-title">Depósito 3</span>
       </button>
       <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.006.jpeg" aria-label="Ampliar imagen: Depósito 4">
         <span class="mosaic-frame">
           <img src="fotos/Fotoplanos.006.jpeg" loading="lazy" alt="Depósito 4 del predio en Firmat">
           <span class="mosaic-zoom" aria-hidden="true"><span class="mosaic-zoom-label">Depósito 4</span></span>
         </span>
+        <span class="mosaic-title">Depósito 4</span>
       </button>
       <button type="button" class="mosaic-item" data-full="fotos/Fotoplanos.007.jpeg" aria-label="Ampliar imagen: Depósito 5">
         <span class="mosaic-frame">
           <img src="fotos/Fotoplanos.007.jpeg" loading="lazy" alt="Depósito 5 del predio en Firmat">
           <span class="mosaic-zoom" aria-hidden="true"><span class="mosaic-zoom-label">Depósito 5</span></span>
         </span>
+        <span class="mosaic-title">Depósito 5</span>
       </button>
     </div>
   </section>
