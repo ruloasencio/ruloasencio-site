@@ -143,6 +143,12 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
 .video-play svg{width:30px;height:30px;color:var(--accent);margin-left:4px}
 @media(max-width:600px){.video-play{width:62px;height:62px}.video-play svg{width:26px;height:26px}}
 .mosaic-zoom-label{font-family:var(--font-body);font-size:14px;font-weight:700;color:#fff;text-align:center;line-height:1.35;letter-spacing:.3px;text-shadow:0 1px 4px rgba(0,0,0,.7);padding:0 10px}@media(max-width:600px){.mosaic-zoom-label{font-size:13px}}
+
+.mosaic-badge{position:absolute;top:12px;left:12px;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-body);font-size:15px;font-weight:700;color:#fff;z-index:3;box-shadow:0 2px 8px rgba(0,0,0,.35);border:2px solid rgba(255,255,255,.35)}
+.mosaic-badge--red{background:#E05C48}
+.mosaic-badge--green{background:#4E8B5F}
+.mosaic-badge--blue{background:#4A7FB5}
+@media(max-width:600px){.mosaic-badge{width:28px;height:28px;font-size:13px;top:8px;left:8px}}
 </style>
 </head>
 <body>
@@ -162,46 +168,59 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
     </div>
   </section>
 
+  <section style="margin-bottom:48px;">
+    <div class="plan-img-container" style="border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-md);position:relative;">
+      <img
+        src="https://raw.githubusercontent.com/ruloasencio/ruloasencio-site/main/predio/Fotos/planocuatrotresok.jpg"
+        alt="Plano del predio — Buenos Aires 1348, Firmat"
+        loading="lazy"
+        onclick="openLightbox(this.src)"
+        style="width:100%;display:block;cursor:zoom-in;border-radius:var(--radius);"
+      >
+    </div>
+    <p style="text-align:center;margin-top:10px;font-size:13px;color:var(--text-tertiary);">Plano del predio · Hacé click para ampliar</p>
+  </section>
+
   <section class="gallery-section">
     <div class="mosaic" id="mosaic">
       <button type="button" class="mosaic-item" data-full="https://raw.githubusercontent.com/ruloasencio/ruloasencio-site/main/predio/Fotos/1%20-%20Deposito%2060.jpeg" aria-label="Ampliar imagen: Depósito 60 m²">
-        <span class="mosaic-frame">
+        <span class="mosaic-frame"><span class="mosaic-badge mosaic-badge--red">1</span>
           <img src="https://raw.githubusercontent.com/ruloasencio/ruloasencio-site/main/predio/Fotos/1%20-%20Deposito%2060.jpeg" loading="lazy" alt="Depósito 60 m² del predio en Firmat">
           <span class="mosaic-zoom" aria-hidden="true"><span class="mosaic-zoom-label">Depósito 60 m²</span></span>
         </span>
       </button>
       <button type="button" class="mosaic-item" data-full="https://raw.githubusercontent.com/ruloasencio/ruloasencio-site/main/predio/Fotos/2%20-%20Deposito%2090.jpeg" aria-label="Ampliar imagen: Depósito 90 m²">
-        <span class="mosaic-frame">
+        <span class="mosaic-frame"><span class="mosaic-badge mosaic-badge--red">2</span>
           <img src="https://raw.githubusercontent.com/ruloasencio/ruloasencio-site/main/predio/Fotos/2%20-%20Deposito%2090.jpeg" loading="lazy" alt="Depósito 90 m² del predio en Firmat">
           <span class="mosaic-zoom" aria-hidden="true"><span class="mosaic-zoom-label">Depósito 90 m²</span></span>
         </span>
       </button>
       <button type="button" class="mosaic-item" data-full="https://raw.githubusercontent.com/ruloasencio/ruloasencio-site/main/predio/Fotos/3%20-%20Deposito%2090.jpeg" aria-label="Ampliar imagen: Depósito 90 m²">
-        <span class="mosaic-frame">
+        <span class="mosaic-frame"><span class="mosaic-badge mosaic-badge--red">3</span>
           <img src="https://raw.githubusercontent.com/ruloasencio/ruloasencio-site/main/predio/Fotos/3%20-%20Deposito%2090.jpeg" loading="lazy" alt="Depósito 90 m² del predio en Firmat">
           <span class="mosaic-zoom" aria-hidden="true"><span class="mosaic-zoom-label">Depósito 90 m²</span></span>
         </span>
       </button>
       <button type="button" class="mosaic-item" data-full="https://raw.githubusercontent.com/ruloasencio/ruloasencio-site/main/predio/Fotos/4%20-%20Deposito%20100.jpeg" aria-label="Ampliar imagen: Depósito 100 m²">
-        <span class="mosaic-frame">
+        <span class="mosaic-frame"><span class="mosaic-badge mosaic-badge--red">4</span>
           <img src="https://raw.githubusercontent.com/ruloasencio/ruloasencio-site/main/predio/Fotos/4%20-%20Deposito%20100.jpeg" loading="lazy" alt="Depósito 100 m² del predio en Firmat">
           <span class="mosaic-zoom" aria-hidden="true"><span class="mosaic-zoom-label">Depósito 100 m²</span></span>
         </span>
       </button>
       <button type="button" class="mosaic-item" data-full="https://raw.githubusercontent.com/ruloasencio/ruloasencio-site/main/predio/Fotos/5%20-%20Deposito%2060.jpeg" aria-label="Ampliar imagen: Depósito 60 m²">
-        <span class="mosaic-frame">
+        <span class="mosaic-frame"><span class="mosaic-badge mosaic-badge--red">5</span>
           <img src="https://raw.githubusercontent.com/ruloasencio/ruloasencio-site/main/predio/Fotos/5%20-%20Deposito%2060.jpeg" loading="lazy" alt="Depósito 60 m² del predio en Firmat">
           <span class="mosaic-zoom" aria-hidden="true"><span class="mosaic-zoom-label">Depósito 60 m²</span></span>
         </span>
       </button>
       <button type="button" class="mosaic-item" data-full="https://raw.githubusercontent.com/ruloasencio/ruloasencio-site/main/predio/Fotos/6%20-%20Oficina%2030.jpeg" aria-label="Ampliar imagen: Oficina 30 m²">
-        <span class="mosaic-frame">
+        <span class="mosaic-frame"><span class="mosaic-badge mosaic-badge--green">6</span>
           <img src="https://raw.githubusercontent.com/ruloasencio/ruloasencio-site/main/predio/Fotos/6%20-%20Oficina%2030.jpeg" loading="lazy" alt="Oficina 30 m² del predio en Firmat">
           <span class="mosaic-zoom" aria-hidden="true"><span class="mosaic-zoom-label">Oficina 30 m²</span></span>
         </span>
       </button>
       <button type="button" class="mosaic-item" data-full="https://raw.githubusercontent.com/ruloasencio/ruloasencio-site/main/predio/Fotos/7%20-%20Salon%20Comercial%2050.jpeg" aria-label="Ampliar imagen: Salón Comercial 50 m²">
-        <span class="mosaic-frame">
+        <span class="mosaic-frame"><span class="mosaic-badge mosaic-badge--blue">7</span>
           <img src="https://raw.githubusercontent.com/ruloasencio/ruloasencio-site/main/predio/Fotos/7%20-%20Salon%20Comercial%2050.jpeg" loading="lazy" alt="Salón Comercial 50 m² del predio en Firmat">
           <span class="mosaic-zoom" aria-hidden="true"><span class="mosaic-zoom-label">Salón Comercial 50 m²</span></span>
         </span>
