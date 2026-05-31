@@ -149,6 +149,8 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
 
 
 
+.hero-title-mobile{display:none}
+@media(max-width:600px){.hero-title-desktop{display:none}.hero-title-mobile{display:block}}
 .metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
 @media(max-width:600px){.metrics-grid{grid-template-columns:repeat(2,1fr);}}
 .mosaic-item-label{display:flex;align-items:center;justify-content:center;gap:4px;padding:6px 8px 4px;flex-wrap:wrap}
@@ -166,7 +168,8 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
 
   <section class="hero">
     <span class="hero-label">Oportunidad Alquiler</span>
-    <h1>Descubrí este predio de <span style="white-space:nowrap">1.000 m²</span><br>que no sabías que existía<br>en el centro de Firmat</h1>
+    <h1 class="hero-title-desktop">Descubrí este predio de <span style="white-space:nowrap">1.000 m²</span><br>que no sabías que existía<br>en el centro de Firmat</h1>
+    <h1 class="hero-title-mobile">Descubrí este predio<br>de 1.000 m² que no sabías<br>que existía en el centro<br>de Firmat</h1>
   </section>
 
   <section class="video-section">
