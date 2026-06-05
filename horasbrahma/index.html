@@ -1,1 +1,168 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brahma & La América · Verano 2027</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Source+Serif+4:wght@300;400;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #f0ede6; min-height: 100vh; display: flex; justify-content: center; padding: 2rem 1rem; }
+    .doc-wrap { background: #faf8f4; padding: 2rem 2rem 3rem; font-family: 'Source Serif 4', serif; color: #1a1a1a; max-width: 680px; width: 100%; border-radius: 16px; }
+    .doc-title { font-family: 'Lora', serif; font-size: 22px; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.2px; }
+    .doc-sub { font-size: 13px; font-family: 'DM Mono', monospace; color: #888; margin: 0 0 4px; }
+    .doc-desc { font-family: 'Source Serif 4', serif; font-size: 15px; font-weight: 400; color: #888; margin: 0 0 2rem; }
+    .section { margin-bottom: 1.25rem; border-radius: 12px; overflow: hidden; border: 0.5px solid #e0ddd6; }
+    .section-header { padding: 11px 16px; }
+    .section-label { font-family: 'Lora', serif; font-size: 15px; font-weight: 600; letter-spacing: 0.1px; }
+    .section-rows { background: #fff; }
+    .row { display: flex; align-items: baseline; padding: 10px 16px; border-top: 0.5px solid #e0ddd6; gap: 12px; }
+    .row.empty { opacity: 0.35; }
+    .row-info { flex: 1; }
+    .row-role { font-size: 14px; font-weight: 500; color: #1a1a1a; }
+    .row-name { font-size: 12px; color: #888; margin-top: 1px; }
+    .row-hrs { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; }
+    .tbd { font-style: italic; color: #aaa; }
+    .bar-hrs { display: flex; justify-content: space-between; align-items: center; padding: 9px 16px; border-top: 0.5px solid #e0ddd6; }
+    .bar-hrs-label { font-family: 'DM Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; }
+    .bar-hrs-val { font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 500; }
+    .bar-fee { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px 14px; border-top: 0.5px solid rgba(0,0,0,0.06); }
+    .bar-fee-pct { font-family: 'Lora', serif; font-size: 28px; font-weight: 600; line-height: 1; }
+    .bar-fee-right { text-align: right; display: flex; flex-direction: column; gap: 5px; }
+    .fee-line { font-family: 'DM Mono', monospace; display: flex; justify-content: flex-end; align-items: baseline; gap: 6px; }
+    .fee-label { font-size: 11px; opacity: 0.6; }
+    .fee-amount { font-size: 13px; font-weight: 500; }
+    .recap { margin: 2rem 0 1.5rem; }
+    .recap-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+    .recap-card { border-radius: 10px; overflow: hidden; border: 0.5px solid #e0ddd6; }
+    .recap-card-header { padding: 8px 10px 6px; }
+    .recap-card-title { font-family: 'Lora', serif; font-size: 12px; font-weight: 600; }
+    .recap-card-body { background: #fff; padding: 10px; }
+    .recap-pct { font-family: 'Lora', serif; font-size: 22px; font-weight: 600; line-height: 1; margin-bottom: 6px; }
+    .recap-hrs { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; margin-bottom: 8px; }
+    .recap-fee-line { font-family: 'DM Mono', monospace; font-size: 9px; display: flex; justify-content: space-between; gap: 4px; margin-bottom: 3px; }
+    .recap-fee-lbl { opacity: 0.55; }
+    .recap-fee-amt { font-weight: 500; text-align: right; }
+    .grand { margin-top: 0; background: #f0ede6; border-radius: 8px; padding: 14px 16px; }
+    .grand-hrs-row { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 12px; }
+    .grand-divider { border: none; border-top: 0.5px solid #d0cdc6; margin: 0 0 12px; }
+    .grand-fee-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+    .grand-fee-row:last-child { margin-bottom: 0; }
+    .grand-label { font-family: 'DM Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; color: #888; }
+    .grand-val { font-family: 'Lora', serif; font-size: 16px; font-weight: 600; color: #1a1a1a; }
+    .grand-val.big { font-size: 22px; }
+
+    .h-acc { background: #d4edda; } .lbl-acc { color: #1a5c2a; }
+    .h-str { background: #d1ecf1; } .lbl-str { color: #0c5460; }
+    .h-cre { background: #f8d7da; } .lbl-cre { color: #721c24; }
+    .h-dig { background: #e8d5f0; } .lbl-dig { color: #4a1a6b; }
+    .h-pro { background: #ffe5cc; } .lbl-pro { color: #7a3b00; }
+  </style>
+</head>
+<body>
+<div class="doc-wrap">
+  <p class="doc-title">Brahma &amp; La América</p>
+  <p class="doc-sub">DESARROLLO ESTRATÉGICO, CREATIVIDAD Y PRODUCCIÓN · CAMPAÑA VERANO 2027</p>
+  <p class="doc-desc">Distribución de horas según roles</p>
+
+  <!-- ACCOUNT -->
+  <div class="section">
+    <div class="section-header h-acc"><span class="section-label lbl-acc">Account</span></div>
+    <div class="section-rows">
+      <div class="row"><div class="row-info"><div class="row-role">Managing Director</div><div class="row-name">Ale</div></div><span class="row-hrs lbl-acc">129 hs</span></div>
+      <div class="row"><div class="row-info"><div class="row-role">Director de Operaciones</div><div class="row-name">Rulo</div></div><span class="row-hrs lbl-acc">233 hs</span></div>
+      <div class="row empty"><div class="row-info"><div class="row-role">Ejecutivo de Cuentas</div></div><span class="row-hrs lbl-acc">—</span></div>
+      <div class="bar-hrs h-acc"><span class="bar-hrs-label lbl-acc">Total horas</span><span class="bar-hrs-val lbl-acc">362 hs</span></div>
+      <div class="bar-fee h-acc"><span class="bar-fee-pct lbl-acc">5%</span><div class="bar-fee-right lbl-acc"><div class="fee-line"><span class="fee-label">Fixed Fee (sin Bono)</span><span class="fee-amount">$23.089.556</span></div><div class="fee-line"><span class="fee-label">Maximum Fee (con Bono)</span><span class="fee-amount">$30.006.723</span></div></div></div>
+    </div>
+  </div>
+
+  <!-- STRATEGY -->
+  <div class="section">
+    <div class="section-header h-str"><span class="section-label lbl-str">Strategy</span></div>
+    <div class="section-rows">
+      <div class="row"><div class="row-info"><div class="row-role">Chief Strategy Officer</div><div class="row-name">Martín</div></div><span class="row-hrs lbl-str">233 hs</span></div>
+      <div class="row"><div class="row-info"><div class="row-role">Directora de Insights</div><div class="row-name">Magui</div></div><span class="row-hrs lbl-str">361 hs</span></div>
+      <div class="row"><div class="row-info"><div class="row-role">Sr. Brand Strategist</div><div class="row-name tbd">To be defined</div></div><span class="row-hrs lbl-str">247 hs</span></div>
+      <div class="row empty"><div class="row-info"><div class="row-role">Data Analyst</div></div><span class="row-hrs lbl-str">—</span></div>
+      <div class="bar-hrs h-str"><span class="bar-hrs-label lbl-str">Total horas</span><span class="bar-hrs-val lbl-str">841 hs</span></div>
+      <div class="bar-fee h-str"><span class="bar-fee-pct lbl-str">12%</span><div class="bar-fee-right lbl-str"><div class="fee-line"><span class="fee-label">Fixed Fee (sin Bono)</span><span class="fee-amount">$53.558.857</span></div><div class="fee-line"><span class="fee-label">Maximum Fee (con Bono)</span><span class="fee-amount">$69.616.213</span></div></div></div>
+    </div>
+  </div>
+
+  <!-- CREATIVE -->
+  <div class="section">
+    <div class="section-header h-cre"><span class="section-label lbl-cre">Creative</span></div>
+    <div class="section-rows">
+      <div class="row"><div class="row-info"><div class="row-role">Chief Creative Officer</div><div class="row-name">Rafa</div></div><span class="row-hrs lbl-cre">128 hs</span></div>
+      <div class="row"><div class="row-info"><div class="row-role">Director General Creativo</div><div class="row-name">Keke</div></div><span class="row-hrs lbl-cre">236 hs</span></div>
+      <div class="row"><div class="row-info"><div class="row-role">Directora Creativa</div><div class="row-name">Audrey</div></div><span class="row-hrs lbl-cre">712 hs</span></div>
+      <div class="row"><div class="row-info"><div class="row-role">Redactora</div><div class="row-name tbd">To be defined</div></div><span class="row-hrs lbl-cre">1.008 hs</span></div>
+      <div class="row"><div class="row-info"><div class="row-role">Director de Arte</div><div class="row-name">Lucho</div></div><span class="row-hrs lbl-cre">1.008 hs</span></div>
+      <div class="row"><div class="row-info"><div class="row-role">Head of Design</div><div class="row-name">Gus</div></div><span class="row-hrs lbl-cre">232 hs</span></div>
+      <div class="row"><div class="row-info"><div class="row-role">Diseñador</div><div class="row-name">Lucas</div></div><span class="row-hrs lbl-cre">361 hs</span></div>
+      <div class="row"><div class="row-info"><div class="row-role">Diseñador Junior</div><div class="row-name">Roni</div></div><span class="row-hrs lbl-cre">530 hs</span></div>
+      <div class="row empty"><div class="row-info"><div class="row-role">Director Creativo</div></div><span class="row-hrs lbl-cre">—</span></div>
+      <div class="row empty"><div class="row-info"><div class="row-role">Director Creativo Digital</div></div><span class="row-hrs lbl-cre">—</span></div>
+      <div class="row empty"><div class="row-info"><div class="row-role">Director Creativo Digital</div></div><span class="row-hrs lbl-cre">—</span></div>
+      <div class="row empty"><div class="row-info"><div class="row-role">Redactor Senior Digital</div></div><span class="row-hrs lbl-cre">—</span></div>
+      <div class="row empty"><div class="row-info"><div class="row-role">Director de Arte Senior Digital</div></div><span class="row-hrs lbl-cre">—</span></div>
+      <div class="bar-hrs h-cre"><span class="bar-hrs-label lbl-cre">Total horas</span><span class="bar-hrs-val lbl-cre">4.215 hs</span></div>
+      <div class="bar-fee h-cre"><span class="bar-fee-pct lbl-cre">62%</span><div class="bar-fee-right lbl-cre"><div class="fee-line"><span class="fee-label">Fixed Fee (sin Bono)</span><span class="fee-amount">$268.033.163</span></div><div class="fee-line"><span class="fee-label">Maximum Fee (con Bono)</span><span class="fee-amount">$348.443.113</span></div></div></div>
+    </div>
+  </div>
+
+  <!-- DIGITAL -->
+  <div class="section">
+    <div class="section-header h-dig"><span class="section-label lbl-dig">Digital</span></div>
+    <div class="section-rows">
+      <div class="row"><div class="row-info"><div class="row-role">Digital Strategist Director</div><div class="row-name tbd">To be defined</div></div><span class="row-hrs lbl-dig">235 hs</span></div>
+      <div class="row"><div class="row-info"><div class="row-role">Social Strategist</div><div class="row-name">Trini</div></div><span class="row-hrs lbl-dig">563 hs</span></div>
+      <div class="bar-hrs h-dig"><span class="bar-hrs-label lbl-dig">Total horas</span><span class="bar-hrs-val lbl-dig">798 hs</span></div>
+      <div class="bar-fee h-dig"><span class="bar-fee-pct lbl-dig">12%</span><div class="bar-fee-right lbl-dig"><div class="fee-line"><span class="fee-label">Fixed Fee (sin Bono)</span><span class="fee-amount">$50.835.128</span></div><div class="fee-line"><span class="fee-label">Maximum Fee (con Bono)</span><span class="fee-amount">$66.084.590</span></div></div></div>
+    </div>
+  </div>
+
+  <!-- PRODUCTION -->
+  <div class="section">
+    <div class="section-header h-pro"><span class="section-label lbl-pro">Production</span></div>
+    <div class="section-rows">
+      <div class="row"><div class="row-info"><div class="row-role">Productora</div><div class="row-name">Luz</div></div><span class="row-hrs lbl-pro">570 hs</span></div>
+      <div class="row empty"><div class="row-info"><div class="row-role">Head of Production</div></div><span class="row-hrs lbl-pro">—</span></div>
+      <div class="row empty"><div class="row-info"><div class="row-role">Producer</div></div><span class="row-hrs lbl-pro">—</span></div>
+      <div class="bar-hrs h-pro"><span class="bar-hrs-label lbl-pro">Total horas</span><span class="bar-hrs-val lbl-pro">570 hs</span></div>
+      <div class="bar-fee h-pro"><span class="bar-fee-pct lbl-pro">8%</span><div class="bar-fee-right lbl-pro"><div class="fee-line"><span class="fee-label">Fixed Fee (sin Bono)</span><span class="fee-amount">$36.301.942</span></div><div class="fee-line"><span class="fee-label">Maximum Fee (con Bono)</span><span class="fee-amount">$47.194.382</span></div></div></div>
+    </div>
+  </div>
+
+  <!-- RECAP CARDS -->
+  <div class="recap">
+    <div class="recap-grid">
+      <div class="recap-card"><div class="recap-card-header h-acc"><span class="recap-card-title lbl-acc">Account</span></div><div class="recap-card-body"><div class="recap-pct lbl-acc">5%</div><div class="recap-hrs lbl-acc">362 hs</div><div class="recap-fee-line lbl-acc"><span class="recap-fee-lbl">Fixed</span><span class="recap-fee-amt">$23.089.556</span></div><div class="recap-fee-line lbl-acc"><span class="recap-fee-lbl">Max</span><span class="recap-fee-amt">$30.006.723</span></div></div></div>
+      <div class="recap-card"><div class="recap-card-header h-str"><span class="recap-card-title lbl-str">Strategy</span></div><div class="recap-card-body"><div class="recap-pct lbl-str">12%</div><div class="recap-hrs lbl-str">841 hs</div><div class="recap-fee-line lbl-str"><span class="recap-fee-lbl">Fixed</span><span class="recap-fee-amt">$53.558.857</span></div><div class="recap-fee-line lbl-str"><span class="recap-fee-lbl">Max</span><span class="recap-fee-amt">$69.616.213</span></div></div></div>
+      <div class="recap-card"><div class="recap-card-header h-cre"><span class="recap-card-title lbl-cre">Creative</span></div><div class="recap-card-body"><div class="recap-pct lbl-cre">62%</div><div class="recap-hrs lbl-cre">4.215 hs</div><div class="recap-fee-line lbl-cre"><span class="recap-fee-lbl">Fixed</span><span class="recap-fee-amt">$268.033.163</span></div><div class="recap-fee-line lbl-cre"><span class="recap-fee-lbl">Max</span><span class="recap-fee-amt">$348.443.113</span></div></div></div>
+      <div class="recap-card"><div class="recap-card-header h-dig"><span class="recap-card-title lbl-dig">Digital</span></div><div class="recap-card-body"><div class="recap-pct lbl-dig">12%</div><div class="recap-hrs lbl-dig">798 hs</div><div class="recap-fee-line lbl-dig"><span class="recap-fee-lbl">Fixed</span><span class="recap-fee-amt">$50.835.128</span></div><div class="recap-fee-line lbl-dig"><span class="recap-fee-lbl">Max</span><span class="recap-fee-amt">$66.084.590</span></div></div></div>
+      <div class="recap-card"><div class="recap-card-header h-pro"><span class="recap-card-title lbl-pro">Production</span></div><div class="recap-card-body"><div class="recap-pct lbl-pro">8%</div><div class="recap-hrs lbl-pro">570 hs</div><div class="recap-fee-line lbl-pro"><span class="recap-fee-lbl">Fixed</span><span class="recap-fee-amt">$36.301.942</span></div><div class="recap-fee-line lbl-pro"><span class="recap-fee-lbl">Max</span><span class="recap-fee-amt">$47.194.382</span></div></div></div>
+    </div>
+  </div>
+
+  <!-- GRAND TOTAL -->
+  <div class="grand">
+    <div class="grand-hrs-row">
+      <span class="grand-label">Total horas</span>
+      <span class="grand-val big">6.786 hs</span>
+    </div>
+    <hr class="grand-divider">
+    <div class="grand-fee-row">
+      <span class="grand-label">Fixed Fee (sin Bono)</span>
+      <span class="grand-val">$432.311.554</span>
+    </div>
+    <div class="grand-fee-row">
+      <span class="grand-label">Maximum Fee (con Bono)</span>
+      <span class="grand-val">$562.005.021</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>
