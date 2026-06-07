@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Acuerdo de pago · Cordara</title>
+<title>Préstamo Naty a Hernán · Cronograma</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -21,7 +21,7 @@
 
     --accent: #9a6b3f;
     --accent-deep: #7d5430;
-    --accent-soft: #f1e4d2;
+    --accent-soft: #f3e6d3;
     --green: #5f6e4a;
     --green-soft: #e8ecdc;
 
@@ -31,14 +31,12 @@
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
   body {
     background: var(--bg);
     color: var(--ink);
     font-family: var(--serif-body);
     font-size: 17px;
     line-height: 1.62;
-    font-feature-settings: "kern", "liga", "onum";
     -webkit-font-smoothing: antialiased;
   }
 
@@ -51,159 +49,202 @@
   /* ---- Header ---- */
   header.doc-head {
     border-bottom: 1px solid var(--rule);
-    padding-bottom: 36px;
-    margin-bottom: 48px;
+    padding-bottom: 30px;
+    margin-bottom: 40px;
   }
   h1 {
     font-family: var(--serif-display);
     font-weight: 600;
-    font-size: 40px;
+    font-size: 38px;
     line-height: 1.15;
     letter-spacing: -0.01em;
   }
 
-  /* ---- Sections ---- */
-  section { margin-bottom: 56px; }
-  h2 {
-    font-family: var(--serif-display);
-    font-weight: 600;
-    font-size: 24px;
-    margin-bottom: 22px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--rule);
+  /* ---- Grid de cards: 4 filas de 2 ---- */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
 
-  /* ---- Data cells (resumen) ---- */
-  .data-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    margin-bottom: 18px;
-  }
-  .data-cell {
-    background: var(--bg-card);
+  /* ---- Card base (cuota) ---- */
+  .card {
+    border-radius: 16px;
     border: 1px solid var(--rule);
-    border-radius: 6px;
-    padding: 20px 22px;
+    background: var(--bg-card);
+    padding: 24px 26px;
+    display: flex;
+    flex-direction: column;
+    min-height: 168px;
   }
-  .data-cell .label {
+  .card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: auto;
+  }
+  .cuota-num {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: var(--ink-mute);
+  }
+  .cuota-num em { font-style: normal; color: var(--rule); }
+
+  .mes {
+    font-family: var(--serif-display);
+    font-size: 23px;
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-top: 20px;
+  }
+  .importe {
+    font-family: var(--mono);
+    font-size: 20px;
+    color: var(--ink);
+    margin-top: 8px;
+  }
+
+  /* ---- Badge de estado ---- */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
     font-family: var(--mono);
     font-size: 10.5px;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--ink-mute);
-    margin-bottom: 10px;
   }
-  .data-cell .value {
-    font-family: var(--serif-display);
-    font-size: 28px;
-    font-weight: 600;
-    color: var(--ink);
-    line-height: 1.1;
+  .badge .ic {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
   }
-  .data-cell .value small {
+  .badge svg { width: 11px; height: 11px; display: block; }
+
+  /* ---- Estado: PAGADA ---- */
+  .card.paid { background: var(--bg-soft); border-color: var(--rule-soft); }
+  .card.paid .mes,
+  .card.paid .importe { color: var(--ink-mute); }
+  .card.paid .cuota-num { color: var(--ink-mute); }
+  .badge-paid { color: var(--green); }
+  .badge-paid .ic { background: var(--green); }
+  .badge-paid svg { stroke: #fff; stroke-width: 3.5; fill: none; }
+
+  /* ---- Estado: EN CURSO ---- */
+  .card.current {
+    background: var(--accent-soft);
+    border: 1.5px solid var(--accent);
+    box-shadow: 0 8px 30px rgba(125,84,48,0.16);
+  }
+  .card.current .mes { color: var(--accent-deep); }
+  .card.current .importe { color: var(--accent-deep); font-size: 25px; font-weight: 500; }
+  .card.current .cuota-num { color: var(--accent-deep); }
+  .badge-current { color: var(--accent-deep); }
+  .badge-current .ic { background: var(--accent); }
+  .badge-current .ic span {
+    width: 7px; height: 7px; border-radius: 50%; background: #fff;
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  .vence {
     font-family: var(--mono);
     font-size: 12px;
-    font-weight: 400;
-    color: var(--ink-mute);
-    margin-left: 4px;
+    letter-spacing: 0.03em;
+    color: var(--accent-deep);
+    font-weight: 500;
+    margin-top: 12px;
   }
-  .data-cell.accent { background: var(--accent-soft); border-color: #e0c9a8; }
-  .data-cell.accent .value { color: var(--accent-deep); }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(0.55); opacity: .55; }
+  }
 
-  /* ---- Tabla cuotas ---- */
-  .table-wrap {
+  /* ---- Estado: PENDIENTE ---- */
+  .card.pending { background: var(--bg-card); opacity: .62; }
+  .card.pending .mes,
+  .card.pending .importe { color: var(--ink-mute); }
+  .card.pending .cuota-num { color: var(--rule); }
+  .badge-pending { color: var(--ink-mute); }
+  .badge-pending .ic { border: 1.5px solid var(--ink-mute); background: transparent; }
+
+  /* ---- Card 08 · Total ---- */
+  .card.summary {
+    border: 1.5px solid var(--accent);
     background: var(--bg-card);
-    border: 1px solid var(--rule);
-    border-radius: 6px;
-    overflow: hidden;
+    justify-content: flex-start;
   }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 15px;
-  }
-  thead th {
-    text-align: left;
-    padding: 14px 18px;
+  .summary .eyebrow {
     font-family: var(--mono);
     font-size: 10.5px;
-    font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--ink-mute);
-    background: var(--bg-soft);
-    border-bottom: 1px solid var(--rule);
+    margin-bottom: 16px;
   }
-  tbody td {
-    padding: 14px 18px;
-    border-bottom: 1px solid var(--rule-soft);
-    color: var(--ink-soft);
-    vertical-align: middle;
+  .summary .row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
   }
-  tbody tr:last-child td { border-bottom: none; }
-  tbody tr.mes-actual { background: #fdf6e8; }
-  tbody tr.mes-actual td.mes { color: var(--accent-deep); }
-  td.num-cuota {
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--accent);
-    font-weight: 500;
-    width: 50px;
-  }
-  td.mes { font-weight: 500; color: var(--ink); }
-  td.importe {
-    font-family: var(--mono);
-    font-size: 14px;
+  .summary .abonado {
+    font-family: var(--serif-display);
+    font-size: 31px;
+    font-weight: 600;
+    line-height: 1;
     color: var(--ink);
+    letter-spacing: -0.01em;
   }
-  td.saldo {
+  .summary .pct {
+    font-family: var(--serif-display);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--accent-deep);
+  }
+  .bar {
+    height: 12px;
+    background: var(--bg-soft);
+    border: 1px solid var(--rule-soft);
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 16px 0 16px;
+  }
+  .bar > span {
+    display: block;
+    height: 100%;
+    width: 43%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-deep));
+    border-radius: 999px;
+    animation: grow 1.1s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  @keyframes grow { from { width: 0; } to { width: 43%; } }
+  .summary .foot {
     font-family: var(--mono);
-    font-size: 13px;
-    color: var(--ink-mute);
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin-top: auto;
   }
-  td.saldo.cancelado { color: var(--green); font-weight: 500; }
-  td.check {
-    text-align: center;
-    width: 56px;
-  }
-  .checkbox {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    border: 1.5px solid var(--ink-mute);
-    border-radius: 2px;
-    vertical-align: middle;
-    position: relative;
-  }
-  .checkbox.checked {
-    background: var(--accent);
-    border-color: var(--accent);
-  }
-  .checkbox.checked::after {
-    content: "";
-    position: absolute;
-    left: 3px;
-    top: 0px;
-    width: 4px;
-    height: 8px;
-    border: solid #fff;
-    border-width: 0 1.5px 1.5px 0;
-    transform: rotate(45deg);
-  }
+  .summary .foot .sub { color: var(--ink-mute); }
 
   /* ---- Responsive ---- */
   @media (max-width: 640px) {
     .wrap { padding: 48px 22px 64px; }
-    h1 { font-size: 30px; }
-    .data-grid { grid-template-columns: 1fr; }
-    table { font-size: 13px; }
-    thead th, tbody td { padding: 10px 12px; }
+    h1 { font-size: 29px; }
+    .cards { grid-template-columns: 1fr; }
+    .summary .abonado { font-size: 30px; }
   }
 
   @media print {
-    body { background: white; }
-    section { page-break-inside: avoid; }
+    body { background: #fff; }
+    .card { box-shadow: none; }
+    .badge-current .ic span { animation: none; }
+    .bar > span { animation: none; }
   }
 </style>
 </head>
@@ -215,72 +256,115 @@
     <h1>Préstamo Naty a Hernán — Cronograma de cuotas</h1>
   </header>
 
-  <section>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Mes</th>
-            <th>Importe</th>
-            <th>Saldo restante</th>
-            <th style="text-align:center;">Confirmación</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="num-cuota">01</td>
-            <td class="mes">Marzo 2026</td>
-            <td class="importe">USD 500</td>
-            <td class="saldo">USD 3.000</td>
-            <td class="check"><span class="checkbox checked"></span></td>
-          </tr>
-          <tr>
-            <td class="num-cuota">02</td>
-            <td class="mes">Abril 2026</td>
-            <td class="importe">USD 500</td>
-            <td class="saldo">USD 2.500</td>
-            <td class="check"><span class="checkbox checked"></span></td>
-          </tr>
-          <tr class="mes-actual">
-            <td class="num-cuota">03</td>
-            <td class="mes">Mayo 2026</td>
-            <td class="importe">USD 500</td>
-            <td class="saldo">USD 2.000</td>
-            <td class="check"><span class="checkbox"></span></td>
-          </tr>
-          <tr>
-            <td class="num-cuota">04</td>
-            <td class="mes">Junio 2026</td>
-            <td class="importe">USD 500</td>
-            <td class="saldo">USD 1.500</td>
-            <td class="check"><span class="checkbox"></span></td>
-          </tr>
-          <tr>
-            <td class="num-cuota">05</td>
-            <td class="mes">Julio 2026</td>
-            <td class="importe">USD 500</td>
-            <td class="saldo">USD 1.000</td>
-            <td class="check"><span class="checkbox"></span></td>
-          </tr>
-          <tr>
-            <td class="num-cuota">06</td>
-            <td class="mes">Agosto 2026</td>
-            <td class="importe">USD 500</td>
-            <td class="saldo">USD 500</td>
-            <td class="check"><span class="checkbox"></span></td>
-          </tr>
-          <tr>
-            <td class="num-cuota">07</td>
-            <td class="mes">Septiembre 2026</td>
-            <td class="importe">USD 500</td>
-            <td class="saldo">USD 0</td>
-            <td class="check"><span class="checkbox"></span></td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="cards">
+
+    <!-- 01 · PAGADA -->
+    <div class="card paid">
+      <div class="card-top">
+        <div class="cuota-num">01<em> / 07</em></div>
+        <div class="badge badge-paid">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Pagada
+        </div>
+      </div>
+      <div class="mes">Marzo 2026</div>
+      <div class="importe">USD 500</div>
     </div>
-  </section>
+
+    <!-- 02 · PAGADA -->
+    <div class="card paid">
+      <div class="card-top">
+        <div class="cuota-num">02<em> / 07</em></div>
+        <div class="badge badge-paid">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Pagada
+        </div>
+      </div>
+      <div class="mes">Abril 2026</div>
+      <div class="importe">USD 500</div>
+    </div>
+
+    <!-- 03 · PAGADA -->
+    <div class="card paid">
+      <div class="card-top">
+        <div class="cuota-num">03<em> / 07</em></div>
+        <div class="badge badge-paid">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Pagada
+        </div>
+      </div>
+      <div class="mes">Mayo 2026</div>
+      <div class="importe">USD 500</div>
+    </div>
+
+    <!-- 04 · EN CURSO -->
+    <div class="card current">
+      <div class="card-top">
+        <div class="cuota-num">04<em> / 07</em></div>
+        <div class="badge badge-current">
+          <span class="ic"><span></span></span>
+          Este mes
+        </div>
+      </div>
+      <div class="mes">Junio 2026</div>
+      <div class="importe">USD 500</div>
+      <div class="vence">Vence el 30 de junio</div>
+    </div>
+
+    <!-- 05 · PENDIENTE -->
+    <div class="card pending">
+      <div class="card-top">
+        <div class="cuota-num">05<em> / 07</em></div>
+        <div class="badge badge-pending">
+          <span class="ic"></span>
+          Pendiente
+        </div>
+      </div>
+      <div class="mes">Julio 2026</div>
+      <div class="importe">USD 500</div>
+    </div>
+
+    <!-- 06 · PENDIENTE -->
+    <div class="card pending">
+      <div class="card-top">
+        <div class="cuota-num">06<em> / 07</em></div>
+        <div class="badge badge-pending">
+          <span class="ic"></span>
+          Pendiente
+        </div>
+      </div>
+      <div class="mes">Agosto 2026</div>
+      <div class="importe">USD 500</div>
+    </div>
+
+    <!-- 07 · PENDIENTE -->
+    <div class="card pending">
+      <div class="card-top">
+        <div class="cuota-num">07<em> / 07</em></div>
+        <div class="badge badge-pending">
+          <span class="ic"></span>
+          Pendiente
+        </div>
+      </div>
+      <div class="mes">Septiembre 2026</div>
+      <div class="importe">USD 500</div>
+    </div>
+
+    <!-- 08 · TOTAL -->
+    <div class="card summary">
+      <div class="eyebrow">Total abonado</div>
+      <div class="row">
+        <div class="abonado">USD 1.500</div>
+        <div class="pct">43%</div>
+      </div>
+      <div class="bar"><span></span></div>
+      <div class="foot">
+        <div>3 de 7 cuotas pagadas · Restan USD 2.000</div>
+        <div class="sub">de USD 3.500 totales</div>
+      </div>
+    </div>
+
+  </div>
 
 </div>
 
