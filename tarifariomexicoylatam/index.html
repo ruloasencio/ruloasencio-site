@@ -1,1 +1,251 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarifario comparativo · Buenos Aires / México</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f4;
+    --ink: #2b2620;
+    --ink-soft: #6f6557;
+    --line: #e6e0d4;
+    --imagen: #b05c3f;
+    --imagen-bg: #f6ece6;
+    --animacion: #a87f2e;
+    --animacion-bg: #f5efe0;
+    --audiovisual: #6e7a4a;
+    --audiovisual-bg: #eef0e4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Source Serif 4', serif;
+    font-size: 17px;
+    line-height: 1.5;
+    padding: 64px 24px 96px;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; }
+
+  .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  header { margin-bottom: 56px; }
+  header .label { margin-bottom: 16px; }
+  h1 {
+    font-family: 'Lora', serif;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  .intro {
+    max-width: 620px;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+  .intro strong { color: var(--ink); font-weight: 600; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  thead th {
+    text-align: left;
+    padding: 0 16px 14px;
+    border-bottom: 2px solid var(--ink);
+    vertical-align: bottom;
+  }
+  thead th.num { text-align: right; }
+  thead .th-title {
+    font-family: 'Lora', serif;
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  thead .th-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+
+  tr.group td {
+    padding: 36px 16px 10px;
+    border: none;
+  }
+  tr.group:first-child td { padding-top: 8px; }
+  .group-tag {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 4px;
+  }
+  .group-tag .n { opacity: 0.55; }
+
+  tr.g-imagen .group-tag { color: var(--imagen); background: var(--imagen-bg); }
+  tr.g-animacion .group-tag { color: var(--animacion); background: var(--animacion-bg); }
+  tr.g-audiovisual .group-tag { color: var(--audiovisual); background: var(--audiovisual-bg); }
+
+  tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: baseline;
+  }
+  td.servicio { font-weight: 600; }
+  td.num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  td.num .cur {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-right: 6px;
+  }
+  td.eq { color: var(--audiovisual); font-weight: 600; }
+
+  tr.r-imagen td.servicio { box-shadow: inset 3px 0 0 var(--imagen); }
+  tr.r-animacion td.servicio { box-shadow: inset 3px 0 0 var(--animacion); }
+  tr.r-audiovisual td.servicio { box-shadow: inset 3px 0 0 var(--audiovisual); }
+
+  footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+    color: var(--ink-soft);
+    max-width: 640px;
+  }
+  footer p + p { margin-top: 8px; }
+
+  @media (max-width: 640px) {
+    body { padding: 40px 16px 64px; font-size: 15px; }
+    h1 { font-size: 30px; }
+    thead th, tbody td { padding-left: 8px; padding-right: 8px; }
+    td.eq, th.eq { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="label">La América · Documento interno · Junio 2026</div>
+    <h1>Tarifario comparativo<br>Buenos Aires / México</h1>
+    <p class="intro">El tarifario México replica la estructura del tarifario Buenos Aires.</p>
+    <p class="intro" style="margin-top: 12px;">Por el aumento de cada ítem, lo que ganamos en México versus Argentina tiene un margen promedio de <strong>+90%</strong>, calculado al tipo de cambio oficial de <strong>$ 1.450</strong>.</p>
+  </header>
+
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th class="num">
+          <div class="th-title">Tarifario 🇦🇷</div>
+          <div class="th-sub">En pesos</div>
+        </th>
+        <th class="num">
+          <div class="th-title">Tarifario 🇲🇽</div>
+          <div class="th-sub">En dólares</div>
+        </th>
+        <th class="num eq">
+          <div class="th-title">Diferencia extra</div>
+          <div class="th-sub">Entre lo que ganamos entre Arg y Mex</div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr class="group g-imagen"><td colspan="4"><span class="group-tag"><span class="n">01</span>Imagen</span></td></tr>
+      <tr class="r-imagen">
+        <td class="servicio">Original Still</td>
+        <td class="num"><span class="cur">$</span>800.000</td>
+        <td class="num"><span class="cur">USD</span>1.000</td>
+        <td class="num eq"><span class="cur">+$</span>650.000</td>
+      </tr>
+      <tr class="r-imagen">
+        <td class="servicio">Adaptación Still</td>
+        <td class="num"><span class="cur">$</span>200.000</td>
+        <td class="num"><span class="cur">USD</span>250</td>
+        <td class="num eq"><span class="cur">+$</span>162.500</td>
+      </tr>
+
+      <tr class="group g-animacion"><td colspan="4"><span class="group-tag"><span class="n">02</span>Animación</span></td></tr>
+      <tr class="r-animacion">
+        <td class="servicio">Animación Short</td>
+        <td class="num"><span class="cur">$</span>2.000.000</td>
+        <td class="num"><span class="cur">USD</span>2.500</td>
+        <td class="num eq"><span class="cur">+$</span>1.625.000</td>
+      </tr>
+      <tr class="r-animacion">
+        <td class="servicio">Animación Medium</td>
+        <td class="num"><span class="cur">$</span>3.500.000</td>
+        <td class="num"><span class="cur">USD</span>4.500</td>
+        <td class="num eq"><span class="cur">+$</span>3.025.000</td>
+      </tr>
+      <tr class="r-animacion">
+        <td class="servicio">Animación Large</td>
+        <td class="num"><span class="cur">$</span>5.000.000</td>
+        <td class="num"><span class="cur">USD</span>6.500</td>
+        <td class="num eq"><span class="cur">+$</span>4.425.000</td>
+      </tr>
+      <tr class="r-animacion">
+        <td class="servicio">Adaptación Animación</td>
+        <td class="num"><span class="cur">$</span>300.000</td>
+        <td class="num"><span class="cur">USD</span>500</td>
+        <td class="num eq"><span class="cur">+$</span>425.000</td>
+      </tr>
+
+      <tr class="group g-audiovisual"><td colspan="4"><span class="group-tag"><span class="n">03</span>Audiovisual</span></td></tr>
+      <tr class="r-audiovisual">
+        <td class="servicio">Audiovisual Short</td>
+        <td class="num"><span class="cur">$</span>10.000.000</td>
+        <td class="num"><span class="cur">USD</span>12.500</td>
+        <td class="num eq"><span class="cur">+$</span>8.125.000</td>
+      </tr>
+      <tr class="r-audiovisual">
+        <td class="servicio">Audiovisual Medium</td>
+        <td class="num"><span class="cur">$</span>20.000.000</td>
+        <td class="num"><span class="cur">USD</span>25.000</td>
+        <td class="num eq"><span class="cur">+$</span>16.250.000</td>
+      </tr>
+      <tr class="r-audiovisual">
+        <td class="servicio">Audiovisual Large</td>
+        <td class="num"><span class="cur">$</span>30.000.000</td>
+        <td class="num"><span class="cur">USD</span>40.000</td>
+        <td class="num eq"><span class="cur">+$</span>28.000.000</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <footer>
+    <p><strong>Nota para el PDF que recibirá el cliente:</strong></p>
+    <p>Incluirá un texto que explica, a prueba de dudas, que estos precios son <strong>netos, libres de impuestos y retenciones</strong>.</p>
+    <p>Si el país del cliente aplica algún tipo de retención (por ejemplo, Venezuela retiene el 35%), ese monto deberá sumarse al precio para que La América reciba el dinero limpio y neto que figura acá.</p>
+    <p>El tarifario 🇲🇽 no se ajusta por IPC: su valor en pesos fluctúa con el tipo de cambio.</p>
+  </footer>
+
+</div>
+</body>
+</html>
