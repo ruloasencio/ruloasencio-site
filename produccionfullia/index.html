@@ -1,1 +1,259 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Buró · Producción audiovisual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f4;
+    --ink: #2b2620;
+    --ink-soft: #6f6557;
+    --line: #e6e0d4;
+    --card: #f4f0e8;
+    --buro: #5a4a8a;
+    --mxn: #b05c3f;
+    --ars: #5d7148;
+    --usd: #2b2620;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Source Serif 4', serif;
+    font-size: 17px;
+    line-height: 1.5;
+    padding: 56px 24px 96px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  header { margin-bottom: 44px; }
+  header .label { margin-bottom: 14px; }
+  h1 { font-family: 'Lora', serif; font-weight: 500; font-size: 34px; line-height: 1.12; margin-bottom: 14px; }
+  .intro { max-width: 560px; font-size: 17px; color: var(--ink-soft); }
+
+  .slider-zone { margin: 8px 0 36px; padding: 0 4px; }
+  .slider-hint { background: var(--card); border-radius: 12px; padding: 14px 20px; margin-bottom: 24px; font-size: 16px; color: var(--ink-soft); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  input[type=range] {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 6px; border-radius: 3px;
+    background: var(--line); outline: none; margin-bottom: 16px;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--mxn); cursor: pointer; border: 5px solid var(--bg);
+    box-shadow: 0 0 0 1px var(--mxn);
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--mxn); cursor: pointer; border: 5px solid var(--bg);
+  }
+  .ticks { display: flex; justify-content: space-between; }
+  .tick { display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; padding: 4px 6px; }
+  .tick-dur { font-family: 'Lora', serif; font-size: 22px; color: var(--ink-soft); transition: color .15s; }
+  .tick-tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); opacity: 0.6; transition: opacity .15s; white-space: nowrap; }
+  .tick.on .tick-dur { color: var(--mxn); font-weight: 500; }
+  .tick.on .tick-tag { opacity: 1; color: var(--mxn); }
+
+  .client-box {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 40px 32px;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .client-box .amt {
+    font-family: 'Lora', serif;
+    font-size: 48px;
+    font-weight: 500;
+    color: var(--mxn);
+    line-height: 1.05;
+  }
+  .client-box .amt .cur { font-size: 24px; color: var(--ink-soft); }
+  .client-box .cap { font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); margin-top: 14px; }
+
+  .internal { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .ibox { background: transparent; border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; text-align: center; }
+  .ibox .amt { font-family: 'Lora', serif; font-size: 22px; font-weight: 400; line-height: 1.1; color: var(--ink-soft); }
+  .ibox .amt .cur { font-size: 13px; color: var(--ink-soft); }
+  .ibox .cap { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-top: 10px; }
+  .ibox .legal { font-size: 11px; color: var(--ink-soft); margin-top: 6px; font-style: italic; opacity: 0.7; }
+
+  .client-tag { font-size: 11px; color: var(--ink-soft); font-style: italic; margin-top: 8px; }
+
+  .ejemplos { margin-top: 56px; }
+  .ejemplos h2 { font-family: 'Lora', serif; font-weight: 500; font-size: 24px; margin-bottom: 22px; }
+  .video-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .video-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 32px; }
+  .video-item { display: flex; flex-direction: column; }
+  .video-frame { position: relative; padding-top: 56.25%; border-radius: 14px; overflow: hidden; background: #1c1812; border: 1px solid var(--line); }
+  .video-frame iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+  .video-ficha { display: flex; flex-direction: column; gap: 2px; padding: 14px 4px 0; }
+  .vf-marca { font-family: 'Lora', serif; font-size: 19px; color: var(--ink); }
+  .vf-nombre { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: var(--ink-soft); margin-top: 3px; }
+  .vf-dur { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--ink-soft); margin-top: 1px; }
+
+  .ibox.fx { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .ibox.fx .fx-body { font-family: 'Lora', serif; font-size: 15px; font-weight: 400; color: var(--ink-soft); line-height: 1.7; text-align: center; }
+  .ibox.fx .fx-top { font-size: 17px; color: var(--ink); }
+  footer { margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 15px; color: var(--ink-soft); }
+  footer .foot-title { font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+  footer .foot-sub { margin-bottom: 16px; font-size: 15px; line-height: 1.5; }
+  footer .terceros { display: grid; gap: 6px; }
+  footer .trow { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  footer .trow:last-child { border-bottom: none; }
+  footer .trow.thead { border-bottom: 2px solid var(--line); padding-bottom: 10px; align-items: center; }
+  footer .tflag { font-size: 38px; text-align: left; }
+  footer .tconcept { color: var(--ink-soft); font-size: 14.5px; }
+  footer .tnum { font-family: 'DM Mono', monospace; color: var(--buro); margin-right: 8px; font-size: 13px; }
+  footer .tval { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--ink); text-align: left; }
+  footer .tval a { color: var(--buro); text-decoration: none; border-bottom: 1px solid var(--line); }
+  footer .tval a:hover { border-bottom-color: var(--buro); }
+  footer .foot-fine { margin-top: 16px; font-size: 13px; opacity: 0.85; }
+
+  @media (max-width: 560px) {
+    body { padding: 36px 16px 60px; font-size: 15px; }
+    h1 { font-size: 26px; }
+    .client-box .amt { font-size: 36px; }
+    .internal { grid-template-columns: 1fr; }
+    .tick { font-size: 17px; padding: 4px 2px; }
+    .video-grid { grid-template-columns: 1fr; }
+    .slider-hint { font-size: 12px; padding: 12px 14px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Audiovisuales 100% IA<br>by La América Buró &amp; Partners</h1>
+  </header>
+
+  <div class="slider-zone">
+    <div class="slider-hint">Deslizá por las diferentes duraciones para calcular el costo de producción.</div>
+    <input type="range" id="slider" min="0" max="4" value="0" step="1">
+    <div class="ticks" id="ticks"></div>
+  </div>
+
+  <div class="client-box">
+    <div class="amt"><span class="cur">$ </span><span id="mxn">80.000</span> <span class="cur">MXN</span></div>
+    <div class="cap">Valor de la pieza audiovisual</div>
+    <div class="client-tag">Información para el cliente</div>
+  </div>
+
+  <div class="internal">
+    <div class="ibox usd">
+      <div class="amt"><span class="cur">USD </span><span id="usd">775</span></div>
+      <div class="cap">Costo por segundo</div>
+      <div class="legal">Uso interno · Ale &amp; Rulo</div>
+    </div>
+    <div class="ibox usdtot">
+      <div class="amt"><span class="cur">USD </span><span id="usdtot">4.651</span></div>
+      <div class="cap">Total en dólares</div>
+      <div class="legal">Uso interno · Ale &amp; Rulo</div>
+    </div>
+    <div class="ibox ars">
+      <div class="amt"><span class="cur">$ </span><span id="ars">6.740.000</span></div>
+      <div class="cap">Total en pesos argentinos</div>
+      <div class="legal">Uso interno · Ale &amp; Rulo</div>
+    </div>
+    <div class="ibox fx">
+      <div class="fx-body"><span class="fx-top">USD 1 &nbsp;=&nbsp; $ 17,20 MXN &nbsp;=&nbsp; $ 1.450 ARS</span><br>Valores de cambio de referencia</div>
+      <div class="legal">Uso interno · Ale &amp; Rulo</div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="foot-sub">Esta cotización de producción 100% IA no incluye costos de terceros.<br>En caso de existir, los mismos se presupuestarán a costo real, sin markup alguno.</div>
+    <div class="terceros">
+      <div class="trow thead"><span class="tconcept"></span><span class="tval tflag">🇲🇽</span><span class="tval tflag">🇦🇷</span></div>
+      <div class="trow"><span class="tconcept"><span class="tnum">1</span> Locución</span><span class="tval"><a href="https://laanda.org.mx" target="_blank">ANDA</a></span><span class="tval"><a href="https://www.sal.org.ar" target="_blank">SAL</a></span></div>
+      <div class="trow"><span class="tconcept"><span class="tnum">2</span> Actores · cachet &amp; imagen</span><span class="tval"><a href="https://laanda.org.mx" target="_blank">ANDA</a> + <a href="https://andi.org.mx" target="_blank">ANDI</a></span><span class="tval"><a href="https://actores.org.ar" target="_blank">AAA</a> + <a href="https://www.sagai.org" target="_blank">SAGAI</a></span></div>
+      <div class="trow"><span class="tconcept"><span class="tnum">3</span> Música · letra &amp; composición</span><span class="tval"><a href="https://www.sacm.org.mx" target="_blank">SACM</a></span><span class="tval"><a href="https://www.sadaic.org.ar" target="_blank">SADAIC</a></span></div>
+      <div class="trow"><span class="tconcept"><span class="tnum">4</span> Música · fonograma &amp; intérpretes</span><span class="tval"><a href="https://www.amprofon.com.mx" target="_blank">AMPROFON</a></span><span class="tval"><a href="https://www.capif.org.ar" target="_blank">CAPIF</a></span></div>
+    </div>
+  </footer>
+
+  <section class="ejemplos">
+    <h2>Algunas piezas by La América Buró &amp; Partners</h2>
+    <div class="video-grid">
+      <div class="video-item">
+        <div class="video-frame"><iframe src="https://agencialaamerica.slateapp.com/embed/clip/62" allow="fullscreen" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe></div>
+        <div class="video-ficha"><span class="vf-marca">Lucchetti</span><span class="vf-nombre">Feliz IA</span><span class="vf-dur">60 seg.</span></div>
+      </div>
+      <div class="video-item">
+        <div class="video-frame"><iframe src="https://agencialaamerica.slateapp.com/embed/clip/217" allow="fullscreen" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe></div>
+        <div class="video-ficha"><span class="vf-marca">Lucchetti</span><span class="vf-nombre">La Lucchettineta</span><span class="vf-dur">35 seg.</span></div>
+      </div>
+      <div class="video-item">
+        <div class="video-frame"><iframe src="https://agencialaamerica.slateapp.com/embed/clip/364" allow="fullscreen" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe></div>
+        <div class="video-ficha"><span class="vf-marca">Banco Provincia</span><span class="vf-nombre">Crecimiento</span><span class="vf-dur">21 seg.</span></div>
+      </div>
+      <div class="video-item">
+        <div class="video-frame"><iframe src="https://agencialaamerica.slateapp.com/embed/clip/45" allow="fullscreen" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe></div>
+        <div class="video-ficha"><span class="vf-marca">Banco Provincia</span><span class="vf-nombre">Lassie</span><span class="vf-dur">24 seg.</span></div>
+      </div>
+      <div class="video-item">
+        <div class="video-frame"><iframe src="https://agencialaamerica.slateapp.com/embed/clip/693" allow="fullscreen" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe></div>
+        <div class="video-ficha"><span class="vf-marca">La Virginia</span><span class="vf-nombre">Yacaré</span><span class="vf-dur">36 seg.</span></div>
+      </div>
+      <div class="video-item">
+        <div class="video-frame"><iframe src="https://agencialaamerica.slateapp.com/embed/clip/742" allow="fullscreen" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe></div>
+        <div class="video-ficha"><span class="vf-marca">La Virginia</span><span class="vf-nombre">Yoga</span><span class="vf-dur">38 seg.</span></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  var MXN_USD = 17.20, USD_ARS = 1450;
+  var pasos = [
+    { dur: 6,  tag: "Bumper", mxn: 80000 },
+    { dur: 15, tag: "Teaser",  mxn: 180000 },
+    { dur: 30, tag: "Spot", mxn: 350000 },
+    { dur: 45, tag: "Extended", mxn: 500000 },
+    { dur: 60, tag: "Hero",  mxn: 650000 }
+  ];
+
+  function fmtMX(n){ return Math.round(n).toLocaleString('es-MX'); }
+  function fmtAR(n){ return Math.round(n).toLocaleString('es-AR'); }
+
+  var ticksEl = document.getElementById('ticks');
+  ticksEl.innerHTML = pasos.map(function(p, i){
+    return '<span class="tick" data-i="'+i+'"><span class="tick-dur">'+p.dur+'”</span><span class="tick-tag">'+p.tag+'</span></span>';
+  }).join('');
+
+  var slider = document.getElementById('slider');
+  function render(){
+    var i = parseInt(slider.value, 10);
+    var p = pasos[i];
+    var usd = p.mxn / MXN_USD;
+    var ars = usd * USD_ARS;
+    var segUSD = usd / p.dur;
+    document.getElementById('mxn').textContent = fmtMX(p.mxn);
+    document.getElementById('usdtot').textContent = fmtMX(usd);
+    document.getElementById('ars').textContent = fmtAR(ars);
+    document.getElementById('usd').textContent = fmtMX(segUSD);
+    var ts = ticksEl.querySelectorAll('.tick');
+    ts.forEach(function(t){ t.classList.toggle('on', parseInt(t.dataset.i,10) === i); });
+  }
+  slider.addEventListener('input', render);
+  ticksEl.querySelectorAll('.tick').forEach(function(t){
+    t.addEventListener('click', function(){ slider.value = t.dataset.i; render(); });
+  });
+  render();
+</script>
+</body>
+</html>
