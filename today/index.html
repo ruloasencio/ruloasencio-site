@@ -17,6 +17,7 @@
     --luci-bg: #fdeef0;  --luci-ink: #c0405a;
     --manu-bg: #eaf2fb;  --manu-ink: #2f6db0;
     --mati-bg: #eef5ec;  --mati-ink: #4a7c43;
+    --hnos-bg: #f6efe2;  --hnos-ink: #9a6b2f;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -112,6 +113,7 @@
   .pill-luci { background: var(--luci-bg); color: var(--luci-ink); }
   .pill-manu { background: var(--manu-bg); color: var(--manu-ink); }
   .pill-mati { background: var(--mati-bg); color: var(--mati-ink); }
+  .pill-hnos { background: var(--hnos-bg); color: var(--hnos-ink); }
   /* Profesional a cargo — outline neutro */
   .pill-pro {
     background: transparent;
@@ -141,7 +143,7 @@
 
   <!-- ===================== EN CURSO ===================== -->
   <section class="section">
-    <h2>En curso</h2>
+    <h2>En curso <span class="h2-note">(Junio + Julio)</span></h2>
     <div class="cards">
 
       <div class="card">
@@ -149,12 +151,11 @@
           <div class="card-num">1</div>
           <div class="card-main">
             <div class="card-title">Campo Chovet</div>
-            <div class="card-sub">Rectificación denuncia</div>
+            <div class="card-sub">Cobro préstamo</div>
           </div>
         </div>
         <div class="pills">
-          <span class="pill pill-pro">Keco</span>
-          <span class="pill pill-luci">Luci</span>
+          <span class="pill pill-hnos">Hnos. Asencio</span>
         </div>
       </div>
 
@@ -162,12 +163,12 @@
         <div class="card-left">
           <div class="card-num">2</div>
           <div class="card-main">
-            <div class="card-title">Predio 1350</div>
-            <div class="card-sub">Cesión de derechos</div>
+            <div class="card-title">Casa Mati</div>
+            <div class="card-sub">Denuncia del bien</div>
           </div>
         </div>
         <div class="pills">
-          <span class="pill pill-pro">Elisa</span>
+          <span class="pill pill-pro">Keco</span>
           <span class="pill pill-mati">Mati</span>
         </div>
       </div>
@@ -190,12 +191,11 @@
         <div class="card-left">
           <div class="card-num">4</div>
           <div class="card-main">
-            <div class="card-title">Casa Mati</div>
-            <div class="card-sub">Denuncia del bien</div>
+            <div class="card-title">Lote Manu</div>
+            <div class="card-sub">Traslado de gas y agua</div>
           </div>
         </div>
         <div class="pills">
-          <span class="pill pill-pro">Keco</span>
           <span class="pill pill-mati">Mati</span>
         </div>
       </div>
@@ -212,19 +212,6 @@
         <div class="card-left">
           <div class="card-num">5</div>
           <div class="card-main">
-            <div class="card-title">Tía Liliana</div>
-            <div class="card-sub">Cobro préstamo</div>
-          </div>
-        </div>
-        <div class="pills">
-          <span class="pill pill-manu">Manu</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-left">
-          <div class="card-num">6</div>
-          <div class="card-main">
             <div class="card-title">Casa Luci</div>
             <div class="card-sub">Plano de obra</div>
           </div>
@@ -237,7 +224,7 @@
 
       <div class="card">
         <div class="card-left">
-          <div class="card-num">7</div>
+          <div class="card-num">6</div>
           <div class="card-main">
             <div class="card-title">Predio 1350</div>
             <div class="card-sub">Usucapión</div>
@@ -251,7 +238,7 @@
 
       <div class="card">
         <div class="card-left">
-          <div class="card-num">8</div>
+          <div class="card-num">7</div>
           <div class="card-main">
             <div class="card-title">Casa Mati</div>
             <div class="card-sub">Escritura</div>
@@ -270,6 +257,32 @@
   <section class="section done">
     <h2>Done</h2>
     <div class="cards">
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-title">Campo Chovet</div>
+            <div class="card-sub">Rectificación denuncia</div>
+          </div>
+        </div>
+        <div class="pills">
+          <span class="pill pill-pro">Keco</span>
+          <span class="pill pill-luci">Luci</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-title">Predio 1350</div>
+            <div class="card-sub">Cesión de derechos</div>
+          </div>
+        </div>
+        <div class="pills">
+          <span class="pill pill-pro">Elisa</span>
+          <span class="pill pill-mati">Mati</span>
+        </div>
+      </div>
 
       <div class="card">
         <div class="card-left">
@@ -314,7 +327,9 @@
             <div class="card-sub">Plano de obra · Consultar en municipalidad</div>
           </div>
         </div>
-        <div class="pills"></div>
+        <div class="pills">
+          <span class="pill pill-manu">Manu</span>
+        </div>
       </div>
 
       <div class="card">
@@ -348,7 +363,9 @@
             <div class="card-sub">Compensación · % en dólares a Luci + Mati</div>
           </div>
         </div>
-        <div class="pills"></div>
+        <div class="pills">
+          <span class="pill pill-hnos">Hnos. Asencio</span>
+        </div>
       </div>
 
       <div class="card">
@@ -356,18 +373,6 @@
           <div class="card-main">
             <div class="card-title">Casa Luci</div>
             <div class="card-sub">Escritura · ya finalizada, esperando original</div>
-          </div>
-        </div>
-        <div class="pills">
-          <span class="pill pill-pro">Elisa</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-left">
-          <div class="card-main">
-            <div class="card-title">Predio 1350</div>
-            <div class="card-sub">Cesión de derechos</div>
           </div>
         </div>
         <div class="pills">
