@@ -1,1 +1,172 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workflow Granja Del Sol</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf8f4;
+    --ink:#2b2622;
+    --muted:#8a8076;
+    --line:#e2dace;
+    --brief:#5a4a8a;      /* violeta */
+    --present:#c0552b;    /* terracota */
+    --feed:#5d7148;       /* oliva */
+    --pend:#b3a99c;       /* a confirmar */
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Source Serif 4",serif;
+    line-height:1.5;
+    padding:64px 24px 96px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:620px;margin:0 auto}
+
+  /* Header */
+  .eyebrow{
+    font-family:"DM Mono",monospace;
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:14px;
+  }
+  h1{
+    font-family:"Lora",serif;font-weight:600;
+    font-size:38px;line-height:1.08;letter-spacing:-.01em;
+  }
+
+  /* Timeline */
+  .timeline{margin-top:44px}
+  .block{
+    position:relative;padding-left:34px;
+    padding-top:30px;border-top:1px solid var(--line);
+  }
+  .block + .block{margin-top:30px}
+
+  .node{position:relative;padding-bottom:22px}
+  .node:last-child{padding-bottom:0}
+  /* connecting rail only between nodes within the same block */
+  .node:not(:last-child)::after{
+    content:"";position:absolute;left:-29px;top:9px;bottom:-9px;
+    width:2px;background:var(--line);
+  }
+  .dot{
+    position:absolute;left:-34px;top:3px;
+    width:12px;height:12px;border-radius:50%;
+    background:var(--bg);border:2.5px solid var(--ink);
+  }
+  .date{
+    font-family:"DM Mono",monospace;font-size:12px;
+    letter-spacing:.06em;color:var(--muted);margin-bottom:7px;
+  }
+  .chip{
+    display:inline-block;font-family:"DM Mono",monospace;
+    font-size:11px;letter-spacing:.06em;
+    padding:5px 12px;border-radius:20px;color:#fff;
+  }
+
+  /* type colors */
+  .t-brief   .dot{border-color:var(--brief)}   .c-brief{background:var(--brief)}
+  .t-present .dot{border-color:var(--present)} .c-present{background:var(--present)}
+  .t-feed    .dot{border-color:var(--feed)}    .c-feed{background:var(--feed)}
+  .t-pend .dot{border-style:dashed}
+  .t-pend .date{color:var(--pend)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">Molinos · La América · 2026</div>
+  <h1>Workflow Granja Del Sol</h1>
+
+  <div class="timeline">
+
+    <!-- Arranque -->
+    <div class="block">
+      <div class="node t-brief">
+        <div class="dot"></div>
+        <div class="date">23 ENE</div>
+        <div class="chip c-brief">Brief &amp; Kick Off</div>
+      </div>
+    </div>
+
+    <!-- Ronda 1 -->
+    <div class="block">
+      <div class="node t-present">
+        <div class="dot"></div>
+        <div class="date">10 FEB</div>
+        <div class="chip c-present">1º Presentación Creativa</div>
+      </div>
+      <div class="node t-feed">
+        <div class="dot"></div>
+        <div class="date">24 FEB</div>
+        <div class="chip c-feed">Feedback 1</div>
+      </div>
+    </div>
+
+    <!-- Ronda 2 -->
+    <div class="block">
+      <div class="node t-present">
+        <div class="dot"></div>
+        <div class="date">19 MAR</div>
+        <div class="chip c-present">2º Presentación Creativa</div>
+      </div>
+      <div class="node t-feed">
+        <div class="dot"></div>
+        <div class="date">30 MAR</div>
+        <div class="chip c-feed">Feedback 2</div>
+      </div>
+    </div>
+
+    <!-- Ronda 3 -->
+    <div class="block">
+      <div class="node t-present">
+        <div class="dot"></div>
+        <div class="date">24 ABR</div>
+        <div class="chip c-present">3º Presentación Creativa</div>
+      </div>
+      <div class="node t-feed t-pend">
+        <div class="dot"></div>
+        <div class="date">A CONFIRMAR</div>
+        <div class="chip c-feed">Feedback 3</div>
+      </div>
+    </div>
+
+    <!-- Ronda 4 -->
+    <div class="block">
+      <div class="node t-present">
+        <div class="dot"></div>
+        <div class="date">14 MAY</div>
+        <div class="chip c-present">4º Presentación Creativa</div>
+      </div>
+      <div class="node t-feed">
+        <div class="dot"></div>
+        <div class="date">29 MAY</div>
+        <div class="chip c-feed">Feedback 4</div>
+      </div>
+    </div>
+
+    <!-- Ronda 5 -->
+    <div class="block">
+      <div class="node t-present">
+        <div class="dot"></div>
+        <div class="date">17 JUN</div>
+        <div class="chip c-present">5º Presentación Creativa</div>
+      </div>
+      <div class="node t-feed t-pend">
+        <div class="dot"></div>
+        <div class="date">A CONFIRMAR</div>
+        <div class="chip c-feed">Feedback 5</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
