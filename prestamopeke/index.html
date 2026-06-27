@@ -174,8 +174,8 @@
 
   /* ---- Card 08 · Total ---- */
   .card.summary {
-    border: 1.5px solid var(--accent);
-    background: var(--bg-card);
+    border: 1.5px solid var(--green);
+    background: var(--green-soft);
     justify-content: flex-start;
   }
   .summary .eyebrow {
@@ -203,7 +203,7 @@
     font-family: var(--serif-display);
     font-size: 22px;
     font-weight: 600;
-    color: var(--accent-deep);
+    color: var(--green);
   }
   .bar {
     height: 12px;
@@ -216,12 +216,12 @@
   .bar > span {
     display: block;
     height: 100%;
-    width: 43%;
-    background: linear-gradient(90deg, var(--accent), var(--accent-deep));
+    width: 100%;
+    background: linear-gradient(90deg, var(--green), #4a5639);
     border-radius: 999px;
     animation: grow 1.1s cubic-bezier(.2,.7,.2,1) forwards;
   }
-  @keyframes grow { from { width: 0; } to { width: 43%; } }
+  @keyframes grow { from { width: 0; } to { width: 100%; } }
   .summary .foot {
     font-family: var(--mono);
     font-size: 12px;
@@ -231,6 +231,36 @@
     margin-top: auto;
   }
   .summary .foot .sub { color: var(--ink-mute); }
+
+  /* ---- Nota de cierre ---- */
+  .closing {
+    margin-top: 32px;
+    border: 1px solid var(--green);
+    background: var(--green-soft);
+    border-radius: 16px;
+    padding: 26px 30px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+  }
+  .closing .seal {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: var(--green);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    margin-top: 2px;
+  }
+  .closing .seal svg { width: 20px; height: 20px; stroke: #fff; stroke-width: 3; fill: none; }
+  .closing .ctext {
+    font-family: var(--serif-body);
+    font-size: 16.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+  .closing .ctext strong { color: var(--ink); font-weight: 600; }
 
   /* ---- Responsive ---- */
   @media (max-width: 640px) {
@@ -297,53 +327,52 @@
       <div class="importe">USD 500</div>
     </div>
 
-    <!-- 04 · EN CURSO -->
-    <div class="card current">
+    <!-- 04 · PAGADA -->
+    <div class="card paid">
       <div class="card-top">
         <div class="cuota-num">04<em> / 07</em></div>
-        <div class="badge badge-current">
-          <span class="ic"><span></span></span>
-          Este mes
+        <div class="badge badge-paid">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Pagada
         </div>
       </div>
       <div class="mes">Junio 2026</div>
       <div class="importe">USD 500</div>
-      <div class="vence">Vence el 30 de junio</div>
     </div>
 
-    <!-- 05 · PENDIENTE -->
-    <div class="card pending">
+    <!-- 05 · PAGADA -->
+    <div class="card paid">
       <div class="card-top">
         <div class="cuota-num">05<em> / 07</em></div>
-        <div class="badge badge-pending">
-          <span class="ic"></span>
-          Pendiente
+        <div class="badge badge-paid">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Pagada
         </div>
       </div>
       <div class="mes">Julio 2026</div>
       <div class="importe">USD 500</div>
     </div>
 
-    <!-- 06 · PENDIENTE -->
-    <div class="card pending">
+    <!-- 06 · PAGADA -->
+    <div class="card paid">
       <div class="card-top">
         <div class="cuota-num">06<em> / 07</em></div>
-        <div class="badge badge-pending">
-          <span class="ic"></span>
-          Pendiente
+        <div class="badge badge-paid">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Pagada
         </div>
       </div>
       <div class="mes">Agosto 2026</div>
       <div class="importe">USD 500</div>
     </div>
 
-    <!-- 07 · PENDIENTE -->
-    <div class="card pending">
+    <!-- 07 · PAGADA -->
+    <div class="card paid">
       <div class="card-top">
         <div class="cuota-num">07<em> / 07</em></div>
-        <div class="badge badge-pending">
-          <span class="ic"></span>
-          Pendiente
+        <div class="badge badge-paid">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Pagada
         </div>
       </div>
       <div class="mes">Septiembre 2026</div>
@@ -354,16 +383,24 @@
     <div class="card summary">
       <div class="eyebrow">Total abonado</div>
       <div class="row">
-        <div class="abonado">USD 1.500</div>
-        <div class="pct">43%</div>
+        <div class="abonado">USD 3.500</div>
+        <div class="pct">100%</div>
       </div>
       <div class="bar"><span></span></div>
       <div class="foot">
-        <div>3 de 7 cuotas pagadas · Restan USD 2.000</div>
+        <div>7 de 7 cuotas pagadas · Préstamo cancelado</div>
         <div class="sub">de USD 3.500 totales</div>
       </div>
     </div>
 
+  </div>
+
+  <!-- Nota de cierre -->
+  <div class="closing">
+    <span class="seal"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    <div class="ctext">
+      El <strong>jueves 25 de junio</strong> recibí la suma de <strong>USD 2.000 (dos mil dólares) en billete</strong>, quedando de esta manera abonado el <strong>100% del préstamo</strong>.
+    </div>
   </div>
 
 </div>
