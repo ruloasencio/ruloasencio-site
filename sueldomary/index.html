@@ -1,1 +1,343 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mary · Sueldo</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #1d1d1f;
+    --muted: #86868b;
+    --line: #e8e8ed;
+    --card: #fbfbfd;
+
+    --pay-bg: #eef5ec;  --pay-ink: #4a7c43;   /* monto / en blanco */
+    --agui-bg: #f6efe2; --agui-ink: #9a6b2f;  /* aguinaldo */
+    --soft-bg: #fbf7f1;                        /* card reconocimiento */
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.4;
+    padding: 64px 24px 96px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+
+  h1 {
+    font-size: 44px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .lede {
+    font-size: 17px;
+    color: var(--muted);
+    margin-bottom: 56px;
+    letter-spacing: -0.01em;
+  }
+
+  .section { margin-bottom: 56px; }
+  .section:last-child { margin-bottom: 0; }
+
+  h2 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  h2 .h2-note {
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .cards { display: flex; flex-direction: column; gap: 12px; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .card-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+  }
+  .card-num {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+    width: 18px;
+    text-align: right;
+  }
+  .card-main { min-width: 0; }
+  .card-title {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+  .card-sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .pill {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .pill-agui { background: var(--agui-bg); color: var(--agui-ink); }
+  .pill-pay  { background: var(--pay-bg);  color: var(--pay-ink); }
+
+  .pills { align-items: center; }
+  .plus {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .agui-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+  }
+  .agui-cap {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--muted);
+  }
+
+  /* Texto / reconocimiento */
+  .note {
+    background: var(--soft-bg);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 28px 26px;
+  }
+  .note p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .note p:last-child { margin-bottom: 0; }
+  .note strong { font-weight: 600; }
+
+  /* Data-cells reconocimiento */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .stat {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 16px;
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-lbl {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+    line-height: 1.3;
+  }
+
+  /* Condiciones */
+  .cond { display: flex; flex-direction: column; gap: 12px; }
+  .cond .card { align-items: flex-start; }
+  .cond .card-title { font-size: 16px; }
+
+  .foot {
+    margin-top: 64px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.01em;
+  }
+
+  @media (max-width: 480px) {
+    body { padding: 40px 18px 64px; }
+    h1 { font-size: 34px; }
+    .lede { margin-bottom: 40px; }
+    .card { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .pills { justify-content: flex-start; padding-left: 0; }
+    .agui-wrap { align-items: flex-start; }
+    .stats { grid-template-columns: 1fr; }
+    .cond .card, .card { align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Mary &amp; Familia Asencio Cordara</h1>
+  <p class="lede">Sueldo, condiciones y cronograma de pago</p>
+
+  <!-- ===================== PAGOS ===================== -->
+  <section class="section">
+    <h2>2º semestre 2026</h2>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-title">Julio</div>
+            <div class="card-sub">Miércoles 1º</div>
+          </div>
+        </div>
+        <div class="pills"><span class="pill pill-pay">$ 450.000</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-title">Agosto</div>
+            <div class="card-sub">Lunes 3</div>
+          </div>
+        </div>
+        <div class="pills"><span class="pill pill-pay">$ 450.000</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-title">Septiembre</div>
+            <div class="card-sub">Martes 1º</div>
+          </div>
+        </div>
+        <div class="pills"><span class="pill pill-pay">$ 450.000</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-title">Octubre</div>
+            <div class="card-sub">Jueves 1º</div>
+          </div>
+        </div>
+        <div class="pills"><span class="pill pill-pay">$ 450.000</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-title">Noviembre</div>
+            <div class="card-sub">Lunes 2</div>
+          </div>
+        </div>
+        <div class="pills"><span class="pill pill-pay">$ 450.000</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-title">Diciembre</div>
+            <div class="card-sub">Martes 1º</div>
+          </div>
+        </div>
+        <div class="pills">
+          <span class="pill pill-pay">$ 450.000</span>
+          <span class="plus">+</span>
+          <div class="agui-wrap">
+            <span class="pill pill-agui">$ 225.000</span>
+            <span class="agui-cap">Medio aguinaldo</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== RECONOCIMIENTO ===================== -->
+  <section class="section">
+    <div class="note">
+      <p>Mary, queremos que tengas todo claro y por escrito.</p>
+      <p>Desde julio tu sueldo pasa de <strong>$300.000 a $450.000 por mes</strong>. Es un aumento del 50%, y lo hicimos así a propósito.</p>
+      <p>La inflación de los últimos meses fue de alrededor del 18 al 20%. Con eso solo, tu sueldo tendría que haber subido a unos $360.000 para no perder poder de compra. Nosotros te llevamos a <strong>$450.000</strong>: cerca de $90.000 por encima de lo que hacía falta solo para empatar la inflación. Es un aumento real, no solo para cubrir los precios.</p>
+      <p>Por hora, te estamos pagando <strong>$7.500</strong>. La tabla oficial de personal de casas particulares marca un mínimo de <strong>$3.601 por hora</strong>. Estamos pagando más del doble.</p>
+      <p>Todo se abona <strong>en blanco</strong>, con los aportes, impuestos y el aguinaldo que corresponden. Queremos que estés tranquila con lo que vas a cobrar y que sepas que valoramos mucho tu trabajo y tu compromiso con nosotros.</p>
+    </div>
+  </section>
+
+  <!-- ===================== CONDICIONES ===================== -->
+  <section class="section">
+    <h2>Condiciones</h2>
+    <div class="cond cards">
+
+      <div class="card">
+        <div class="card-main">
+          <div class="card-title">Días y horarios</div>
+          <div class="card-sub">3 horas por día · 10:00 a 13:00 · de lunes a viernes, en Casa Buenos Aires 1242.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-main">
+          <div class="card-title">Días de lluvia</div>
+          <div class="card-sub">Para evitar ausencias, los días de lluvia nos hacemos cargo del traslado en taxi o remís. El costo del viaje se te abona ese mismo día por transferencia a tu Mercado Pago.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-main">
+          <div class="card-title">Forma de pago</div>
+          <div class="card-sub">El pago de cada mes se realiza en la fecha detallada, por transferencia a una cuenta a nombre de Mary Rivero (alias de banco o Mercado Pago), sin excepción.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-main">
+          <div class="card-title">Relación 100% en blanco</div>
+          <div class="card-sub">La totalidad de las horas y demás conceptos —aportes jubilatorios y cargas sociales— se abonan en blanco, haciendo los aportes y pagando los impuestos que correspondan.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-main">
+          <div class="card-title">Próxima actualización</div>
+          <div class="card-sub">Estas condiciones se revisan cada semestre. La próxima actualización será en el primer semestre de 2027.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <p class="foot">Transparencia y simplicidad para todos y todas.</p>
+
+</div>
+</body>
+</html>
