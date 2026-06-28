@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -43,6 +42,7 @@
 
   .section { margin-bottom: 56px; }
   .section:last-child { margin-bottom: 0; }
+  .past { opacity: 0.5; }
 
   h2 {
     font-size: 13px;
@@ -98,6 +98,16 @@
     color: var(--muted);
     margin-top: 2px;
   }
+  .card-day {
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .card-month {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-top: 1px;
+  }
 
   .pills {
     display: flex;
@@ -148,6 +158,11 @@
   }
   .note p:last-child { margin-bottom: 0; }
   .note strong { font-weight: 600; }
+  .note a {
+    color: #9a6b2f;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
 
   /* Data-cells reconocimiento */
   .stats {
@@ -205,7 +220,7 @@
 <div class="wrap">
 
   <h1>Mary &amp; Familia Asencio Cordara</h1>
-  <p class="lede">Sueldo, condiciones y cronograma de pago</p>
+  <p class="lede">Cronograma de pago, sueldo y condiciones</p>
 
   <!-- ===================== PAGOS ===================== -->
   <section class="section">
@@ -215,8 +230,8 @@
       <div class="card">
         <div class="card-left">
           <div class="card-main">
-            <div class="card-title">Julio</div>
-            <div class="card-sub">Miércoles 1º</div>
+            <div class="card-day">Miércoles 1</div>
+            <div class="card-month">Julio</div>
           </div>
         </div>
         <div class="pills"><span class="pill pill-pay">$ 450.000</span></div>
@@ -225,8 +240,8 @@
       <div class="card">
         <div class="card-left">
           <div class="card-main">
-            <div class="card-title">Agosto</div>
-            <div class="card-sub">Lunes 3</div>
+            <div class="card-day">Lunes 3</div>
+            <div class="card-month">Agosto</div>
           </div>
         </div>
         <div class="pills"><span class="pill pill-pay">$ 450.000</span></div>
@@ -235,8 +250,8 @@
       <div class="card">
         <div class="card-left">
           <div class="card-main">
-            <div class="card-title">Septiembre</div>
-            <div class="card-sub">Martes 1º</div>
+            <div class="card-day">Martes 1</div>
+            <div class="card-month">Septiembre</div>
           </div>
         </div>
         <div class="pills"><span class="pill pill-pay">$ 450.000</span></div>
@@ -245,8 +260,8 @@
       <div class="card">
         <div class="card-left">
           <div class="card-main">
-            <div class="card-title">Octubre</div>
-            <div class="card-sub">Jueves 1º</div>
+            <div class="card-day">Jueves 1</div>
+            <div class="card-month">Octubre</div>
           </div>
         </div>
         <div class="pills"><span class="pill pill-pay">$ 450.000</span></div>
@@ -255,8 +270,8 @@
       <div class="card">
         <div class="card-left">
           <div class="card-main">
-            <div class="card-title">Noviembre</div>
-            <div class="card-sub">Lunes 2</div>
+            <div class="card-day">Lunes 2</div>
+            <div class="card-month">Noviembre</div>
           </div>
         </div>
         <div class="pills"><span class="pill pill-pay">$ 450.000</span></div>
@@ -265,17 +280,14 @@
       <div class="card">
         <div class="card-left">
           <div class="card-main">
-            <div class="card-title">Diciembre</div>
-            <div class="card-sub">Martes 1º</div>
+            <div class="card-day">Martes 1</div>
+            <div class="card-month">Diciembre</div>
           </div>
         </div>
         <div class="pills">
           <span class="pill pill-pay">$ 450.000</span>
           <span class="plus">+</span>
-          <div class="agui-wrap">
-            <span class="pill pill-agui">$ 225.000</span>
-            <span class="agui-cap">Medio aguinaldo</span>
-          </div>
+          <span class="pill pill-agui">$ 225.000 · Medio aguinaldo</span>
         </div>
       </div>
 
@@ -285,11 +297,17 @@
   <!-- ===================== RECONOCIMIENTO ===================== -->
   <section class="section">
     <div class="note">
-      <p>Mary, queremos que tengas todo claro y por escrito.</p>
-      <p>Desde julio tu sueldo pasa de <strong>$300.000 a $450.000 por mes</strong>. Es un aumento del 50%, y lo hicimos así a propósito.</p>
-      <p>La inflación de los últimos meses fue de alrededor del 18 al 20%. Con eso solo, tu sueldo tendría que haber subido a unos $360.000 para no perder poder de compra. Nosotros te llevamos a <strong>$450.000</strong>: cerca de $90.000 por encima de lo que hacía falta solo para empatar la inflación. Es un aumento real, no solo para cubrir los precios.</p>
-      <p>Por hora, te estamos pagando <strong>$7.500</strong>. La tabla oficial de personal de casas particulares marca un mínimo de <strong>$3.601 por hora</strong>. Estamos pagando más del doble.</p>
-      <p>Todo se abona <strong>en blanco</strong>, con los aportes, impuestos y el aguinaldo que corresponden. Queremos que estés tranquila con lo que vas a cobrar y que sepas que valoramos mucho tu trabajo y tu compromiso con nosotros.</p>
+      <p>Mary, te comparto lo que conversamos el pasado viernes 26 de junio, para que tengas todo claro y por escrito.</p>
+      <p>Desde julio de 2026, tu sueldo pasa de <strong>$300.000 a $450.000 por mes</strong>: un aumento del 50%, que decidimos junto con Naty.</p>
+      <p>A continuación el detalle, porque queremos que veas el esfuerzo realizado.</p>
+      <p>La inflación acumulada de los últimos 6 meses fue del 20%. O sea que, si tu sueldo subiera de $300.000 a $360.000, estaría OK y en línea con los datos oficiales publicados.</p>
+      <p>Pero somos conscientes de cuánto aumenta todo y del costo de vida real, y por eso vamos a llevar tu salario mensual a <strong>$450.000</strong>.</p>
+      <p>Son $90.000 por encima del ajuste por inflación.</p>
+      <p>Si el cálculo de este nuevo sueldo lo hacés teniendo en cuenta lo que se paga la hora según la <a href="https://www.argentina.gob.ar/trabajo/casasparticulares/trabajador/sueldo" target="_blank" rel="noopener">tabla oficial de personal de casas particulares</a>, tu categoría —<strong>Personal para tareas generales con retiro</strong>— se paga hoy $3.348,33 la hora. O sea que estarás recibiendo más del doble, ya que nosotros te estaremos pagando cada hora a <strong>$7.500</strong>.</p>
+      <p>El horario cambia: de <strong>10:30 a 13:30 hs.</strong></p>
+      <p>Estas condiciones se revisan cada 6 meses. La próxima charla será en enero de 2027, y es importante que tengas en cuenta que lo más probable es que, a partir de ahora, cada ajuste se haga considerando solo la inflación acumulada.</p>
+      <p>Queremos que estés tranquila con lo que vas a cobrar, y que sepas que valoramos mucho tu trabajo, tu compromiso y tu predisposición a sumar tareas —como hacer las compras y otras nuevas que Naty te irá comentando.</p>
+      <p>Un beso,<br>Familia Asencio Cordara</p>
     </div>
   </section>
 
@@ -301,7 +319,7 @@
       <div class="card">
         <div class="card-main">
           <div class="card-title">Días y horarios</div>
-          <div class="card-sub">3 horas por día · 10:00 a 13:00 · de lunes a viernes, en Casa Buenos Aires 1242.</div>
+          <div class="card-sub">3 horas por día · 10:30 a 13:30 · de lunes a viernes, en Casa Buenos Aires 1242.</div>
         </div>
       </div>
 
@@ -322,21 +340,91 @@
       <div class="card">
         <div class="card-main">
           <div class="card-title">Relación 100% en blanco</div>
-          <div class="card-sub">La totalidad de las horas y demás conceptos —aportes jubilatorios y cargas sociales— se abonan en blanco, haciendo los aportes y pagando los impuestos que correspondan.</div>
+          <div class="card-sub">La totalidad de las horas y demás conceptos —aportes jubilatorios, cargas sociales, aguinaldo y vacaciones— se abonan en blanco, haciendo los aportes y pagando los impuestos que correspondan.</div>
         </div>
       </div>
 
       <div class="card">
         <div class="card-main">
           <div class="card-title">Próxima actualización</div>
-          <div class="card-sub">Estas condiciones se revisan cada semestre. La próxima actualización será en el primer semestre de 2027.</div>
+          <div class="card-sub">Estas condiciones se revisan cada 6 meses. La próxima charla será en enero de 2027.</div>
         </div>
       </div>
 
     </div>
   </section>
 
-  <p class="foot">Transparencia y simplicidad para todos y todas.</p>
+  <!-- ===================== HISTÓRICO 1º SEM 2026 ===================== -->
+  <section class="section past">
+    <h2>1º semestre 2026</h2>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-day">Viernes 2</div>
+            <div class="card-month">Enero</div>
+          </div>
+        </div>
+        <div class="pills"><span class="pill pill-pay">$ 300.000</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-day">Lunes 2</div>
+            <div class="card-month">Febrero</div>
+          </div>
+        </div>
+        <div class="pills"><span class="pill pill-pay">$ 300.000</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-day">Lunes 2</div>
+            <div class="card-month">Marzo</div>
+          </div>
+        </div>
+        <div class="pills"><span class="pill pill-pay">$ 300.000</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-day">Miércoles 1</div>
+            <div class="card-month">Abril</div>
+          </div>
+        </div>
+        <div class="pills"><span class="pill pill-pay">$ 300.000</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-day">Viernes 1</div>
+            <div class="card-month">Mayo</div>
+          </div>
+        </div>
+        <div class="pills"><span class="pill pill-pay">$ 300.000</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-day">Lunes 1</div>
+            <div class="card-month">Junio</div>
+          </div>
+        </div>
+        <div class="pills">
+          <span class="pill pill-pay">$ 300.000</span>
+          <span class="plus">+</span>
+          <span class="pill pill-agui">$ 150.000 · Medio aguinaldo</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
 </div>
 </body>
