@@ -1,1 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pagos a Victor</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #1d1d1f;
+    --muted: #86868b;
+    --line: #e8e8ed;
+    --card: #fbfbfd;
 
+    --pay-bg: #eef5ec;  --pay-ink: #4a7c43;   /* monto abonado */
+    --out-line: #c6c6cb;                       /* pill outline / pendiente */
+    --soft-bg: #fbf7f1;                         /* card nota */
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.4;
+    padding: 64px 24px 96px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+
+  h1 {
+    font-size: 44px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 48px;
+  }
+
+  .section { margin-bottom: 56px; }
+  .section:last-child { margin-bottom: 0; }
+
+  h2 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .cards { display: flex; flex-direction: column; gap: 12px; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .card-left { display: flex; align-items: center; gap: 14px; min-width: 0; }
+  .card-main { min-width: 0; }
+  .card-day {
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .card-month {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-top: 1px;
+  }
+
+  .pills { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+  .pill {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 5px 13px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .pill-pay     { background: var(--pay-bg); color: var(--pay-ink); }
+  .pill-outline { background: transparent; border-color: var(--out-line); color: #515154; }
+  .pill-tbd     { background: transparent; border: 1px dashed var(--out-line); color: var(--muted); font-weight: 400; }
+
+  /* Resumen total */
+  .summary {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px 20px;
+    margin-top: 12px;
+  }
+  .summary-label {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+  .summary-num {
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    margin-top: 2px;
+  }
+  .progress { display: flex; gap: 6px; margin-top: 16px; }
+  .progress span {
+    flex: 1;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--line);
+  }
+  .progress span.done { background: var(--pay-ink); }
+  .summary-cap {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+
+  /* Nota final */
+  .note {
+    background: var(--soft-bg);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 24px 26px;
+  }
+  .note p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 480px) {
+    body { padding: 40px 18px 64px; }
+    h1 { font-size: 34px; margin-bottom: 36px; }
+    .card { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .pills { justify-content: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Pagos a Victor</h1>
+
+  <!-- ===================== LOCAL & PREDIO ===================== -->
+  <section class="section">
+    <h2>Por tareas realizadas en el predio Buenos Aires 1350</h2>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-day">Miércoles 1</div>
+            <div class="card-month">Julio</div>
+          </div>
+        </div>
+        <div class="pills"><span class="pill pill-pay">$ 750.000</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-day">Lunes 3</div>
+            <div class="card-month">Agosto</div>
+          </div>
+        </div>
+        <div class="pills"><span class="pill pill-outline">$ 500.000</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-day">Martes 1</div>
+            <div class="card-month">Septiembre</div>
+          </div>
+        </div>
+        <div class="pills"><span class="pill pill-outline">$ 500.000</span></div>
+      </div>
+
+    </div>
+
+    <div class="summary">
+      <div class="summary-label">Total a abonar</div>
+      <div class="summary-num">$ 1.750.000</div>
+      <div class="progress">
+        <span class="done"></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="summary-cap">1 de 3 pagos realizados</div>
+    </div>
+  </section>
+
+  <!-- ===================== CASA 1242 ===================== -->
+  <section class="section">
+    <h2>Por tareas a realizar en Casa Buenos Aires 1242</h2>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-day">Fecha a definir</div>
+            <div class="card-month">Octubre</div>
+          </div>
+        </div>
+        <div class="pills"><span class="pill pill-tbd">Monto a definir</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== NOTA FINAL ===================== -->
+  <section class="section">
+    <div class="note">
+      <p>Victor: este es un compromiso de pago en fechas máximas. Si podemos abonar la totalidad de los trabajos —realizados y por realizar— antes de esas fechas, lo haremos con gusto.</p>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
