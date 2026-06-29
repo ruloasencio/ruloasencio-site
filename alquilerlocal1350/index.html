@@ -1,1 +1,206 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Local Buenos Aires 1350 · Alquiler Mensual</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #1d1d1f;
+    --muted: #86868b;
+    --line: #e8e8ed;
+    --card: #fbfbfd;
+
+    --amt-bg: #4a7c43;  --amt-ink: #ffffff;     /* monto verde (factura emitida) */
+    --red-bg: #c0382f;  --red-ink: #ffffff;      /* monto rojo (opción danger) */
+    --due-bg: #fbedcb;  --due-ink: #8a5a0c;      /* monto pendiente (ámbar) */
+    --bonif-bg: #eef5ec; --bonif-ink: #4a7c43;   /* bonificado */
+    --neut-bg: #f0f0f3;  --neut-ink: #515154;    /* sin factura */
+    --out-line: #c6c6cb;                          /* outline / a definir */
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.4;
+    padding: 64px 24px 96px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+
+  h1 { font-size: 40px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 12px; line-height: 1.15; }
+  h1 .sep { color: var(--muted); font-weight: 400; }
+  .subtitle { font-size: 17px; color: var(--muted); letter-spacing: -0.01em; margin-bottom: 48px; max-width: 560px; }
+
+  .section { margin-bottom: 48px; }
+  .section:last-child { margin-bottom: 0; }
+
+  h2 {
+    font-size: 13px; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 18px;
+  }
+
+  .cards { display: flex; flex-direction: column; gap: 12px; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .card-main { min-width: 0; flex-shrink: 0; }
+  .card-month { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
+  .card-count {
+    font-size: 12px; color: var(--muted); margin-top: 3px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    letter-spacing: -0.02em; font-variant-numeric: tabular-nums;
+  }
+
+  .pills { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+  .pill {
+    font-size: 13px; font-weight: 600;
+    padding: 5px 13px; border-radius: 999px;
+    border: 1px solid transparent; white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .pill-amt   { background: var(--amt-bg); color: var(--amt-ink); }
+  .pill-red   { background: var(--red-bg); color: var(--red-ink); }
+  .pill-due   { background: var(--due-bg); color: var(--due-ink); }
+  .pill-bonif { background: var(--bonif-bg); color: var(--bonif-ink); }
+  .pill-neut  { background: var(--neut-bg); color: var(--neut-ink); }
+  .pill-pend  { background: transparent; border: 1px solid var(--out-line); color: var(--neut-ink); }
+  .pill-tbd   { background: transparent; border: 1px dashed var(--out-line); color: var(--muted); font-weight: 400; white-space: normal; text-align: right; }
+
+  @media (max-width: 480px) {
+    body { padding: 40px 18px 64px; }
+    h1 { font-size: 30px; margin-bottom: 10px; }
+    .subtitle { font-size: 16px; margin-bottom: 36px; }
+    .card { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .pills { justify-content: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Local Buenos Aires 1350<span class="sep">&nbsp;&nbsp;|&nbsp;&nbsp;</span>Alquiler Mensual</h1>
+  <p class="subtitle">Info para emisión de facturas el día 1 de cada mes en concepto de pago alquiler mes entero adelantado.</p>
+
+  <!-- ===================== 2026 · 2º CUATRIMESTRE ===================== -->
+  <section class="section">
+    <h2>Año 2026&nbsp;&nbsp;|&nbsp;&nbsp;2º Cuatrimestre</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="card-main"><div class="card-month">Mayo</div><div class="card-count">Mes 1 de 36</div></div>
+        <div class="pills"><span class="pill pill-neut">No se emitió factura</span><span class="pill pill-bonif">Bonificado</span></div>
+      </div>
+      <div class="card">
+        <div class="card-main"><div class="card-month">Junio</div><div class="card-count">Mes 2 de 36</div></div>
+        <div class="pills"><span class="pill pill-neut">No se emitió factura</span><span class="pill pill-bonif">Bonificado</span></div>
+      </div>
+      <div class="card">
+        <div class="card-main"><div class="card-month">Julio</div><div class="card-count">Mes 3 de 36</div></div>
+        <div class="pills"><span class="pill pill-pend">Factura aún por emitirse</span><span class="pill pill-due">$ 900.000</span></div>
+      </div>
+      <div class="card">
+        <div class="card-main"><div class="card-month">Agosto</div><div class="card-count">Mes 4 de 36</div></div>
+        <div class="pills"><span class="pill pill-pend">Factura aún por emitirse</span><span class="pill pill-due">$ 900.000</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 2026 · 3º CUATRIMESTRE ===================== -->
+  <section class="section">
+    <h2>Año 2026&nbsp;&nbsp;|&nbsp;&nbsp;3º Cuatrimestre</h2>
+    <div class="cards">
+      <div class="card"><div class="card-main"><div class="card-month">Septiembre</div><div class="card-count">Mes 5 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Octubre</div><div class="card-count">Mes 6 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Noviembre</div><div class="card-count">Mes 7 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Diciembre</div><div class="card-count">Mes 8 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== 2027 · 1º CUATRIMESTRE ===================== -->
+  <section class="section">
+    <h2>Año 2027&nbsp;&nbsp;|&nbsp;&nbsp;1º Cuatrimestre</h2>
+    <div class="cards">
+      <div class="card"><div class="card-main"><div class="card-month">Enero</div><div class="card-count">Mes 9 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Febrero</div><div class="card-count">Mes 10 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Marzo</div><div class="card-count">Mes 11 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Abril</div><div class="card-count">Mes 12 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== 2027 · 2º CUATRIMESTRE ===================== -->
+  <section class="section">
+    <h2>Año 2027&nbsp;&nbsp;|&nbsp;&nbsp;2º Cuatrimestre</h2>
+    <div class="cards">
+      <div class="card"><div class="card-main"><div class="card-month">Mayo</div><div class="card-count">Mes 13 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Junio</div><div class="card-count">Mes 14 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Julio</div><div class="card-count">Mes 15 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Agosto</div><div class="card-count">Mes 16 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== 2027 · 3º CUATRIMESTRE ===================== -->
+  <section class="section">
+    <h2>Año 2027&nbsp;&nbsp;|&nbsp;&nbsp;3º Cuatrimestre</h2>
+    <div class="cards">
+      <div class="card"><div class="card-main"><div class="card-month">Septiembre</div><div class="card-count">Mes 17 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Octubre</div><div class="card-count">Mes 18 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Noviembre</div><div class="card-count">Mes 19 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Diciembre</div><div class="card-count">Mes 20 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== 2028 · 1º CUATRIMESTRE ===================== -->
+  <section class="section">
+    <h2>Año 2028&nbsp;&nbsp;|&nbsp;&nbsp;1º Cuatrimestre</h2>
+    <div class="cards">
+      <div class="card"><div class="card-main"><div class="card-month">Enero</div><div class="card-count">Mes 21 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Febrero</div><div class="card-count">Mes 22 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Marzo</div><div class="card-count">Mes 23 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Abril</div><div class="card-count">Mes 24 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== 2028 · 2º CUATRIMESTRE ===================== -->
+  <section class="section">
+    <h2>Año 2028&nbsp;&nbsp;|&nbsp;&nbsp;2º Cuatrimestre</h2>
+    <div class="cards">
+      <div class="card"><div class="card-main"><div class="card-month">Mayo</div><div class="card-count">Mes 25 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Junio</div><div class="card-count">Mes 26 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Julio</div><div class="card-count">Mes 27 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Agosto</div><div class="card-count">Mes 28 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== 2028 · 3º CUATRIMESTRE ===================== -->
+  <section class="section">
+    <h2>Año 2028&nbsp;&nbsp;|&nbsp;&nbsp;3º Cuatrimestre</h2>
+    <div class="cards">
+      <div class="card"><div class="card-main"><div class="card-month">Septiembre</div><div class="card-count">Mes 29 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Octubre</div><div class="card-count">Mes 30 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Noviembre</div><div class="card-count">Mes 31 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Diciembre</div><div class="card-count">Mes 32 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== 2029 · 1º CUATRIMESTRE ===================== -->
+  <section class="section">
+    <h2>Año 2029&nbsp;&nbsp;|&nbsp;&nbsp;1º Cuatrimestre</h2>
+    <div class="cards">
+      <div class="card"><div class="card-main"><div class="card-month">Enero</div><div class="card-count">Mes 33 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Febrero</div><div class="card-count">Mes 34 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Marzo</div><div class="card-count">Mes 35 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+      <div class="card"><div class="card-main"><div class="card-month">Abril</div><div class="card-count">Mes 36 de 36</div></div><div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div></div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
