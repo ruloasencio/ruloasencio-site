@@ -140,9 +140,9 @@ const TAREAS = [
     c.innerHTML = `
       ${media}
       <div class="data">
-        <div class="row"><span class="ico">📍</span><span class="txt"><span class="lbl">Ubicación</span> ${it.ubic}</span></div>
-        <div class="row"><span class="ico">☑️</span><span class="txt"><span class="lbl">Tarea</span> ${it.tarea}</span></div>
-        <div class="row"><span class="ico">👤</span><span class="txt"><span class="lbl">Responsable</span> ${it.resp}</span></div>
+        <div class="row"><span class="ico">📍</span><span class="txt">${it.ubic}</span></div>
+        <div class="row"><span class="ico">☑️</span><span class="txt">${it.tarea}</span></div>
+        <div class="row"><span class="ico">👤</span><span class="txt">${it.resp}</span></div>
       </div>`;
     cards.appendChild(c);
   });
