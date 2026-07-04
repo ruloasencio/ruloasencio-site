@@ -1,1 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan de pago · Tia Liliana &amp; Hnos. Asencio</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #1d1d1f;
+    --muted: #86868b;
+    --line: #e8e8ed;
+    --card: #fbfbfd;
 
+    --pay-bg: #eef5ec;  --pay-ink: #4a7c43;
+    --agui-bg: #f6efe2; --agui-ink: #9a6b2f;
+    --soft-bg: #fbf7f1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.4;
+    padding: 64px 24px 96px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+
+  h1 {
+    font-size: 44px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 56px;
+  }
+
+  .section { margin-bottom: 56px; }
+  .section:last-child { margin-bottom: 0; }
+  .past { opacity: 0.35; }
+
+  .block-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  h2 {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .pill-estado {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 13px;
+    border-radius: 999px;
+    background: var(--agui-bg);
+    color: var(--agui-ink);
+    white-space: nowrap;
+    margin-top: 4px;
+  }
+  .h2-sub {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .cards { display: flex; flex-direction: column; gap: 12px; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .card-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+  }
+  .card-main { min-width: 0; }
+  .card-title {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+  .card-sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .card-day {
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .card-month {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-top: 1px;
+  }
+
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 6px;
+    flex-shrink: 0;
+    align-items: center;
+  }
+  .pill {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .pill-agui { background: var(--agui-bg); color: var(--agui-ink); }
+  .pill-pay  { background: var(--pay-bg);  color: var(--pay-ink); }
+  .pill-tbd  {
+    background: transparent;
+    color: var(--muted);
+    border: 1px dotted #b8b8bf;
+  }
+  .pill-split {
+    background: var(--card);
+    color: var(--ink);
+    border: 1px solid var(--line);
+  }
+  .pill-split span { color: var(--muted); font-weight: 500; }
+  .total-rect {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: var(--pay-bg);
+    color: var(--pay-ink);
+    white-space: nowrap;
+  }
+  .total-pend { background: var(--agui-bg); color: var(--agui-ink); }
+  .pills-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .pills-row { display: flex; gap: 6px; }
+  .plus {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .note {
+    background: var(--soft-bg);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 28px 26px;
+  }
+  .note p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 11px;
+  }
+  .note p:last-child { margin-bottom: 0; }
+  .note strong { font-weight: 600; }
+
+  .rows { display: flex; flex-direction: column; width: 100%; }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .row:last-child { border-bottom: none; }
+  .row-lbl { font-size: 14px; color: var(--muted); }
+  .row-val {
+    font-size: 15px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+  .pill-val {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .pill-link {
+    background: #f0f0f3;
+    border: 1px solid #e0e0e5;
+  }
+  .pill-link a {
+    color: #55555c;
+    text-decoration: none;
+  }
+  .pill-link a::after {
+    content: " ↗";
+    font-size: 12px;
+  }
+  .pill-total {
+    background: #4a7c43;
+    border: 1px solid #4a7c43;
+    color: #ffffff;
+  }
+  .pill-alert {
+    background: transparent;
+    border: 1px solid #4a7cc4;
+    color: #2b5ca8;
+  }
+  .pill-outline-green {
+    background: transparent;
+    border: 1px solid #4a7c43;
+    color: #4a7c43;
+  }
+
+  .cond { display: flex; flex-direction: column; gap: 12px; }
+  .cond .card { align-items: flex-start; }
+  .cond .card-title { font-size: 16px; }
+
+  @media (max-width: 480px) {
+    body { padding: 40px 18px 64px; }
+    h1 { font-size: 34px; margin-bottom: 40px; }
+    .card { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .pills { justify-content: flex-start; }
+    .pills-stack { align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Plan de pago | Tia Liliana &amp; Hnos. Asencio</h1>
+
+</div>
+</body>
+</html>
+  <section class="section">
+    <div class="block-head">
+      <h2>Año 2026</h2>
+      <span class="pill-estado">Pendiente</span>
+    </div>
+    <p class="h2-sub">Cuota 1 de 3</p>
+    <div class="cards">
+
+      <div class="card">
+        <div class="rows">
+          <div class="row">
+            <span class="row-lbl">Cantidad de quintales</span>
+            <span class="pill-val">100</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Fecha de liquidación</span>
+            <span class="pill-val">Lunes 6 Julio 2026</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Fuente</span>
+            <span class="pill-val pill-link"><a href="https://www.afascl.coop/afadiario/mercados-en-linea" target="_blank">AFA</a></span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Cotización</span>
+            <span class="pill-val">$ 47.600 el quintal</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Total a transferir</span>
+            <span class="pill-val pill-total">$ 4.760.000 Pesos</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Fecha de transferencia</span>
+            <span class="pill-val">Lunes 20 Julio 2026</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Destinataria</span>
+            <span class="pill-val">Luciana Asencio</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Banco</span>
+            <span class="pill-val">Santander</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">N° Cuenta en pesos</span>
+            <span class="pill-val">17-364022/5</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">CBU</span>
+            <span class="pill-val pill-alert">A confirmar por Luci</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Alias</span>
+            <span class="pill-val pill-alert">A confirmar por Luci</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="block-head">
+      <h2>Año 2027</h2>
+      <span class="pill-estado">Pendiente</span>
+    </div>
+    <p class="h2-sub">Cuota 2 de 3</p>
+    <div class="cards">
+
+      <div class="card">
+        <div class="rows">
+          <div class="row">
+            <span class="row-lbl">Cantidad de quintales</span>
+            <span class="pill-val">100</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Fecha de liquidación</span>
+            <span class="pill-val">Lunes 7 Junio 2027</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Fuente</span>
+            <span class="pill-val pill-link"><a href="https://www.afascl.coop/afadiario/mercados-en-linea" target="_blank">AFA</a></span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Cotización</span>
+            <span class="pill-val pill-outline-green">Según pizarra Viernes 4 Junio 2027</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Total a transferir</span>
+            <span class="pill-val pill-outline-green">$ _ _ _ _ _ _ _ Pesos</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Fecha de transferencia</span>
+            <span class="pill-val">Lunes 21 Junio 2027</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Destinatario</span>
+            <span class="pill-val">Manuel Asencio</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Banco</span>
+            <span class="pill-val">Santander</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">N° Cuenta en pesos</span>
+            <span class="pill-val">208-010070/0</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">CBU</span>
+            <span class="pill-val">0720208988000001007004</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Alias</span>
+            <span class="pill-val">manuelasencio</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="block-head">
+      <h2>Año 2028</h2>
+      <span class="pill-estado">Pendiente</span>
+    </div>
+    <p class="h2-sub">Cuota 3 de 3</p>
+    <div class="cards">
+
+      <div class="card">
+        <div class="rows">
+          <div class="row">
+            <span class="row-lbl">Cantidad de quintales</span>
+            <span class="pill-val">100</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Fecha de liquidación</span>
+            <span class="pill-val">Lunes 5 Junio 2028</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Fuente</span>
+            <span class="pill-val pill-link"><a href="https://www.afascl.coop/afadiario/mercados-en-linea" target="_blank">AFA</a></span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Cotización</span>
+            <span class="pill-val pill-outline-green">Según pizarra Viernes 2 Junio 2028</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Total a transferir</span>
+            <span class="pill-val pill-outline-green">$ _ _ _ _ _ _ _ Pesos</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Fecha de transferencia</span>
+            <span class="pill-val">Lunes 19 Junio 2028</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Destinatario</span>
+            <span class="pill-val">Matias Asencio</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Banco</span>
+            <span class="pill-val">Macro</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">N° Cuenta en pesos</span>
+            <span class="pill-val">474409540641391</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">CBU</span>
+            <span class="pill-val">2850744840095406413918</span>
+          </div>
+          <div class="row">
+            <span class="row-lbl">Alias</span>
+            <span class="pill-val">asenciomacro</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
