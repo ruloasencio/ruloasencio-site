@@ -1,1 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Honorarios Jime · Luci &amp; Manu</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #1d1d1f;
+    --muted: #86868b;
+    --line: #e8e8ed;
+    --card: #fbfbfd;
 
+    --pay-bg: #eef5ec;  --pay-ink: #4a7c43;
+    --agui-bg: #f6efe2; --agui-ink: #9a6b2f;
+    --soft-bg: #fbf7f1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.4;
+    padding: 64px 24px 96px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+
+  h1 {
+    font-size: 44px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 56px;
+  }
+
+  .section { margin-bottom: 56px; }
+  .section:last-child { margin-bottom: 0; }
+  .past { opacity: 0.35; }
+
+  h2 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .cards { display: flex; flex-direction: column; gap: 12px; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .card-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+  }
+  .card-main { min-width: 0; }
+  .card-title {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+  .card-sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .card-day {
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .card-month {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-top: 1px;
+  }
+
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 6px;
+    flex-shrink: 0;
+    align-items: center;
+  }
+  .pill {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .pill-agui { background: var(--agui-bg); color: var(--agui-ink); }
+  .pill-pay  { background: var(--pay-bg);  color: var(--pay-ink); }
+  .pill-tbd  {
+    background: transparent;
+    color: var(--muted);
+    border: 1px dotted #b8b8bf;
+  }
+  .pill-split {
+    background: var(--card);
+    color: var(--ink);
+    border: 1px solid var(--line);
+  }
+  .pill-split span { color: var(--muted); font-weight: 500; }
+  .total-rect {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: var(--pay-bg);
+    color: var(--pay-ink);
+    white-space: nowrap;
+  }
+  .total-pend { background: var(--agui-bg); color: var(--agui-ink); }
+  .pills-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .pills-row { display: flex; gap: 6px; }
+  .plus {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .note {
+    background: var(--soft-bg);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 28px 26px;
+  }
+  .note p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 11px;
+  }
+  .note p:last-child { margin-bottom: 0; }
+  .note strong { font-weight: 600; }
+
+  .cond { display: flex; flex-direction: column; gap: 12px; }
+  .cond .card { align-items: flex-start; }
+  .cond .card-title { font-size: 16px; }
+
+  @media (max-width: 480px) {
+    body { padding: 40px 18px 64px; }
+    h1 { font-size: 34px; margin-bottom: 40px; }
+    .card { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .pills { justify-content: flex-start; }
+    .pills-stack { align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Honorarios Jime ( servicio a Luci &amp; Manu )</h1>
+
+  <!-- ===================== AÑO 2025 ===================== -->
+  <section class="section">
+    <h2>Año 2026</h2>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-month">Diciembre</div>
+          </div>
+        </div>
+        <div class="pills">
+          <span class="pill pill-tbd">Honorarios Luci: A definir</span>
+          <span class="pill pill-tbd">Honorarios Manu: A definir</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-month">Noviembre</div>
+          </div>
+        </div>
+        <div class="pills">
+          <span class="pill pill-tbd">Honorarios Luci: A definir</span>
+          <span class="pill pill-tbd">Honorarios Manu: A definir</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-month">Octubre</div>
+          </div>
+        </div>
+        <div class="pills">
+          <span class="pill pill-tbd">Honorarios Luci: A definir</span>
+          <span class="pill pill-tbd">Honorarios Manu: A definir</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-month">Septiembre</div>
+          </div>
+        </div>
+        <div class="pills">
+          <span class="pill pill-tbd">Honorarios Luci: A definir</span>
+          <span class="pill pill-tbd">Honorarios Manu: A definir</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-month">Agosto</div>
+          </div>
+        </div>
+        <div class="pills">
+          <span class="pill pill-tbd">Honorarios Luci: A definir</span>
+          <span class="pill pill-tbd">Honorarios Manu: A definir</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-month">Julio</div>
+          </div>
+        </div>
+        <div class="pills">
+          <span class="pill pill-split">Luci $ 30.000</span>
+          <span class="plus">+</span>
+          <span class="pill pill-split">Manu $ 30.000</span>
+          <span class="plus">=</span>
+          <span class="total-rect total-pend">Total $ 60.000</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-month">Junio</div>
+          </div>
+        </div>
+        <div class="pills">
+          <span class="pill pill-split">Luci $ 30.000</span>
+          <span class="plus">+</span>
+          <span class="pill pill-split">Manu $ 30.000</span>
+          <span class="plus">=</span>
+          <span class="total-rect">Total $ 60.000</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-month">Mayo</div>
+          </div>
+        </div>
+        <div class="pills">
+          <span class="pill pill-split">Luci $ 30.000</span>
+          <span class="plus">+</span>
+          <span class="pill pill-split">Manu $ 30.000</span>
+          <span class="plus">=</span>
+          <span class="total-rect">Total $ 60.000</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-month">Abril</div>
+          </div>
+        </div>
+        <div class="pills">
+          <span class="pill pill-split">Luci $ 30.000</span>
+          <span class="plus">+</span>
+          <span class="pill pill-split">Manu $ 30.000</span>
+          <span class="plus">=</span>
+          <span class="total-rect">Total $ 60.000</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
