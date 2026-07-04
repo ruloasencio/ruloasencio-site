@@ -1,1 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Honorarios Jime</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #1d1d1f;
+    --muted: #86868b;
+    --line: #e8e8ed;
+    --card: #fbfbfd;
 
+    --pay-bg: #eef5ec;  --pay-ink: #4a7c43;
+    --agui-bg: #f6efe2; --agui-ink: #9a6b2f;
+    --soft-bg: #fbf7f1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.4;
+    padding: 64px 24px 96px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+
+  h1 {
+    font-size: 44px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 56px;
+  }
+
+  .section { margin-bottom: 56px; }
+  .section:last-child { margin-bottom: 0; }
+  .past { opacity: 0.35; }
+
+  h2 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .cards { display: flex; flex-direction: column; gap: 12px; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .card-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+  }
+  .card-main { min-width: 0; }
+  .card-title {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+  .card-sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .card-day {
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .card-month {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-top: 1px;
+  }
+
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 6px;
+    flex-shrink: 0;
+    align-items: center;
+  }
+  .pill {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .pill-agui { background: var(--agui-bg); color: var(--agui-ink); }
+  .pill-pay  { background: var(--pay-bg);  color: var(--pay-ink); }
+  .pill-tbd  { background: #f0f0f3; color: var(--muted); }
+  .plus {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .note {
+    background: var(--soft-bg);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 28px 26px;
+  }
+  .note p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 11px;
+  }
+  .note p:last-child { margin-bottom: 0; }
+  .note strong { font-weight: 600; }
+
+  .cond { display: flex; flex-direction: column; gap: 12px; }
+  .cond .card { align-items: flex-start; }
+  .cond .card-title { font-size: 16px; }
+
+  @media (max-width: 480px) {
+    body { padding: 40px 18px 64px; }
+    h1 { font-size: 34px; margin-bottom: 40px; }
+    .card { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .pills { justify-content: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Honorarios Jime</h1>
+
+  <!-- ===================== 3º CUATRIMESTRE ===================== -->
+  <section class="section">
+    <h2>3º Cuatrimestre 2026</h2>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-month">Diciembre</div>
+            <div class="card-day">Martes 1</div>
+          </div>
+        </div>
+        <div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-month">Noviembre</div>
+            <div class="card-day">Lunes 2</div>
+          </div>
+        </div>
+        <div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-month">Octubre</div>
+            <div class="card-day">Jueves 1</div>
+          </div>
+        </div>
+        <div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-month">Septiembre</div>
+            <div class="card-day">Martes 1</div>
+          </div>
+        </div>
+        <div class="pills"><span class="pill pill-tbd">A definir según índice IPC</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== PAGOS ===================== -->
+  <section class="section">
+    <h2>2º Cuatrimestre 2026</h2>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-month">Agosto</div>
+            <div class="card-day">Lunes 3</div>
+          </div>
+        </div>
+        <div class="pills"><span class="pill pill-agui">$ 80.000</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-month">Julio</div>
+            <div class="card-day">Miércoles 1</div>
+          </div>
+        </div>
+        <div class="pills"><span class="pill pill-pay">$ 80.000</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-month">Junio</div>
+            <div class="card-day">Lunes 1</div>
+          </div>
+        </div>
+        <div class="pills"><span class="pill pill-pay">$ 80.000</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-left">
+          <div class="card-main">
+            <div class="card-month">Mayo</div>
+            <div class="card-day">Viernes 1</div>
+          </div>
+        </div>
+        <div class="pills"><span class="pill pill-pay">$ 80.000</span></div>
+      </div>
+
+    </div>
+  </section>
+
+
+</div>
+</body>
+</html>
