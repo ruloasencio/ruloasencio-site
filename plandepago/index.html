@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -26,6 +27,7 @@
     padding: 64px 24px 96px;
   }
   .wrap { max-width: 720px; margin: 0 auto; }
+  html, body { overflow-x: hidden; }
 
   h1 {
     font-size: 44px;
@@ -200,7 +202,10 @@
     border: 1px solid var(--line);
     color: var(--ink);
     font-variant-numeric: tabular-nums;
-    white-space: nowrap;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-align: right;
+    max-width: 70%;
   }
   .pill-link {
     background: #f0f0f3;
