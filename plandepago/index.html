@@ -80,6 +80,8 @@
     align-items: center;
     justify-content: space-between;
     gap: 16px;
+    min-width: 0;
+    max-width: 100%;
   }
   .card-left {
     display: flex;
@@ -184,7 +186,10 @@
     gap: 16px;
     padding: 10px 0;
     border-bottom: 1px solid var(--line);
+    min-width: 0;
   }
+  .row > * { min-width: 0; }
+  .row-lbl { flex-shrink: 0; }
   .row:last-child { border-bottom: none; }
   .row-lbl { font-size: 14px; color: var(--muted); }
   .row-val {
