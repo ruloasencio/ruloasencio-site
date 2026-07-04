@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,7 +12,8 @@
     --line: #e8e8ed;
     --card: #fbfbfd;
 
-    --pay-bg: #eef5ec;  --pay-ink: #4a7c43;   /* monto / en blanco */
+    --pay-bg: #eef5ec;  --pay-ink: #4a7c43;   /* abonado */
+    --pend-bg: #f2f2f5; --pend-ink: #86868b;  /* pendiente de pago */
     --agui-bg: #f6efe2; --agui-ink: #9a6b2f;  /* aguinaldo */
     --soft-bg: #fbf7f1;                        /* card reconocimiento */
   }
@@ -126,6 +126,7 @@
   }
   .pill-agui { background: var(--agui-bg); color: var(--agui-ink); }
   .pill-pay  { background: var(--pay-bg);  color: var(--pay-ink); }
+  .pill-pend { background: var(--pend-bg); color: var(--pend-ink); }
 
   .pills { align-items: center; }
   .plus {
@@ -245,7 +246,7 @@
             <div class="card-month">Agosto</div>
           </div>
         </div>
-        <div class="pills"><span class="pill pill-pay">$ 450.000</span></div>
+        <div class="pills"><span class="pill pill-pend">$ 450.000</span></div>
       </div>
 
       <div class="card">
@@ -255,7 +256,7 @@
             <div class="card-month">Septiembre</div>
           </div>
         </div>
-        <div class="pills"><span class="pill pill-pay">$ 450.000</span></div>
+        <div class="pills"><span class="pill pill-pend">$ 450.000</span></div>
       </div>
 
       <div class="card">
@@ -265,7 +266,7 @@
             <div class="card-month">Octubre</div>
           </div>
         </div>
-        <div class="pills"><span class="pill pill-pay">$ 450.000</span></div>
+        <div class="pills"><span class="pill pill-pend">$ 450.000</span></div>
       </div>
 
       <div class="card">
@@ -275,7 +276,7 @@
             <div class="card-month">Noviembre</div>
           </div>
         </div>
-        <div class="pills"><span class="pill pill-pay">$ 450.000</span></div>
+        <div class="pills"><span class="pill pill-pend">$ 450.000</span></div>
       </div>
 
       <div class="card">
@@ -286,9 +287,9 @@
           </div>
         </div>
         <div class="pills">
-          <span class="pill pill-pay">$ 450.000</span>
+          <span class="pill pill-pend">$ 450.000</span>
           <span class="plus">+</span>
-          <span class="pill pill-agui">$ 225.000 · Medio aguinaldo</span>
+          <span class="pill pill-pend">$ 225.000 · Medio aguinaldo</span>
         </div>
       </div>
 
