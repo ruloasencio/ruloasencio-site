@@ -1,1 +1,304 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Papeles Volkswagen</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #1d1d1f;
+    --muted: #86868b;
+    --line: #e8e8ed;
+    --card: #fbfbfd;
+
+    --pay-bg: #eef5ec;  --pay-ink: #4a7c43;   /* abonado */
+    --pend-bg: #f2f2f5; --pend-ink: #86868b;  /* pendiente / a confirmar */
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.4;
+    padding: 64px 24px 96px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+
+  h1 {
+    font-size: 44px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 56px;
+  }
+
+  .section { margin-bottom: 56px; }
+  .section:last-child { margin-bottom: 0; }
+
+  h2 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .h2-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .h2-row h2 { margin-bottom: 0; }
+  .pill-link {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 13px;
+    border-radius: 999px;
+    white-space: nowrap;
+    text-decoration: none;
+    background: #9b1b21;
+    color: #fff;
+  }
+
+  .cards { display: flex; flex-direction: column; gap: 12px; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .card-main { min-width: 0; }
+  .card-month {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .card-sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .pill {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .pill-pay  { background: var(--pay-bg);  color: var(--pay-ink); }
+  .pill-pend { background: var(--pend-bg); color: var(--pend-ink); }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 12px 0;
+  }
+  .stat {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 16px;
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-lbl {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+    line-height: 1.3;
+  }
+  .pill-card { background: var(--card); border: 1px solid var(--line); color: var(--ink); }
+  .pill-due  { background: #f6efe2; color: #9a6b2f; }
+
+  .stat-green { background: var(--pay-bg); border-color: var(--pay-bg); }
+  .stat-green .stat-num, .stat-green .stat-lbl { color: var(--pay-ink); }
+  .stat-pink { background: #fdeef2; border-color: #fdeef2; }
+  .stat-pink .stat-num, .stat-pink .stat-lbl { color: #b3446c; }
+
+  @media (max-width: 480px) {
+    body { padding: 40px 18px 64px; }
+    h1 { font-size: 34px; margin-bottom: 40px; }
+    .card { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .pills { justify-content: flex-start; }
+    .stats { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Papeles Volkswagen</h1>
+
+  <!-- ===================== SEGURO 2026 ===================== -->
+  <section class="section">
+    <div class="h2-row">
+      <h2>Seguro 2026</h2>
+      <a class="pill-link" href="https://portalasegurado.papps.lasegunda.com.ar/inicio" target="_blank" rel="noopener">Login La Segunda</a>
+    </div>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Enero</div></div>
+        <div class="pills"><span class="pill pill-pay">$ 100.000</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Febrero</div></div>
+        <div class="pills"><span class="pill pill-pay">$ 100.000</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Marzo</div></div>
+        <div class="pills"><span class="pill pill-pay">$ 100.000</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Abril</div></div>
+        <div class="pills"><span class="pill pill-pay">$ 110.000</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Mayo</div></div>
+        <div class="pills"><span class="pill pill-pay">$ 110.000</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Junio</div></div>
+        <div class="pills"><span class="pill pill-pay">$ 110.000</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main">
+          <div class="card-month">Julio</div>
+          <div class="card-sub">Vence 05/07</div>
+        </div>
+        <div class="pills"><span class="pill pill-due">$ 122.131,42</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main">
+          <div class="card-month">Agosto</div>
+          <div class="card-sub">Vence 05/08</div>
+        </div>
+        <div class="pills"><span class="pill pill-due">$ 122.120,00</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main">
+          <div class="card-month">Septiembre</div>
+          <div class="card-sub">Vence 05/09</div>
+        </div>
+        <div class="pills"><span class="pill pill-due">$ 122.120,00</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Octubre</div></div>
+        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Noviembre</div></div>
+        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Diciembre</div></div>
+        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== PATENTE 2026 ===================== -->
+  <section class="section">
+    <h2>Patente 2026 · 100% pagada</h2>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-main">
+          <div class="card-month">Pago total anual adelantado</div>
+          <div class="card-sub">Volkswagen T-Cross 1.0 TR · Patente AH461TN-05 · Abonado en enero 2026 con 35% de descuento.</div>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-num">$ 155.935</div>
+          <div class="stat-lbl">Valor de cada patente si se decide abonar bimestralmente</div>
+        </div>
+        <div class="stat stat-green">
+          <div class="stat-num">$ 506.789</div>
+          <div class="stat-lbl">Total abonado en Enero 2026</div>
+        </div>
+        <div class="stat stat-pink">
+          <div class="stat-num">$ 272.886</div>
+          <div class="stat-lbl">Ahorro por pagar todo el año por adelantado</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-main">
+          <div class="card-month">Cuota 1</div>
+        </div>
+        <div class="pills"><span class="pill pill-card">$ 155.935 Pesos</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main">
+          <div class="card-month">Cuota 2</div>
+        </div>
+        <div class="pills"><span class="pill pill-card">$ 155.935 Pesos</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main">
+          <div class="card-month">Cuota 3</div>
+        </div>
+        <div class="pills"><span class="pill pill-card">$ 155.935 Pesos</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main">
+          <div class="card-month">Cuota 4</div>
+        </div>
+        <div class="pills"><span class="pill pill-card">$ 155.935 Pesos</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main">
+          <div class="card-month">Cuota 5</div>
+        </div>
+        <div class="pills"><span class="pill pill-card">$ 155.935 Pesos</span></div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
