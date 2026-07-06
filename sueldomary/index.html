@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -32,14 +33,56 @@
     font-size: 44px;
     font-weight: 600;
     letter-spacing: -0.02em;
-    margin-bottom: 8px;
+    margin-bottom: 32px;
   }
   .lede {
     font-size: 17px;
     color: var(--muted);
-    margin-bottom: 56px;
+    margin-bottom: 32px;
     letter-spacing: -0.01em;
   }
+
+  /* Totales anuales */
+  .hero-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 56px;
+  }
+  .hero-stat {
+    background: #fdeef2;
+    border: 1px solid #fdeef2;
+    border-radius: 14px;
+    padding: 22px 20px;
+    text-align: center;
+  }
+  .hero-stat .stat-num {
+    font-size: 32px;
+    color: #b3446c;
+  }
+  .hero-stat .stat-lbl {
+    color: #b3446c;
+    opacity: 0.75;
+  }
+  .stat-cur {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #b3446c;
+    margin-bottom: 4px;
+  }
+  .stat-rate {
+    font-size: 11px;
+    opacity: 0.55;
+    margin-top: 2px;
+  }
+  .hero-usd { background: #e9f1fb; border-color: #e9f1fb; }
+  .hero-stat.hero-usd .stat-num,
+  .hero-stat.hero-usd .stat-lbl,
+  .hero-stat.hero-usd .stat-cur,
+  .hero-stat.hero-usd .stat-rate { color: #2b5f9e; }
+  .hero-stat.hero-usd .stat-lbl { opacity: 0.75; }
 
   .section { margin-bottom: 56px; }
   .section:last-child { margin-bottom: 0; }
@@ -209,7 +252,8 @@
   @media (max-width: 480px) {
     body { padding: 40px 18px 64px; }
     h1 { font-size: 34px; }
-    .lede { margin-bottom: 40px; }
+    .lede { margin-bottom: 28px; }
+    .hero-row { grid-template-columns: 1fr; }
     .card { flex-direction: column; align-items: flex-start; gap: 10px; }
     .pills { justify-content: flex-start; padding-left: 0; }
     .agui-wrap { align-items: flex-start; }
@@ -221,8 +265,22 @@
 <body>
 <div class="wrap">
 
-  <h1>Mary &amp; Familia Asencio Cordara</h1>
-  <p class="lede">Cronograma de pago, sueldo y condiciones</p>
+  <h1>Mary Rivero</h1>
+
+  <!-- ===================== TOTALES 2026 ===================== -->
+  <div class="hero-row">
+    <div class="hero-stat">
+      <div class="stat-cur">Pesos</div>
+      <div class="stat-num" id="total-num">$ 4.875.000</div>
+      <div class="stat-lbl" id="total-lbl">Total sueldo 2026 · Enero a Diciembre</div>
+    </div>
+    <div class="hero-stat hero-usd">
+      <div class="stat-cur">Dólares</div>
+      <div class="stat-num" id="total-usd">USD 3.282,83</div>
+      <div class="stat-lbl" id="total-usd-lbl">Total sueldo 2026 · Enero a Diciembre</div>
+      <div class="stat-rate" id="usd-rate">Dólar oficial BNA promedio: $ 1.485</div>
+    </div>
+  </div>
 
   <!-- ===================== PAGOS ===================== -->
   <section class="section">
@@ -434,5 +492,43 @@
   </section>
 
 </div>
+
+<script>
+  // Total anual 2026: suma TODAS las pills con monto del documento
+  // (pagadas, pendientes y aguinaldos), porque el año ya está definido
+  // hasta el 31 de diciembre. Si cambia algún monto en las cards,
+  // las cajas se recalculan solas.
+  (function () {
+    var pills = document.querySelectorAll('.card .pill');
+    var total = 0;
+    pills.forEach(function (pill) {
+      var raw = pill.textContent.replace(/[^0-9,\.]/g, '');
+      if (!raw) return;
+      var valor = parseFloat(raw.replace(/\./g, '').replace(',', '.'));
+      if (isNaN(valor) || valor <= 0) return;
+      total += valor;
+    });
+    if (total > 0) {
+      document.getElementById('total-num').textContent =
+        '$ ' + total.toLocaleString('es-AR', { maximumFractionDigits: 0 });
+
+      // Dólar oficial BNA: promedio entre compra y venta.
+      var RESPALDO = 1485; // (1.460 compra + 1.510 venta) / 2 — actualizar cada tanto
+      function pintarUSD(tc) {
+        document.getElementById('total-usd').textContent =
+          'USD ' + (total / tc).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById('usd-rate').textContent =
+          'Dólar oficial BNA promedio: $ ' + tc.toLocaleString('es-AR', { maximumFractionDigits: 0 });
+      }
+      pintarUSD(RESPALDO);
+      fetch('https://dolarapi.com/v1/dolares/oficial')
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (d && d.compra && d.venta) pintarUSD((d.compra + d.venta) / 2);
+        })
+        .catch(function () {});
+    }
+  })();
+</script>
 </body>
 </html>
