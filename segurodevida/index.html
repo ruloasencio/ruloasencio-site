@@ -1,1 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seguro de Vida</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #1d1d1f;
+    --muted: #86868b;
+    --line: #e8e8ed;
+    --card: #fbfbfd;
 
+    --pay-bg: #eef5ec;  --pay-ink: #4a7c43;   /* abonado */
+    --pend-bg: #f2f2f5; --pend-ink: #86868b;  /* pendiente / a confirmar */
+    --due-bg: #f6efe2;  --due-ink: #9a6b2f;   /* a pagarse */
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.4;
+    padding: 64px 24px 96px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+
+  h1 {
+    font-size: 44px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 56px;
+  }
+
+  .hero-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: -24px 0 56px;
+  }
+  .hero-stat {
+    background: #fdeef2;
+    border: 1px solid #fdeef2;
+    border-radius: 14px;
+    padding: 22px 20px;
+    text-align: center;
+  }
+  .hero-usd { background: #e9f1fb; border-color: #e9f1fb; }
+  .hero-stat.hero-usd .stat-num,
+  .hero-stat.hero-usd .stat-lbl,
+  .hero-stat.hero-usd .stat-cur,
+  .hero-stat.hero-usd .stat-rate { color: #2b5f9e; }
+  .hero-stat.hero-usd .stat-lbl { opacity: 0.75; }
+  .stat-cur {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #b3446c;
+    margin-bottom: 4px;
+  }
+  .stat-rate {
+    font-size: 11px;
+    color: #2b5f9e;
+    opacity: 0.55;
+    margin-top: 2px;
+  }
+  .hero-stat .stat-num {
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    color: #b3446c;
+  }
+  .hero-stat .stat-lbl {
+    font-size: 12px;
+    color: #b3446c;
+    opacity: 0.75;
+    margin-top: 4px;
+  }
+
+  .section { margin-bottom: 56px; }
+  .section:last-child { margin-bottom: 0; }
+
+  h2 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .h2-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .h2-row h2 { margin-bottom: 0; }
+  .pill-link {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 13px;
+    border-radius: 999px;
+    white-space: nowrap;
+    text-decoration: none;
+    background: #4d31da;
+    color: #fff;
+  }
+
+  .cards { display: flex; flex-direction: column; gap: 12px; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .card-main { min-width: 0; }
+  .card-month {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .card-sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .pill {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .pill-pay  { background: var(--pay-bg);  color: var(--pay-ink); }
+  .pill-pend { background: var(--pend-bg); color: var(--pend-ink); }
+  .pill-due  { background: var(--due-bg);  color: var(--due-ink); }
+
+  @media (max-width: 480px) {
+    body { padding: 40px 18px 64px; }
+    h1 { font-size: 34px; margin-bottom: 40px; }
+    .card { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .pills { justify-content: flex-start; }
+    .hero-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Seguro de Vida</h1>
+
+  <div class="hero-row">
+    <div class="hero-stat">
+      <div class="stat-cur">Pesos</div>
+      <div class="stat-num" id="total-num">$ 116.906,28</div>
+      <div class="stat-lbl" id="total-lbl">Total abonado en pesos hasta Junio 2026</div>
+    </div>
+    <div class="hero-stat hero-usd">
+      <div class="stat-cur">Dólares</div>
+      <div class="stat-num" id="total-usd">USD 78,72</div>
+      <div class="stat-lbl" id="total-usd-lbl">Total abonado en dólares hasta Junio 2026</div>
+      <div class="stat-rate" id="usd-rate">Dólar oficial BNA promedio: $ 1.485</div>
+    </div>
+  </div>
+
+  <!-- ===================== COBERTURA MEDICA 2026 ===================== -->
+  <section class="section">
+    <div class="h2-row">
+      <h2>Seguro de Vida 2026</h2>
+      <a class="pill-link" href="https://www.bina.seg.ar/login/personas/" target="_blank" rel="noopener">Login Bina</a>
+    </div>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Enero</div></div>
+        <div class="pills"><span class="pill pill-pay">$ 20.415,57</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Febrero</div></div>
+        <div class="pills"><span class="pill pill-pay">$ 20.348,60</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Marzo</div></div>
+        <div class="pills"><span class="pill pill-pay">$ 19.639,27</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Abril</div></div>
+        <div class="pills"><span class="pill pill-pay">$ 19.105,48</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Mayo</div></div>
+        <div class="pills"><span class="pill pill-pay">$ 18.764,16</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Junio</div></div>
+        <div class="pills"><span class="pill pill-pay">$ 18.633,20</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Julio</div></div>
+        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Agosto</div></div>
+        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Septiembre</div></div>
+        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Octubre</div></div>
+        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Noviembre</div></div>
+        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Diciembre</div></div>
+        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<script>
+  // Suma automática: recorre las cards, toma toda pill verde con monto
+  // y actualiza el total y el último mes pagado. No hay nada que editar acá:
+  // al pasar una pill a verde (class "pill-pay") con su "$ monto",
+  // la caja se actualiza sola.
+  (function () {
+    var cards = document.querySelectorAll('.card');
+    var total = 0;
+    var ultimoMes = null;
+    cards.forEach(function (card) {
+      var pill = card.querySelector('.pill-pay');
+      var mes = card.querySelector('.card-month');
+      if (!pill || !mes) return;
+      var raw = pill.textContent.replace(/[^0-9,\.]/g, '');
+      if (!raw) return;
+      var valor = parseFloat(raw.replace(/\./g, '').replace(',', '.'));
+      if (isNaN(valor) || valor <= 0) return;
+      total += valor;
+      ultimoMes = mes.textContent.trim();
+    });
+    if (total > 0 && ultimoMes) {
+      document.getElementById('total-num').textContent =
+        '$ ' + total.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      document.getElementById('total-lbl').textContent =
+        'Total abonado en pesos hasta ' + ultimoMes + ' 2026';
+      document.getElementById('total-usd-lbl').textContent =
+        'Total abonado en dólares hasta ' + ultimoMes + ' 2026';
+
+      // Dólar oficial BNA: promedio entre compra y venta.
+      // Intenta traer la cotización del día; si falla, usa el valor de respaldo.
+      var RESPALDO = 1485; // (1.460 compra + 1.510 venta) / 2 — actualizar cada tanto
+      function pintarUSD(tc) {
+        document.getElementById('total-usd').textContent =
+          'USD ' + (total / tc).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById('usd-rate').textContent =
+          'Dólar oficial BNA promedio: $ ' + tc.toLocaleString('es-AR', { maximumFractionDigits: 0 });
+      }
+      pintarUSD(RESPALDO);
+      fetch('https://dolarapi.com/v1/dolares/oficial')
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (d && d.compra && d.venta) pintarUSD((d.compra + d.venta) / 2);
+        })
+        .catch(function () {});
+    }
+  })();
+</script>
+</body>
+</html>
