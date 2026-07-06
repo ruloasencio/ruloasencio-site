@@ -153,13 +153,13 @@
   <div class="hero-row">
     <div class="hero-stat">
       <div class="stat-cur">Pesos</div>
-      <div class="stat-num" id="total-num">$ 5.800.000</div>
-      <div class="stat-lbl" id="total-lbl">Total cobrado en pesos hasta Julio 2026</div>
+      <div class="stat-num" id="total-num">$ 10.800.000</div>
+      <div class="stat-lbl" id="total-lbl">Total alquiler 2026 · Enero a Diciembre</div>
     </div>
     <div class="hero-stat hero-usd">
       <div class="stat-cur">Dólares</div>
-      <div class="stat-num" id="total-usd">USD 3.905,72</div>
-      <div class="stat-lbl" id="total-usd-lbl">Total cobrado en dólares hasta Julio 2026</div>
+      <div class="stat-num" id="total-usd">USD 7.272,73</div>
+      <div class="stat-lbl" id="total-usd-lbl">Total alquiler 2026 · Enero a Diciembre</div>
       <div class="stat-rate" id="usd-rate">Dólar oficial BNA promedio: $ 1.485</div>
     </div>
   </div>
@@ -279,35 +279,22 @@
 </div>
 
 <script>
-  // Suma automática: toma toda pill verde (cobrada) con monto y actualiza
-  // pesos, dólares y último mes cobrado. Al pasar una pill a "pill-pay",
-  // las cajas se recalculan solas.
+  // Total anual 2026: suma TODAS las pills con monto (cobradas y pendientes),
+  // porque el año ya está definido de enero a diciembre. Si cambia algún
+  // monto en las cards, las cajas se recalculan solas.
   (function () {
-    var cards = document.querySelectorAll('.card');
+    var pills = document.querySelectorAll('.card .pill');
     var total = 0;
-    var ultimoMes = null;
-    var ORDEN = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
-                 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-    var maxIdx = -1;
-    cards.forEach(function (card) {
-      var pill = card.querySelector('.pill-pay');
-      var mes = card.querySelector('.card-month');
-      if (!pill || !mes) return;
+    pills.forEach(function (pill) {
       var raw = pill.textContent.replace(/[^0-9,\.]/g, '');
       if (!raw) return;
       var valor = parseFloat(raw.replace(/\./g, '').replace(',', '.'));
       if (isNaN(valor) || valor <= 0) return;
       total += valor;
-      var idx = ORDEN.indexOf(mes.textContent.trim());
-      if (idx > maxIdx) { maxIdx = idx; ultimoMes = mes.textContent.trim(); }
     });
-    if (total > 0 && ultimoMes) {
+    if (total > 0) {
       document.getElementById('total-num').textContent =
         '$ ' + total.toLocaleString('es-AR', { maximumFractionDigits: 0 });
-      document.getElementById('total-lbl').textContent =
-        'Total cobrado en pesos hasta ' + ultimoMes + ' 2026';
-      document.getElementById('total-usd-lbl').textContent =
-        'Total cobrado en dólares hasta ' + ultimoMes + ' 2026';
 
       // Dólar oficial BNA: promedio entre compra y venta.
       var RESPALDO = 1485; // (1.460 compra + 1.510 venta) / 2
