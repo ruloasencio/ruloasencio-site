@@ -34,6 +34,53 @@
     margin-bottom: 56px;
   }
 
+  .hero-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: -24px 0 56px;
+  }
+  .hero-stat {
+    background: #fdeef2;
+    border: 1px solid #fdeef2;
+    border-radius: 14px;
+    padding: 22px 20px;
+    text-align: center;
+  }
+  .hero-stat .stat-num {
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    color: #b3446c;
+  }
+  .hero-stat .stat-lbl {
+    font-size: 12px;
+    color: #b3446c;
+    opacity: 0.75;
+    margin-top: 4px;
+  }
+  .stat-cur {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #b3446c;
+    margin-bottom: 4px;
+  }
+  .stat-rate {
+    font-size: 11px;
+    color: #2b5f9e;
+    opacity: 0.55;
+    margin-top: 2px;
+  }
+  .hero-usd { background: #e9f1fb; border-color: #e9f1fb; }
+  .hero-stat.hero-usd .stat-num,
+  .hero-stat.hero-usd .stat-lbl,
+  .hero-stat.hero-usd .stat-cur,
+  .hero-stat.hero-usd .stat-rate { color: #2b5f9e; }
+  .hero-stat.hero-usd .stat-lbl { opacity: 0.75; }
+
   .section { margin-bottom: 56px; }
   .section:last-child { margin-bottom: 0; }
 
@@ -113,6 +160,7 @@
     h1 { font-size: 34px; margin-bottom: 40px; }
     .card { flex-direction: column; align-items: flex-start; gap: 10px; }
     .pills { justify-content: flex-start; }
+    .hero-row { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -120,6 +168,20 @@
 <div class="wrap">
 
   <h1>Avalian</h1>
+
+  <div class="hero-row">
+    <div class="hero-stat">
+      <div class="stat-cur">Pesos</div>
+      <div class="stat-num" id="total-num">$ 4.259.688,84</div>
+      <div class="stat-lbl" id="total-lbl">Total abonado en pesos hasta Junio 2026</div>
+    </div>
+    <div class="hero-stat hero-usd">
+      <div class="stat-cur">Dólares</div>
+      <div class="stat-num" id="total-usd">USD 2.868,48</div>
+      <div class="stat-lbl" id="total-usd-lbl">Total abonado en dólares hasta Junio 2026</div>
+      <div class="stat-rate" id="usd-rate">Dólar oficial BNA promedio: $ 1.485</div>
+    </div>
+  </div>
 
   <!-- ===================== COBERTURA MEDICA 2026 ===================== -->
   <section class="section">
@@ -193,5 +255,52 @@
   </section>
 
 </div>
+
+<script>
+  // Suma automática: recorre las cards, toma toda pill verde con monto
+  // y actualiza pesos, dólares y último mes pagado. No hay nada que editar:
+  // al pasar una pill a verde (class "pill-pay") con su "$ monto",
+  // las cajas se actualizan solas.
+  (function () {
+    var cards = document.querySelectorAll('.card');
+    var total = 0;
+    var ultimoMes = null;
+    cards.forEach(function (card) {
+      var pill = card.querySelector('.pill-pay');
+      var mes = card.querySelector('.card-month');
+      if (!pill || !mes) return;
+      var raw = pill.textContent.replace(/[^0-9,\.]/g, '');
+      if (!raw) return;
+      var valor = parseFloat(raw.replace(/\./g, '').replace(',', '.'));
+      if (isNaN(valor) || valor <= 0) return;
+      total += valor;
+      ultimoMes = mes.textContent.trim();
+    });
+    if (total > 0 && ultimoMes) {
+      document.getElementById('total-num').textContent =
+        '$ ' + total.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      document.getElementById('total-lbl').textContent =
+        'Total abonado en pesos hasta ' + ultimoMes + ' 2026';
+      document.getElementById('total-usd-lbl').textContent =
+        'Total abonado en dólares hasta ' + ultimoMes + ' 2026';
+
+      // Dólar oficial BNA: promedio entre compra y venta.
+      var RESPALDO = 1485; // (1.460 compra + 1.510 venta) / 2 — actualizar cada tanto
+      function pintarUSD(tc) {
+        document.getElementById('total-usd').textContent =
+          'USD ' + (total / tc).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById('usd-rate').textContent =
+          'Dólar oficial BNA promedio: $ ' + tc.toLocaleString('es-AR', { maximumFractionDigits: 0 });
+      }
+      pintarUSD(RESPALDO);
+      fetch('https://dolarapi.com/v1/dolares/oficial')
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (d && d.compra && d.venta) pintarUSD((d.compra + d.venta) / 2);
+        })
+        .catch(function () {});
+    }
+  })();
+</script>
 </body>
 </html>
