@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Papeles Volkswagen</title>
+<title>Volkswagen T-Cross</title>
 <style>
   :root {
     --bg: #ffffff;
@@ -32,6 +32,44 @@
     letter-spacing: -0.02em;
     margin-bottom: 56px;
   }
+
+  .hero-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: -24px 0 56px;
+  }
+  .hero-stat {
+    background: #fdeef2;
+    border: 1px solid #fdeef2;
+    border-radius: 14px;
+    padding: 22px 20px;
+    text-align: center;
+  }
+  .hero-stat .stat-num {
+    font-size: 32px;
+    color: #b3446c;
+  }
+  .hero-stat .stat-lbl { color: #b3446c; opacity: 0.75; }
+  .stat-cur {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #b3446c;
+    margin-bottom: 4px;
+  }
+  .stat-rate {
+    font-size: 11px;
+    opacity: 0.55;
+    margin-top: 2px;
+  }
+  .hero-usd { background: #e9f1fb; border-color: #e9f1fb; }
+  .hero-stat.hero-usd .stat-num,
+  .hero-stat.hero-usd .stat-lbl,
+  .hero-stat.hero-usd .stat-cur,
+  .hero-stat.hero-usd .stat-rate { color: #2b5f9e; }
+  .hero-stat.hero-usd .stat-lbl { opacity: 0.75; }
 
   .section { margin-bottom: 56px; }
   .section:last-child { margin-bottom: 0; }
@@ -144,6 +182,7 @@
     h1 { font-size: 34px; margin-bottom: 40px; }
     .card { flex-direction: column; align-items: flex-start; gap: 10px; }
     .pills { justify-content: flex-start; }
+    .hero-row { grid-template-columns: 1fr; }
     .stats { grid-template-columns: 1fr; }
   }
 </style>
@@ -151,7 +190,21 @@
 <body>
 <div class="wrap">
 
-  <h1>Papeles Volkswagen</h1>
+  <h1>Volkswagen T-Cross</h1>
+
+  <div class="hero-row">
+    <div class="hero-stat">
+      <div class="stat-cur">Pesos</div>
+      <div class="stat-num" id="total-num">$ 1.975.603</div>
+      <div class="stat-lbl" id="total-lbl">Total 2026 · Seguro + Patente</div>
+    </div>
+    <div class="hero-stat hero-usd">
+      <div class="stat-cur">Dólares</div>
+      <div class="stat-num" id="total-usd">USD 1.330,37</div>
+      <div class="stat-lbl" id="total-usd-lbl">Total 2026 · Seguro + Patente</div>
+      <div class="stat-rate" id="usd-rate">Dólar oficial BNA promedio: $ 1.485</div>
+    </div>
+  </div>
 
   <!-- ===================== SEGURO 2026 ===================== -->
   <section class="section">
@@ -217,17 +270,17 @@
 
       <div class="card">
         <div class="card-main"><div class="card-month">Octubre</div></div>
-        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
+        <div class="pills"><span class="pill pill-pend">A confirmar $ 130.000</span></div>
       </div>
 
       <div class="card">
         <div class="card-main"><div class="card-month">Noviembre</div></div>
-        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
+        <div class="pills"><span class="pill pill-pend">A confirmar $ 130.000</span></div>
       </div>
 
       <div class="card">
         <div class="card-main"><div class="card-month">Diciembre</div></div>
-        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
+        <div class="pills"><span class="pill pill-pend">A confirmar $ 130.000</span></div>
       </div>
 
     </div>
@@ -250,7 +303,7 @@
           <div class="stat-num">$ 779.675</div>
           <div class="stat-lbl">Total si se abona en 5 cuotas bimestrales</div>
         </div>
-        <div class="stat stat-green">
+        <div class="stat stat-green" data-sum="506788.75">
           <div class="stat-num">$ 506.789</div>
           <div class="stat-lbl">Total abonado en Enero 2026</div>
         </div>
@@ -299,5 +352,50 @@
   </section>
 
 </div>
+
+<script>
+  // Total anual 2026: suma los 12 meses del seguro (pagados, a pagarse
+  // y a confirmar con monto estimado) + la patente anual (data-sum).
+  // Las cuotas informativas de patente (pill-card) NO se suman.
+  // Si cambia cualquier monto, las cajas se recalculan solas.
+  (function () {
+    var total = 0;
+
+    document.querySelectorAll('.card .pill-pay, .card .pill-due, .card .pill-pend')
+      .forEach(function (pill) {
+        var raw = pill.textContent.replace(/[^0-9,\.]/g, '');
+        if (!raw) return;
+        var valor = parseFloat(raw.replace(/\./g, '').replace(',', '.'));
+        if (isNaN(valor) || valor <= 0) return;
+        total += valor;
+      });
+
+    document.querySelectorAll('[data-sum]').forEach(function (el) {
+      var v = parseFloat(el.getAttribute('data-sum'));
+      if (!isNaN(v)) total += v;
+    });
+
+    if (total > 0) {
+      document.getElementById('total-num').textContent =
+        '$ ' + total.toLocaleString('es-AR', { maximumFractionDigits: 0 });
+
+      // Dólar oficial BNA: promedio entre compra y venta.
+      var RESPALDO = 1485; // (1.460 compra + 1.510 venta) / 2
+      function pintarUSD(tc) {
+        document.getElementById('total-usd').textContent =
+          'USD ' + (total / tc).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById('usd-rate').textContent =
+          'Dólar oficial BNA promedio: $ ' + tc.toLocaleString('es-AR', { maximumFractionDigits: 0 });
+      }
+      pintarUSD(RESPALDO);
+      fetch('https://dolarapi.com/v1/dolares/oficial')
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (d && d.compra && d.venta) pintarUSD((d.compra + d.venta) / 2);
+        })
+        .catch(function () {});
+    }
+  })();
+</script>
 </body>
 </html>
