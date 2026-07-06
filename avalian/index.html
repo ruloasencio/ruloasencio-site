@@ -1,1 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avalian</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #1d1d1f;
+    --muted: #86868b;
+    --line: #e8e8ed;
+    --card: #fbfbfd;
 
+    --pay-bg: #eef5ec;  --pay-ink: #4a7c43;   /* abonado */
+    --pend-bg: #f2f2f5; --pend-ink: #86868b;  /* pendiente / a confirmar */
+    --due-bg: #f6efe2;  --due-ink: #9a6b2f;   /* a pagarse */
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.4;
+    padding: 64px 24px 96px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+
+  h1 {
+    font-size: 44px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 56px;
+  }
+
+  .section { margin-bottom: 56px; }
+  .section:last-child { margin-bottom: 0; }
+
+  h2 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .h2-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .h2-row h2 { margin-bottom: 0; }
+  .pill-link {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 13px;
+    border-radius: 999px;
+    white-space: nowrap;
+    text-decoration: none;
+    background: #00a44f;
+    color: #fff;
+  }
+
+  .cards { display: flex; flex-direction: column; gap: 12px; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .card-main { min-width: 0; }
+  .card-month {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .card-sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .pill {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .pill-pay  { background: var(--pay-bg);  color: var(--pay-ink); }
+  .pill-pend { background: var(--pend-bg); color: var(--pend-ink); }
+  .pill-due  { background: var(--due-bg);  color: var(--due-ink); }
+
+  @media (max-width: 480px) {
+    body { padding: 40px 18px 64px; }
+    h1 { font-size: 34px; margin-bottom: 40px; }
+    .card { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .pills { justify-content: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Avalian</h1>
+
+  <!-- ===================== COBERTURA MEDICA 2026 ===================== -->
+  <section class="section">
+    <div class="h2-row">
+      <h2>Cobertura Medica 2026</h2>
+      <a class="pill-link" href="https://online.avalian.com/ingreso?returnUrl=%2Finicio" target="_blank" rel="noopener">Login Avalian</a>
+    </div>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Enero</div></div>
+        <div class="pills"><span class="pill pill-pay">$ 646.758,39</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Febrero</div></div>
+        <div class="pills"><span class="pill pill-pay">$ 700.915,85</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Marzo</div></div>
+        <div class="pills"><span class="pill pill-pay">$ 707.517,27</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Abril</div></div>
+        <div class="pills"><span class="pill pill-pay">$ 706.042,09</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Mayo</div></div>
+        <div class="pills"><span class="pill pill-pay">$ 730.048,02</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Junio</div></div>
+        <div class="pills"><span class="pill pill-pay">$ 768.407,22</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Julio</div></div>
+        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Agosto</div></div>
+        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Septiembre</div></div>
+        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Octubre</div></div>
+        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Noviembre</div></div>
+        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Diciembre</div></div>
+        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
