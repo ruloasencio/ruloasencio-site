@@ -1,1 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Provincia Vida — Borrador de propuesta · Para Ale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf8f4;
+    --ink:#2b2620;
+    --ink-soft:#5c554a;
+    --line:#e6e0d4;
+    --terracotta:#b4552d;
+    --olive:#6b7248;
+    --ochre:#c1892b;
+    --violet:#6d5a8f;
+    --card:#ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;font-size:17px;line-height:1.65;padding:0 20px 90px}
+  .wrap{max-width:760px;margin:0 auto}
+  h1,h2,h3{font-family:'Lora',Georgia,serif}
+  .mono{font-family:'DM Mono',monospace}
 
+  header{padding:64px 0 34px;border-bottom:1px solid var(--line)}
+  .kicker{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--terracotta);margin-bottom:14px}
+  h1{font-size:34px;font-weight:600;line-height:1.2;margin-bottom:10px}
+  .sub{color:var(--ink-soft);font-size:17px}
+
+  nav{display:flex;flex-wrap:wrap;gap:8px 18px;padding:20px 0;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:5}
+  nav a{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.06em;color:var(--ink-soft);text-decoration:none}
+  nav a:hover{color:var(--terracotta)}
+  nav a b{color:var(--terracotta);font-weight:500;margin-right:4px}
+
+  section{padding:46px 0 8px}
+  .sec-label{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--ink-soft);margin-bottom:8px}
+  h2{font-size:24px;font-weight:600;margin-bottom:18px}
+  p{margin-bottom:14px;max-width:66ch}
+  p.lead{font-size:19px}
+
+  .data-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:22px 0}
+  .data-cell{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 16px}
+  .data-cell .n{font-family:'Lora',serif;font-size:27px;font-weight:600;line-height:1.1}
+  .data-cell .l{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-top:6px}
+  .data-cell.t .n{color:var(--terracotta)}
+  .data-cell.o .n{color:var(--olive)}
+  .data-cell.c .n{color:var(--ochre)}
+  .data-cell.v .n{color:var(--violet)}
+
+  .card{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--olive);border-radius:10px;padding:20px 22px;margin:16px 0}
+  .card.terra{border-left-color:var(--terracotta)}
+  .card.ochre{border-left-color:var(--ochre)}
+  .card.violet{border-left-color:var(--violet)}
+  .card h3{font-size:16.5px;font-weight:600;margin-bottom:8px}
+  .card .tag{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:6px}
+  .card ul{list-style:none;margin-top:6px}
+  .card li{padding:5px 0 5px 18px;position:relative;font-size:16px}
+  .card li::before{content:"—";position:absolute;left:0;color:var(--terracotta)}
+
+  table{width:100%;border-collapse:collapse;margin:18px 0;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:15.5px}
+  th{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;text-align:left;color:var(--ink-soft);padding:12px 16px;border-bottom:1px solid var(--line);background:#f4f0e7}
+  td{padding:11px 16px;border-bottom:1px solid var(--line)}
+  tr:last-child td{border-bottom:none}
+  td.pct{font-family:'DM Mono',monospace;color:var(--terracotta);white-space:nowrap}
+
+  .note{font-size:14.5px;color:var(--ink-soft);font-style:italic}
+  .pill{display:inline-block;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;padding:3px 10px;border-radius:20px;background:#f0e9db;color:var(--ink-soft);margin-left:6px;vertical-align:middle}
+  .pill.hot{background:#f5e3d8;color:var(--terracotta)}
+
+  footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);font-family:'DM Mono',monospace;font-size:12px;color:var(--ink-soft);letter-spacing:.05em}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">La América · Nuevos negocios</div>
+  <h1>Provincia Vida — Borrador de propuesta</h1>
+  <div class="sub">Para Ale · Julio 2026 · Resumen para tu OK antes de enviar</div>
+</header>
+
+<nav>
+  <a href="#s1"><b>01</b>Contexto</a>
+  <a href="#s2"><b>02</b>Scope</a>
+  <a href="#s3"><b>03</b>Equipo</a>
+  <a href="#s4"><b>04</b>Presupuesto</a>
+  <a href="#s5"><b>05</b>Condiciones</a>
+  <a href="#s6"><b>06</b>Qué necesito de vos</a>
+</nav>
+
+<section id="s1">
+  <div class="sec-label">01</div>
+  <h2>Contexto</h2>
+  <p class="lead">El scope cambió bastante respecto de lo que presupuestamos al inicio. Hoy es un trabajo más de El Buró que de agencia: ejecución concreta, sin estrategia ni insights.</p>
+  <p>Ya hicimos el doble check con Graciela (mail con respuestas punto por punto) y el alcance quedó confirmado. Lo que sigue es cerrar número y forma de pago para enviar la propuesta.</p>
+</section>
+
+<section id="s2">
+  <div class="sec-label">02</div>
+  <h2>Scope confirmado</h2>
+
+  <div class="data-row">
+    <div class="data-cell t"><div class="n">40%</div><div class="l">Rediseño website</div></div>
+    <div class="data-cell o"><div class="n">60%</div><div class="l">Lanzamiento nuevo producto</div></div>
+    <div class="data-cell c"><div class="n">13 sem</div><div class="l">20/07 → 16/10</div></div>
+  </div>
+
+  <div class="card terra">
+    <span class="tag">Website · 40% del scope</span>
+    <h3>Rediseño integral: UX/UI, contenidos, lineamientos, desarrollo</h3>
+    <ul>
+      <li>15 secciones/páginas sobre la base del sitio actual</li>
+      <li>Textos: revisión y optimización de lo existente (no redacción desde cero)</li>
+      <li>Plataforma: WordPress. IT de ellos disponible para acompañar</li>
+      <li>Manual de marca vigente, sin cambios</li>
+      <li>Desarrollo con partner: <strong>Coding & Co</strong> — presupuesto más que razonable: <strong>ARS 5.000.000 + IVA</strong></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <span class="tag">Nuevo producto · 60% del scope</span>
+    <h3>Seguro Universal (reemplaza a Provin Flex +A)</h3>
+    <ul>
+      <li>Naming, isologotipo y key visual del nuevo producto</li>
+      <li>Atributos: flexibilidad, protección + inversión, autonomía. Concepto: tranquilidad</li>
+      <li>+Actual C queda tal cual, sin modificaciones</li>
+      <li>4 folletos trípticos (pensar, redactar, diseñar) <span class="pill hot">prioritario · agosto</span></li>
+      <li>Banners: 3 diseños originales + 8 adaptaciones c/u = 24 piezas</li>
+      <li>Email marketing: 2 plantillas + 2 textos</li>
+      <li>RRSS kit de lanzamiento: 8 audiovisuales (animación o full IA) + 16 estáticos</li>
+    </ul>
+  </div>
+
+  <div class="card ochre">
+    <span class="tag">Fechas de entrega</span>
+    <ul>
+      <li>Website → <strong>25 de septiembre</strong></li>
+      <li>Materiales de venta, RRSS y banners → <strong>30 de octubre</strong></li>
+      <li>La puesta en marcha depende de validación de Provincia Vida e IT</li>
+    </ul>
+  </div>
+</section>
+
+<section id="s3">
+  <div class="sec-label">03</div>
+  <h2>Equipo propuesto</h2>
+  <p>Lo definimos con Gus. No incluye insights, ni estrategia, ni dupla creativa (sí redactora). Si sentís que algo suma al planteo, lo agregamos.</p>
+
+  <table>
+    <tr><th>Persona</th><th>Rol</th><th>Dedicación</th></tr>
+    <tr><td>Gustavo Chiocconi</td><td>Director de Diseño</td><td class="pct">10%</td></tr>
+    <tr><td>Micaela Mazzioti</td><td>Project Manager</td><td class="pct">10%</td></tr>
+    <tr><td>Rulo</td><td>Director de Operaciones</td><td class="pct">5%</td></tr>
+    <tr><td>Audrey Prieto</td><td>Redactora</td><td class="pct">10%</td></tr>
+    <tr><td>Morena Joos</td><td>Diseñadora</td><td class="pct">20%</td></tr>
+    <tr><td>Lucas Sotelo</td><td>Diseñador</td><td class="pct">30%</td></tr>
+    <tr><td>TBD · Coding & Co</td><td>Directora de Tecnología</td><td class="pct">10%</td></tr>
+    <tr><td>TBD · Coding & Co</td><td>Backend Engineer</td><td class="pct">25%</td></tr>
+    <tr><td>TBD · Coding & Co</td><td>Diseñador UX</td><td class="pct">25%</td></tr>
+  </table>
+  <p class="note">Los tres roles TBD corresponden al servicio subcontratado a Coding & Co (ARS 5.000.000 + IVA).</p>
+</section>
+
+<section id="s4">
+  <div class="sec-label">04</div>
+  <h2>Presupuesto — lectura de la situación</h2>
+
+  <div class="card violet">
+    <span class="tag">Dónde estamos parados</span>
+    <ul>
+      <li>Nos confirmaron que <strong>fuimos los más caros</strong>, pero todavía no entraron a definir por variables económicas</li>
+      <li><strong>Ventaja:</strong> somos la agencia del banco, nuestro trabajo se conoce internamente, y estamos en esta búsqueda porque alguien de arriba nos mencionó</li>
+      <li><strong>Watch out:</strong> con el scope actual seguramente haya números muy por debajo del nuestro. Nosotros tenemos un piso, dado por nuestro servicio y fee al banco</li>
+    </ul>
+  </div>
+
+  <p>Mi lectura: si el excel nos da un número más bajo que los <strong>100 MM</strong> que pasamos inicialmente, tenemos buenas chances.</p>
+  <p>Acá pienso en lo que charlamos con los proyectos de Molinos (Gallo & Preferido) y los costos fijos que ya existen: un ingreso de, por ejemplo, <strong>30 MM durante 3 meses</strong> podría servirnos. Lo dejo a tu criterio — estoy atento a lo que quizás no estoy viendo, tanto desde el sentido común como desde el excel, para plantear costo y forma de pago según te parezca.</p>
+
+  <div class="data-row">
+    <div class="data-cell v"><div class="n">100 MM</div><div class="l">Propuesta inicial</div></div>
+    <div class="data-cell t"><div class="n">30 MM × 3</div><div class="l">Hipótesis a evaluar</div></div>
+    <div class="data-cell o"><div class="n">5 MM</div><div class="l">Coding & Co (+IVA)</div></div>
+  </div>
+</section>
+
+<section id="s5">
+  <div class="sec-label">05</div>
+  <h2>Condiciones (draft)</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Período:</strong> 13 semanas · 20/07/2026 → 16/10/2026</li>
+      <li><strong>Fee:</strong> ARS __.000.000 + IVA (a definir)</li>
+      <li><strong>Pago:</strong> 30 días fecha de factura · 50% aprobación / 25% septiembre / 25% entrega final</li>
+      <li><strong>Ajuste:</strong> IPC al momento de emisión de cada factura</li>
+      <li><strong>Validez:</strong> 30 días</li>
+      <li><strong>No incluye:</strong> investigación de mercado, medios, social listening, reporting digital, generación de imágenes IA, banco de imágenes, ilustraciones, retoques, materiales a tercerizar, producción audiovisual y gráfica, armado de originales</li>
+    </ul>
+  </div>
+  <p class="note">Los dos slides draft (equipo y condiciones) van adjuntos en PDF.</p>
+</section>
+
+<section id="s6">
+  <div class="sec-label">06</div>
+  <h2>Qué necesito de vos</h2>
+  <div class="card terra">
+    <ul>
+      <li>OK general al planteo de scope y equipo (o qué sumarías)</li>
+      <li>Definir el <strong>número</strong>: ¿validás la hipótesis de ~30 MM × 3 meses, o lo planteamos distinto?</li>
+      <li>Forma de pago: ¿mantenemos 50/25/25 o preferís otro esquema?</li>
+    </ul>
+  </div>
+  <p>Con tu OK, cierro la propuesta y la enviamos a Provincia Vida.</p>
+</section>
+
+<footer>LA AMÉRICA · PROVINCIA VIDA · JULIO 2026 · CONFIDENCIAL</footer>
+
+</div>
+</body>
+</html>
