@@ -1,1 +1,385 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600&family=Source+Serif+4:wght@400;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf8f4; --card:#fffdf9; --ink:#2e2a24; --soft:#8a8072; --line:#e8e2d6;
+    --in:#4d6a8f; --out:#a65440; --ahorro:#5e7052; --today:#2e2a24; --next:#b08c3e;
+  }
+  *{box-sizing:border-box;margin:0}
+  body{background:var(--bg);color:var(--ink);font-family:'Source Serif 4',serif}
+  .wrap{max-width:780px;margin:0 auto;padding:42px 20px 80px}
+  .header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:28px}
+  h1{font-family:'Lora',serif;font-size:38px;font-weight:600}
+  .toggle{display:flex;gap:4px}
+  .pill{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;padding:6px 14px;border-radius:20px;cursor:pointer;border:1px solid var(--line);color:var(--soft);background:transparent;user-select:none}
+  .pill.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .bigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:40px}
+  .big{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px}
+  .label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--soft);margin-bottom:8px}
+  .big .n1{font-family:'Lora',serif;font-size:28px;font-weight:600;line-height:1.15}
+  .big .n2{font-family:'DM Mono',monospace;font-size:13px;opacity:.75;margin-top:4px}
+  .big .tn{font-family:'DM Mono',monospace;font-size:10px;margin-top:10px;display:flex;gap:12px;flex-wrap:wrap}
+  h2{font-family:'Lora',serif;font-size:20px;font-weight:600;margin:0 0 14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;cursor:pointer}
+  .card .nom{font-size:15px;font-weight:600;margin-bottom:8px}
+  .card .n1{font-family:'Lora',serif;font-size:19px;font-weight:600}
+  .card .tn{font-family:'DM Mono',monospace;font-size:9px;margin-top:4px;display:flex;gap:8px;flex-wrap:wrap}
+  .card .vacio{font-family:'DM Mono',monospace;font-size:10px;color:#c4b8a4}
+  .today{color:var(--today)} .next{color:var(--next)}
+  .footer{font-family:'DM Mono',monospace;font-size:10px;color:var(--soft);margin-top:40px;text-align:center}
+  /* Modal */
+  .overlay{position:fixed;inset:0;background:rgba(46,42,36,.4);display:grid;place-items:center;padding:16px;z-index:20}
+  .modal{background:var(--bg);border-radius:16px;padding:22px 22px 26px;width:100%;max-width:400px;max-height:88vh;overflow-y:auto;box-shadow:0 24px 60px rgba(46,42,36,.25)}
+  .modal-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+  .modal h3{font-family:'Lora',serif;font-size:22px;font-weight:600}
+  .cerrar{font-family:'DM Mono',monospace;font-size:12px;color:var(--soft);cursor:pointer;padding:6px}
+  .modal-sub{font-family:'DM Mono',monospace;font-size:11px;color:var(--soft);margin-bottom:18px}
+  .fila{display:flex;align-items:center;gap:12px;padding:7px 0;border-bottom:1px solid var(--line)}
+  .fila .mes{width:64px;font-size:14px;color:var(--soft)}
+  .fila .mes.lleno{color:var(--ink)}
+  .tagnext{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--next);margin-left:6px;vertical-align:middle}
+  .campo{flex:1;position:relative;min-width:0}
+  .campo .pref{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-family:'DM Mono',monospace;font-size:11px;color:var(--soft)}
+  .campo input{width:100%;padding:8px 10px 8px 28px;border:1px solid var(--line);border-radius:8px;background:transparent;font-family:'Lora',serif;font-size:15px;font-weight:600;color:var(--soft);outline:none;text-align:right}
+  .campo input.lleno{background:#fff;color:var(--today)}
+  .campo input.lleno.esnext{color:var(--next)}
+  .campo input.esnext{border-style:dashed}
+  .concepto{flex:1.2;min-width:0;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:transparent;font-family:'Source Serif 4',serif;font-size:14px;color:var(--ink);outline:none}
+  .concepto.lleno{background:#fff}
+  .concepto.esnext{border-style:dashed}
+  .mes-sep{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--soft);border-bottom:1px solid var(--line);padding-bottom:5px;margin:14px 0 2px}
+  .mes-sep.esnext{color:var(--next)}
+  .guardado{font-family:'DM Mono',monospace;font-size:10px;color:var(--soft);margin-top:14px;text-align:center}
+  input::placeholder{color:#c4b8a4}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <h1 id="titulo">Family Plan</h1>
+    <div class="toggle">
+      <span class="pill" id="pill-ars" onclick="setMoneda('ARS')">ARS</span>
+      <span class="pill" id="pill-usd" onclick="setMoneda('USD')">USD</span>
+    </div>
+  </div>
+
+  <div class="bigs" id="bigs"></div>
+
+  <h2 style="color:var(--in)">In</h2>
+  <div class="grid" id="grid-in" style="margin-bottom:40px"></div>
+
+  <h2 style="color:var(--out)">Out</h2>
+  <div class="grid" id="grid-out"></div>
+
+  <div class="footer" id="footer"></div>
+</div>
+
+<div id="modal-root"></div>
+
+<script>
+// ═══ Family Plan · ruloasencio.com ═══
+// Base de datos: localStorage de este navegador.
+
+const ANIO = new Date().getFullYear();
+const KEY = 'family-plan';
+
+const FUENTES = [
+  // — In —
+  { slug:'sueldomati', nombre:'Sueldo Mati', tipo:'in' },
+  { slug:'alquiler1350', nombre:'Alquiler 1350', tipo:'in' },
+  { slug:'alquiler1348', nombre:'Alquiler 1348', tipo:'in' },
+  { slug:'freelancekurz', nombre:'Freelance Kurz', tipo:'in', anual:true },
+  { slug:'devolucionpeke', nombre:'Devolución Préstamo Peke', tipo:'in', anual:true },
+  // — Out —
+  { slug:'mary', nombre:'Mary', tipo:'out' },
+  { slug:'jime', nombre:'Jime', tipo:'out' },
+  { slug:'bina', nombre:'Bina', tipo:'out' },
+  { slug:'deptoba', nombre:'Depto BA', tipo:'out' },
+  { slug:'budget1242', nombre:'Budget Naty', tipo:'out' },
+  { slug:'budgetmati', nombre:'Budget Mati', tipo:'out' },
+  { slug:'cocheraba', nombre:'Cochera BA', tipo:'out' },
+  { slug:'colegio', nombre:'Colegio', tipo:'out' },
+  { slug:'luz1242', nombre:'Luz 1242', tipo:'out' },
+  { slug:'agua1242', nombre:'Agua 1242', tipo:'out' },
+  { slug:'gas1242', nombre:'Gas 1242', tipo:'out' },
+  { slug:'api1242', nombre:'API 1242', tipo:'out', anual:true },
+  { slug:'tgi1242', nombre:'TGI 1242', tipo:'out' },
+  { slug:'internet1242', nombre:'Internet 1242', tipo:'out' },
+  { slug:'flow1242', nombre:'Flow 1242', tipo:'out' },
+  { slug:'celunati', nombre:'Celu Naty', tipo:'out' },
+  { slug:'avalian', nombre:'Avalian', tipo:'out' },
+  { slug:'api1350', nombre:'API 1350', tipo:'out', anual:true },
+  { slug:'tgi1350', nombre:'TGI 1350', tipo:'out' },
+  { slug:'agua1350', nombre:'Agua 1350', tipo:'out' },
+  { slug:'patente', nombre:'Patente', tipo:'out', anual:true },
+  { slug:'lasegunda', nombre:'La Segunda', tipo:'out' },
+  { slug:'prestamo1', nombre:'Préstamo 1', tipo:'out', desde:7 },
+  { slug:'prestamo2', nombre:'Préstamo 2', tipo:'out', desde:7 },
+  { slug:'prestamo3', nombre:'Préstamo 3', tipo:'out', desde:7 },
+  { slug:'espontaneo', nombre:'Espontáneo', tipo:'out', libre:true },
+  { slug:'suscripciones', nombre:'Suscripciones', tipo:'out', subs:true },
+  { slug:'amex', nombre:'Amex', tipo:'out' },
+];
+
+const MESES = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+const SUBS = ['Flow','Netflix','AppleTV','Disney+','PrimeVideo','La Nación','Excel','Claude Pro Naty','iCloud+ Naty','Claude Pro Mati','iCloud+ Mati'];
+
+// ——— Estado ———
+let db;
+try { db = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ db = {}; }
+db.fuentes = db.fuentes || {};
+db.moneda = db.moneda || 'ARS';
+let rate = 1485; // último promedio conocido; se pisa con el del día
+
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(db)); }catch(e){ console.error(e); } }
+
+// ——— Helpers ———
+const hoyKey = ANIO + '-' + String(new Date().getMonth()+1).padStart(2,'0');
+const esProy = k => k.slice(0,7) > hoyKey;
+const fmt = (n,cur) => {
+  if(n==null||isNaN(n)) return cur==='USD'?'USD 0':'$ 0';
+  const s = Math.round(Math.abs(n)).toLocaleString('es-AR',{maximumFractionDigits:0});
+  return (n<0?'−':'') + (cur==='USD'?'USD ':'$ ') + s;
+};
+const conPuntos = s => { const d = String(s).replace(/\D/g,''); return d ? (+d).toLocaleString('es-AR') : ''; };
+const sinPuntos = s => String(s).replace(/\D/g,'');
+const dual = v => db.moneda==='USD'
+  ? { p: fmt(v/rate,'USD'), s: fmt(v,'ARS') }
+  : { p: fmt(v,'ARS'), s: fmt(v/rate,'USD') };
+
+// ——— Consolidado ———
+function calc(){
+  const r = { fuente:{}, tInReal:0, tInProy:0, tOutReal:0, tOutProy:0 };
+  FUENTES.forEach(f=>{
+    const d = db.fuentes[f.slug];
+    let real=0, proy=0;
+    if(d) Object.entries(d.historial||{}).forEach(([k,m])=>{
+      if(!k.startsWith(String(ANIO))) return;
+      const v = +m||0;
+      if(!f.libre && esProy(k)) proy+=v; else real+=v;
+    });
+    r.fuente[f.slug] = { real, proy, tot: real+proy };
+    if(f.tipo==='in'){ r.tInReal+=real; r.tInProy+=proy; } else { r.tOutReal+=real; r.tOutProy+=proy; }
+  });
+  r.tIn = r.tInReal+r.tInProy; r.tOut = r.tOutReal+r.tOutProy;
+  return r;
+}
+
+// ——— Render principal ———
+function render(){
+  document.getElementById('titulo').textContent = 'Family Plan ' + ANIO;
+  document.getElementById('pill-ars').className = 'pill' + (db.moneda==='ARS'?' on':'');
+  document.getElementById('pill-usd').className = 'pill' + (db.moneda==='USD'?' on':'');
+
+  const c = calc();
+  const bigs = [
+    { label:'In', v:c.tIn, real:c.tInReal, proy:c.tInProy, color:'var(--in)' },
+    { label:'Out', v:c.tOut, real:c.tOutReal, proy:c.tOutProy, color:'var(--out)' },
+    { label:'Ahorro', v:c.tIn-c.tOut, real:c.tInReal-c.tOutReal, proy:c.tInProy-c.tOutProy, color:'var(--ahorro)' },
+  ];
+  document.getElementById('bigs').innerHTML = bigs.map(b=>{
+    const d = dual(b.v), dr = dual(b.real), dp = dual(b.proy);
+    return `<div class="big">
+      <div class="label">${b.label}</div>
+      <div class="n1" style="color:${b.color}">${d.p}</div>
+      <div class="n2" style="color:${b.color}">${d.s}</div>
+      <div class="tn"><span class="today">Today ${dr.p}</span><span class="next">Next ${dp.p}</span></div>
+    </div>`;
+  }).join('');
+
+  const card = (f,color)=>{
+    const x = c.fuente[f.slug];
+    const d = dual(x.tot), dr = dual(x.real), dp = dual(x.proy);
+    const cuerpo = x.tot>0
+      ? `<div class="n1" style="color:${color}">${d.p}</div>
+         <div class="tn"><span class="today">Today ${dr.p}</span>${x.proy>0?`<span class="next">Next ${dp.p}</span>`:''}</div>`
+      : `<div class="vacio">tocá para cargar</div>`;
+    return `<div class="card" onclick="abrir('${f.slug}')"><div class="nom">${f.nombre}</div>${cuerpo}</div>`;
+  };
+  document.getElementById('grid-in').innerHTML = FUENTES.filter(f=>f.tipo==='in').map(f=>card(f,'var(--in)')).join('');
+  document.getElementById('grid-out').innerHTML = FUENTES.filter(f=>f.tipo==='out').map(f=>card(f,'var(--out)')).join('');
+  document.getElementById('footer').innerHTML = 'Dólar oficial · dolarhoy.com · promedio compra/venta: $ ' + rate.toLocaleString('es-AR',{maximumFractionDigits:2})
+    + ' <span style="margin-left:14px;cursor:pointer;border-bottom:1px dotted var(--soft)" onclick="abrirImportar()">importar datos</span>'
+    + ' <span style="margin-left:14px;cursor:pointer;border-bottom:1px dotted var(--soft)" onclick="abrirExportar()">exportar</span>';
+}
+
+function setMoneda(m){ db.moneda=m; save(); render(); }
+
+// ——— Escrituras ———
+function setMonto(slug,k,valor){
+  const f = db.fuentes[slug] = db.fuentes[slug] || { historial:{}, labels:{} };
+  f.historial = f.historial || {};
+  if(valor==='' || valor==null) delete f.historial[k]; else f.historial[k] = +valor;
+  save(); render(); actualizarSubtotalModal(slug);
+}
+function setLabel(slug,k,texto){
+  const f = db.fuentes[slug] = db.fuentes[slug] || { historial:{}, labels:{} };
+  f.labels = f.labels || {};
+  f.labels[k] = texto;
+  save();
+}
+
+// ——— Modal ———
+let abierta = null;
+
+function filaMes(f, etiqueta, k, proy){
+  const d = db.fuentes[f.slug] || {};
+  const val = d.historial ? d.historial[k] : undefined;
+  return `<div class="fila">
+    <div class="mes ${val!=null?'lleno':''}">${etiqueta}${proy?'<span class="tagnext">NEXT</span>':''}</div>
+    <div class="campo">
+      <span class="pref">$</span>
+      <input type="text" inputmode="numeric" placeholder="—"
+        value="${val!=null?conPuntos(val):''}"
+        class="${val!=null?'lleno':''} ${proy?'esnext':''}"
+        oninput="this.value=conPuntos(this.value)"
+        onblur="setMonto('${f.slug}','${k}',sinPuntos(this.value))"
+        onkeydown="if(event.key==='Enter')this.blur()">
+    </div>
+  </div>`;
+}
+
+function filaLibre(f, k, proy, defaultLabel){
+  const d = db.fuentes[f.slug] || {};
+  const label = (d.labels && d.labels[k] !== undefined) ? d.labels[k] : (defaultLabel||'');
+  const val = d.historial ? d.historial[k] : undefined;
+  return `<div class="fila" style="gap:10px">
+    <input type="text" class="concepto ${label?'lleno':''} ${proy?'esnext':''}" placeholder="Concepto…"
+      value="${label.replace(/"/g,'&quot;')}"
+      onblur="setLabel('${f.slug}','${k}',this.value)"
+      onkeydown="if(event.key==='Enter')this.blur()">
+    <div class="campo">
+      <span class="pref">$</span>
+      <input type="text" inputmode="numeric" placeholder="—"
+        value="${val!=null?conPuntos(val):''}"
+        class="${val!=null?'lleno':''} ${proy?'esnext':''}"
+        oninput="this.value=conPuntos(this.value)"
+        onblur="setMonto('${f.slug}','${k}',sinPuntos(this.value))"
+        onkeydown="if(event.key==='Enter')this.blur()">
+    </div>
+  </div>`;
+}
+
+function abrir(slug){
+  abierta = slug;
+  const f = FUENTES.find(x=>x.slug===slug);
+  const color = f.tipo==='in' ? 'var(--in)' : 'var(--out)';
+  let cuerpo = '';
+
+  if(f.subs){
+    cuerpo = MESES.map((n,i)=>{
+      const mm = String(i+1).padStart(2,'0');
+      const proy = esProy(ANIO+'-'+mm);
+      const filas = Array.from({length:SUBS.length+1},(_,x)=>filaLibre(f, `${ANIO}-${mm}-s${x+1}`, proy, SUBS[x]||'')).join('');
+      return `<div class="mes-sep ${proy?'esnext':''}">${n}${proy?'<span class="tagnext">NEXT</span>':''}</div>${filas}`;
+    }).join('');
+  } else if(f.libre){
+    cuerpo = Array.from({length:12},(_,i)=>filaLibre(f, `${ANIO}-item${String(i+1).padStart(2,'0')}`, false, '')).join('');
+  } else if(f.anual){
+    const et = f.tipo==='in' ? `Único ${ANIO}` : `Anual ${ANIO}`;
+    cuerpo = filaMes(f, et, ANIO+'-01', esProy(ANIO+'-01'));
+  } else {
+    cuerpo = MESES.map((n,i)=>{
+      if(f.desde && i+1 < f.desde) return '';
+      const k = `${ANIO}-${String(i+1).padStart(2,'0')}`;
+      return filaMes(f, n, k, esProy(k));
+    }).join('');
+  }
+
+  document.getElementById('modal-root').innerHTML = `
+    <div class="overlay" onclick="if(event.target===this)cerrar()">
+      <div class="modal">
+        <div class="modal-top">
+          <h3 style="color:${color}">${f.nombre}</h3>
+          <span class="cerrar" onclick="cerrar()">cerrar ✕</span>
+        </div>
+        <div class="modal-sub" id="modal-sub"></div>
+        ${cuerpo}
+        <div class="guardado">Se guarda solo al salir de cada campo</div>
+      </div>
+    </div>`;
+  actualizarSubtotalModal(slug);
+}
+
+function actualizarSubtotalModal(slug){
+  if(abierta!==slug) return;
+  const el = document.getElementById('modal-sub');
+  if(!el) return;
+  const f = FUENTES.find(x=>x.slug===slug);
+  const x = calc().fuente[slug];
+  const et = f.anual ? (f.tipo==='in'?'Pago único':'Pago anual único') : `Total ${ANIO}`;
+  const color = f.tipo==='in' ? 'var(--in)' : 'var(--out)';
+  el.innerHTML = `${et}: <b style="color:${color}">${fmt(x.tot,'ARS')}</b>`;
+}
+
+function cerrar(){ abierta=null; document.getElementById('modal-root').innerHTML=''; }
+
+// ——— Importar / Exportar ———
+function abrirImportar(){
+  document.getElementById('modal-root').innerHTML = `
+    <div class="overlay" onclick="if(event.target===this)cerrar()">
+      <div class="modal">
+        <div class="modal-top"><h3>Importar datos</h3><span class="cerrar" onclick="cerrar()">cerrar ✕</span></div>
+        <div style="font-size:13px;color:var(--soft);margin-bottom:12px">Pegá acá el bloque que copiaste de "exportar datos" y tocá Importar. Pisa lo que haya cargado en este navegador.</div>
+        <textarea id="import-box" style="width:100%;box-sizing:border-box;height:160px;padding:10px;border:1px solid var(--line);border-radius:8px;font-family:'DM Mono',monospace;font-size:10px;background:#fff;color:var(--ink)"></textarea>
+        <button onclick="importarDatos()" style="margin-top:12px;width:100%;padding:10px;border:none;border-radius:8px;background:var(--ink);color:#fff;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1px;cursor:pointer">IMPORTAR</button>
+        <div id="import-msg" style="font-family:'DM Mono',monospace;font-size:10px;margin-top:8px;text-align:center;color:var(--soft)"></div>
+      </div>
+    </div>`;
+}
+function importarDatos(){
+  const msg = document.getElementById('import-msg');
+  try{
+    const nuevo = JSON.parse(document.getElementById('import-box').value.trim());
+    if(!nuevo || typeof nuevo.fuentes !== 'object') throw new Error('formato');
+    db = nuevo;
+    db.fuentes = db.fuentes || {};
+    db.moneda = db.moneda || 'ARS';
+    save(); render(); cerrar();
+  }catch(e){
+    msg.textContent = 'Ese texto no parece ser una exportación válida. Copiá el bloque completo y probá de nuevo.';
+    msg.style.color = 'var(--out)';
+  }
+}
+function abrirExportar(){
+  document.getElementById('modal-root').innerHTML = `
+    <div class="overlay" onclick="if(event.target===this)cerrar()">
+      <div class="modal">
+        <div class="modal-top"><h3>Exportar datos</h3><span class="cerrar" onclick="cerrar()">cerrar ✕</span></div>
+        <div style="font-size:13px;color:var(--soft);margin-bottom:12px">Copia de seguridad de todo lo cargado en este navegador. Tocá el cuadro y copiá.</div>
+        <textarea readonly onfocus="this.select()" style="width:100%;box-sizing:border-box;height:160px;padding:10px;border:1px solid var(--line);border-radius:8px;font-family:'DM Mono',monospace;font-size:10px;background:#fff;color:var(--ink)">${JSON.stringify(db)}</textarea>
+      </div>
+    </div>`;
+}
+
+// ——— Dólar del día: dolarhoy.com, promedio compra/venta ———
+(async ()=>{
+  const limpiar = s => parseFloat(String(s).replace(/\./g,'').replace(',','.'));
+  try{
+    const r = await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent('https://dolarhoy.com/'));
+    const html = await r.text();
+    const m = html.match(/D[oó]lar Oficial[\s\S]{0,600}?Compra[\s\S]{0,80}?\$?\s*([\d.,]+)[\s\S]{0,200}?Venta[\s\S]{0,80}?\$?\s*([\d.,]+)/i);
+    if(m){
+      const compra=limpiar(m[1]), venta=limpiar(m[2]);
+      if(compra>0 && venta>0){ rate=(compra+venta)/2; render(); return; }
+    }
+    throw new Error('sin match');
+  }catch(e){}
+  try{
+    const r = await fetch('https://dolarapi.com/v1/dolares/oficial');
+    const d = await r.json();
+    if(d && d.compra && d.venta){ rate=(d.compra+d.venta)/2; render(); }
+  }catch(e){}
+})();
+
+render();
+</script>
+</body>
+</html>
