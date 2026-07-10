@@ -31,6 +31,12 @@
     font-size: 44px;
     font-weight: 600;
     letter-spacing: -0.02em;
+  }
+  .title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
     margin-bottom: 56px;
   }
 
@@ -92,14 +98,6 @@
     color: var(--muted);
     margin-bottom: 20px;
   }
-  .h2-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-  .h2-row h2 { margin-bottom: 0; }
   .pill-link {
     font-size: 12px;
     font-weight: 600;
@@ -155,9 +153,17 @@
   .pill-pend { background: var(--pend-bg); color: var(--pend-ink); }
   .pill-due  { background: var(--due-bg);  color: var(--due-ink); }
 
+  a.pill { text-decoration: none; }
+  .pill-pay .ext {
+    font-size: 10px;
+    margin-left: 5px;
+    opacity: 0.6;
+  }
+
   @media (max-width: 480px) {
     body { padding: 40px 18px 64px; }
-    h1 { font-size: 34px; margin-bottom: 40px; }
+    h1 { font-size: 34px; }
+    .title-row { margin-bottom: 40px; }
     .card { flex-direction: column; align-items: flex-start; gap: 10px; }
     .pills { justify-content: flex-start; }
     .hero-row { grid-template-columns: 1fr; }
@@ -167,88 +173,87 @@
 <body>
 <div class="wrap">
 
-  <h1>Avalian</h1>
+  <div class="title-row">
+    <h1>Avalian 2026</h1>
+    <a class="pill-link" href="https://online.avalian.com/ingreso?returnUrl=%2Finicio" target="_blank" rel="noopener">Acceso Portal Web</a>
+  </div>
 
   <div class="hero-row">
     <div class="hero-stat">
       <div class="stat-cur">Pesos</div>
-      <div class="stat-num" id="total-num">$ 4.259.688,84</div>
-      <div class="stat-lbl" id="total-lbl">Total abonado en pesos hasta Junio 2026</div>
+      <div class="stat-num" id="total-num">$ 4.285.994,85</div>
+      <div class="stat-lbl" id="total-lbl">Total abonado en pesos hasta Julio 2026</div>
     </div>
     <div class="hero-stat hero-usd">
       <div class="stat-cur">Dólares</div>
-      <div class="stat-num" id="total-usd">USD 2.868,48</div>
-      <div class="stat-lbl" id="total-usd-lbl">Total abonado en dólares hasta Junio 2026</div>
+      <div class="stat-num" id="total-usd">USD 2.886,19</div>
+      <div class="stat-lbl" id="total-usd-lbl">Total abonado en dólares hasta Julio 2026</div>
       <div class="stat-rate" id="usd-rate">Dólar oficial BNA promedio: $ 1.485</div>
     </div>
   </div>
 
   <!-- ===================== COBERTURA MEDICA 2026 ===================== -->
   <section class="section">
-    <div class="h2-row">
-      <h2>Cobertura Medica 2026</h2>
-      <a class="pill-link" href="https://online.avalian.com/ingreso?returnUrl=%2Finicio" target="_blank" rel="noopener">Login Avalian</a>
-    </div>
     <div class="cards">
 
       <div class="card">
-        <div class="card-main"><div class="card-month">Enero</div></div>
-        <div class="pills"><span class="pill pill-pay">$ 646.758,39</span></div>
-      </div>
-
-      <div class="card">
-        <div class="card-main"><div class="card-month">Febrero</div></div>
-        <div class="pills"><span class="pill pill-pay">$ 700.915,85</span></div>
-      </div>
-
-      <div class="card">
-        <div class="card-main"><div class="card-month">Marzo</div></div>
-        <div class="pills"><span class="pill pill-pay">$ 707.517,27</span></div>
-      </div>
-
-      <div class="card">
-        <div class="card-main"><div class="card-month">Abril</div></div>
-        <div class="pills"><span class="pill pill-pay">$ 706.042,09</span></div>
-      </div>
-
-      <div class="card">
-        <div class="card-main"><div class="card-month">Mayo</div></div>
-        <div class="pills"><span class="pill pill-pay">$ 730.048,02</span></div>
-      </div>
-
-      <div class="card">
-        <div class="card-main"><div class="card-month">Junio</div></div>
-        <div class="pills"><span class="pill pill-pay">$ 768.407,22</span></div>
-      </div>
-
-      <div class="card">
-        <div class="card-main"><div class="card-month">Julio</div></div>
-        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
-      </div>
-
-      <div class="card">
-        <div class="card-main"><div class="card-month">Agosto</div></div>
-        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
-      </div>
-
-      <div class="card">
-        <div class="card-main"><div class="card-month">Septiembre</div></div>
-        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
-      </div>
-
-      <div class="card">
-        <div class="card-main"><div class="card-month">Octubre</div></div>
-        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
+        <div class="card-main"><div class="card-month">Diciembre</div></div>
+        <div class="pills"><span class="pill pill-pend">Próximamente</span></div>
       </div>
 
       <div class="card">
         <div class="card-main"><div class="card-month">Noviembre</div></div>
-        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
+        <div class="pills"><span class="pill pill-pend">Próximamente</span></div>
       </div>
 
       <div class="card">
-        <div class="card-main"><div class="card-month">Diciembre</div></div>
-        <div class="pills"><span class="pill pill-pend">A confirmar</span></div>
+        <div class="card-main"><div class="card-month">Octubre</div></div>
+        <div class="pills"><span class="pill pill-pend">Próximamente</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Septiembre</div></div>
+        <div class="pills"><span class="pill pill-pend">Próximamente</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Agosto</div></div>
+        <div class="pills"><span class="pill pill-pend">Próximamente</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Julio</div></div>
+        <div class="pills"><a class="pill pill-pay" href="facturas/2026-07.pdf" target="_blank" rel="noopener">$ 26.306,01<span class="ext">↗</span></a></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Junio</div></div>
+        <div class="pills"><a class="pill pill-pay" href="facturas/2026-06.pdf" target="_blank" rel="noopener">$ 768.407,22<span class="ext">↗</span></a></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Mayo</div></div>
+        <div class="pills"><a class="pill pill-pay" href="facturas/2026-05.pdf" target="_blank" rel="noopener">$ 730.048,02<span class="ext">↗</span></a></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Abril</div></div>
+        <div class="pills"><a class="pill pill-pay" href="facturas/2026-04.pdf" target="_blank" rel="noopener">$ 706.042,09<span class="ext">↗</span></a></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Marzo</div></div>
+        <div class="pills"><a class="pill pill-pay" href="facturas/2026-03.pdf" target="_blank" rel="noopener">$ 707.517,27<span class="ext">↗</span></a></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Febrero</div></div>
+        <div class="pills"><a class="pill pill-pay" href="facturas/2026-02.pdf" target="_blank" rel="noopener">$ 700.915,85<span class="ext">↗</span></a></div>
+      </div>
+
+      <div class="card">
+        <div class="card-main"><div class="card-month">Enero</div></div>
+        <div class="pills"><a class="pill pill-pay" href="facturas/2026-01.pdf" target="_blank" rel="noopener">$ 646.758,39<span class="ext">↗</span></a></div>
       </div>
 
     </div>
@@ -274,7 +279,9 @@
       var valor = parseFloat(raw.replace(/\./g, '').replace(',', '.'));
       if (isNaN(valor) || valor <= 0) return;
       total += valor;
-      ultimoMes = mes.textContent.trim();
+      // Orden invertido (Dic → Ene): el mes más reciente pagado
+      // es la primera pill verde que aparece.
+      if (!ultimoMes) ultimoMes = mes.textContent.trim();
     });
     if (total > 0 && ultimoMes) {
       document.getElementById('total-num').textContent =
