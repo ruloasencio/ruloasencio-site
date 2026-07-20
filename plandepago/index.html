@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -33,8 +32,66 @@
     font-size: 44px;
     font-weight: 600;
     letter-spacing: -0.02em;
-    margin-bottom: 56px;
+    margin-bottom: 36px;
   }
+
+  /* ── Stepper ── */
+  .stepper {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 64px;
+  }
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .step-dot {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 600;
+    background: var(--card);
+    border: 1.5px solid var(--line);
+    color: var(--muted);
+  }
+  .step.done .step-dot {
+    background: #4a7c43;
+    border-color: #4a7c43;
+    color: #ffffff;
+  }
+  .step-year {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .step-state {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--agui-bg);
+    color: var(--agui-ink);
+    margin-top: -4px;
+  }
+  .step.done .step-state {
+    background: var(--pay-bg);
+    color: var(--pay-ink);
+  }
+  .step-bar {
+    flex: 1;
+    height: 1.5px;
+    background: var(--line);
+    margin-top: 19px;
+    min-width: 24px;
+  }
+  .step-bar.done { background: #4a7c43; }
 
   .section { margin-bottom: 56px; }
   .section:last-child { margin-bottom: 0; }
@@ -62,6 +119,10 @@
     white-space: nowrap;
     margin-top: 4px;
   }
+  .pill-estado.abonada {
+    background: var(--pay-bg);
+    color: var(--pay-ink);
+  }
   .h2-sub {
     font-size: 15px;
     font-weight: 300;
@@ -83,100 +144,6 @@
     min-width: 0;
     max-width: 100%;
   }
-  .card-left {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    min-width: 0;
-  }
-  .card-main { min-width: 0; }
-  .card-title {
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    font-variant-numeric: tabular-nums;
-  }
-  .card-sub {
-    font-size: 14px;
-    color: var(--muted);
-    margin-top: 2px;
-  }
-  .card-day {
-    font-size: 14px;
-    color: var(--muted);
-  }
-  .card-month {
-    font-size: 22px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    margin-top: 1px;
-  }
-
-  .pills {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 6px;
-    flex-shrink: 0;
-    align-items: center;
-  }
-  .pill {
-    font-size: 12px;
-    font-weight: 600;
-    padding: 4px 11px;
-    border-radius: 999px;
-    white-space: nowrap;
-  }
-  .pill-agui { background: var(--agui-bg); color: var(--agui-ink); }
-  .pill-pay  { background: var(--pay-bg);  color: var(--pay-ink); }
-  .pill-tbd  {
-    background: transparent;
-    color: var(--muted);
-    border: 1px dotted #b8b8bf;
-  }
-  .pill-split {
-    background: var(--card);
-    color: var(--ink);
-    border: 1px solid var(--line);
-  }
-  .pill-split span { color: var(--muted); font-weight: 500; }
-  .total-rect {
-    font-size: 12px;
-    font-weight: 600;
-    padding: 6px 12px;
-    border-radius: 8px;
-    background: var(--pay-bg);
-    color: var(--pay-ink);
-    white-space: nowrap;
-  }
-  .total-pend { background: var(--agui-bg); color: var(--agui-ink); }
-  .pills-stack {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 6px;
-    flex-shrink: 0;
-  }
-  .pills-row { display: flex; gap: 6px; }
-  .plus {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--muted);
-  }
-
-  .note {
-    background: var(--soft-bg);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 28px 26px;
-  }
-  .note p {
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 11px;
-  }
-  .note p:last-child { margin-bottom: 0; }
-  .note strong { font-weight: 600; }
 
   .rows { display: flex; flex-direction: column; width: 100%; }
   .row {
@@ -192,12 +159,6 @@
   .row-lbl { flex-shrink: 0; }
   .row:last-child { border-bottom: none; }
   .row-lbl { font-size: 14px; color: var(--muted); }
-  .row-val {
-    font-size: 15px;
-    font-weight: 600;
-    font-variant-numeric: tabular-nums;
-    text-align: right;
-  }
   .pill-val {
     font-size: 13px;
     font-weight: 600;
@@ -240,16 +201,12 @@
     color: #4a7c43;
   }
 
-  .cond { display: flex; flex-direction: column; gap: 12px; }
-  .cond .card { align-items: flex-start; }
-  .cond .card-title { font-size: 16px; }
-
   @media (max-width: 480px) {
     body { padding: 40px 18px 64px; }
-    h1 { font-size: 34px; margin-bottom: 40px; }
-    .card { flex-direction: column; align-items: flex-start; gap: 10px; }
-    .pills { justify-content: flex-start; }
-    .pills-stack { align-items: flex-start; }
+    h1 { font-size: 34px; margin-bottom: 28px; }
+    .stepper { margin-bottom: 48px; }
+    .step-dot { width: 34px; height: 34px; font-size: 14px; }
+    .step-bar { margin-top: 16px; min-width: 14px; }
   }
 </style>
 </head>
@@ -258,13 +215,30 @@
 
   <h1>Plan de pago | Tia Liliana &amp; Hnos. Asencio</h1>
 
-</div>
-</body>
-</html>
+  <div class="stepper">
+    <div class="step done">
+      <div class="step-dot">✓</div>
+      <div class="step-year">2026</div>
+      <div class="step-state">Abonada</div>
+    </div>
+    <div class="step-bar done"></div>
+    <div class="step">
+      <div class="step-dot">2</div>
+      <div class="step-year">2027</div>
+      <div class="step-state">Pendiente</div>
+    </div>
+    <div class="step-bar"></div>
+    <div class="step">
+      <div class="step-dot">3</div>
+      <div class="step-year">2028</div>
+      <div class="step-state">Pendiente</div>
+    </div>
+  </div>
+
   <section class="section">
     <div class="block-head">
       <h2>Año 2026</h2>
-      <span class="pill-estado">Pendiente</span>
+      <span class="pill-estado abonada">Abonada</span>
     </div>
     <p class="h2-sub">Cuota 1 de 3</p>
     <div class="cards">
@@ -276,10 +250,6 @@
             <span class="pill-val">100</span>
           </div>
           <div class="row">
-            <span class="row-lbl">Fecha de liquidación</span>
-            <span class="pill-val">Lunes 6 Julio 2026</span>
-          </div>
-          <div class="row">
             <span class="row-lbl">Fuente</span>
             <span class="pill-val pill-link"><a href="https://www.afascl.coop/afadiario/mercados-en-linea" target="_blank">AFA</a></span>
           </div>
@@ -288,12 +258,12 @@
             <span class="pill-val">$ 47.600 el quintal</span>
           </div>
           <div class="row">
-            <span class="row-lbl">Total a transferir</span>
+            <span class="row-lbl">Total transferido</span>
             <span class="pill-val pill-total">$ 4.760.000 Pesos</span>
           </div>
           <div class="row">
             <span class="row-lbl">Fecha de transferencia</span>
-            <span class="pill-val">Lunes 20 Julio 2026</span>
+            <span class="pill-val">Viernes 17 Julio 2026</span>
           </div>
           <div class="row">
             <span class="row-lbl">Destinataria</span>
@@ -306,14 +276,6 @@
           <div class="row">
             <span class="row-lbl">N° Cuenta en pesos</span>
             <span class="pill-val">17-364022/5</span>
-          </div>
-          <div class="row">
-            <span class="row-lbl">CBU</span>
-            <span class="pill-val pill-alert">A confirmar por Luci</span>
-          </div>
-          <div class="row">
-            <span class="row-lbl">Alias</span>
-            <span class="pill-val pill-alert">A confirmar por Luci</span>
           </div>
         </div>
       </div>
