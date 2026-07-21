@@ -1,1 +1,295 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Balance Salvo Máximo Poder · P&G × La América</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fondo: #faf8f4;
+    --tinta: #2b2620;
+    --tinta-suave: #6b6156;
+    --linea: #e5ddd0;
+    --card: #ffffff;
+    --verde: #4a6b4f;      /* resultados */
+    --terra: #b05c3a;      /* aprendizajes */
+    --ocre: #a8842c;       /* relación / elogios */
+    --azul: #4a5d7a;       /* equipo y next steps */
+    --verde-bg: #eef3ee;
+    --terra-bg: #f7ece5;
+    --ocre-bg: #f6f0e0;
+    --azul-bg: #eaeef4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--fondo);
+    color: var(--tinta);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--tinta-suave);
+  }
+  h1 {
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 1.15;
+    margin: 10px 0 6px;
+  }
+  .sub { color: var(--tinta-suave); font-size: 16px; }
+
+  nav {
+    margin: 32px 0 8px;
+    padding: 16px 0;
+    border-top: 1px solid var(--linea);
+    border-bottom: 1px solid var(--linea);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+  }
+  nav a {
+    font-family: 'DM Mono', monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+    color: var(--tinta-suave);
+    text-decoration: none;
+  }
+  nav a:hover { color: var(--tinta); }
+
+  section { margin-top: 48px; }
+  .sec-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 18px; }
+  .sec-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  h2 {
+    font-family: 'Lora', serif;
+    font-weight: 600;
+    font-size: 23px;
+  }
+  section p { margin-bottom: 12px; }
+
+  .s-verde .sec-num { color: var(--verde); }
+  .s-terra .sec-num { color: var(--terra); }
+  .s-ocre  .sec-num { color: var(--ocre); }
+  .s-azul  .sec-num { color: var(--azul); }
+
+  .data-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0 24px;
+  }
+  .data-cell {
+    background: var(--verde-bg);
+    border: 1px solid var(--linea);
+    border-radius: 10px;
+    padding: 18px 16px 14px;
+    text-align: center;
+  }
+  .data-cell .num {
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    font-size: 30px;
+    color: var(--verde);
+    line-height: 1;
+  }
+  .data-cell .desc {
+    font-family: 'DM Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--tinta-suave);
+    margin-top: 8px;
+    line-height: 1.4;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--linea);
+    border-left: 3px solid var(--terra);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+  }
+  .card .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--terra);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .card p { margin-bottom: 8px; }
+  .card p:last-child { margin-bottom: 0; }
+  .card .accion { font-size: 15.5px; color: var(--tinta-suave); }
+  .card .accion strong { color: var(--tinta); font-weight: 600; }
+
+  .quote {
+    background: var(--ocre-bg);
+    border: 1px solid var(--linea);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin: 18px 0;
+    font-style: italic;
+  }
+  .quote .who {
+    font-family: 'DM Mono', monospace;
+    font-style: normal;
+    font-size: 12px;
+    color: var(--ocre);
+    margin-top: 10px;
+    display: block;
+  }
+
+  .card-azul { border-left-color: var(--azul); }
+  .card-azul .tag { color: var(--azul); }
+
+  ul.plain { list-style: none; }
+  ul.plain li {
+    padding: 10px 0 10px 22px;
+    border-bottom: 1px solid var(--linea);
+    position: relative;
+  }
+  ul.plain li:last-child { border-bottom: none; }
+  ul.plain li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--azul);
+    font-family: 'DM Mono', monospace;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--linea);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--tinta-suave);
+  }
+
+  @media (max-width: 560px) {
+    h1 { font-size: 27px; }
+    .data-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="label">P&G · Salvo Máximo Poder · Meet de balance · 16 jul 2026</span>
+    <h1>Máximo Poder</h1>
+    <p class="sub">Balance de campaña con el equipo de P&G. Feedback excelente en resultados, en relación de trabajo y con recomendación interna dentro de Procter.</p>
+  </header>
+
+  <nav>
+    <a href="#resultados">1 · Resultados</a>
+    <a href="#relacion">2 · Relación</a>
+    <a href="#aprendizajes">3 · Aprendizajes</a>
+    <a href="#equipo">4 · Equipo</a>
+    <a href="#next">5 · Next steps</a>
+  </nav>
+
+  <section id="resultados" class="s-verde">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Resultados: over-achieving</h2></div>
+    <div class="data-row">
+      <div class="data-cell">
+        <div class="num">7 pts</div>
+        <div class="desc">de share en el mes 4<br>(objetivo: 10 pts en el año 1)</div>
+      </div>
+      <div class="data-cell">
+        <div class="num">15%</div>
+        <div class="desc">del negocio total<br>de Salvo ya es Máximo Poder</div>
+      </div>
+      <div class="data-cell">
+        <div class="num">100%</div>
+        <div class="desc">del portafolio Salvo:<br>la ambición a 2 años</div>
+      </div>
+    </div>
+    <p>En palabras de Majo: <em>"Máximo Poder ha sido un rotundo éxito"</em>. El plan de awareness funcionó, la gente fue directo a probar el producto y las entrevistas confirman que la experiencia cumple lo que prometimos en comunicación y packaging. La aspiración declarada de P&G es que en dos años Máximo Poder sea todo el negocio de Salvo.</p>
+    <p>Corrieron un brand health tracker de Máximo Poder que nos van a compartir, y el próximo (en 1–2 meses) también, para ponerle números al éxito de la campaña.</p>
+  </section>
+
+  <section id="relacion" class="s-ocre">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Elogios y recomendación interna</h2></div>
+    <p>El equipo de P&G fue explícito: de todas las marcas que manejan, este es el trabajo que más resonó. Es la única marca que logró "stickiness" cultural, uno de los conceptos que más se está hablando puertas adentro de la compañía.</p>
+
+    <div class="quote">
+      "Deberían sentirse bien orgullosos. Es la única marca que ha logrado hacer feliz a la gente a partir de una canción que terminan cantando niños."
+      <span class="who">Equipo P&G</span>
+    </div>
+
+    <div class="quote">
+      "He trabajado ya con varias agencias y me ha encantado trabajar con ustedes. La proactividad, la ayuda, la eficiencia ha sido increíble. Quedé impresionada con ustedes como agencia."
+      <span class="who">Majo</span>
+    </div>
+
+    <p><strong>Dato clave:</strong> otro equipo interno de P&G ya manifestó interés en explorar trabajar con La América, y desde el equipo de Salvo respondieron "more than happy for you to talk to La América". Puerta abierta a nuevo negocio dentro de Procter.</p>
+    <p>Mención especial para <strong>Luz</strong>, por cómo llevó adelante todo el proceso y tema buyouts + derechos. Majo dijo que "no hubiéramos podido pedir una mejor partner".</p>
+  </section>
+
+  <section id="aprendizajes" class="s-terra">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Aprendizajes de comunicación</h2></div>
+
+    <div class="card">
+      <span class="tag">Grasa invisible</span>
+      <p>El comercial funcionó muy bien y el mensaje de superioridad se entendió. El único gap: mucha gente interpretó que los trastes "lloran" porque están sucios, no por la grasa invisible que queda después de un mal lavado.</p>
+      <p class="accion"><strong>Acción:</strong> aclarar el insight vía social media e influencers. La meta es instalar "el traste está lloroso" como expresión cultural, con el significado correcto: lavado pero grasoso.</p>
+    </div>
+
+    <div class="card">
+      <span class="tag">Canción y brand attribution</span>
+      <p>La canción fue viral (hasta niños cantándola), pero fuera del contexto del comercial —radio, social— le falta marca. Hubo videos de gente cantándola sin atribución a Salvo.</p>
+      <p class="accion"><strong>Acción:</strong> integrar "Salvo Máximo Poder" a la segunda parte de la canción, la que los influencers pueden usar por derechos.</p>
+    </div>
+
+    <div class="card">
+      <span class="tag">Marca madre vs. versión</span>
+      <p>La comunicación permeó más a Salvo marca que a Máximo Poder: el consumidor no distingue versiones, lo leyó como "Salvo mejorado". No es un error de la campaña —el comercial decía "nuevo" por todas partes— sino un comportamiento de categoría. La mención "Máximo Poder" en el empaque ayuda a diferenciar.</p>
+    </div>
+  </section>
+
+  <section id="equipo" class="s-azul">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Cambios en el equipo P&G</h2></div>
+    <ul class="plain">
+      <li><strong>Majo</strong> cambia de rol efectivo el 1 de agosto: pasa a liderar social media digital y "cultura/stickiness" de las marcas. Sigue cerca, pero ya no en el día a día.</li>
+      <li><strong>Isa</strong> vuelve de su licencia de maternidad y retoma el día a día de la cuenta junto al resto del equipo.</li>
+      <li>Antes de irse, Majo va a dejar aterrizado el entendimiento de los nuevos desafíos.</li>
+    </ul>
+  </section>
+
+  <section id="next" class="s-azul">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Next steps</h2></div>
+    <div class="card card-azul">
+      <span class="tag">Posible brief: second wave</span>
+      <p>P&G va a evaluar si logra los ajustes con recursos internos o si necesita el soporte creativo de La América. El brief tentativo: campaña de influencers con big idea para que el consumidor entienda que "traste lloroso" = lavado con grasa, y que solo Máximo Poder lo resuelve. Sin grabar nuevo comercial: consistencia como fortaleza.</p>
+    </div>
+    <ul class="plain">
+      <li>P&G comparte resultados del brand health tracker actual y del próximo (1–2 meses).</li>
+      <li>Resolver la integración de "Salvo Máximo Poder" en la segunda parte de la canción.</li>
+      <li>Este año se suma un pack nuevo de mayor tamaño al portafolio.</li>
+      <li>Quedamos a disposición: "cuenten con nosotros para lo que necesiten".</li>
+    </ul>
+  </section>
+
+  <footer>
+    La América · Balance Salvo Máximo Poder · Preparado por Rulo · Julio 2026
+  </footer>
+
+</div>
+</body>
+</html>
