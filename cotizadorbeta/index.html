@@ -1,595 +1,256 @@
-import { useState, useEffect, useRef } from "react";
- 
-const TEAM = [
-  { id: 1, name: "Alejandro Dominguez", role: "CEO", rate: 950000 },
-  { id: 2, name: "Rafael D'Alvia", role: "Director Creativo", rate: 850000 },
-  { id: 3, name: "Sebastian Stagno", role: "Director de Cuentas", rate: 820000 },
-  { id: 4, name: "Nicolas Roberts", role: "Estrategia", rate: 780000 },
-  { id: 5, name: "Christian Camean", role: "Producción", rate: 750000 },
-  { id: 6, name: "Audrey López", role: "Diseño", rate: 720000 },
-  { id: 7, name: "Martin Rubins", role: "Desarrollo", rate: 760000 },
-  { id: 8, name: "Magalí Sabella", role: "Social Media", rate: 680000 },
-  { id: 9, name: "Gustavo Chiocconi", role: "Contenidos", rate: 700000 },
-  { id: 10, name: "Rulo Asencio", role: "Motion Design", rate: 720000 },
-  { id: 11, name: "Luz Lopez Moreno", role: "Community Manager", rate: 620000 },
-  { id: 12, name: "Micaela Mazziotti", role: "PR", rate: 650000 },
-  { id: 13, name: "Luciano Groba", role: "Performance", rate: 700000 },
-  { id: 14, name: "Morena Joos", role: "UX/UI", rate: 690000 },
-  { id: 15, name: "Lucas Sotelo", role: "Desarrollo Front", rate: 740000 },
-  { id: 16, name: "Joaquin Calvo", role: "Desarrollo Back", rate: 740000 },
-  { id: 17, name: "Roni Castillo", role: "Audiovisual", rate: 680000 },
-  { id: 18, name: "Trini Fernandez Madero", role: "Planning", rate: 670000 },
-  { id: 19, name: "Mariel Nogues", role: "Administración", rate: 600000 },
-  { id: 20, name: "Silvia Otazo", role: "Finanzas", rate: 620000 },
-  { id: 21, name: "Damian Buckmeier", role: "Tecnología", rate: 750000 },
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cotizador</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f7; color: #1d1d1f; }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px 28px 60px; }
+  .header { padding: 40px 28px 8px; max-width: 900px; margin: 0 auto; }
+  .header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
+  .header p { font-size: 14px; color: #86868b; margin-top: 6px; }
+
+  .top-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+  .top-bar input { flex: 1; min-width: 200px; font-size: 14px; font-weight: 500; padding: 10px 14px; border: 1px solid #d2d2d7; border-radius: 10px; background: #fff; color: #1d1d1f; outline: none; }
+  .top-bar input:focus { border-color: #0071e3; }
+  .btn-reset { padding: 10px 18px; font-size: 13px; font-weight: 500; background: transparent; color: #86868b; border: 1px solid #d2d2d7; border-radius: 10px; cursor: pointer; }
+
+  .timeline { display: flex; gap: 2px; margin-bottom: 8px; border-radius: 8px; overflow: hidden; height: 8px; }
+  .timeline-info { display: flex; justify-content: space-between; margin-bottom: 24px; font-size: 11px; color: #86868b; }
+
+  .phase-card { margin-bottom: 8px; background: #fff; border-radius: 14px; border: 1px solid rgba(0,0,0,0.06); overflow: hidden; }
+  .phase-header { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: none; border: none; cursor: pointer; text-align: left; font-family: inherit; }
+  .phase-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+  .phase-name { font-size: 15px; font-weight: 700; color: #1d1d1f; letter-spacing: -0.2px; }
+  .phase-badge { font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+  .phase-arrow { font-size: 14px; color: #c7c7cc; transition: transform 0.3s; display: inline-block; }
+
+  .weeks-row { display: flex; align-items: center; gap: 14px; padding: 12px 16px; border-radius: 10px; margin-bottom: 8px; }
+  .weeks-label { font-size: 12px; font-weight: 600; color: #86868b; flex-shrink: 0; width: 60px; }
+  .weeks-val { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; width: 32px; text-align: right; flex-shrink: 0; }
+
+  .person-row { display: flex; align-items: center; gap: 14px; padding: 11px 0; transition: opacity 0.4s; }
+  .person-avatar { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; flex-shrink: 0; transition: background 0.4s; }
+  .person-info { flex: 0 0 160px; min-width: 0; }
+  .person-name { font-size: 13px; font-weight: 600; color: #1d1d1f; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .person-role { font-size: 11px; color: #86868b; margin-top: 1px; }
+  .person-pct { width: 40px; text-align: right; font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; flex-shrink: 0; }
+
+  .slider-wrap { position: relative; height: 36px; display: flex; align-items: center; flex: 1; }
+  .slider-track { position: absolute; left: 0; right: 0; height: 4px; background: #e5e5e7; border-radius: 2px; }
+  .slider-fill { position: absolute; left: 0; height: 4px; border-radius: 2px; transition: background 0.3s; }
+  .slider-thumb { position: absolute; width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08); pointer-events: none; z-index: 1; transition: left 0.1s; }
+  .slider-input { position: absolute; left: 0; right: 0; width: 100%; height: 36px; opacity: 0; cursor: pointer; margin: 0; z-index: 2; }
+
+  .subtotal-row { margin-top: 8px; padding: 12px 16px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; }
+  .subtotal-label { font-size: 12px; font-weight: 500; color: #86868b; }
+  .subtotal-val { font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -0.3px; transition: color 0.3s; }
+
+  .fee-section { margin-top: 40px; background: #fff; border-radius: 18px; border: 1px solid rgba(0,0,0,0.06); overflow: hidden; }
+  .fee-title { padding: 24px 24px 0; font-size: 11px; font-weight: 600; color: #86868b; text-transform: uppercase; letter-spacing: 1.2px; }
+  .fee-body { padding: 24px; }
+  .fee-grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+  .fee-grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+  .fee-dot { width: 6px; height: 6px; border-radius: 2px; display: inline-block; }
+  .fee-small-label { font-size: 10px; color: #86868b; margin-bottom: 3px; display: flex; align-items: center; gap: 4px; }
+  .fee-small-val { font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .fee-small-sub { font-size: 10px; color: #a1a1a6; margin-top: 1px; }
+  .fee-mid-label { font-size: 11px; color: #86868b; margin-bottom: 3px; display: flex; align-items: center; gap: 5px; }
+  .fee-mid-val { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; font-variant-numeric: tabular-nums; }
+
+  .team-detail { padding-bottom: 20px; border-bottom: 1px solid rgba(0,0,0,0.06); margin-bottom: 24px; }
+  .team-group { margin-bottom: 10px; }
+  .team-group-title { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+  .team-person { display: flex; justify-content: space-between; padding: 3px 0; font-size: 12.5px; }
+  .team-person-name { font-weight: 500; }
+  .team-person-role { color: #86868b; font-weight: 400; margin-left: 5px; }
+  .team-person-pct { font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  .oh-mu-row { display: flex; gap: 32px; flex-wrap: wrap; margin-bottom: 24px; }
+  .oh-mu-col { flex: 1; min-width: 220px; }
+  .oh-mu-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+  .oh-mu-label { font-size: 13px; font-weight: 600; color: #1d1d1f; }
+  .oh-mu-desc { font-size: 11px; color: #86868b; margin-top: 1px; }
+  .oh-mu-val { font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -0.5px; }
+  .oh-mu-divider { width: 1px; background: rgba(0,0,0,0.06); align-self: stretch; }
+
+  .breakdown-bar { display: flex; gap: 2px; margin-bottom: 16px; border-radius: 6px; overflow: hidden; height: 5px; }
+
+  .total-box { padding: 20px; background: #f5f5f7; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; }
+  .total-label { font-size: 13px; color: #1d1d1f; font-weight: 600; }
+  .total-sub { font-size: 12px; color: #86868b; margin-top: 2px; }
+  .total-val { font-size: 36px; font-weight: 700; letter-spacing: -1.5px; font-variant-numeric: tabular-nums; }
+
+  .btn-save { padding: 10px 22px; font-size: 13px; font-weight: 600; border: none; border-radius: 10px; cursor: pointer; margin-top: 20px; }
+  .empty-msg { text-align: center; padding: 24px 0; color: #c7c7cc; font-size: 14px; }
+
+  .saved-section { margin-top: 24px; }
+  .saved-title { font-size: 10px; font-weight: 600; color: #86868b; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 10px; }
+  .saved-card { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #fff; border-radius: 10px; border: 1px solid rgba(0,0,0,0.06); cursor: pointer; margin-bottom: 6px; }
+  .saved-name { font-size: 13px; font-weight: 600; }
+  .saved-meta { font-size: 11px; color: #86868b; margin-top: 1px; }
+  .saved-fee { font-size: 16px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .saved-remove { background: none; border: none; color: #c7c7cc; cursor: pointer; font-size: 16px; padding: 0 4px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+<script type="text/babel">
+const { useState } = React;
+
+const PHASES = [
+  { key:"estrategia", name:"Estrategia", color:"#0071e3",
+    people:[{id:1,name:"Alejandro Dominguez",role:"CEO"},{id:4,name:"Nicolas Roberts",role:"Estrategia"},{id:18,name:"Trini Fernandez Madero",role:"Planning"}]},
+  { key:"creatividad", name:"Creatividad", color:"#34a853",
+    people:[{id:2,name:"Rafael D'Alvia",role:"Director Creativo"},{id:9,name:"Gustavo Chiocconi",role:"Contenidos"},{id:10,name:"Rulo Asencio",role:"Motion Design"},{id:17,name:"Roni Castillo",role:"Audiovisual"},{id:14,name:"Morena Joos",role:"UX/UI"}]},
+  { key:"produccion", name:"Producción", color:"#e8590c",
+    people:[{id:6,name:"Audrey López",role:"Diseño"},{id:7,name:"Martin Rubins",role:"Desarrollo"},{id:15,name:"Lucas Sotelo",role:"Desarrollo Front"},{id:16,name:"Joaquin Calvo",role:"Desarrollo Back"},{id:21,name:"Damian Buckmeier",role:"Tecnología"}]},
 ];
- 
-function formatARS(value) {
-  return new Intl.NumberFormat("es-AR", {
-    style: "currency",
-    currency: "ARS",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(value);
+const OPS = { key:"operaciones", name:"Operaciones", color:"#d63384",
+  people:[{id:3,name:"Sebastian Stagno",role:"Director de Cuentas"},{id:5,name:"Christian Camean",role:"Producción"},{id:8,name:"Magalí Sabella",role:"Social Media"},{id:11,name:"Luz Lopez Moreno",role:"Community Manager"},{id:12,name:"Micaela Mazziotti",role:"PR"},{id:13,name:"Luciano Groba",role:"Performance"},{id:19,name:"Mariel Nogues",role:"Administración"},{id:20,name:"Silvia Otazo",role:"Finanzas"}]};
+
+const RATES={1:950000,2:850000,3:820000,4:780000,5:750000,6:720000,7:760000,8:680000,9:700000,10:720000,11:620000,12:650000,13:700000,14:690000,15:740000,16:740000,17:680000,18:670000,19:600000,20:620000,21:750000};
+const WF=12/52;
+const fmt=v=>new Intl.NumberFormat("es-AR",{style:"currency",currency:"ARS",minimumFractionDigits:0,maximumFractionDigits:0}).format(v);
+const ini=n=>{const p=n.split(" ");return(p[0][0]+(p[1]?p[1][0]:"")).toUpperCase();};
+const cost=(ppl,a,w)=>ppl.reduce((s,p)=>s+(RATES[p.id]*WF*(a[p.id]||0)/100)*w,0);
+
+function Sl({value,onChange,color,min=0,max=100,step=5}){
+  const pct=max===min?0:((value-min)/(max-min))*100;
+  return(<div className="slider-wrap"><div className="slider-track"/><div className="slider-fill" style={{width:pct+"%",background:pct>0?color:"#e5e5e7"}}/><input type="range" className="slider-input" min={min} max={max} step={step} value={value} onChange={e=>onChange(Number(e.target.value))}/><div className="slider-thumb" style={{left:`calc(${pct}% - 9px)`}}/></div>);
 }
- 
-function getInitials(name) {
-  const parts = name.split(" ");
-  return (parts[0][0] + (parts[1] ? parts[1][0] : "")).toUpperCase();
+
+function Person({person,value,onChange,color}){
+  return(<div className="person-row" style={{opacity:value===0?0.38:1}}>
+    <div className="person-avatar" style={{background:value>0?color:"#e5e5e7"}}>{ini(person.name)}</div>
+    <div className="person-info"><div className="person-name">{person.name}</div><div className="person-role">{person.role}</div></div>
+    <Sl value={value} onChange={onChange} color={color} step={5}/>
+    <div className="person-pct" style={{color:value>0?"#1d1d1f":"#c7c7cc"}}>{value}%</div>
+  </div>);
 }
- 
-const COLORS = [
-  "#1d1d1f", "#0071e3", "#bf4800", "#6e6e73", "#1d7a4e",
-  "#a33d71", "#4a6fa5", "#8b6914", "#2d6a6f", "#6b4c9a",
-  "#b5485d", "#3a7d44", "#7a5c3e", "#5b6abf", "#9b5d2e",
-  "#3d8b8b", "#8a4a7d", "#5c7a29", "#a35d5d", "#4a7a8b",
-  "#7d6b5d",
-];
- 
-function PersonSlider({ person, value, onChange, color, index }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const monthlyValue = (person.rate * value) / 100;
- 
-  return (
-    <div
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "16px",
-        padding: "14px 0",
-        borderBottom: "1px solid rgba(0,0,0,0.06)",
-        opacity: value === 0 ? 0.4 : 1,
-        transition: "opacity 0.4s ease",
-        animation: `fadeSlideIn 0.5s ease ${index * 30}ms both`,
-      }}
-    >
-      <div
-        style={{
-          width: 42,
-          height: 42,
-          borderRadius: "50%",
-          background: value > 0 ? color : "#e5e5e7",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "#fff",
-          fontSize: "13px",
-          fontWeight: 600,
-          letterSpacing: "0.5px",
-          flexShrink: 0,
-          transition: "background 0.4s ease",
-          fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif",
-        }}
-      >
-        {getInitials(person.name)}
+
+function Phase({phase,alloc,onChange,weeks,onWeeks}){
+  const[col,setCol]=useState(false);
+  const ac=phase.people.filter(p=>alloc[p.id]>0).length;
+  const sub=cost(phase.people,alloc,weeks);
+  return(<div className="phase-card">
+    <button className="phase-header" onClick={()=>setCol(!col)}>
+      <div style={{display:"flex",alignItems:"center",gap:10}}><div className="phase-dot" style={{background:phase.color}}/><span className="phase-name">{phase.name}</span></div>
+      <div style={{display:"flex",alignItems:"center",gap:10}}>
+        <span className="phase-badge" style={{color:phase.color,background:phase.color+"12"}}>{weeks} sem{ac>0?` · ${ac} persona${ac!==1?"s":""}`:""}</span>
+        <span className="phase-arrow" style={{transform:col?"rotate(-90deg)":"rotate(0deg)"}}>▾</span>
       </div>
- 
-      <div style={{ flex: "0 0 180px", minWidth: 0 }}>
-        <div
-          style={{
-            fontSize: "14px",
-            fontWeight: 600,
-            color: "#1d1d1f",
-            lineHeight: 1.3,
-            fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif",
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-          }}
-        >
-          {person.name}
-        </div>
-        <div
-          style={{
-            fontSize: "12px",
-            color: "#86868b",
-            fontWeight: 400,
-            marginTop: "1px",
-            fontFamily: "'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif",
-          }}
-        >
-          {person.role}
-        </div>
+    </button>
+    {!col&&<div style={{padding:"0 20px 16px"}}>
+      <div className="weeks-row" style={{background:phase.color+"08"}}><div className="weeks-label">Semanas</div><Sl value={weeks} onChange={onWeeks} color={phase.color} min={0} max={12} step={1}/><div className="weeks-val" style={{color:phase.color}}>{weeks}</div></div>
+      <div style={{borderTop:"1px solid rgba(0,0,0,0.04)"}}>
+        {phase.people.map(p=><Person key={p.id} person={p} value={alloc[p.id]||0} onChange={v=>onChange(p.id,v)} color={phase.color}/>)}
       </div>
- 
-      <div
-        style={{
-          flex: 1,
-          display: "flex",
-          alignItems: "center",
-          gap: "14px",
-          minWidth: 0,
-        }}
-      >
-        <div style={{ flex: 1, position: "relative", height: "36px", display: "flex", alignItems: "center" }}>
-          <div
-            style={{
-              position: "absolute",
-              left: 0,
-              right: 0,
-              height: "4px",
-              background: "#e5e5e7",
-              borderRadius: "2px",
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              left: 0,
-              width: `${value}%`,
-              height: "4px",
-              background: value > 0 ? color : "#e5e5e7",
-              borderRadius: "2px",
-              transition: "background 0.3s ease",
-            }}
-          />
-          <input
-            type="range"
-            min="0"
-            max="100"
-            step="5"
-            value={value}
-            onChange={(e) => onChange(parseInt(e.target.value))}
-            style={{
-              position: "absolute",
-              left: 0,
-              right: 0,
-              width: "100%",
-              height: "36px",
-              opacity: 0,
-              cursor: "pointer",
-              margin: 0,
-              zIndex: 2,
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              left: `calc(${value}% - 10px)`,
-              width: "20px",
-              height: "20px",
-              borderRadius: "50%",
-              background: "#fff",
-              boxShadow: isHovered || value > 0
-                ? "0 1px 4px rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08)"
-                : "0 1px 3px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.06)",
-              transition: "left 0.1s ease, box-shadow 0.2s ease, transform 0.2s ease",
-              pointerEvents: "none",
-              transform: isHovered ? "scale(1.15)" : "scale(1)",
-              zIndex: 1,
-            }}
-          />
-        </div>
- 
-        <div
-          style={{
-            width: "44px",
-            textAlign: "right",
-            fontSize: "15px",
-            fontWeight: 600,
-            color: value > 0 ? "#1d1d1f" : "#c7c7cc",
-            fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif",
-            fontVariantNumeric: "tabular-nums",
-            flexShrink: 0,
-          }}
-        >
-          {value}%
-        </div>
- 
-        <div
-          style={{
-            width: "100px",
-            textAlign: "right",
-            fontSize: "13px",
-            fontWeight: 500,
-            color: value > 0 ? "#86868b" : "#c7c7cc",
-            fontFamily: "'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif",
-            fontVariantNumeric: "tabular-nums",
-            flexShrink: 0,
-            transition: "color 0.3s ease",
-          }}
-        >
-          {formatARS(monthlyValue)}
+      <div className="subtotal-row" style={{background:phase.color+"08"}}><div className="subtotal-label">Subtotal {phase.name}</div><div className="subtotal-val" style={{color:sub>0?phase.color:"#c7c7cc"}}>{fmt(sub)}</div></div>
+    </div>}
+  </div>);
+}
+
+function Ops({alloc,onChange,tw}){
+  const[col,setCol]=useState(false);
+  const ac=OPS.people.filter(p=>alloc[p.id]>0).length;
+  const sub=cost(OPS.people,alloc,tw);
+  return(<div className="phase-card">
+    <button className="phase-header" onClick={()=>setCol(!col)}>
+      <div style={{display:"flex",alignItems:"center",gap:10}}><div className="phase-dot" style={{background:OPS.color}}/><span className="phase-name">{OPS.name}</span></div>
+      <div style={{display:"flex",alignItems:"center",gap:10}}>
+        <span className="phase-badge" style={{color:OPS.color,background:OPS.color+"12"}}>{tw} sem transversal{ac>0?` · ${ac} persona${ac!==1?"s":""}`:""}</span>
+        <span className="phase-arrow" style={{transform:col?"rotate(-90deg)":"rotate(0deg)"}}>▾</span>
+      </div>
+    </button>
+    {!col&&<div style={{padding:"0 20px 16px"}}>
+      <div style={{padding:"10px 16px",background:OPS.color+"08",borderRadius:10,marginBottom:8,fontSize:12,color:"#86868b"}}>Transversal a todo el proyecto · {tw} semanas totales</div>
+      <div style={{borderTop:"1px solid rgba(0,0,0,0.04)"}}>
+        {OPS.people.map(p=><Person key={p.id} person={p} value={alloc[p.id]||0} onChange={v=>onChange(p.id,v)} color={OPS.color}/>)}
+      </div>
+      <div className="subtotal-row" style={{background:OPS.color+"08"}}><div className="subtotal-label">Subtotal Operaciones</div><div className="subtotal-val" style={{color:sub>0?OPS.color:"#c7c7cc"}}>{fmt(sub)}</div></div>
+    </div>}
+  </div>);
+}
+
+function App(){
+  const all=[...PHASES.flatMap(p=>p.people),...OPS.people];
+  const[pn,setPn]=useState("");
+  const[alloc,setAlloc]=useState(()=>Object.fromEntries(all.map(p=>[p.id,0])));
+  const[wk,setWk]=useState({estrategia:6,creatividad:6,produccion:6});
+  const[oh,setOh]=useState(20);
+  const[mu,setMu]=useState(35);
+  const[saved,setSaved]=useState([]);
+
+  const tw=wk.estrategia+wk.creatividad+wk.produccion;
+  const pcs=PHASES.map(ph=>({key:ph.key,name:ph.name,color:ph.color,cost:cost(ph.people,alloc,wk[ph.key]),weeks:wk[ph.key]}));
+  const oc=cost(OPS.people,alloc,tw);
+  const base=pcs.reduce((s,p)=>s+p.cost,0)+oc;
+  const woh=base*(1+oh/100);
+  const total=woh*(1+mu/100);
+  const ac=all.filter(p=>alloc[p.id]>0).length;
+
+  const chg=(id,v)=>setAlloc(prev=>({...prev,[id]:v}));
+  const chgW=(k,v)=>setWk(prev=>({...prev,[k]:v}));
+  const reset=()=>{setAlloc(Object.fromEntries(all.map(p=>[p.id,0])));setWk({estrategia:6,creatividad:6,produccion:6});setOh(20);setMu(35);setPn("");};
+  const save=()=>{if(!pn.trim())return;setSaved(prev=>[...prev,{name:pn,alloc:{...alloc},wk:{...wk},oh,mu,total}]);};
+  const load=c=>{setAlloc(c.alloc);setWk(c.wk);setOh(c.oh);setMu(c.mu);setPn(c.name);};
+  const rm=i=>setSaved(prev=>prev.filter((_,idx)=>idx!==i));
+
+  return(<div>
+    <div className="header"><h1>Cotizador</h1><p>Definí el equipo, las semanas por etapa, y ajustá el fee.</p></div>
+    <div className="container">
+      <div className="top-bar"><input value={pn} onChange={e=>setPn(e.target.value)} placeholder="Nombre del proyecto..."/><button className="btn-reset" onClick={reset}>Resetear</button></div>
+
+      {tw>0&&<><div className="timeline">{PHASES.map(ph=>wk[ph.key]>0?<div key={ph.key} style={{flex:wk[ph.key],background:ph.color,transition:"flex 0.4s"}}/>:null)}</div><div className="timeline-info"><span>Inicio</span><span>{tw} semanas · Operaciones transversal</span></div></>}
+
+      {PHASES.map(ph=><Phase key={ph.key} phase={ph} alloc={alloc} onChange={chg} weeks={wk[ph.key]} onWeeks={v=>chgW(ph.key,v)}/>)}
+      <Ops alloc={alloc} onChange={chg} tw={tw}/>
+
+      <div className="fee-section">
+        <div className="fee-title">Cálculo del fee</div>
+        <div className="fee-body">
+          {base>0?<>
+            <div className="fee-grid4">
+              {pcs.map(pc=><div key={pc.key}><div className="fee-small-label"><span className="fee-dot" style={{background:pc.color}}/>{pc.name}</div><div className="fee-small-val" style={{color:pc.cost>0?"#1d1d1f":"#c7c7cc"}}>{fmt(pc.cost)}</div><div className="fee-small-sub">{pc.weeks} sem</div></div>)}
+              <div><div className="fee-small-label"><span className="fee-dot" style={{background:OPS.color}}/>Operaciones</div><div className="fee-small-val" style={{color:oc>0?"#1d1d1f":"#c7c7cc"}}>{fmt(oc)}</div><div className="fee-small-sub">{tw} sem</div></div>
+            </div>
+
+            <div className="team-detail">
+              {[...PHASES,OPS].map(g=>{const act=g.people.filter(p=>alloc[p.id]>0);if(!act.length)return null;const w=g.key==="operaciones"?tw:wk[g.key];return(<div key={g.key} className="team-group"><div className="team-group-title" style={{color:g.color}}>{g.name} · {w} sem</div>{act.sort((a,b)=>alloc[b.id]-alloc[a.id]).map(p=><div key={p.id} className="team-person"><span><span className="team-person-name">{p.name}</span><span className="team-person-role">{p.role}</span></span><span className="team-person-pct">{alloc[p.id]}%</span></div>)}</div>);})}
+            </div>
+
+            <div className="oh-mu-row">
+              <div className="oh-mu-col"><div className="oh-mu-header"><div><div className="oh-mu-label">Overhead</div><div className="oh-mu-desc">Costos operativos</div></div><div className="oh-mu-val" style={{color:oh>0?"#6e6e73":"#c7c7cc"}}>{oh}%</div></div><Sl value={oh} onChange={setOh} color="#6e6e73" step={1}/></div>
+              <div className="oh-mu-divider"/>
+              <div className="oh-mu-col"><div className="oh-mu-header"><div><div className="oh-mu-label">Markup</div><div className="oh-mu-desc">Margen de ganancia</div></div><div className="oh-mu-val" style={{color:mu>0?"#0071e3":"#c7c7cc"}}>{mu}%</div></div><Sl value={mu} onChange={setMu} color="#0071e3" step={1}/></div>
+            </div>
+
+            <div className="breakdown-bar"><div style={{flex:base||1,background:"#1d1d1f",transition:"flex 0.4s"}}/><div style={{flex:Math.max(woh-base,0)||0.01,background:"#6e6e73",transition:"flex 0.4s"}}/><div style={{flex:Math.max(total-woh,0)||0.01,background:"#0071e3",transition:"flex 0.4s"}}/></div>
+
+            <div className="fee-grid3">
+              {[{l:"Base equipo",v:base,c:"#1d1d1f"},{l:`Overhead (${oh}%)`,v:woh-base,c:"#6e6e73"},{l:`Markup (${mu}%)`,v:total-woh,c:"#0071e3"}].map(i=><div key={i.l}><div className="fee-mid-label"><span className="fee-dot" style={{background:i.c}}/>{i.l}</div><div className="fee-mid-val">{fmt(i.v)}</div></div>)}
+            </div>
+
+            <div className="total-box"><div><div className="total-label">Fee total del proyecto{pn?` — ${pn}`:""}</div><div className="total-sub">{ac} persona{ac!==1?"s":""} · {tw} semanas</div></div><div className="total-val">{fmt(total)}</div></div>
+
+            <button className="btn-save" onClick={save} disabled={!pn.trim()} style={{background:pn.trim()?"#0071e3":"#e5e5e7",color:pn.trim()?"#fff":"#a1a1a6",cursor:pn.trim()?"pointer":"default"}}>Guardar cotización</button>
+          </>:<div className="empty-msg">Asigná horas arriba para calcular el fee del proyecto</div>}
         </div>
       </div>
+
+      {saved.length>0&&<div className="saved-section"><div className="saved-title">Cotizaciones guardadas</div>{saved.map((c,i)=><div key={i} className="saved-card" onClick={()=>load(c)}><div><div className="saved-name">{c.name}</div><div className="saved-meta">{c.wk.estrategia+c.wk.creatividad+c.wk.produccion} sem · OH {c.oh}% · MU {c.mu}%</div></div><div style={{display:"flex",alignItems:"center",gap:12}}><span className="saved-fee">{fmt(c.total)}</span><button className="saved-remove" onClick={e=>{e.stopPropagation();rm(i);}}>×</button></div></div>)}</div>}
     </div>
-  );
+  </div>);
 }
- 
-export default function ProjectPricer() {
-  const [projectName, setProjectName] = useState("");
-  const [allocations, setAllocations] = useState(() =>
-    Object.fromEntries(TEAM.map((p) => [p.id, 0]))
-  );
-  const [savedConfigs, setSavedConfigs] = useState([]);
- 
-  const total = TEAM.reduce(
-    (sum, p) => sum + (p.rate * (allocations[p.id] || 0)) / 100,
-    0
-  );
-  const activeCount = TEAM.filter((p) => allocations[p.id] > 0).length;
- 
-  const handleChange = (id, val) => {
-    setAllocations((prev) => ({ ...prev, [id]: val }));
-  };
- 
-  const resetAll = () => {
-    setAllocations(Object.fromEntries(TEAM.map((p) => [p.id, 0])));
-  };
- 
-  const saveConfig = () => {
-    if (!projectName.trim()) return;
-    setSavedConfigs((prev) => [
-      ...prev,
-      {
-        name: projectName,
-        allocations: { ...allocations },
-        total,
-        date: new Date().toLocaleDateString("es-AR"),
-      },
-    ]);
-  };
- 
-  const loadConfig = (config) => {
-    setAllocations(config.allocations);
-    setProjectName(config.name);
-  };
- 
-  return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: "#fafafa",
-        fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-        color: "#1d1d1f",
-      }}
-    >
-      <style>{`
-        @keyframes fadeSlideIn {
-          from { opacity: 0; transform: translateY(8px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes numberPop {
-          0% { transform: scale(1); }
-          50% { transform: scale(1.02); }
-          100% { transform: scale(1); }
-        }
-        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; cursor: pointer; }
-        input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; cursor: pointer; border: none; background: transparent; }
-        ::selection { background: rgba(0,113,227,0.15); }
-      `}</style>
- 
-      {/* Header */}
-      <div
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 100,
-          background: "rgba(250,250,250,0.85)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-          borderBottom: "1px solid rgba(0,0,0,0.08)",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "960px",
-            margin: "0 auto",
-            padding: "20px 32px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            gap: "16px",
-          }}
-        >
-          <div>
-            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-              <div
-                style={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: "50%",
-                  background: total > 0 ? "#30d158" : "#c7c7cc",
-                  transition: "background 0.4s ease",
-                }}
-              />
-              <h1
-                style={{
-                  fontSize: "20px",
-                  fontWeight: 700,
-                  margin: 0,
-                  letterSpacing: "-0.3px",
-                }}
-              >
-                Cotizador
-              </h1>
-            </div>
-            <p
-              style={{
-                fontSize: "13px",
-                color: "#86868b",
-                margin: "4px 0 0 18px",
-                fontFamily: "'SF Pro Text', -apple-system, sans-serif",
-              }}
-            >
-              {activeCount} persona{activeCount !== 1 ? "s" : ""} asignada{activeCount !== 1 ? "s" : ""}
-            </p>
-          </div>
- 
-          <div style={{ textAlign: "right" }}>
-            <div
-              style={{
-                fontSize: "11px",
-                fontWeight: 600,
-                color: "#86868b",
-                textTransform: "uppercase",
-                letterSpacing: "1px",
-                marginBottom: "2px",
-              }}
-            >
-              Total mensual
-            </div>
-            <div
-              key={total}
-              style={{
-                fontSize: "32px",
-                fontWeight: 700,
-                letterSpacing: "-1px",
-                color: total > 0 ? "#1d1d1f" : "#c7c7cc",
-                fontVariantNumeric: "tabular-nums",
-                transition: "color 0.4s ease",
-                animation: "numberPop 0.2s ease",
-                lineHeight: 1,
-              }}
-            >
-              {formatARS(total)}
-            </div>
-          </div>
-        </div>
-      </div>
- 
-      {/* Main */}
-      <div style={{ maxWidth: "960px", margin: "0 auto", padding: "24px 32px 100px" }}>
-        {/* Project name + actions */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "12px",
-            marginBottom: "28px",
-            flexWrap: "wrap",
-          }}
-        >
-          <input
-            type="text"
-            value={projectName}
-            onChange={(e) => setProjectName(e.target.value)}
-            placeholder="Nombre del proyecto..."
-            style={{
-              flex: 1,
-              minWidth: "200px",
-              fontSize: "15px",
-              fontWeight: 500,
-              padding: "10px 16px",
-              border: "1px solid #d2d2d7",
-              borderRadius: "10px",
-              background: "#fff",
-              color: "#1d1d1f",
-              outline: "none",
-              fontFamily: "'SF Pro Text', -apple-system, sans-serif",
-              transition: "border-color 0.2s ease",
-            }}
-            onFocus={(e) => (e.target.style.borderColor = "#0071e3")}
-            onBlur={(e) => (e.target.style.borderColor = "#d2d2d7")}
-          />
-          <button
-            onClick={saveConfig}
-            disabled={!projectName.trim() || total === 0}
-            style={{
-              padding: "10px 20px",
-              fontSize: "14px",
-              fontWeight: 600,
-              background: projectName.trim() && total > 0 ? "#0071e3" : "#e5e5e7",
-              color: projectName.trim() && total > 0 ? "#fff" : "#a1a1a6",
-              border: "none",
-              borderRadius: "10px",
-              cursor: projectName.trim() && total > 0 ? "pointer" : "default",
-              fontFamily: "'SF Pro Text', -apple-system, sans-serif",
-              transition: "all 0.2s ease",
-            }}
-          >
-            Guardar
-          </button>
-          <button
-            onClick={resetAll}
-            style={{
-              padding: "10px 20px",
-              fontSize: "14px",
-              fontWeight: 500,
-              background: "transparent",
-              color: "#86868b",
-              border: "1px solid #d2d2d7",
-              borderRadius: "10px",
-              cursor: "pointer",
-              fontFamily: "'SF Pro Text', -apple-system, sans-serif",
-              transition: "all 0.2s ease",
-            }}
-          >
-            Resetear
-          </button>
-        </div>
- 
-        {/* Saved configs */}
-        {savedConfigs.length > 0 && (
-          <div style={{ marginBottom: "28px" }}>
-            <div
-              style={{
-                fontSize: "11px",
-                fontWeight: 600,
-                color: "#86868b",
-                textTransform: "uppercase",
-                letterSpacing: "1px",
-                marginBottom: "10px",
-              }}
-            >
-              Cotizaciones guardadas
-            </div>
-            <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-              {savedConfigs.map((c, i) => (
-                <button
-                  key={i}
-                  onClick={() => loadConfig(c)}
-                  style={{
-                    padding: "8px 16px",
-                    fontSize: "13px",
-                    fontWeight: 500,
-                    background: "#fff",
-                    color: "#1d1d1f",
-                    border: "1px solid #d2d2d7",
-                    borderRadius: "8px",
-                    cursor: "pointer",
-                    fontFamily: "'SF Pro Text', -apple-system, sans-serif",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "8px",
-                    transition: "all 0.2s ease",
-                  }}
-                >
-                  <span>{c.name}</span>
-                  <span style={{ color: "#86868b", fontSize: "12px" }}>
-                    {formatARS(c.total)}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
- 
-        {/* Team list */}
-        <div>
-          {TEAM.map((person, i) => (
-            <PersonSlider
-              key={person.id}
-              person={person}
-              value={allocations[person.id]}
-              onChange={(val) => handleChange(person.id, val)}
-              color={COLORS[i % COLORS.length]}
-              index={i}
-            />
-          ))}
-        </div>
- 
-        {/* Summary footer */}
-        {total > 0 && (
-          <div
-            style={{
-              marginTop: "40px",
-              padding: "24px",
-              background: "#fff",
-              borderRadius: "16px",
-              border: "1px solid rgba(0,0,0,0.06)",
-              animation: "fadeSlideIn 0.4s ease both",
-            }}
-          >
-            <div
-              style={{
-                fontSize: "11px",
-                fontWeight: 600,
-                color: "#86868b",
-                textTransform: "uppercase",
-                letterSpacing: "1px",
-                marginBottom: "16px",
-              }}
-            >
-              Resumen{projectName ? ` — ${projectName}` : ""}
-            </div>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-                gap: "20px",
-              }}
-            >
-              <div>
-                <div style={{ fontSize: "28px", fontWeight: 700, letterSpacing: "-0.5px" }}>
-                  {activeCount}
-                </div>
-                <div style={{ fontSize: "13px", color: "#86868b", marginTop: "2px" }}>
-                  Personas asignadas
-                </div>
-              </div>
-              <div>
-                <div style={{ fontSize: "28px", fontWeight: 700, letterSpacing: "-0.5px" }}>
-                  {formatARS(total)}
-                </div>
-                <div style={{ fontSize: "13px", color: "#86868b", marginTop: "2px" }}>
-                  Costo mensual
-                </div>
-              </div>
-              <div>
-                <div style={{ fontSize: "28px", fontWeight: 700, letterSpacing: "-0.5px" }}>
-                  {formatARS(total * 1.35)}
-                </div>
-                <div style={{ fontSize: "13px", color: "#86868b", marginTop: "2px" }}>
-                  Fee sugerido (+35%)
-                </div>
-              </div>
-            </div>
- 
-            {/* Active people detail */}
-            <div style={{ marginTop: "20px", paddingTop: "16px", borderTop: "1px solid rgba(0,0,0,0.06)" }}>
-              {TEAM.filter((p) => allocations[p.id] > 0)
-                .sort((a, b) => allocations[b.id] - allocations[a.id])
-                .map((p) => (
-                  <div
-                    key={p.id}
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      padding: "6px 0",
-                      fontSize: "13px",
-                      fontFamily: "'SF Pro Text', -apple-system, sans-serif",
-                    }}
-                  >
-                    <span style={{ color: "#1d1d1f", fontWeight: 500 }}>
-                      {p.name}
-                      <span style={{ color: "#86868b", fontWeight: 400, marginLeft: "6px" }}>
-                        {allocations[p.id]}%
-                      </span>
-                    </span>
-                    <span style={{ color: "#86868b", fontVariantNumeric: "tabular-nums" }}>
-                      {formatARS((p.rate * allocations[p.id]) / 100)}
-                    </span>
-                  </div>
-                ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>
